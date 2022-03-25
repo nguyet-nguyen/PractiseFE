@@ -26,10 +26,17 @@ export default function App() {
     });
 
   return (
-    <ThemeProvider theme={theme}>
-      <Routes>
-        {getRoutes(routes)}
-      </Routes>
-    </ThemeProvider>
+    // <ThemeProvider theme={theme}>
+    //   <Routes>
+    //     {getRoutes(routes)}
+    //   </Routes>
+    // </ThemeProvider>
+    <>
+      <h1 className="text-3xl font-bold underline text-orange-700">
+        Hello world!
+      </h1>
+      <button type="button" class="inline-block px-6 py-2.5 bg-gray-200 text-gray-700 font-medium text-xs leading-tight uppercase rounded shadow-md hover:bg-gray-300 hover:shadow-lg focus:bg-gray-300 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-gray-400 active:shadow-lg transition duration-150 ease-in-out">Light</button>
+    </>
+
   );
 }
