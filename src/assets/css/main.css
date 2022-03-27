@@ -1,0 +1,69 @@
+html {
+    font-family: ui-serif, Georgia, "Times New Roman", Times, serif;
+}
+
+.c {
+    color: #63584c
+}
+
+.image-card {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    object-fit: cover
+}
+
+.card-product-img:before {
+    content: "";
+    display: block;
+    padding-top: 83.695652%
+}
+
+.product-img:before {
+    content: "";
+    display: block;
+    padding-top: 110%
+}
+
+.card-icon {
+    top: 60%;
+    left: 50%;
+    opacity: 0;
+    transform: translate(-50%, -50%);
+    transition: all .3s ease-in-out
+}
+
+.card-product:hover .card-icon {
+    top: 50%;
+    opacity: 0.8
+}
+
+.category .category-image:hover img {
+    animation: circular 5s linear 0s infinite
+}
+
+.image {
+    display: block;
+    width: 100%;
+    height: auto
+}
+
+.overlay {
+    transition: .5s ease;
+}
+
+.category-image:hover .overlay {
+    opacity: 0.3;
+}
+
+@keyframes circular {
+    from {
+        transform: rotate(0)
+    }
+    to {
+        transform: rotate(360deg)
+    }
+}

@@ -1,0 +1,15 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Unit Test Component render Button component rendering with SnapShot Part 1 1`] = `
+<button>
+  Click 
+  Me
+</button>
+`;
+
+exports[`Unit Test Component render Button component rendering with SnapShot Part 1 2`] = `
+<button>
+  Click 
+  Mai Nguyen
+</button>
+`;

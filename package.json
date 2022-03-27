@@ -24,10 +24,10 @@
         "react-countup": "6.1.0",
         "react-dom": "17.0.2",
         "react-flatpickr": "3.10.7",
-        "react-router-dom": "6.0.2",
-        "react-scripts": "4.0.3",
+        "react-router-dom": "^6.0.2",
+        "react-scripts": "5.0.0",
         "react-syntax-highlighter": "15.4.5",
-        "tw-elements": "^1.0.0-alpha11",
+        "tw-elements": "^1.0.0-alpha12",
         "web-vitals": "1.0.1"
     },
     "scripts": {
@@ -49,6 +49,7 @@
         ]
     },
     "devDependencies": {
+        "@faker-js/faker": "^6.0.0",
         "autoprefixer": "^10.4.4",
         "eslint": "7.30.0",
         "eslint-config-airbnb": "18.2.1",
