@@ -1,29 +1,17 @@
-import React from "react";
+import { getAllCategory } from "features/Api";
+import React,{ useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 function Category() {
-    const categoryList = [
-        {
-            id: 1,
-            name: 'Men',
-
-        },
-        {
-            id: 2,
-            name: 'Women',
-        },
-        {
-            id: 3,
-            name: 'Unisex',
-        },
-        {
-            id: 4,
-            name: 'Unisex 1',
-        },
-        {
-            id: 5,
-            name: 'Unisex 1',
-        },
-    ];
+    const [categoryList, setCategoryList] = useState([]);
+    useEffect(() => {
+        getAllCategory()
+            .then((response) => {
+                setCategoryList(response.data);
+            })
+            .catch((err) => {
+                console.warn(err);
+            });
+    });
     return (
         <section className="overflow-hidden">
             <div className="container px-5 py-2 mx-auto md:py-12 md:px-32">
@@ -35,16 +23,16 @@ function Category() {
                             <div className="w-full p-2 md:p-4">
                                 <div className="text-center">
                                     <Link to="/product-list-page">
-                                        <div className="category-image mx-auto relative w-full">
+                                        <div className="category-image mx-auto relative w-56 h-56 md:mb-4 mb-2">
                                             <img
-                                                src="https://mdbcdn.b-cdn.net/img/new/avatars/8.webp"
-                                                className="rounded-full w-32 md:mb-4 mb-2 mx-auto image block"
+                                                src={category.image}
+                                                className="rounded-full w-full h-full image block"
                                                 alt="Avatar"
                                             />
                                             <div class="overlay bg-gray-800 rounded-full opacity-0 inset-0 absolute h-full w-full"> </div>
                                             
                                         </div>
-                                        <h5 className="md:text-xl text-lg font-semibold leading-tight mb-2 text-color">{category.name}</h5>
+                                        <h5 className="md:text-xl text-lg font-semibold leading-tight text-color hover:text-amber-700">{category.name}</h5>
                                     </Link>
                                 </div>
                             </div>

@@ -1,77 +1,58 @@
-import { Link } from "react-router-dom";
+import { getAllCategory } from "features/Api";
 import React, { useState, useEffect } from 'react';
 import CardProduct from "pages/LandingPages/Home/function/CardProduct";
+import { getAllProducts } from "features/Api";
 const ListPage = () => {
-    const [categoryid, setcategoryid] = useState();
-    const categoryList = [
-        {
-            id: 1,
-            name: 'Men',
+    const [categoryId, setcategoryId] = useState(1);
+    const [productListFilter, setProductListFilter] = useState([]);
+    const [categoryList, setCategoryList] = useState([]);
+    const [productList, setproductList] = useState([]);
 
-        },
-        {
-            id: 2,
-            name: 'Women',
-        },
-        {
-            id: 3,
-            name: 'Unisex',
-        },
-        {
-            id: 4,
-            name: 'Unisex 1',
-        },
-        {
-            id: 5,
-            name: 'Unisex 1 aa aa aa',
-        },
-    ];
-    const productList = [
-        {
-            id: 1,
-            name: 'Item 1',
-            price: 300000,
-            categoryId: 1
-        },
-        {
-            id: 2,
-            name: 'Item 2',
-            price: 300000,
-            categoryId: 2
-        },
-        {
-            id: 3,
-            name: 'Item 3',
-            price: 300000,
-            categoryId: 1
-        },
-        {
-            id: 4,
-            name: 'Item 4',
-            price: 300000,
-            categoryId: 2
-        },
-        {
-            id: 5,
-            name: 'Item 5',
-            price: 300000,
-            categoryId: 2
-        },
-        {
-            id: 6,
-            name: 'Item 6',
-            price: 300000,
-            categoryId: 1
-        },
-    ];
-    const getCategoryId = (e) => {
-        setcategoryid(e.target.value);
+    useEffect(() => {
+        // get category 
+        getAllCategory()
+            .then((response) => {
+                setCategoryList(response.data);
+                console.log(response.data);
+            })
+            .catch((err) => {
+                console.warn(err);
+            });
+
+        getAllProducts()
+            .then((response) => {
+                setproductList(response.data);
+                setProductListFilter(response.data);
+            })
+            .catch((err) => {
+                console.warn(err);
+            });
+        getAllCategory()
+            .then((response) => {
+                setCategoryList(response.data);
+            })
+            .catch((err) => {
+                console.warn(err);
+            });
+    }, getAllProducts());
+
+    var arrProduct = [];
+    const getcategoryId = (e) => {
+        productList.forEach( (item) => {
+            if(item.category === e.target.value){
+                arrProduct.push(item);
+                console.log(item);
+            }else if (e.target.value === "all items"){
+                arrProduct.push(item);
+            } ;
+        });
+        setProductListFilter(arrProduct);
     }
-    console.log(categoryid);
+
     return (
-        <div className="container md:mx-16 md:px-16 mx-2 my-10">
-            <h2 class="font-bold text-color leading-tight text-3xl mb-2 text-center uppercase">Tailwind Elements</h2>
-            <nav className="navbar navbar-expand-lg shadow-lg py-2 bg-gray-50 relative flex items-center w-full justify-between px-2">
+        <div className="container min-h-screen mx-auto px-5 py-2 mx-auto md:py-12 md:px-32">
+            <h2 class="font-bold text-color leading-tight text-3xl mb-2 text-center uppercase">All Items</h2>
+            <nav className="navbar navbar-expand-lg shadow-lg py-2 bg-gray-50 relative md:flex md:items-center w-full md:justify-between block px-2">
                 <div className="px-6">
                     <button
                         className="navbar-toggler border-0 py-3 lg:hidden leading-none text-xl bg-transparent text-gray-600 hover:text-gray-700 focus:text-gray-700 transition-shadow duration-150 ease-in-out"
@@ -89,18 +70,15 @@ const ListPage = () => {
                             className="w-5"
                             role="img"
                             xmlns="http://www.w3.org/2000/svg"
-                            viewBox="0 0 448 512"
-                        >
+                            viewBox="0 0 448 512">
                             <path
                                 fill="currentColor"
                                 d="M16 132h416c8.837 0 16-7.163 16-16V76c0-8.837-7.163-16-16-16H16C7.163 60 0 67.163 0 76v40c0 8.837 7.163 16 16 16zm0 160h416c8.837 0 16-7.163 16-16v-40c0-8.837-7.163-16-16-16H16c-8.837 0-16 7.163-16 16v40c0 8.837 7.163 16 16 16zm0 160h416c8.837 0 16-7.163 16-16v-40c0-8.837-7.163-16-16-16H16c-8.837 0-16 7.163-16 16v40c0 8.837 7.163 16 16 16z"
                             />
                         </svg>
                     </button>
-                    <div
-                        className="navbar-collapse collapse grow items-center"
-                        id="navbarSupportedContentX"
-                    >
+                    <div className="navbar-collapse collapse grow items-center"
+                        id="navbarSupportedContentX">
                         <ul className="navbar-nav mr-auto flex flex-row">
                             <li className="nav-item dropdown static">
                                 <a
@@ -178,13 +156,13 @@ const ListPage = () => {
                         </ul>
                     </div>
                 </div>
-                <div className="min-w-min">
-                    <select onChange={getCategoryId}
+                <div className="w-52 w-full">
+                    <select onChange={getcategoryId}
                         className="form-select appearance-none block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding bg-no-repeat border border-solid border-gray-300 rounded transition ease-in-out m-0
-                        focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
+                        focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none capitalize"
                         aria-label="Default select example">
                         {categoryList.map((category) =>
-                            <option value={category.id} className="p-2 m-2">{category.name}</option>
+                            <option id={category.name} value={category.name} className="p-2 m-2 capitalize">{category.name}</option>
                         )}
                     </select>
                 </div>
@@ -193,8 +171,8 @@ const ListPage = () => {
             </nav>
 
 
-            <div className="md:flex md:justify-evenly md:flex-wrap gap-6 md:mt-6 mt-3">
-                <CardProduct proList={productList} catList={categoryList} />
+            <div className="grid grid-cols-4 gap-6 md:mt-6 mt-3">
+                <CardProduct proList={productListFilter} />
             </div>
 
 
