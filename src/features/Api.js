@@ -37,7 +37,7 @@ export const getAllCategory = () => {
 
 export const requestFilterCategory = (data) => {
   try {
-      return api.post('/products/search', data);
+      return api.post('/products/filter', data);
   }
   catch (error) {
       console.log(error);

@@ -12,7 +12,6 @@ import footerRoutes from "footer.routes";
 
 // Images
 import bannerHome from "assets/images/logos/banner-home.PNG"
-import Banner from "./sections/Banner";
 import ListPage from "./sections/ListPage";
 
 function ProductListPages() {
@@ -43,7 +42,6 @@ function ProductListPages() {
                     placeItems: "center",
                 }}>
             </MKBox>
-            {/* <Banner /> */}
             <ListPage />
             <MKBox pt={6} px={1} mt={6}>
                 <DefaultFooter content={footerRoutes} />

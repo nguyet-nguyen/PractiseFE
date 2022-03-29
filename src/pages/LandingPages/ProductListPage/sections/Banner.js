@@ -1,7 +1,7 @@
 import React from "react";
 import bannerProduct from "./../../../../assets/images/logos/banner-product-list-page.JPG"  
 
-const Banner = () => {
+const BannerProductList = () => {
     return (
         <div className="w-full">
             <img src={bannerProduct} class="w-full h-auto" alt="..." />
@@ -9,4 +9,4 @@ const Banner = () => {
     )
 }
 
-export default Banner;
+export default BannerProductList;

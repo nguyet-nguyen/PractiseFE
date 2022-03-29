@@ -1,5 +1,5 @@
 import { getAllCategory } from "features/Api";
-import React,{ useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 function Category() {
     const [categoryList, setCategoryList] = useState([]);
@@ -18,7 +18,8 @@ function Category() {
                 <h3 className="text-color uppercase text-center font-semibold md:text-3xl text-xl">Product's Categories</h3>
                 <p className="text-color text-center mb-4 text-base">All products are warranted for 12 months</p>
                 <div className="flex flex-wrap justify-center">
-                    {categoryList.map((category) =>
+                    {categoryList.map((category, index) =>
+                    (index > 0) ?
                         <div className="flex md:flex-wrap md:w-1/5 w-1/2 flex-col category">
                             <div className="w-full p-2 md:p-4">
                                 <div className="text-center">
@@ -30,18 +31,16 @@ function Category() {
                                                 alt="Avatar"
                                             />
                                             <div class="overlay bg-gray-800 rounded-full opacity-0 inset-0 absolute h-full w-full"> </div>
-                                            
                                         </div>
                                         <h5 className="md:text-xl text-lg font-semibold leading-tight text-color hover:text-amber-700">{category.name}</h5>
                                     </Link>
                                 </div>
                             </div>
-                        </div>
+                        </div> : ''
                     )}
                 </div>
             </div>
         </section>
-
     );
 }
 

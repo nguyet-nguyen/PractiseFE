@@ -46,6 +46,10 @@ html {
     animation: circular 5s linear 0s infinite
 }
 
+.category .category-image:hover ~ h5 {
+    color: rgb(180 83 9);
+}
+
 .image {
     display: block;
     width: 100%;
@@ -59,6 +63,7 @@ html {
 .category-image:hover .overlay {
     opacity: 0.3;
 }
+
 .nav-category button.nav-link.active {
     border-color: rgb(217 119 6);
     color: rgb(180 83 9);
@@ -68,6 +73,7 @@ html {
     from {
         transform: rotate(0)
     }
+
     to {
         transform: rotate(360deg)
     }

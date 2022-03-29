@@ -28,7 +28,6 @@ function ProductList() {
     }, []);
     var arrProduct = [];
     const getcategoryId = (e) => {
-        //console.log(e.target.value);
         productList.forEach((item) => {
             if (item.category == e.target.value) {
                 arrProduct.push(item);
@@ -51,27 +50,15 @@ function ProductList() {
                     <ul class="nav nav-tabs flex flex-col md:flex-row flex-wrap list-none border-b-0 pl-0" id="tabs-tab"
                         role="tablist">
                         {categoryList.map((category, index) =>
-                            index == 0 && (
-                                <li class="nav-item nav-category mx-2" role="presentation" onClick={getcategoryId}>
-                                    <button type="button" class="nav-link block font-semibold text-sm leading-tight uppercase border-x-0 
+                            <li class="nav-item nav-category mx-2" role="presentation" onClick={getcategoryId}>
+                                <button type="button" class={`nav-link block font-semibold text-sm leading-tight uppercase border-x-0 
                                border-t-0 border-b-2 hover:border-amber-600 focus:border-amber-600
                                border-transparent px-6 py-3 hover:border-transparent hover:text-amber-700 focus:text-amber-700
-                               focus:border-transparent active" id="tabs-home-tab" data-bs-toggle="pill" data-bs-target="#tabs-home" role="tab" aria-controls="tabs-home"
-                                        aria-selected="true" value={category.name}>{category.name}</button>
-                                </li>
-                            )
+                               focus:border-transparent ${(index == 0) ? "active" : ""}`} id="tabs-home-tab" data-bs-toggle="pill" data-bs-target="#tabs-home" role="tab" aria-controls="tabs-home"
+                                    aria-selected="true" value={category.name}>{category.name}</button>
+                            </li>
                         )}
-                        {categoryList.map((category, index) =>
-                            index > 0 && (
-                                <li class="nav-item nav-category mx-2" role="presentation" onClick={getcategoryId}>
-                                    <button type="button" class="nav-link block font-semibold text-sm leading-tight uppercase border-x-0 
-                               border-t-0 border-b-2 hover:border-amber-600 focus:border-amber-600
-                               border-transparent px-6 py-3 hover:border-transparent hover:text-amber-700 focus:text-amber-700
-                               focus:border-transparent" id="tabs-home-tab" data-bs-toggle="pill" data-bs-target="#tabs-home" role="tab" aria-controls="tabs-home"
-                                        aria-selected="true" value={category.name}>{category.name}</button>
-                                </li>
-                            )
-                        )}
+
                     </ul>
                     <Link to="/product-list-page" className="md:flex items-center transition duration-300 ease-in-out hover:text-amber-600 hidden">
                         See All Product
@@ -81,7 +68,6 @@ function ProductList() {
                         </svg>
                     </Link>
                 </div>
-                {/* <div className="border-solid border-b-2 border-neutral-100"></div> */}
 
                 <div className="grid grid-cols-4 gap-6 md:mt-6 mt-3">
                     <CardProduct proList={productListFilter} />

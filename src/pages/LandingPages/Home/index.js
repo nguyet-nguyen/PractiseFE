@@ -26,7 +26,7 @@ import footerRoutes from "footer.routes";
 import bannerHome from "assets/images/logos/banner-home.PNG"
 import ProductList from "./sections/ProductList";
 import Category from "./sections/Category";
-import Banner from "./sections/Banner";
+import BannerHomepage from "./sections/Banner";
 import HotDeal from "./sections/HotDeal";
 function Home() {
     return (
@@ -58,7 +58,7 @@ function Home() {
             </MKBox>
             <Category/>
             <ProductList />
-            <Banner />
+            <BannerHomepage />
             <HotDeal/>
         
             <MKBox pt={6} px={1} mt={6}>
