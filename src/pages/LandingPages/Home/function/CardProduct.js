@@ -7,7 +7,7 @@ const CardProduct = ({ proList }) => {
     return proList ? (
         <>
             {proList.map((product) =>
-                <div className="w-full h-84 p-3 border bg-white rounded-lg md:w-72 hover:shadow-lg transition duration-300 ease-in-out">
+                <div id="ProductCard" className="w-full h-84 p-3 border bg-white rounded-lg md:w-72 hover:shadow-lg transition duration-300 ease-in-out">
                     <div className="bg-gray-400 h-auto rounded-t-lg relative card-product">
                         <a href="#!">
                             <div className="card-product-img">

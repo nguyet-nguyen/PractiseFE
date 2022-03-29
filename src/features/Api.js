@@ -1,19 +1,6 @@
 
-import axios from 'axios';
 import {api} from "../utils/Api";
-const Api = async (url) => {
-  return await axios
-    .get(url)
-    .then(function (response) {
-      return response.data;
-    })
-    .catch(function (error) {
-      console.log(error);
-      return error;
-    });
-};
 
-export default Api;
 
 export const getAllProducts = () => {
     try {
