@@ -34,15 +34,6 @@ export const getAllCategory = () => {
   }
 }
 
-export const getFilterCategory = () => {
-  try {
-    return api.get('/products/search');
-  }
-  catch (error) {
-      console.log(error);
-
-  }
-}
 
 export const requestFilterCategory = (data) => {
   try {
