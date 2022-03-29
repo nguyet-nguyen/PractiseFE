@@ -30,6 +30,13 @@ describe("Unit Test CardProduct Component render", () => {
     it("SnapShot case 2",  () => {
         const productList = [
             {
+                id: 1,
+                name: "MOONLIGHT ANKLE BOOT",
+                image: "https://bizweb.dktcdn.net/thumb/large/100/419/519/products/quanonglung.jpg?v=1614139227953",
+                category: "Boot",
+                price: 500000,
+            },
+            {
                 id: 2,
                 name: "MOONLIGHT ANKLE BOOT",
                 image: "https://bizweb.dktcdn.net/thumb/large/100/419/519/products/quanonglung.jpg?v=1614139227953",
@@ -39,7 +46,7 @@ describe("Unit Test CardProduct Component render", () => {
         ]
  
         act(() => { 
-            ReactDOM.render(<CardProduct productList={productList}/>, container) 
+            ReactDOM.render(<CardProduct proList={productList}/>, container) 
         }) 
  
         const button = container.querySelector("#ProductCard")
