@@ -27,7 +27,7 @@ import bgImage from "assets/images/bg-about-us.jpg";
 
 function AboutUs() {
   return (
-    <>
+    <div>
       <DefaultNavbar
         routes={routes}
         action={{
@@ -119,7 +119,7 @@ function AboutUs() {
       <MKBox pt={6} px={1} mt={6}>
         <DefaultFooter content={footerRoutes} />
       </MKBox>
-    </>
+    </div>
   );
 }
 

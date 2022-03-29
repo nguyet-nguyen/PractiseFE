@@ -2,9 +2,10 @@
 import Icon from "@mui/material/Icon";
 
 // Pages
-import AboutUs from "layouts/pages/landing-pages/about-us";
 import ProductList from "layouts/pages/landing-pages/product-list"
 import SignIn from "layouts/pages/authentication/sign-in";
+import Home from "pages/LandingPages/Home";
+import ProductListPages from "pages/LandingPages/ProductListPage";
 
 const routes = [
   {
@@ -19,12 +20,12 @@ const routes = [
           {
             name: "Home",
             route: "/",
-            component: <AboutUs />,
+            component: <Home/>,
           },
           {
-            name: "about us",
-            route: "/about-us",
-            component: <AboutUs />,
+            name: "product list page",
+            route: "/product-list-page",
+            component: <ProductListPages/>,
           },
           {
             name: "product list",
