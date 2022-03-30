@@ -24,8 +24,8 @@ describe("Unit Test banner product list page Component render", () => {
             ReactDOM.render(<BannerProductList/>, container) 
         }) 
  
-        const button = container.querySelector("div")
-        expect(button).toMatchSnapshot()
+        const button = container.querySelector(".banner-productList")
+        expect(button).toMatchSnapshot
     }) 
 
 })

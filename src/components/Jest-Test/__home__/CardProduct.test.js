@@ -29,7 +29,7 @@ describe("Unit Test CardProduct Component render", () => {
             json: () => Promise.resolve(productList)
         })
     );
-    act(async () => {
+     act(() => {
         ReactDOM.render(
             <BrowserRouter>
                 <CardProduct proList={productList} />
@@ -53,7 +53,7 @@ describe("Unit Test CardProduct Component render", () => {
                 json: () => Promise.resolve(productList)
             })
         );
-        await act(async () => {
+         act( () => {
             ReactDOM.render(
                 <BrowserRouter>
                     <CardProduct proList={productList} />

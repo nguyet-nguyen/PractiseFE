@@ -5,7 +5,7 @@ exports[`Unit Test banner home Component render SnapShot case 1 1`] = `
   class="container mx-auto flex justify-center"
 >
   <div
-    class="relative overflow-hidden bg-no-repeat bg-cover max-w-7xl"
+    class="relative overflow-hidden bg-no-repeat bg-cover w-full"
   >
     <img
       alt="Louvre"

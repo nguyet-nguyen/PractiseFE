@@ -38,8 +38,8 @@ const ListPage = () => {
     }
     return (
         <section id="listPage-productList" className="container h-auto mx-auto md:px-5 px-0 py-2 mx-auto md:py-12 md:px-32">
-            <div className="md:w-10/12 w-full h-auto transition-all rounded-lg mx-auto">
-                <h2 class="font-bold text-color leading-tight text-3xl mb-2 text-center uppercase">All Items</h2>
+            <div className="md:w-12/12 w-full h-auto transition-all rounded-lg mx-auto">
+                <h2 className="font-bold text-color leading-tight text-3xl mb-2 text-center uppercase">All Items</h2>
                 <nav className="navbar navbar-expand-lg shadow-lg py-2 bg-gray-50 relative md:flex md:items-center w-full md:justify-between block px-2">
                     <div className="px-6">
                         <button

@@ -15,12 +15,11 @@ const Category = () => {
         });
 
     return (
-        <section id="categoryHome" className="overflow-hidden container h-auto mx-auto md:px-5 px-0 py-2 mx-auto md:py-12">
-            <div className="md:w-10/12 w-full h-auto transition-all rounded-lg mx-auto">
-                <h3 className="text-color uppercase text-center font-semibold md:text-3xl text-xl">Product's Categories</h3>
-                <p className="text-color text-center mb-4 text-base product-desc">All products are warranted for 12 months</p>
-                <div className="flex flex-wrap md:justify-center justify-start">
-                    {categoryList.map((category, index) =>
+        <div id="categoryHome">
+            <h3 className="text-color uppercase text-center font-semibold md:text-3xl text-xl">Product's Categories</h3>
+            <p className="text-color text-center mb-4 text-base product-desc">All products are warranted for 12 months</p>
+            <div className="flex flex-wrap md:justify-center justify-start">
+                {categoryList.map((category, index) =>
                     (index > 0) ?
                         <div className={`flex md:flex-wrap md:w-1/5 w-1/2 flex-col category category-${index}`}>
                             <div className="w-full p-2 md:p-4">
@@ -39,10 +38,12 @@ const Category = () => {
                                 </div>
                             </div>
                         </div> : ''
-                    )}
-                </div>
+                )}
             </div>
-        </section>
+        </div>
+
+
+
     );
 }
 

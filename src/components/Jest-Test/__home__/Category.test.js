@@ -20,7 +20,7 @@ describe("Unit Test category homepage Component render", () => {
 
     it("SnapShot case 1", () => {
         const categoryList = []
-        act(async () => {
+         act( () => {
             ReactDOM.render(
                 <BrowserRouter>
                     <Category />
@@ -39,7 +39,7 @@ describe("Unit Test category homepage Component render", () => {
             image: "https://bizweb.dktcdn.net/thumb/large/100/419/519/products/quanonglung.jpg?v=1614139227953",
         }];
 
-        act(async () => {
+         act( () => {
             ReactDOM.render(
                 <BrowserRouter>
                     <Category />

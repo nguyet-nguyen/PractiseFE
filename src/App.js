@@ -6,7 +6,6 @@ import { ThemeProvider } from "@mui/material/styles";
 
 // Practise React React themes
 import theme from "assets/theme";
-import ListPage from "pages/LandingPages/ProductListPage/sections/ListPage"
 
 // Practise React React routes
 import routes from "routes";
@@ -30,7 +29,6 @@ export default function App() {
     <ThemeProvider theme={theme}>
       <Routes>
         {getRoutes(routes)}
-        <Route path="/admin" element={<ListPage />} />
       </Routes>
     </ThemeProvider>
   );
