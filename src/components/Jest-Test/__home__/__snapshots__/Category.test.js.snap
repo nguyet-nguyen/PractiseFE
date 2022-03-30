@@ -1,0 +1,51 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Unit Test category homepage Component render SnapShot case 1 1`] = `
+<section
+  class="overflow-hidden container h-auto mx-auto md:px-5 px-0 py-2 mx-auto md:py-12"
+  id="categoryHome"
+>
+  <div
+    class="md:w-10/12 w-full h-auto transition-all rounded-lg mx-auto"
+  >
+    <h3
+      class="text-color uppercase text-center font-semibold md:text-3xl text-xl"
+    >
+      Product's Categories
+    </h3>
+    <p
+      class="text-color text-center mb-4 text-base product-desc"
+    >
+      All products are warranted for 12 months
+    </p>
+    <div
+      class="flex flex-wrap md:justify-center justify-start"
+    />
+  </div>
+</section>
+`;
+
+exports[`Unit Test category homepage Component render SnapShot case 2 1`] = `
+<section
+  class="overflow-hidden container h-auto mx-auto md:px-5 px-0 py-2 mx-auto md:py-12"
+  id="categoryHome"
+>
+  <div
+    class="md:w-10/12 w-full h-auto transition-all rounded-lg mx-auto"
+  >
+    <h3
+      class="text-color uppercase text-center font-semibold md:text-3xl text-xl"
+    >
+      Product's Categories
+    </h3>
+    <p
+      class="text-color text-center mb-4 text-base product-desc"
+    >
+      All products are warranted for 12 months
+    </p>
+    <div
+      class="flex flex-wrap md:justify-center justify-start"
+    />
+  </div>
+</section>
+`;

@@ -1,0 +1,88 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Unit Test CardProduct Component render SnapShot case 1 1`] = `null`;
+
+exports[`Unit Test CardProduct Component render SnapShot case 2 1`] = `
+<div
+  class="w-full h-84 p-3 border bg-white rounded-lg md:w-72 hover:shadow-lg transition duration-300 ease-in-out"
+  id="ProductCard"
+>
+  <div
+    class="bg-gray-400 h-auto rounded-t-lg relative card-product"
+  >
+    <a
+      class="card-product-img"
+      href="/"
+    >
+      <img
+        alt=""
+        class="image-card"
+        src="https://bizweb.dktcdn.net/thumb/large/100/419/519/products/quanonglung.jpg?v=1614139227953"
+      />
+    </a>
+    <div
+      class="flex justify-center items-center px-2 pb-2 card-icon absolute"
+    >
+      <div
+        class="w-1/2 p-2"
+      >
+        <button
+          class="block w-full bg-white hover:bg-amber-600
+ border-2 border-amber-600 hover:border-inherit p-1 rounded uppercase font-small"
+        >
+          <svg
+            class="h-6 w-6 stroke-amber-600 hover:stroke-white"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            viewBox="0 0 24 24"
+          >
+            <path
+              d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v3m0 0v3m0-3h3m-3 0H7"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            />
+          </svg>
+        </button>
+      </div>
+      <div
+        class="w-1/2 p-2"
+      >
+        <button
+          class="block w-full bg-white hover:bg-amber-600
+ border-2 border-amber-600 hover:border-inherit p-1 rounded uppercase font-small"
+        >
+          <svg
+            class="h-6 w-6 stroke-amber-600 hover:stroke-white"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            viewBox="0 0 24 24"
+          >
+            <path
+              d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            />
+          </svg>
+        </button>
+      </div>
+    </div>
+  </div>
+  <div
+    class="mx-auto text-center py-2 px-2"
+  >
+    <a
+      class="productName md:text-sm text-xs text-color font-semibold hover:text-amber-700 uppercase"
+      href="/"
+    >
+      MOONLIGHT ANKLE BOOT
+    </a>
+    <p
+      class="productPrice font-bold md:text-base text-sm lining-nums"
+    >
+      500.000 ₫
+    </p>
+  </div>
+</div>
+`;
