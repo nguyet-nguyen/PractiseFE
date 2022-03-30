@@ -5,8 +5,9 @@ import { Link } from "react-router-dom";
 const CardProduct = ({ proList }) => {
     return proList ? (
         <>
-            {proList.map((product) =>
-                <div key={product.id} id="ProductCard" className="w-full h-84 p-3 border bg-white rounded-lg md:w-72 hover:shadow-lg transition duration-300 ease-in-out">
+            {proList.map((product,index) =>
+                <div key={product.id} id="ProductCard" className={`cardProduct-${index} w-full h-84 p-3 border bg-white rounded-lg md:w-72 hover:shadow-lg 
+                transition duration-300 ease-in-out`}>
                     <div className="bg-gray-400 h-auto rounded-t-lg relative card-product">
                         <Link to='/' className="card-product-img">
                             <img className="image-card"
@@ -37,10 +38,10 @@ const CardProduct = ({ proList }) => {
                         </div>
                     </div>
                     <div className="mx-auto text-center py-2 px-2">
-                        <Link to='/' className="productName text-sm text-color font-semibold hover:text-amber-700">
+                        <Link to='/' className="productName md:text-sm text-xs text-color font-semibold hover:text-amber-700 uppercase">
                             {product.name}
                         </Link>
-                        <p className="productPrice font-bold text-base lining-nums">
+                        <p className="productPrice font-bold md:text-base text-sm lining-nums">
                             {numberFormat(product.price)}
                         </p>
                     </div>

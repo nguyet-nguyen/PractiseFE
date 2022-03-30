@@ -60,10 +60,9 @@ describe("Unit Test CardProduct Component render", () => {
                 </BrowserRouter>
                 , container)
         });
-       
+        expect(container.querySelector('#ProductCard')).toMatchSnapshot();
         expect(container.querySelector(".productName").textContent).toBe('MOONLIGHT ANKLE BOOT');
         expect(container.querySelector(".productPrice").textContent).toBe(numberFormat(500000));
-        expect(container.querySelector('#ProductCard')).toMatchSnapshot();
 
     })
     

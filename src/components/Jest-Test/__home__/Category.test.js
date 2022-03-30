@@ -48,7 +48,6 @@ describe("Unit Test category homepage Component render", () => {
         });
 
         let categoryHome = container.querySelector('#categoryHome');
-        // expect(container.querySelector(".categoryName").textContent).toBe('Pan');
         expect(categoryHome).toMatchSnapshot();
 
     })

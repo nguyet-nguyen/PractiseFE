@@ -73,13 +73,13 @@ exports[`Unit Test CardProduct Component render SnapShot case 2 1`] = `
     class="mx-auto text-center py-2 px-2"
   >
     <a
-      class="productName text-sm text-color font-semibold hover:text-amber-700"
+      class="productName md:text-sm text-xs text-color font-semibold hover:text-amber-700 uppercase"
       href="/"
     >
       MOONLIGHT ANKLE BOOT
     </a>
     <p
-      class="productPrice font-bold text-base lining-nums"
+      class="productPrice font-bold md:text-base text-sm lining-nums"
     >
       500.000 ₫
     </p>

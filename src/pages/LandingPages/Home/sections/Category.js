@@ -1,5 +1,5 @@
 import { getAllCategory } from "features/Api";
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import _ from "lodash";
 
@@ -15,26 +15,26 @@ const Category = () => {
         });
 
     return (
-        <section id="categoryHome" className="overflow-hidden">
-            <div className="container px-5 py-2 mx-auto md:py-12 md:px-32">
+        <section id="categoryHome" className="overflow-hidden container h-auto mx-auto md:px-5 px-0 py-2 mx-auto md:py-12">
+            <div className="md:w-10/12 w-full h-auto transition-all rounded-lg mx-auto">
                 <h3 className="text-color uppercase text-center font-semibold md:text-3xl text-xl">Product's Categories</h3>
                 <p className="text-color text-center mb-4 text-base product-desc">All products are warranted for 12 months</p>
-                <div className="flex flex-wrap justify-center">
+                <div className="flex flex-wrap md:justify-center justify-start">
                     {categoryList.map((category, index) =>
                     (index > 0) ?
-                        <div className="flex md:flex-wrap md:w-1/5 w-1/2 flex-col category">
+                        <div className={`flex md:flex-wrap md:w-1/5 w-1/2 flex-col category category-${index}`}>
                             <div className="w-full p-2 md:p-4">
                                 <div className="text-center">
                                     <Link to="/product-list-page">
-                                        <div className="category-image mx-auto relative w-56 h-56 md:mb-4 mb-2">
+                                        <div className="category-image mx-auto relative md:w-56 md:h-56 w-32 h-32 md:mb-4 mb-2">
                                             <img
                                                 src={category.image}
                                                 className="rounded-full w-full h-full image block"
                                                 alt="Avatar"
                                             />
-                                            <div class="overlay bg-gray-800 rounded-full opacity-0 inset-0 absolute h-full w-full"> </div>
+                                            <div className="overlay bg-gray-800 rounded-full opacity-0 inset-0 absolute h-full w-full"> </div>
                                         </div>
-                                        <h5 className="md:text-xl text-lg font-semibold leading-tight text-color hover:text-amber-700">{category.name}</h5>
+                                        <h5 className="md:text-xl text-base font-semibold leading-tight text-color hover:text-amber-700">{category.name}</h5>
                                     </Link>
                                 </div>
                             </div>

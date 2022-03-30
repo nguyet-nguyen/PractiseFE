@@ -17,8 +17,8 @@ function HotDeal() {
             });
     });
     return (
-        <section className="container min-h-screen mx-auto px-5 py-2 mx-auto md:py-12 md:px-32">
-            <div className="w-96 h-auto transition-all rounded-lg md:w-full">
+        <section className="container h-auto mx-auto md:px-5 px-0 py-2 mx-auto md:py-12 md:px-32">
+            <div className="md:w-10/12 w-full h-auto transition-all rounded-lg mx-auto">
                 <div className="md:flex md:justify-between md:items-center md:flex-wrap justify-start items-center w-full mb-2">
                     <span className="md:text-3xl text-xl font-bold flex items-center">
                         <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 mr-2 stroke-amber-600 fill-amber-600" viewBox="0 0 20 20" fill="currentColor">
@@ -36,7 +36,7 @@ function HotDeal() {
                 </div>
                 <div className="border-solid border-b-2 border-neutral-100"></div>
 
-                <div className="grid grid-cols-4 gap-6 md:mt-6 mt-3">
+                <div className="grid md:grid-cols-4 grid-cols-2 gap-6 md:mt-6 mt-3">
                     <CardProduct proList={productList} />
                 </div>
                 <div className="flex justify-center items-c md:hidden">
