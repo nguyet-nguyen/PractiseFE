@@ -86,7 +86,7 @@ const ProductDetail = () => {
 
                     </div>
                     <div className="grow-0 shrink-0 basis-auto w-full lg:w-5/12 md:px-6">
-                    <div class=" border-solid border-b-2 border-neutral-300"></div>
+                    <div className=" border-solid border-b-2 border-neutral-300"></div>
                     </div>
                 </div>
             </section>

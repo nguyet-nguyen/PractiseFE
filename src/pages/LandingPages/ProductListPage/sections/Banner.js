@@ -3,8 +3,8 @@ import bannerProduct from "./../../../../assets/images/logos/banner-product-list
 
 const BannerProductList = () => {
     return (
-        <div className="w-full">
-            <img src={bannerProduct} class="w-full h-auto" alt="..." />
+        <div className="w-full banner-productList">
+            <img src={bannerProduct} className="w-full h-auto" alt="..." />
         </div>
     )
 }

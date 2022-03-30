@@ -56,11 +56,16 @@ function Home() {
                     placeItems: "center",
                 }}>
             </MKBox>
-            <Category/>
-            <ProductList />
-            <BannerHomepage />
-            <HotDeal/>
-        
+            <section className="container h-auto mx-auto md:px-5 px-4 py-2 mx-auto md:py-12 md:px-32">
+                <div className="md:w-12/12 w-full h-auto transition-all rounded-lg mx-auto">
+                    <Category />
+                    <ProductList />
+                    <BannerHomepage />
+                    <HotDeal />
+
+                </div>
+            </section>
+
             <MKBox pt={6} px={1} mt={6}>
                 <DefaultFooter content={footerRoutes} />
             </MKBox>
