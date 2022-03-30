@@ -1,22 +1,24 @@
 import { getAllCategory } from "features/Api";
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-function Category() {
+import _ from "lodash";
+
+const Category = () => {
     const [categoryList, setCategoryList] = useState([]);
-    useEffect(() => {
-        getAllCategory()
-            .then((response) => {
-                setCategoryList(response.data);
-            })
-            .catch((err) => {
-                console.warn(err);
-            });
-    });
+
+    getAllCategory()
+        .then((response) => {
+            setCategoryList(response.data);
+        })
+        .catch((err) => {
+            console.warn(err);
+        });
+
     return (
-        <section className="overflow-hidden">
+        <section id="categoryHome" className="overflow-hidden">
             <div className="container px-5 py-2 mx-auto md:py-12 md:px-32">
                 <h3 className="text-color uppercase text-center font-semibold md:text-3xl text-xl">Product's Categories</h3>
-                <p className="text-color text-center mb-4 text-base">All products are warranted for 12 months</p>
+                <p className="text-color text-center mb-4 text-base product-desc">All products are warranted for 12 months</p>
                 <div className="flex flex-wrap justify-center">
                     {categoryList.map((category, index) =>
                     (index > 0) ?
