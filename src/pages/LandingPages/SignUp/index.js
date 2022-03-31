@@ -28,7 +28,7 @@ const SignUp = () => {
                     </div>
                     <input
                       type="text"
-                      className="w-full -ml-10 pl-10 pr-3 py-2 rounded-lg border-2 border-gray-200 outline-none focus:border-indigo-500"
+                      className="w-full -ml-10 pl-10 pr-3 py-2 rounded-lg border-2 border-gray-200 outline-none focus:ring-2 focus:ring-amber-500 focus:border-amber-600"
                       placeholder="Username"
                     />
                   </div>
@@ -43,7 +43,7 @@ const SignUp = () => {
                     </div>
                     <input
                       type="password"
-                      className="w-full -ml-10 pl-10 pr-3 py-2 rounded-lg border-2 border-gray-200 outline-none focus:border-indigo-500"
+                      className="w-full -ml-10 pl-10 pr-3 py-2 rounded-lg border-2 border-gray-200 outline-none focus:ring-2 focus:ring-amber-500 focus:border-amber-600"
                       placeholder="************"
                     />
                   </div>
@@ -60,7 +60,7 @@ const SignUp = () => {
                     </div>
                     <input
                       type="email"
-                      className="w-full -ml-10 pl-10 pr-3 py-2 rounded-lg border-2 border-gray-200 outline-none focus:border-indigo-500"
+                      className="w-full -ml-10 pl-10 pr-3 py-2 rounded-lg border-2 border-gray-200 outline-none focus:ring-2 focus:ring-amber-500 focus:border-amber-600"
                       placeholder="youremail@example.com"
                     />
                   </div>
@@ -74,8 +74,8 @@ const SignUp = () => {
                       <i className="mdi mdi-account-outline text-gray-400 text-lg"></i>
                     </div>
                     <input
-                      type="number"
-                      className="w-full -ml-10 pl-10 pr-3 py-2 rounded-lg border-2 border-gray-200 outline-none focus:border-indigo-500"
+                      type="phone"
+                      className="w-full -ml-10 pl-10 pr-3 py-2 rounded-lg border-2 border-gray-200 outline-none focus:ring-2 focus:ring-amber-500 focus:border-amber-600"
                       placeholder="0933549878"
                     />
                   </div>
@@ -91,7 +91,7 @@ const SignUp = () => {
                       <i className="mdi mdi-account-outline text-gray-400 text-lg"></i>
                     </div>
                     <textarea
-                      className=" w-full h-32 resize-none -ml-10 pl-10 pr-3 py-2 rounded-lg border-2 border-gray-200 outline-none focus:border-indigo-500"
+                      className=" w-full h-32 resize-none -ml-10 pl-10 pr-3 py-2 rounded-lg border-2 border-gray-200 outline-none focus:ring-2 focus:ring-amber-500 focus:border-amber-600"
                       placeholder="Your address"
                     />
                   </div>

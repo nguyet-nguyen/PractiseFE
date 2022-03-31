@@ -1,4 +1,5 @@
-import React from "react";
+import React, { useState } from 'react';
+import { useForm } from 'react-hook-form';
 
 const SignIn = () => {
   return (
@@ -27,7 +28,7 @@ const SignIn = () => {
                   </div>
                   <div className="flex-auto px-4 lg:px-10 py-10 pt-0">
                     <form>
-                      <div className="relative w-full mb-3">
+                      <div className="relative w-full mb-6">
                         <label
                           className="block uppercase text-gray-700 text-xs font-bold mb-2"
                           htmlFor="grid-username"
@@ -36,13 +37,14 @@ const SignIn = () => {
                         </label>
                         <input
                           type="name"
-                          className="border-0 px-3 py-3 placeholder-gray-400 text-gray-700 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full"
+                          className="border-0 px-3 py-3 placeholder-gray-400 text-gray-700 bg-white rounded text-sm 
+                          shadow focus:outline-none focus:ring-2 focus:ring-amber-500 focus:border-amber-600 w-full"
                           placeholder="Username"
                           style={{ transition: "all .15s ease" }}
                         />
                       </div>
 
-                      <div className="relative w-full mb-3">
+                      <div className="relative w-full mb-6">
                         <label
                           className="block uppercase text-gray-700 text-xs font-bold mb-2"
                           htmlFor="grid-password"
@@ -51,7 +53,8 @@ const SignIn = () => {
                         </label>
                         <input
                           type="password"
-                          className="border-0 px-3 py-3 placeholder-gray-400 text-gray-700 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full"
+                          className="border-0 px-3 py-3 placeholder-gray-400 text-gray-700 bg-white rounded 
+                          text-sm shadow focus:outline-none focus:ring-2 focus:ring-amber-500 focus:border-amber-600 w-full"
                           placeholder="Password"
                           style={{ transition: "all .15s ease" }}
                         />

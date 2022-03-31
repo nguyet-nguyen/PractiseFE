@@ -2,7 +2,6 @@
 import Icon from "@mui/material/Icon";
 
 // Pages
-import ProductList from "layouts/pages/landing-pages/product-list"
 import SignIn from "layouts/pages/authentication/sign-in";
 import Home from "pages/LandingPages/Home";
 import ProductListPages from "pages/LandingPages/ProductListPage";
