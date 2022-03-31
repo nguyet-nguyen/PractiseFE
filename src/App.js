@@ -9,7 +9,8 @@ import theme from "assets/theme";
 
 // Practise React React routes
 import routes from "routes";
-import Dashboard from "pages/Admin/Dashboard";
+import SignInAdmin from "layouts/pages/admin/sign-in"
+import Dashboard from "layouts/pages/admin/dashboard"
 
 export default function App() {
 
@@ -33,7 +34,8 @@ export default function App() {
         {getRoutes(routes)}
 
         {/* Admin Page */}
-        <Route exact path="/dashboard" element={<Dashboard />} />
+        <Route exact path="/admin/dashboard" element={<Dashboard />} />
+        <Route exact path="/admin/signIn" element={<SignInAdmin />} />
       </Routes>
     </ThemeProvider>
   );

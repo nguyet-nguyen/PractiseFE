@@ -9,13 +9,13 @@
     <link rel="apple-touch-icon" sizes="76x76" href="%PUBLIC_URL%/apple-icon.png" />
     <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
     <title>NFQ Fresher Practise</title>
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700,900|Roboto+Slab:400,700" />
+    <!-- <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700,900|Roboto+Slab:400,700" /> -->
     <link href="https://fonts.googleapis.com/css?family=Material+Icons|Material+Icons+Outlined|Material+Icons+Two+Tone|Material+Icons+Round|Material+Icons+Sharp" rel="stylesheet" />
     <script src="https://kit.fontawesome.com/42d5adcbca.js" crossorigin="anonymous"></script>
     <script src="./TW-ELEMENTS-PATH/dist/js/index.min.js"></script>
 </head>
 
-<body>
+<body class="font-inter antialiased bg-slate-100 text-slate-600">
     <noscript>You need to enable JavaScript to run this app.</noscript>
     <div id="root"></div>
     <script>
@@ -23,6 +23,12 @@
             let iframe = document.getElementsByTagName('iframe');
             iframe[0].parentNode.removeChild(iframe[0]);
         }, 1000);
+
+        if (localStorage.getItem('sidebar-expanded') == 'true') {
+            document.querySelector('body').classList.add('sidebar-expanded');
+        } else {
+            document.querySelector('body').classList.remove('sidebar-expanded');
+        }
     </script>
 </body>
 
