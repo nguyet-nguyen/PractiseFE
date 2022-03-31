@@ -13,10 +13,13 @@ import footerRoutes from "footer.routes";
 // Images
 import bannerHome from "assets/images/logos/banner-home.PNG"
 import ListPage from "./sections/ListPage";
-import Breadcrumbs from "./sections/Breadcrumbs";
+import BreadcrumbsProductList from "./sections/Breadcrumbs";
 import SideNavFilter from "./sections/SideNavFilter";
+import { useState } from "react";
 
 function ProductListPages() {
+    const [sidebarOpen, setSidebarOpen] = useState(false);
+
     return (
         <>
             <DefaultNavbar
@@ -44,15 +47,15 @@ function ProductListPages() {
                     placeItems: "center",
                 }}>
             </MKBox>
-            <section className="container h-auto mx-auto md:px-5 px-4 py-2 mx-auto md:py-12 md:px-32">
+            <section className="container h-auto mx-auto px-4 py-2 mx-auto md:py-12 md:px-32 productListPage">
                 <div className="md:w-12/12 w-full h-auto transition-all rounded-lg mx-auto">
-                    <Breadcrumbs />
-                    <div className="grid grid-cols-4 gap-4">
-                        <div >
-                            <SideNavFilter />
+                    <BreadcrumbsProductList />
+                    <div className="grid md:grid-cols-4 grid-cols-1 gap-4">
+                        <div className="md:mt-14 mt-0">
+                            <SideNavFilter sidebarOpen={sidebarOpen} setSidebarOpen={setSidebarOpen}/>
                         </div>
                         <div class="col-span-3">
-                            <ListPage />
+                            <ListPage  sidebarOpen={sidebarOpen} setSidebarOpen={setSidebarOpen}/>
                         </div>
                     </div>
 

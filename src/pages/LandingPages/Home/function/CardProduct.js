@@ -7,11 +7,11 @@ const CardProduct = ({ proList, homePage }) => {
         return proList ? (
             <>
                 {proList.map((product, index) =>
-                    <div key={product.id} id="ProductCard" className={`cardProduct-${index} w-full h-84 p-2 border bg-white rounded-lg md:w-72 hover:shadow-lg 
+                    <div key={product.id} className={`ProductCard cardProduct-${index} w-full h-84 p-2 border bg-white rounded-lg md:w-72 hover:shadow-lg 
                     transition duration-300 ease-in-out`}>
                         <div className="bg-gray-400 h-auto rounded-t-lg relative card-product">
                             <Link to='/' className="card-product-img">
-                                <img className="image-card"
+                                <img className="image-card hover:opacity-75"
                                     src={product.image}
                                     alt=""
                                 />
@@ -58,7 +58,7 @@ const CardProduct = ({ proList, homePage }) => {
                     transition duration-300 ease-in-out`}>
                         <div className="bg-gray-400 h-auto rounded-t-lg relative card-product">
                             <Link to='/' className="card-product-img">
-                                <img className="image-card"
+                                <img className="image-card hover:opacity-75"
                                     src={product.image}
                                     alt=""
                                 />

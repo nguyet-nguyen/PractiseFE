@@ -24,14 +24,9 @@ const routes = [
             component: <Home/>,
           },
           {
-            name: "product list page",
-            route: "/product-list-page",
+            name: "All Items",
+            route: "/all-items",
             component: <ProductListPages/>,
-          },
-          {
-            name: "product list",
-            route: "/product-list",
-            component: <ProductList />,
           },
         ],
       },
