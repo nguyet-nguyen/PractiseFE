@@ -1,158 +1,104 @@
-import { useState } from "react";
+import React from "react";
 
-// react-router-dom components
-import { Link } from "react-router-dom";
-
-// @mui material components
-import Card from "@mui/material/Card";
-import Switch from "@mui/material/Switch";
-import Grid from "@mui/material/Grid";
-import MuiLink from "@mui/material/Link";
-
-// @mui icons
-import FacebookIcon from "@mui/icons-material/Facebook";
-import GitHubIcon from "@mui/icons-material/GitHub";
-import GoogleIcon from "@mui/icons-material/Google";
-
-// Practise React React components
-import MKBox from "components/MKBox";
-import MKTypography from "components/MKTypography";
-import MKInput from "components/MKInput";
-import MKButton from "components/MKButton";
-
-// Practise React React example components
-import DefaultNavbar from "examples/Navbars/DefaultNavbar";
-import SimpleFooter from "examples/Footers/SimpleFooter";
-
-// Practise React React page layout routes
-import routes from "routes";
-
-// Images
-import bgImage from "assets/images/bg-sign-in-basic.jpeg";
-
-function SignInBasic() {
-  const [rememberMe, setRememberMe] = useState(false);
-
-  const handleSetRememberMe = () => setRememberMe(!rememberMe);
-
+function SignIn() {
   return (
     <>
-      <DefaultNavbar
-        routes={routes}
-        action={{
-          type: "external",
-          route: "https://www.creative-tim.com/product/material-kit-react",
-          label: "free download",
-          color: "info",
-        }}
-        transparent
-        light
-      />
-      <MKBox
-        position="absolute"
-        top={0}
-        left={0}
-        zIndex={1}
-        width="100%"
-        minHeight="100vh"
-        sx={{
-          backgroundImage: ({ functions: { linearGradient, rgba }, palette: { gradients } }) =>
-            `${linearGradient(
-              rgba(gradients.dark.main, 0.6),
-              rgba(gradients.dark.state, 0.6)
-            )}, url(${bgImage})`,
-          backgroundSize: "cover",
-          backgroundPosition: "center",
-          backgroundRepeat: "no-repeat",
-        }}
-      />
-      <MKBox px={1} width="100%" height="100vh" mx="auto" position="relative" zIndex={2}>
-        <Grid container spacing={1} justifyContent="center" alignItems="center" height="100%">
-          <Grid item xs={11} sm={9} md={5} lg={4} xl={3}>
-            <Card>
-              <MKBox
-                variant="gradient"
-                bgColor="info"
-                borderRadius="lg"
-                coloredShadow="info"
-                mx={2}
-                mt={-3}
-                p={2}
-                mb={1}
-                textAlign="center"
-              >
-                <MKTypography variant="h4" fontWeight="medium" color="white" mt={1}>
-                  Sign in
-                </MKTypography>
-                <Grid container spacing={3} justifyContent="center" sx={{ mt: 1, mb: 2 }}>
-                  <Grid item xs={2}>
-                    <MKTypography component={MuiLink} href="#" variant="body1" color="white">
-                      <FacebookIcon color="inherit" />
-                    </MKTypography>
-                  </Grid>
-                  <Grid item xs={2}>
-                    <MKTypography component={MuiLink} href="#" variant="body1" color="white">
-                      <GitHubIcon color="inherit" />
-                    </MKTypography>
-                  </Grid>
-                  <Grid item xs={2}>
-                    <MKTypography component={MuiLink} href="#" variant="body1" color="white">
-                      <GoogleIcon color="inherit" />
-                    </MKTypography>
-                  </Grid>
-                </Grid>
-              </MKBox>
-              <MKBox pt={4} pb={3} px={3}>
-                <MKBox component="form" role="form">
-                  <MKBox mb={2}>
-                    <MKInput type="email" label="Email" fullWidth />
-                  </MKBox>
-                  <MKBox mb={2}>
-                    <MKInput type="password" label="Password" fullWidth />
-                  </MKBox>
-                  <MKBox display="flex" alignItems="center" ml={-1}>
-                    <Switch checked={rememberMe} onChange={handleSetRememberMe} />
-                    <MKTypography
-                      variant="button"
-                      fontWeight="regular"
-                      color="text"
-                      onClick={handleSetRememberMe}
-                      sx={{ cursor: "pointer", userSelect: "none", ml: -1 }}
-                    >
-                      &nbsp;&nbsp;Remember me
-                    </MKTypography>
-                  </MKBox>
-                  <MKBox mt={4} mb={1}>
-                    <MKButton variant="gradient" color="info" fullWidth>
-                      sign in
-                    </MKButton>
-                  </MKBox>
-                  <MKBox mt={3} mb={1} textAlign="center">
-                    <MKTypography variant="button" color="text">
-                      Don&apos;t have an account?{" "}
-                      <MKTypography
-                        component={Link}
-                        to="/authentication/sign-up/cover"
-                        variant="button"
-                        color="info"
-                        fontWeight="medium"
-                        textGradient
-                      >
-                        Sign up
-                      </MKTypography>
-                    </MKTypography>
-                  </MKBox>
-                </MKBox>
-              </MKBox>
-            </Card>
-          </Grid>
-        </Grid>
-      </MKBox>
-      <MKBox width="100%" position="absolute" zIndex={2} bottom="1.625rem">
-        <SimpleFooter light />
-      </MKBox>
+      <main>
+        <section className="absolute w-full h-full">
+          <div
+            className="absolute top-0 w-full h-full bg-white"
+            style={{
+              backgroundImage:
+                "url(" + require("assets/images/register_bg.png") + ")",
+              backgroundSize: "100%",
+              backgroundRepeat: "no-repeat",
+            }}
+          ></div>
+          <div className="container mx-auto px-4 h-full">
+            <div className="flex content-center items-center justify-center h-full">
+              <div className="w-full lg:w-4/12 px-4">
+                <div className="relative flex flex-col min-w-0 break-words w-full mb-6 shadow-lg rounded-lg border-0">
+                  <div className="rounded-t mb-0 px-6 py-6">
+                    <div className="text-center my-3">
+                      <h6 className="text-slate-700 uppercase text-xl md:text-2xl font-bold">
+                        Sign in
+                      </h6>
+                    </div>
+                  </div>
+                  <div className="flex-auto px-4 lg:px-10 py-10 pt-0">
+                    <form>
+                      <div className="relative w-full mb-3">
+                        <label
+                          className="block uppercase text-gray-700 text-xs font-bold mb-2"
+                          htmlFor="grid-username"
+                        >
+                          Username
+                        </label>
+                        <input
+                          type="name"
+                          className="border-0 px-3 py-3 placeholder-gray-400 text-gray-700 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full"
+                          placeholder="Username"
+                          style={{ transition: "all .15s ease" }}
+                        />
+                      </div>
+
+                      <div className="relative w-full mb-3">
+                        <label
+                          className="block uppercase text-gray-700 text-xs font-bold mb-2"
+                          htmlFor="grid-password"
+                        >
+                          Password
+                        </label>
+                        <input
+                          type="password"
+                          className="border-0 px-3 py-3 placeholder-gray-400 text-gray-700 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full"
+                          placeholder="Password"
+                          style={{ transition: "all .15s ease" }}
+                        />
+                      </div>
+                      <div>
+                        <label className="inline-flex items-center cursor-pointer">
+                          <input
+                            id="customCheckLogin"
+                            type="checkbox"
+                            className="form-checkbox border-0 rounded text-gray-800 ml-1 w-5 h-5"
+                            style={{ transition: "all .15s ease" }}
+                          />
+                          <span className="ml-2 text-sm font-semibold text-gray-700">
+                            Remember me
+                          </span>
+                        </label>
+                      </div>
+
+                      <div className="text-center mt-6">
+                        <button
+                          className="bg-amber-600 text-white active:bg-amber-800 text-sm font-bold uppercase px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 w-full"
+                          type="button"
+                          style={{ transition: "all .15s ease" }}
+                        >
+                          Sign In
+                        </button>
+                      </div>
+                      <div class="flex items-center justify-between mt-4">
+                        <span class="w-1/5 border-b dark:border-slate-800 md:w-1/4"></span>
+                        <a
+                          href="sign-up"
+                          class="text-sm text-amber-600 uppercase font-semibold dark:text-amber-800 hover:underline"
+                        >
+                          or sign up
+                        </a>
+                        <span class="w-1/5 border-b dark:border-slate-800 md:w-1/4"></span>
+                      </div>
+                    </form>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+      </main>
     </>
   );
 }
 
-export default SignInBasic;
+export default SignIn;

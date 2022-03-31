@@ -35,7 +35,7 @@ export default function App() {
 
         {/* Admin Page */}
         <Route exact path="/admin/dashboard" element={<Dashboard />} />
-        <Route exact path="/admin/signIn" element={<SignInAdmin />} />
+        <Route exact path="/admin/sign-in" element={<SignInAdmin />} />
       </Routes>
     </ThemeProvider>
   );
