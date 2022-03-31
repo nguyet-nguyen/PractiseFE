@@ -9,10 +9,11 @@ import theme from "assets/theme";
 
 // Practise React React routes
 import routes from "routes";
-import SignInAdmin from "layouts/pages/admin/sign-in"
 import Dashboard from "layouts/pages/admin/dashboard"
-import Dashboard from "pages/Admin/DashBoard";
 import ProductDetail from "pages/LandingPages/ProductDetail";
+import ProductsPage from "layouts/pages/admin/products";
+import UsersPage from "layouts/pages/admin/users";
+import SignInAdminPage from "layouts/pages/admin/sign-in";
 
 export default function App() {
 
@@ -37,7 +38,10 @@ export default function App() {
 
         {/* Admin Page */}
         <Route exact path="/admin/dashboard" element={<Dashboard />} />
-        <Route exact path="/admin/sign-in" element={<SignInAdmin />} />
+        <Route exact path="/admin/sign-in" element={<SignInAdminPage />} />
+        <Route exact path="/admin/products" element={<ProductsPage />} />
+        <Route exact path="/admin/users" element={<UsersPage />} />
+
         <Route exact path="/all-items/item-detail" element={<ProductDetail />} />
       </Routes>
     </ThemeProvider>
