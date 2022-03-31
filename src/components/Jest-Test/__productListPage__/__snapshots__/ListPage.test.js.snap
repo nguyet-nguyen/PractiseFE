@@ -6,7 +6,7 @@ exports[`Jest Unit Test ListPage productListPage SnapShot case 1 1`] = `
   id="listPage-productList"
 >
   <div
-    class="md:w-10/12 w-full h-auto transition-all rounded-lg mx-auto"
+    class="md:w-12/12 w-full h-auto transition-all rounded-lg mx-auto"
   >
     <h2
       class="font-bold text-color leading-tight text-3xl mb-2 text-center uppercase"
