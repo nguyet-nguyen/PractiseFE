@@ -1,6 +1,6 @@
 import React from "react";
 
-function SignIn() {
+function SignInAdmin() {
   return (
     <>
       <main>
@@ -101,4 +101,4 @@ function SignIn() {
   );
 }
 
-export default SignIn;
+export default SignInAdmin;
