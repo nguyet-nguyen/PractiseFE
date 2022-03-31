@@ -13,6 +13,8 @@ import footerRoutes from "footer.routes";
 // Images
 import bannerHome from "assets/images/logos/banner-home.PNG"
 import ListPage from "./sections/ListPage";
+import Breadcrumbs from "./sections/Breadcrumbs";
+import SideNavFilter from "./sections/SideNavFilter";
 
 function ProductListPages() {
     return (
@@ -42,7 +44,20 @@ function ProductListPages() {
                     placeItems: "center",
                 }}>
             </MKBox>
-            <ListPage />
+            <section className="container h-auto mx-auto md:px-5 px-4 py-2 mx-auto md:py-12 md:px-32">
+                <div className="md:w-12/12 w-full h-auto transition-all rounded-lg mx-auto">
+                    <Breadcrumbs />
+                    <div className="grid grid-cols-4 gap-4">
+                        <div >
+                            <SideNavFilter />
+                        </div>
+                        <div class="col-span-3">
+                            <ListPage />
+                        </div>
+                    </div>
+
+                </div>
+            </section>
             <MKBox pt={6} px={1} mt={6}>
                 <DefaultFooter content={footerRoutes} />
             </MKBox>

@@ -2,16 +2,12 @@
 
 exports[`Unit Test banner home Component render SnapShot case 1 1`] = `
 <div
-  class="container mx-auto flex justify-center"
+  class="relative overflow-hidden bg-no-repeat bg-cover w-full my-10"
 >
-  <div
-    class="relative overflow-hidden bg-no-repeat bg-cover w-full"
-  >
-    <img
-      alt="Louvre"
-      class="max-w-full h-auto hover:scale-110 transition duration-300 ease-in-out"
-      src="banner.JPG"
-    />
-  </div>
+  <img
+    alt="Louvre"
+    class="max-w-full h-auto hover:scale-110 transition duration-300 ease-in-out"
+    src="banner.JPG"
+  />
 </div>
 `;

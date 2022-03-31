@@ -39,15 +39,16 @@ function ProductList() {
         setProductListFilter(arrProduct);
     }
     return (
-            <div id="productListHome" className="md:mt-10 mt-5">
-                <div className="flex justify-between items-center md:flex-wrap justify-start items-center w-full mb-2">
+            <div id="productListHome" className="md:mt-16 mt-5">
+                <div className="flex justify-between items-center md:flex-wrap  w-full mb-2">
                     <span className="md:text-3xl text-xl font-bold flex items-center">
                         <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 mr-2 stroke-amber-600 fill-amber-600" viewBox="0 0 20 20" fill="currentColor">
                             <path fillRule="evenodd" d="M5 2a1 1 0 011 1v1h1a1 1 0 010 2H6v1a1 1 0 01-2 0V6H3a1 1 0 010-2h1V3a1 1 0 011-1zm0 10a1 1 0 011 1v1h1a1 1 0 110 2H6v1a1 1 0 11-2 0v-1H3a1 1 0 110-2h1v-1a1 1 0 011-1zM12 2a1 1 0 01.967.744L14.146 7.2 17.5 9.134a1 1 0 010 1.732l-3.354 1.935-1.18 4.455a1 1 0 01-1.933 0L9.854 12.8 6.5 10.866a1 1 0 010-1.732l3.354-1.935 1.18-4.455A1 1 0 0112 2z" clipRule="evenodd" />
                         </svg>
                         <span className="text-color">New Items</span>
                     </span>
-                    <ul className="nav nav-tabs flex flex-col md:flex-row flex-wrap list-none border-b-0 pl-0 hidden" id="tabs-tab"
+                    <ul className="nav nav-tabs md:flex flex-col md:flex-row flex-wrap list-none 
+                    border-b-0 pl-0 hidden" id="tabs-tab"
                         role="tablist">
                         {categoryList.map((category, index) =>
                             <li className="nav-item nav-category mx-2" role="presentation" onClick={getcategoryId}>
@@ -59,10 +60,10 @@ function ProductList() {
                             </li>
                         )}
                     </ul>
-                    <div className="flex justify-center">
+                    <div className="flex justify-center md:hidden">
                         <div className="xl:w-96">
                             <select onChange={getcategoryId} className="form-select appearance-none block w-full px-5 py-1.5 text-base font-medium 
-                            text-amber-600 bg-white bg-clip-padding bg-no-repeat border  border-2
+                            text-amber-600 bg-white bg-clip-padding bg-no-repeat border border-2 capitalize
                             border-solid border-amber-600 rounded transition ease-in-out mx-2 focus:text-white
                             focus:bg-white focus:text-amber-600 focus:border-amber-600 focus:outline-none focus:shadow-inner" aria-label="Default select example">
                                 {categoryList.map((category) =>
