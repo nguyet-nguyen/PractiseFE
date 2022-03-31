@@ -1,8 +1,8 @@
 import { Link } from "react-router-dom";
 
-const Breadcrumbs = () => {
+const BreadcrumbsProductList = () => {
     return (
-        <nav className="rounded-md w-full mx-4">
+        <nav className="rounded-md w-full mx-4 md:mb-10 mb-5">
             <ol className="list-reset flex">
                 <li>
                     <Link to="/" className="text-gray-800 hover:text-amber-700">
@@ -25,4 +25,4 @@ const Breadcrumbs = () => {
     );
 }
 
-export default Breadcrumbs;
+export default BreadcrumbsProductList;

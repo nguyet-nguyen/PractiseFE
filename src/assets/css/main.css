@@ -68,6 +68,22 @@ html {
     border-color: rgb(217 119 6);
     color: rgb(180 83 9);
 }
+.productListPage {
+    position: relative;
+}
+.buttonSideNav {
+    position: sticky;
+    top: 50%;
+    left: 0;
+    z-index: 500;
+    transform: translate(-16px,0);
+}
+.ItemDetail {
+    box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
+}
+.breadcrumbsItemDetail {
+    background-image: url('/src/assets/images/logos/banner-product-item.PNG');
+}
 
 @keyframes circular {
     from {

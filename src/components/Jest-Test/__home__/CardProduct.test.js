@@ -36,8 +36,8 @@ describe("Unit Test CardProduct Component render", () => {
             </BrowserRouter>
             , container)
     });
-        expect(container.querySelector('#ProductCard')).toMatchSnapshot();
-        expect(container.querySelector('#ProductCard')).toBe(null);
+        expect(container.querySelector('.ProductCard')).toMatchSnapshot();
+        expect(container.querySelector('.ProductCard')).toBe(null);
     });
    
     it("SnapShot case 2", async () => {
@@ -60,7 +60,7 @@ describe("Unit Test CardProduct Component render", () => {
                 </BrowserRouter>
                 , container)
         });
-        expect(container.querySelector('#ProductCard')).toMatchSnapshot();
+        expect(container.querySelector('.ProductCard')).toMatchSnapshot();
         expect(container.querySelector(".productName").textContent).toBe('MOONLIGHT ANKLE BOOT');
         expect(container.querySelector(".productPrice").textContent).toBe(numberFormat(500000));
 
