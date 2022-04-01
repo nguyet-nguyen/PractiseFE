@@ -9,6 +9,7 @@ import theme from "assets/theme";
 
 // Practise React React routes
 import routes from "routes";
+
 import ProductDetail from "pages/LandingPages/ProductDetail";
 import ProductsPage from "layouts/pages/admin/products";
 import UsersPage from "layouts/pages/admin/users";
