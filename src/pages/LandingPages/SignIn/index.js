@@ -1,9 +1,20 @@
-import React, { useState } from 'react';
-import { useForm } from 'react-hook-form';
+import React, {useState} from 'react';
+import {useForm} from 'react-hook-form';
 
 const SignIn = () => {
+  const {register, handleSubmit, formState: {errors}} = useForm();
+  const onSubmit = async (data, e) => {
+    const body = {
+      firstName: data.firstName,
+      lastName: data.lastName,
+      email: data.email,
+      phone: data.phone,
+      city: data.city,
+    };
+    console.log(body);
+    e.target.reset();
+  }
   return (
-    <>
       <main>
         <section className="absolute w-full h-full">
           <div
@@ -27,21 +38,26 @@ const SignIn = () => {
                     </div>
                   </div>
                   <div className="flex-auto px-4 lg:px-10 py-10 pt-0">
-                    <form>
+                    <form onSubmit={handleSubmit(onSubmit)}>
                       <div className="relative w-full mb-6">
                         <label
                           className="block uppercase text-gray-700 text-xs font-bold mb-2"
                           htmlFor="grid-username"
                         >
-                          Username
+                          Email
                         </label>
                         <input
                           type="name"
                           className="border-0 px-3 py-3 placeholder-gray-400 text-gray-700 bg-white rounded text-sm 
                           shadow focus:outline-none focus:ring-2 focus:ring-amber-500 focus:border-amber-600 w-full"
-                          placeholder="Username"
                           style={{ transition: "all .15s ease" }}
+                          id="email"
+                          name='email'
+                          placeholder="email"
+                          {...register("email", { required: true, pattern: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i })}
                         />
+                        {errors.email && errors.email.type === 'required' && <p className="text-red-500 mt-3 text-xs italic">Value required</p>}
+                        {errors.email && errors.email.type === 'pattern' && <p className="text-red-500 mt-3 text-xs italic">Invalid email</p>}
                       </div>
 
                       <div className="relative w-full mb-6">
@@ -57,7 +73,16 @@ const SignIn = () => {
                           text-sm shadow focus:outline-none focus:ring-2 focus:ring-amber-500 focus:border-amber-600 w-full"
                           placeholder="Password"
                           style={{ transition: "all .15s ease" }}
+                          id="password"
+                          name="password"
+                          {...register("password", {required: true, minLength: 8, maxLength: 20})}
                         />
+                        {errors.password && errors.password.type === "required" &&
+                            <p className="mt-3 text-red-500 text-xs italic">value required</p>}
+                        {errors.password && errors.password.type === 'minLength' &&
+                            <p className="mt-3 text-red-500 text-xs italic">no less than 8 characters</p>}
+                        {errors.password && errors.password.type === 'maxLength' &&
+                            <p className="mt-3 text-red-500 text-xs italic">no more than 20 characters</p>}
                       </div>
                       <div>
                         <label className="inline-flex items-center cursor-pointer">
@@ -76,9 +101,8 @@ const SignIn = () => {
                       <div className="text-center mt-6">
                         <button
                           className="bg-amber-600 text-white active:bg-amber-800 text-sm font-bold uppercase px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 w-full"
-                          type="button"
-                          style={{ transition: "all .15s ease" }}
-                        >
+                          type="submit"
+                          style={{ transition: "all .15s ease" }}>
                           Sign In
                         </button>
                       </div>
@@ -100,7 +124,6 @@ const SignIn = () => {
           </div>
         </section>
       </main>
-    </>
   );
 }
 
