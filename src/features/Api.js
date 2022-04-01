@@ -39,11 +39,18 @@ export const SignUpApi = (data) => {
         console.log(error);
     }
 }
-export const SignInApi = (data) => {
+export const SignInApiToken = (data) => {
     try {
-        return api.post(`/register`, data);
+        return api.post(`/login`, data);
     } catch (error) {
         console.log(error);
     }
 }
 
+export const SignInApiRole = (data) => {
+    try {
+        return api.post(`/users/email`, data);
+    } catch (error) {
+        console.log(error);
+    }
+}
