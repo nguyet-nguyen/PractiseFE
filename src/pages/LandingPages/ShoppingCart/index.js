@@ -11,6 +11,7 @@ import Cart from "./sections/Cart";
 
 // Images
 import bannerHome from "assets/images/logos/banner-home.PNG";
+import BreadcrumbsCart from "./sections/Breadcrumbs";
 
 const ShoppingCart = () => {
   return (
@@ -26,7 +27,7 @@ const ShoppingCart = () => {
         light
       />
       <MKBox
-        minHeight="75vh"
+        minHeight="85vh"
         width="100%"
         sx={{
           backgroundImage: ({
@@ -44,7 +45,8 @@ const ShoppingCart = () => {
         }}
       ></MKBox>
       <section className="container h-auto mx-auto px-4 py-2 md:py-12 md:px-32">
-      <div className="md:w-12/12 w-full h-auto transition-all rounded-lg mx-auto">
+        <div className="md:w-12/12 w-full h-auto transition-all rounded-lg mx-auto">
+          <BreadcrumbsCart />
           <Cart />
         </div>
       </section>
