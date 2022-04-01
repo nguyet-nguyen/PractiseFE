@@ -6,6 +6,7 @@ import SignIn from "layouts/pages/authentication/sign-in";
 import Home from "pages/LandingPages/Home";
 import ProductListPages from "pages/LandingPages/ProductListPage";
 import SignUp from "pages/LandingPages/SignUp";
+import ShoppingCart from "pages/LandingPages/ShoppingCart";
 
 const routes = [
   {
@@ -26,6 +27,11 @@ const routes = [
             name: "All Items",
             route: "/all-items",
             component: <ProductListPages/>,
+          },
+          {
+            name: "Shopping Cart",
+            route: "/shopping-cart",
+            component: <ShoppingCart />,
           },
         ],
       },

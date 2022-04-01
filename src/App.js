@@ -10,8 +10,6 @@ import theme from "assets/theme";
 // Practise React React routes
 import routes from "routes";
 import SignInAdmin from "layouts/pages/admin/sign-in"
-// import Dashboard from "layouts/pages/admin/dashboard"
-import Dashboard from "pages/Admin/DashBoard";
 import Dashboard from "layouts/pages/admin/dashboard"
 import ProductDetail from "pages/LandingPages/ProductDetail";
 import ProductsPage from "layouts/pages/admin/products";
