@@ -1,4 +1,5 @@
 import React from "react";
+import {Link} from "react-router-dom";
 
 function SignInAdmin() {
   return (
@@ -32,7 +33,7 @@ function SignInAdmin() {
                           className="block uppercase text-gray-700 text-xs font-bold mb-2"
                           htmlFor="grid-username"
                         >
-                          Username
+                          Name
                         </label>
                         <input
                           type="name"
@@ -74,19 +75,17 @@ function SignInAdmin() {
                         <button
                           className="bg-indigo-500 text-white active:bg-indigo-700 text-sm font-bold uppercase px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 w-full"
                           type="button"
-                          style={{ transition: "all .15s ease" }}
-                        >
+                          style={{ transition: "all .15s ease" }}>
                           Sign In
                         </button>
                       </div>
                       <div class="flex items-center justify-between mt-4">
                         <span class="w-1/5 border-b dark:border-slate-800 md:w-1/4"></span>
-                        <a
-                          href="signUp"
-                          class="text-sm text-indigo-500 uppercase font-semibold dark:text-indigo-700 hover:underline"
-                        >
+                        <Link
+                          to="/pages/authentication/sign-up"
+                          class="text-sm text-indigo-500 uppercase font-semibold dark:text-indigo-700 hover:underline">
                           or sign up
-                        </a>
+                        </Link>
                         <span class="w-1/5 border-b dark:border-slate-800 md:w-1/4"></span>
                       </div>
                     </form>

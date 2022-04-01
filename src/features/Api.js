@@ -32,3 +32,18 @@ export const requestFilterCategory = (data) => {
   }
 }
 
+export const SignUpApi = (data) => {
+    try {
+        return api.post(`/register`, data);
+    } catch (error) {
+        console.log(error);
+    }
+}
+export const SignInApi = (data) => {
+    try {
+        return api.post(`/register`, data);
+    } catch (error) {
+        console.log(error);
+    }
+}
+
