@@ -10,7 +10,22 @@ const ShoppingCart = () => {
       </div>
       <div className="flex lg:flex-row flex-col" id="cart">
         <div className="lg:w-2/3 md:w-8/12 w-full px-4 py-2 bg-white dark:bg-gray-800 lg:h-screen h-auto">
+          <label className="inline-flex items-center">
+            <input
+              type="checkbox"
+              className="w-6 h-7   accent-amber-300 border-0 rounded-md focus:ring-0 mr-7"
+              defaultChecked
+            />
+            <span className="text-lg font-semibold leading-3 text-gray-600 py-5">
+              Select All
+            </span>
+          </label>
           <div className="md:flex items-strech py-8 md:py-10 lg:py-8 border-t border-gray-100">
+            <input
+              type="checkbox"
+              className="w-6 h-7 accent-amber-300 border-0 rounded-md focus:ring-0 mr-7"
+              defaultChecked
+            />
             <div className="md:w-4/12 2xl:w-1/4 w-full">
               <img
                 src="https://media.gucci.com/style/HEXEAF2DC_Center_0_0_800x800/1643239845/688610_XJD7W_9061_002_100_0000_Light-Jersey-zip-jacket-with-Web.jpg"
@@ -24,7 +39,7 @@ const ShoppingCart = () => {
               />
             </div>
             <div className="md:pl-3 lg:ml-7 md:w-8/12 2xl:w-3/4 flex flex-col justify-center">
-              <p className="text-md leading-3 text-gray-800 dark:text-white md:pt-0 pt-4">
+              <p className="text-base font-semibold leading-3 text-gray-600 dark:text-white md:pt-0 pt-4">
                 ID12
               </p>
               <div className="flex items-center justify-between w-full py-3">
@@ -33,7 +48,7 @@ const ShoppingCart = () => {
                 </p>
                 <select
                   aria-label="Select quantity"
-                  className="py-2 px-1 border border-gray-200 mr-6 focus:outline-none dark:bg-gray-800 dark:hover:bg-gray-700 dark:text-white"
+                  className="py-2 px-1 border rounded-md mr-6  dark:bg-gray-800 dark:hover:bg-gray-700 dark:text-white"
                 >
                   <option>01</option>
                   <option>02</option>
@@ -60,6 +75,11 @@ const ShoppingCart = () => {
             </div>
           </div>
           <div className="md:flex items-strech py-8 md:py-10 lg:py-8 border-t border-gray-100">
+            <input
+              type="checkbox"
+              className="w-6 h-7 accent-amber-300 border-0 rounded-md focus:ring-0 mr-7"
+              defaultChecked
+            />
             <div className="md:w-4/12 2xl:w-1/4 w-full">
               <img
                 src="https://media.gucci.com/style/HEXEAF2DC_Center_0_0_800x800/1643239849/688613_XJD6C_9061_002_100_0000_Light-Jersey-shorts-with-Web.jpg"
@@ -73,7 +93,7 @@ const ShoppingCart = () => {
               />
             </div>
             <div className="md:pl-3 lg:ml-7 md:w-8/12 2xl:w-3/4 flex flex-col justify-center">
-              <p className="text-md leading-3 text-gray-800 dark:text-white md:pt-0 pt-4">
+              <p className="text-base font-semibold leading-3 text-gray-600 dark:text-white md:pt-0 pt-4">
                 ID12
               </p>
               <div className="flex items-center justify-between w-full py-3">
@@ -82,7 +102,7 @@ const ShoppingCart = () => {
                 </p>
                 <select
                   aria-label="Select quantity"
-                  className="py-2 px-1 border border-gray-200 mr-6 focus:outline-none dark:bg-gray-800 dark:hover:bg-gray-700 dark:text-white"
+                  className="py-2 px-1 border rounded-md mr-6  dark:bg-gray-800 dark:hover:bg-gray-700 dark:text-white"
                 >
                   <option>01</option>
                   <option>02</option>
@@ -91,7 +111,7 @@ const ShoppingCart = () => {
               </div>
               <div className="flex items-center pb-8">
                 <p className="text-sm font-semibold leading-3 text-gray-500 dark:text-white pr-3">
-                  Black
+                  White
                 </p>
                 <p className="text-sm font-semibold leading-3 text-gray-500 dark:text-white border-l border-gray-300 pl-3">
                   Large
@@ -110,7 +130,7 @@ const ShoppingCart = () => {
           </div>
         </div>
 
-        <div className="lg:w-1/3 lg:ml-20 md:w-8/12 w-96 bg-gray-100 dark:bg-gray-900 h-full">
+        <div className="lg:w-1/3 lg:ml-20 md:w-8/12 w-full bg-gray-100 dark:bg-gray-900 h-full">
           <div className="flex flex-col h-auto lg:px-8 md:px-7 px-4 lg:py-16 md:py-8 py-6 justify-between overflow-y-auto">
             <div>
               <p className="lg:text-2xl text-xl font-bold leading-9 text-gray-800 dark:text-white">
