@@ -170,7 +170,7 @@ const ShoppingCart = () => {
                   $240
                 </p>
               </div>
-              <button className="text-lg leading-none w-full py-5 bg-amber-600 font-bold rounded-lg focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-amber-800 text-white dark:hover:bg-amber-700">
+              <button className="text-lg leading-none w-full py-5 bg-amber-500 hover:bg-amber-600 font-bold rounded-lg focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-amber-800 text-white dark:hover:bg-amber-700">
                 Checkout
               </button>
             </div>
