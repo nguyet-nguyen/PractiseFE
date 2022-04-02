@@ -37,8 +37,8 @@ const SignUp = () => {
                              src="https://images.unsplash.com/photo-1603400521630-9f2de124b33b?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=387&q=80"
                              alt=""/>
                     </div>
-                    <form className="w-full md:w-2/3 py-10 px-5 md:px-10" onSubmit={handleSubmit(onSubmit)}>
-                        <div className="text-center mb-10">
+                    <form className="w-full md:w-2/3 py-8 px-5 md:px-10" onSubmit={handleSubmit(onSubmit)}>
+                        <div className="text-center mb-7">
                             <h1 className="font-bold text-3xl text-gray-900">REGISTER</h1>
                             <p>Enter your information to register</p>
                         </div>
@@ -51,13 +51,13 @@ const SignUp = () => {
                                     <div className="flex">
                                         <div
                                             className="w-10 z-10 pl-1 text-center pointer-events-none flex items-center justify-center">
-                                            <i className="mdi mdi-account-outline text-gray-400 text-lg"></i>
+                                            <i class="fa fa-user-circle-o" aria-hidden="true"></i>  
                                         </div>
                                         <input
                                             type="text"
                                             className="w-full -ml-10 pl-10 pr-3 py-2 rounded-lg border-2 border-gray-200
                                             outline-none focus:ring-2 focus:ring-amber-500 focus:border-amber-600"
-                                            placeholder="name"
+                                            placeholder="username"
                                             id="name"
                                             name="name"
                                             {...register("name", {required: true})}
@@ -73,7 +73,7 @@ const SignUp = () => {
                                     <div className="flex">
                                         <div
                                             className="w-10 z-10 pl-1 text-center pointer-events-none flex items-center justify-center">
-                                            <i className="mdi mdi-account-outline text-gray-400 text-lg"></i>
+                                            <i class="fa fa-lock" aria-hidden="true"></i>
                                         </div>
                                         <input
                                             type="password"
@@ -100,7 +100,7 @@ const SignUp = () => {
                                     <div className="flex">
                                         <div
                                             className="w-10 z-10 pl-1 text-center pointer-events-none flex items-center justify-center">
-                                            <i className="mdi mdi-account-outline text-gray-400 text-lg"></i>
+                                            <i class="fa fa-envelope-o" aria-hidden="true"></i>
                                         </div>
                                         <input
                                             type="email"
@@ -126,7 +126,7 @@ const SignUp = () => {
                                     <div className="flex">
                                         <div
                                             className="w-10 z-10 pl-1 text-center pointer-events-none flex items-center justify-center">
-                                            <i className="mdi mdi-account-outline text-gray-400 text-lg"></i>
+                                            <i class="fa fa-phone" aria-hidden="true"></i>
                                         </div>
                                         <input
                                             type="phone"
@@ -209,10 +209,10 @@ const SignUp = () => {
                                     <div className="flex">
                                         <div
                                             className="w-10 z-10 pl-1 text-center pointer-events-none flex items-center justify-center">
-                                            <i className="mdi mdi-account-outline text-gray-400 text-lg"></i>
+                                            <i class="fa fa-location-arrow" aria-hidden="true"></i>
                                         </div>
                                         <textarea
-                                            className=" w-full h-32 resize-none -ml-10 pl-10 pr-3 py-2 rounded-lg border-2 border-gray-200 outline-none focus:ring-2 focus:ring-amber-500 focus:border-amber-600"
+                                            className=" w-full h-20 resize-none -ml-10 pl-10 pr-3 py-2 rounded-lg border-2 border-gray-200 outline-none focus:ring-2 focus:ring-amber-500 focus:border-amber-600"
                                             placeholder="Your address"
                                         />
                                     </div>
@@ -223,13 +223,13 @@ const SignUp = () => {
                                     </label>
                                     <div class="flex items-center justify-center w-full">
                                         <label
-                                            class="flex flex-col w-full h-32 border-4 border-blue-200 border-dashed hover:bg-gray-100 hover:border-gray-300">
-                                            <div class="flex flex-col items-center justify-center pt-7">
+                                            class="flex flex-col w-full h-20 border-4 border-blue-200 border-dashed hover:bg-gray-100 hover:border-gray-300">
+                                            <div class="flex flex-col items-center justify-center pt-2">
                                                 <p className="pt-1 text-sm tracking-wider text-gray-400 group-hover:text-gray-600">
                                                     Attach a file</p>
                                             </div>
                                             <input id="image" name="image" type="file" {...register('image')}
-                                                   className="ml-6"/>
+                                                   className="ml-8 text-sm"/>
                                         </label>
 
 
@@ -238,12 +238,23 @@ const SignUp = () => {
                             </div>
 
                             <div className="flex -mx-3">
-                                <div className="w-full px-3 mb-5">
+                                <div className="w-full px-3 mb-2">
                                     <button
                                         className="block w-full max-w-xs mx-auto bg-amber-600 hover:bg-amber-700 focus:bg-amber-700 text-white rounded-lg px-3 py-3 font-semibold">
                                         REGISTER NOW
                                     </button>
                                 </div>
+                            </div>
+                            <div class="flex items-center justify-between mt-4">
+                                <span class="w-1/6 border-b dark:border-slate-800 md:w-1/5"></span>
+                                    Already have an account ? 
+                                    <a
+                                    href="sign-in"
+                                    class="text-sm text-amber-600 capitalize font-semibold dark:text-amber-800 hover:underline"
+                                    >
+                                    Sign in here
+                                    </a>
+                                <span class="w-1/6 border-b dark:border-slate-800 md:w-1/5"></span>
                             </div>
                         </div>
                     </form>
