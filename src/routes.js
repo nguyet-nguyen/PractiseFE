@@ -7,6 +7,7 @@ import Home from "pages/LandingPages/Home";
 import ProductListPages from "pages/LandingPages/ProductListPage";
 import SignUp from "pages/LandingPages/SignUp";
 import ShoppingCart from "pages/LandingPages/ShoppingCart";
+import UserProfile from "pages/LandingPages/UserProfile";
 
 const routes = [
   {
@@ -32,6 +33,11 @@ const routes = [
             name: "Shopping Cart",
             route: "/shopping-cart",
             component: <ShoppingCart />,
+          },
+          {
+            name: "Profile",
+            route: "/user-profile",
+            component: <UserProfile />,
           },
         ],
       },
