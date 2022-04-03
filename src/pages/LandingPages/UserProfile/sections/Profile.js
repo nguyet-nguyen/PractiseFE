@@ -1,6 +1,7 @@
 import React from "react";
+import UserAvatar from 'assets/images/user-profile/avatar-1.png';
 
-const ShoppingCart = () => {
+const Profile = () => {
   return ( 
     <>
     <main className="profile-page">
@@ -9,7 +10,7 @@ const ShoppingCart = () => {
           className="absolute top-0 w-full h-full bg-center bg-cover"
           style={{
             backgroundImage:
-              "url('https://images.unsplash.com/photo-1500964757637-c85e8a162699?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1203&q=80')"
+              "url(" + require("assets/images/user-profile/bg-1.png") + ")",
           }}
         >
           <span
@@ -46,7 +47,7 @@ const ShoppingCart = () => {
                   <div className="relative">
                     <img
                       alt="..."
-                      src="https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=880&q=80"
+                      src={UserAvatar}
                       className="shadow-xl rounded-full h-auto align-middle border-none absolute -m-16 -ml-20 lg:-ml-16"
                       style={{ maxWidth: "150px" }}
                     />
@@ -119,11 +120,13 @@ const ShoppingCart = () => {
             </div>
           </div>
         </div>
+
       </section>
+ 
     </main>
    
     </>
    );
 };
 
-export default ShoppingCart;
+export default Profile;
