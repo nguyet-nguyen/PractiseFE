@@ -15,15 +15,7 @@ const UsersTable = () => {
             .catch(err => {
                 console.log(err);
             })
-        $('#usersTable').DataTable( {
-            users: users,
-            columns: [
-                { users: 'name' },
-                { users: 'email' },
-                { users: 'phone' },
-                { users: 'address' }
-            ]
-        } );
+        $('#usersTable').DataTable();
 
         },[]);
 

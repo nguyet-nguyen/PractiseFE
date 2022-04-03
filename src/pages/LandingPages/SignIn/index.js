@@ -5,9 +5,7 @@ import {useNavigate} from 'react-router-dom';
 
 const SignIn = () => {
     const navigate = useNavigate();
-    const [userInfo,setUserInfo] = useState([]);
     const {register, handleSubmit, formState: {errors}} = useForm();
-    const [token,setToken] = useState("");
 
     const onSubmit = async (data, e) => {
         const bodyToken = {
@@ -15,8 +13,6 @@ const SignIn = () => {
             password: data.password,
         };
         SignInApiToken(bodyToken).then(response => {
-            setToken(response.data);
-
             window.localStorage.setItem("token", response.data.token);
         })
             .catch(err => {
@@ -29,8 +25,9 @@ const SignIn = () => {
         }
         SignInApiRole(bodyRole)
             .then(response => {
-            setUserInfo(response.data);
-            if (userInfo.roles[0] === "ROLE_ADMIN") {
+
+
+            if (response.data.roles[0] === "ROLE_ADMIN") {
                 navigate('/admin/dashboard');
             } else {
                 navigate('/');
@@ -39,7 +36,7 @@ const SignIn = () => {
             console.log(err);
         })
         // console.log(token);
-        console.log(userInfo.roles[0]);
+
         e.target.reset();
     }
     return (
