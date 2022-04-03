@@ -258,7 +258,7 @@ const SignUp = () => {
                                             className="w-10 z-10 pl-1 text-center pointer-events-none flex items-center justify-center">
                                             <i class="fa fa-location-arrow" aria-hidden="true"></i>
                                         </div>
-                                        <input id="addressDetail" name="addressDetail"
+                                        <textarea id="addressDetail" name="addressDetail"
                                                className={`w-full h-20 -ml-10 pl-10 pr-3 py-2 rounded-lg border-2 border-gray-200
                                             outline-none focus:ring-2 focus:ring-amber-500 focus:border-amber-600
                                             ${errors.addressDetail && "border-red-600 focus:ring-red-500 focus:border-red-600 border-1"}`}
