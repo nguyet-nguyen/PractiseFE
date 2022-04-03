@@ -1,5 +1,5 @@
 
-import {api} from "../utils/Api";
+import {api, apiadmin} from "../utils/Api";
 
 // ---------------users------------------------?
 export const getAllProducts = () => {
@@ -65,5 +65,14 @@ export const getAllUsers = () => {
     catch (error) {
         console.log(error);
 
+    }
+}
+
+
+export const CreateUsers = (data) => {
+    try {
+        return apiadmin.post('/admin/users', data);
+    } catch (error) {
+        console.log(error);
     }
 }
