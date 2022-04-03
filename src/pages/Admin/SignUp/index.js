@@ -1,33 +1,66 @@
-import {cities, district, ward} from "../../../address";
+import {cities, districts, wards} from "../../../address";
 import React, {useState} from 'react';
 import {useForm} from 'react-hook-form';
-import {SignUpApi} from "../../../features/Api";
+import {CreateUsers} from "../../../features/Api";
 import {Link, useNavigate} from 'react-router-dom';
 
 const SignUpAdmin = () => {
     const navigate = useNavigate();
     const {register, handleSubmit, formState: {errors}} = useForm();
+
+    const [city, setCity] = useState({id: cities[0].id, name: cities[0].name}) ;
+    const [district, setDistrict] = useState({id: districts[0].id, name: districts[0].name});
+    const [ward, setWard] = useState({id: wards[0].id, name: wards[0].name});
+    const changeCityId = (id) => {
+        let cityName;
+        cities.map((city) => {
+            if (city.id == id) {
+                cityName = city.name;
+            }
+        });
+        setCity({id: id, name: cityName});
+    };
+    const changeDistrictId = (id) => {
+        let districtName;
+        districts.map((dis) => {
+            if (dis.id == id) {
+                districtName = dis.name;
+            }
+        });
+        setDistrict({id: id, name: districtName});
+    };
+
+    const changeWar = (id) => {
+        let wardName;
+        wards.map((ward) => {
+            if (ward.id == id) {
+                wardName = ward.name;
+            }
+        });
+        setWard({id: id, name: wardName});
+    };
     const onSubmit = async (data, e) => {
+        let address = city.name + " - " + district.name + " - " + ward.name + " - " + data.addressDetail;
         const formData = new FormData();
         formData.append("image", data.image[0]);
         formData.append("name", data.name);
         formData.append("email", data.email);
         formData.append("phone", data.phone);
         formData.append("password", data.password);
-        formData.append("address", "aaaaaaaa");
-        console.log(formData);
-        SignUpApi(formData).then(response => {
-            // navigate('/pages/authentication/sign-in');
+        formData.append("address", address);
+        console.log(address);
+        CreateUsers(formData).then(response => {
+            navigate('/pages/authentication/sign-in');
             console.log(response.data);
         })
             .catch(err => {
                     alert(err.data);
                 }
             )
-        // e.target.reset();
+        e.target.reset();
 
-    }
-    console.log(`Bearer ${window.localStorage.getItem('token')}`)
+    };
+
     return (
         <div className="min-w-screen min-h-screen flex items-center justify-center px-5 py-5">
             <div
@@ -42,8 +75,8 @@ const SignUpAdmin = () => {
                     </div>
                     <form className="w-full md:w-2/3 py-8 px-5 md:px-10" onSubmit={handleSubmit(onSubmit)}>
                         <div className="text-center mb-7">
-                            <h1 className="font-bold text-3xl text-gray-900">Add Admin</h1>
-                            <p>Enter admin information to register</p>
+                            <h1 className="font-bold text-3xl text-gray-900">Add orther Admin</h1>
+                            <p>Enter admin's information to register</p>
                         </div>
                         <div>
                             <div className="flex -mx-3">
@@ -54,17 +87,17 @@ const SignUpAdmin = () => {
                                     <div className="flex">
                                         <div
                                             className="w-10 z-10 pl-1 text-center pointer-events-none flex items-center justify-center">
-                                            <i class="fa fa-user-circle-o" aria-hidden="true"></i>
+                                            <i className="fa fa-user-circle-o" aria-hidden="true"></i>
                                         </div>
                                         <input
                                             type="text"
-                                            className="w-full -ml-10 pl-10 pr-3 py-2 rounded-lg border-2 border-gray-200
-                                            outline-none focus:ring-2 focus:ring-amber-500 focus:border-amber-600"
+                                            className={`w-full -ml-10 pl-10 pr-3 py-2 rounded-lg border-2 border-gray-200
+                                            outline-none focus:ring-2 focus:ring-amber-500 focus:border-amber-600
+                                            ${errors.name && "border-red-600 focus:ring-red-500 focus:border-red-600 border-1"}`}
                                             placeholder="username"
                                             id="name"
                                             name="name"
-                                            {...register("name", {required: true})}
-                                        />
+                                            {...register("name", {required: true})}/>
                                     </div>
                                     {errors.name && errors.name.type === "required" &&
                                         <p className="text-red-500 mt-3 text-xs italic">value required</p>}
@@ -76,11 +109,13 @@ const SignUpAdmin = () => {
                                     <div className="flex">
                                         <div
                                             className="w-10 z-10 pl-1 text-center pointer-events-none flex items-center justify-center">
-                                            <i class="fa fa-lock" aria-hidden="true"></i>
+                                            <i className="fa fa-lock" aria-hidden="true"></i>
                                         </div>
                                         <input
                                             type="password"
-                                            className="w-full -ml-10 pl-10 pr-3 py-2 rounded-lg border-2 border-gray-200 outline-none focus:ring-2 focus:ring-amber-500 focus:border-amber-600"
+                                            className={`w-full -ml-10 pl-10 pr-3 py-2 rounded-lg border-2 border-gray-200
+                                            outline-none focus:ring-2 focus:ring-amber-500 focus:border-amber-600
+                                            ${errors.password && "border-red-600 focus:ring-red-500 focus:border-red-600 border-1"}`}
                                             placeholder="************"
                                             id="password"
                                             name="password"
@@ -103,11 +138,13 @@ const SignUpAdmin = () => {
                                     <div className="flex">
                                         <div
                                             className="w-10 z-10 pl-1 text-center pointer-events-none flex items-center justify-center">
-                                            <i class="fa fa-envelope-o" aria-hidden="true"></i>
+                                            <i className="fa fa-envelope-o" aria-hidden="true"></i>
                                         </div>
                                         <input
                                             type="email"
-                                            className="w-full -ml-10 pl-10 pr-3 py-2 rounded-lg border-2 border-gray-200 outline-none focus:ring-2 focus:ring-amber-500 focus:border-amber-600"
+                                            className={`w-full -ml-10 pl-10 pr-3 py-2 rounded-lg border-2 border-gray-200
+                                            outline-none focus:ring-2 focus:ring-amber-500 focus:border-amber-600
+                                            ${errors.email && "border-red-600 focus:ring-red-500 focus:border-red-600 border-1"}`}
                                             placeholder="youremail@example.com"
                                             id="email"
                                             name='email'
@@ -129,11 +166,13 @@ const SignUpAdmin = () => {
                                     <div className="flex">
                                         <div
                                             className="w-10 z-10 pl-1 text-center pointer-events-none flex items-center justify-center">
-                                            <i class="fa fa-phone" aria-hidden="true"></i>
+                                            <i className="fa fa-phone" aria-hidden="true"></i>
                                         </div>
                                         <input
                                             type="phone"
-                                            className="w-full -ml-10 pl-10 pr-3 py-2 rounded-lg border-2 border-gray-200 outline-none focus:ring-2 focus:ring-amber-500 focus:border-amber-600"
+                                            className={`w-full -ml-10 pl-10 pr-3 py-2 rounded-lg border-2 border-gray-200
+                                            outline-none focus:ring-2 focus:ring-amber-500 focus:border-amber-600
+                                            ${errors.phone && "border-red-600 focus:ring-red-500 focus:border-red-600 border-1"}`}
                                             placeholder="0933549878"
                                             id="phone"
                                             name='phone'
@@ -157,12 +196,13 @@ const SignUpAdmin = () => {
                                         Province/City
                                     </label>
                                     <div className="flex justify-end">
-                                        <select className="w-full -ml-10 pl-3 pr-3 py-2 rounded-lg border-2 border-gray-200
-                                            outline-none focus:ring-2 focus:ring-amber-500 focus:border-amber-600"
+                                        <select className={`w-full -ml-10 pl-10 pr-3 py-2 rounded-lg border-2 border-gray-200
+                                            outline-none focus:ring-2 focus:ring-amber-500 focus:border-amber-600
+                                            ${errors.city && "border-red-600 focus:ring-red-500 focus:border-red-600 border-1"}`}
                                                 id="city"
-                                                name='city'
+                                                name="city"
                                                 type="text"
-                                                onClick={e => changeId(e.target.value)}>
+                                                onClick={e => changeCityId(e.target.value)}>
                                             {cities.map((cities) => (
                                                 <option value={cities.id}>{cities.name}</option>
                                             ))}
@@ -174,14 +214,16 @@ const SignUpAdmin = () => {
                                         District
                                     </label>
                                     <div className="flex justify-end">
-                                        <select className="w-full -ml-10 pl-3 pr-3 py-2 rounded-lg border-2 border-gray-200
-                                            outline-none focus:ring-2 focus:ring-amber-500 focus:border-amber-600"
+                                        <select className={`w-full -ml-10 pl-10 pr-3 py-2 rounded-lg border-2 border-gray-200
+                                            outline-none focus:ring-2 focus:ring-amber-500 focus:border-amber-600
+                                            ${errors.district && "border-red-600 focus:ring-red-500 focus:border-red-600 border-1"}`}
                                                 id="district"
-                                                name='district'
+                                                name="district"
                                                 type="text"
-                                                onClick={e => changeCountryId(e.target.value)}>
-                                            {district.map((district) => (
-                                                <option value={district.id}>{district.name}</option>
+                                                onClick={e => changeDistrictId(e.target.value)}>
+                                            {districts.map((district) => (
+                                                (district.idCity == city.id) ?
+                                                    <option value={district.id}>{district.name}</option> : null
                                             ))}
                                         </select>
                                     </div>
@@ -191,14 +233,16 @@ const SignUpAdmin = () => {
                                         Ward/Commune
                                     </label>
                                     <div className="flex justify-end">
-                                        <select className="w-full -ml-10 pl-3 pr-3 py-2 rounded-lg border-2 border-gray-200
-                                            outline-none focus:ring-2 focus:ring-amber-500 focus:border-amber-600"
+                                        <select className={`w-full -ml-10 pl-10 pr-3 py-2 rounded-lg border-2 border-gray-200
+                                            outline-none focus:ring-2 focus:ring-amber-500 focus:border-amber-600
+                                            ${errors.wards && "border-red-600 focus:ring-red-500 focus:border-red-600 border-1"}`}
                                                 id="ward"
-                                                name='ward'
+                                                name="ward"
                                                 type="text"
-                                                onClick={e => changeCountryId(e.target.value)}>
-                                            {ward.map((ward) => (
-                                                <option value={ward.id}>{ward.name}</option>
+                                                onChange={e => changeWar(e.target.value)}>
+                                            {wards.map((ward) => (
+                                                (ward.idDistrict == district.id) ?
+                                                    <option value={ward.id}>{ward.name}</option> : null
                                             ))}
                                         </select>
                                     </div>
@@ -212,30 +256,30 @@ const SignUpAdmin = () => {
                                     <div className="flex">
                                         <div
                                             className="w-10 z-10 pl-1 text-center pointer-events-none flex items-center justify-center">
-                                            <i class="fa fa-location-arrow" aria-hidden="true"></i>
+                                            <i className="fa fa-location-arrow" aria-hidden="true"></i>
                                         </div>
-                                        <textarea
-                                            className=" w-full h-20 resize-none -ml-10 pl-10 pr-3 py-2 rounded-lg border-2 border-gray-200 outline-none focus:ring-2 focus:ring-amber-500 focus:border-amber-600"
-                                            placeholder="Your address"
-                                        />
+                                        <input id="addressDetail" name="addressDetail"
+                                               className={`w-full h-20 -ml-10 pl-10 pr-3 py-2 rounded-lg border-2 border-gray-200
+                                            outline-none focus:ring-2 focus:ring-amber-500 focus:border-amber-600
+                                            ${errors.addressDetail && "border-red-600 focus:ring-red-500 focus:border-red-600 border-1"}`}
+                                               placeholder="Your address"
+                                               {...register("addressDetail", {required: true})}/>
                                     </div>
                                 </div>
                                 <div className="w-1/2 px-3 mb-5">
                                     <label htmlFor="" className="text-xs font-semibold px-1">
                                         Avatar
                                     </label>
-                                    <div class="flex items-center justify-center w-full">
+                                    <div className="flex items-center justify-center w-full">
                                         <label
-                                            class="flex flex-col w-full h-20 border-4 border-blue-200 border-dashed hover:bg-gray-100 hover:border-gray-300">
-                                            <div class="flex flex-col items-center justify-center pt-2">
+                                            className="flex flex-col w-full h-20 border-4 border-blue-200 border-dashed hover:bg-gray-100 hover:border-gray-300">
+                                            <div className="flex flex-col items-center justify-center pt-2">
                                                 <p className="pt-1 text-sm tracking-wider text-gray-400 group-hover:text-gray-600">
                                                     Attach a file</p>
                                             </div>
                                             <input id="image" name="image" type="file" {...register('image')}
                                                    className="ml-8 text-sm"/>
                                         </label>
-
-
                                     </div>
                                 </div>
                             </div>
@@ -243,12 +287,21 @@ const SignUpAdmin = () => {
                             <div className="flex -mx-3">
                                 <div className="w-full px-3 mb-2">
                                     <button
-                                        type="submit"
-                                        className="bg-indigo-500 text-white active:bg-indigo-700 text-sm font-bold uppercase px-6 py-3
-                           rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 w-full">
-                                        CREATE NOW
+                                        className="block w-full max-w-xs mx-auto bg-amber-600 hover:bg-amber-700 focus:bg-amber-700 text-white rounded-lg px-3 py-3 font-semibold">
+                                        REGISTER NOW
                                     </button>
                                 </div>
+                            </div>
+                            <div className="flex items-center justify-between mt-4">
+                                <span className="w-1/6 border-b dark:border-slate-800 md:w-1/5"></span>
+                                Already have an account ?
+                                <Link to="/pages/authentication/sign-in"
+                                      href="sign-in"
+                                      class="text-sm text-amber-600 capitalize font-semibold dark:text-amber-800 hover:underline"
+                                >
+                                    Sign in here
+                                </Link>
+                                <span className="w-1/6 border-b dark:border-slate-800 md:w-1/5"></span>
                             </div>
                         </div>
                     </form>

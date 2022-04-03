@@ -13,7 +13,7 @@ export const cities = [
     },
 ];
 
-export const district = [
+export const districts = [
     {
         id: 1,
         idCity: 1,
@@ -31,7 +31,7 @@ export const district = [
     },
     {
         id: 4,
-        idCity: 1,
+        idCity: 3,
         name: 'Quan 12'
     },
     {
@@ -55,7 +55,7 @@ export const district = [
         name: 'Chau Thanh A'
     },
 ];
-export const ward = [
+export const wards = [
     {
         id: 1,
         idDistrict: 5,
@@ -70,5 +70,10 @@ export const ward = [
         id: 3,
         idDistrict: 5,
         name: 'Tan An'
+    },
+    {
+        id: 4,
+        idDistrict: 1,
+        name: 'Giai Xuan'
     },
 ];

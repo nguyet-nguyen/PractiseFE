@@ -1,21 +1,55 @@
-import {cities, district, ward} from "../../../address";
+
 import React, {useState} from 'react';
 import {useForm} from 'react-hook-form';
 import {SignUpApi} from "../../../features/Api";
-import {useNavigate} from 'react-router-dom';
+import {Link, useNavigate} from 'react-router-dom';
+import {cities, districts, wards} from "../../../address";
 
 const SignUp = () => {
     const navigate = useNavigate();
     const {register, handleSubmit, formState: {errors}} = useForm();
+
+    const [city, setCity] = useState({id: cities[0].id, name: cities[0].name}) ;
+    const [district, setDistrict] = useState({id: districts[0].id, name: districts[0].name});
+    const [ward, setWard] = useState({id: wards[0].id, name: wards[0].name});
+    const changeCityId = (id) => {
+        let cityName;
+        cities.map((city) => {
+            if (city.id == id) {
+                cityName = city.name;
+            }
+        });
+        setCity({id: id, name: cityName});
+    };
+    const changeDistrictId = (id) => {
+        let districtName;
+        districts.map((dis) => {
+            if (dis.id == id) {
+                districtName = dis.name;
+            }
+        });
+        setDistrict({id: id, name: districtName});
+    };
+
+    const changeWar = (id) => {
+        let wardName;
+        wards.map((ward) => {
+            if (ward.id == id) {
+                wardName = ward.name;
+            }
+        });
+        setWard({id: id, name: wardName});
+    };
     const onSubmit = async (data, e) => {
+        let address = city.name + " - " + district.name + " - " + ward.name + " - " + data.addressDetail;
         const formData = new FormData();
         formData.append("image", data.image[0]);
         formData.append("name", data.name);
         formData.append("email", data.email);
         formData.append("phone", data.phone);
         formData.append("password", data.password);
-        formData.append("address", "aaaaaaaa");
-        console.log(formData);
+        formData.append("address", address);
+        console.log(address);
         SignUpApi(formData).then(response => {
             navigate('/pages/authentication/sign-in');
             console.log(response.data);
@@ -26,7 +60,8 @@ const SignUp = () => {
             )
         e.target.reset();
 
-    }
+    };
+
     return (
         <div className="min-w-screen min-h-screen flex items-center justify-center px-5 py-5">
             <div
@@ -57,13 +92,13 @@ const SignUp = () => {
                                         </div>
                                         <input
                                             type="text"
-                                            className="w-full -ml-10 pl-10 pr-3 py-2 rounded-lg border-2 border-gray-200
-                                            outline-none focus:ring-2 focus:ring-amber-500 focus:border-amber-600"
+                                            className={`w-full -ml-10 pl-10 pr-3 py-2 rounded-lg border-2 border-gray-200
+                                            outline-none focus:ring-2 focus:ring-amber-500 focus:border-amber-600
+                                            ${errors.name && "border-red-600 focus:ring-red-500 focus:border-red-600 border-1"}`}
                                             placeholder="username"
                                             id="name"
                                             name="name"
-                                            {...register("name", {required: true})}
-                                        />
+                                            {...register("name", {required: true})}/>
                                     </div>
                                     {errors.name && errors.name.type === "required" &&
                                         <p className="text-red-500 mt-3 text-xs italic">value required</p>}
@@ -79,8 +114,9 @@ const SignUp = () => {
                                         </div>
                                         <input
                                             type="password"
-                                            className="w-full -ml-10 pl-10 pr-3 py-2 rounded-lg border-2 border-gray-200 outline-none focus:ring-2 focus:ring-amber-500 focus:border-amber-600"
-                                            placeholder="************"
+                                            className={`w-full -ml-10 pl-10 pr-3 py-2 rounded-lg border-2 border-gray-200
+                                            outline-none focus:ring-2 focus:ring-amber-500 focus:border-amber-600
+                                            ${errors.password && "border-red-600 focus:ring-red-500 focus:border-red-600 border-1"}`}                                            placeholder="************"
                                             id="password"
                                             name="password"
                                             {...register("password", {required: true, minLength: 8, maxLength: 20})}
@@ -106,7 +142,9 @@ const SignUp = () => {
                                         </div>
                                         <input
                                             type="email"
-                                            className="w-full -ml-10 pl-10 pr-3 py-2 rounded-lg border-2 border-gray-200 outline-none focus:ring-2 focus:ring-amber-500 focus:border-amber-600"
+                                            className={`w-full -ml-10 pl-10 pr-3 py-2 rounded-lg border-2 border-gray-200
+                                            outline-none focus:ring-2 focus:ring-amber-500 focus:border-amber-600
+                                            ${errors.email && "border-red-600 focus:ring-red-500 focus:border-red-600 border-1"}`}
                                             placeholder="youremail@example.com"
                                             id="email"
                                             name='email'
@@ -132,7 +170,9 @@ const SignUp = () => {
                                         </div>
                                         <input
                                             type="phone"
-                                            className="w-full -ml-10 pl-10 pr-3 py-2 rounded-lg border-2 border-gray-200 outline-none focus:ring-2 focus:ring-amber-500 focus:border-amber-600"
+                                            className={`w-full -ml-10 pl-10 pr-3 py-2 rounded-lg border-2 border-gray-200
+                                            outline-none focus:ring-2 focus:ring-amber-500 focus:border-amber-600
+                                            ${errors.phone && "border-red-600 focus:ring-red-500 focus:border-red-600 border-1"}`}
                                             placeholder="0933549878"
                                             id="phone"
                                             name='phone'
@@ -156,12 +196,13 @@ const SignUp = () => {
                                         Province/City
                                     </label>
                                     <div className="flex justify-end">
-                                        <select className="w-full -ml-10 pl-3 pr-3 py-2 rounded-lg border-2 border-gray-200
-                                            outline-none focus:ring-2 focus:ring-amber-500 focus:border-amber-600"
+                                        <select  className={`w-full -ml-10 pl-10 pr-3 py-2 rounded-lg border-2 border-gray-200
+                                            outline-none focus:ring-2 focus:ring-amber-500 focus:border-amber-600
+                                            ${errors.city && "border-red-600 focus:ring-red-500 focus:border-red-600 border-1"}`}
                                                 id="city"
-                                                name='city'
+                                                name="city"
                                                 type="text"
-                                                onClick={e => changeId(e.target.value)}>
+                                                onClick={e => changeCityId(e.target.value)}>
                                             {cities.map((cities) => (
                                                 <option value={cities.id}>{cities.name}</option>
                                             ))}
@@ -173,14 +214,16 @@ const SignUp = () => {
                                         District
                                     </label>
                                     <div className="flex justify-end">
-                                        <select className="w-full -ml-10 pl-3 pr-3 py-2 rounded-lg border-2 border-gray-200
-                                            outline-none focus:ring-2 focus:ring-amber-500 focus:border-amber-600"
+                                        <select className={`w-full -ml-10 pl-10 pr-3 py-2 rounded-lg border-2 border-gray-200
+                                            outline-none focus:ring-2 focus:ring-amber-500 focus:border-amber-600
+                                            ${errors.district && "border-red-600 focus:ring-red-500 focus:border-red-600 border-1"}`}
                                                 id="district"
-                                                name='district'
+                                                name="district"
                                                 type="text"
-                                                onClick={e => changeCountryId(e.target.value)}>
-                                            {district.map((district) => (
-                                                <option value={district.id}>{district.name}</option>
+                                                onClick={e => changeDistrictId(e.target.value)}>
+                                            {districts.map((district) => (
+                                                (district.idCity == city.id) ?
+                                                <option value={district.id}>{district.name}</option> : null
                                             ))}
                                         </select>
                                     </div>
@@ -190,14 +233,16 @@ const SignUp = () => {
                                         Ward/Commune
                                     </label>
                                     <div className="flex justify-end">
-                                        <select className="w-full -ml-10 pl-3 pr-3 py-2 rounded-lg border-2 border-gray-200
-                                            outline-none focus:ring-2 focus:ring-amber-500 focus:border-amber-600"
+                                        <select className={`w-full -ml-10 pl-10 pr-3 py-2 rounded-lg border-2 border-gray-200
+                                            outline-none focus:ring-2 focus:ring-amber-500 focus:border-amber-600
+                                            ${errors.wards && "border-red-600 focus:ring-red-500 focus:border-red-600 border-1"}`}
                                                 id="ward"
-                                                name='ward'
+                                                name="ward"
                                                 type="text"
-                                                onClick={e => changeCountryId(e.target.value)}>
-                                            {ward.map((ward) => (
-                                                <option value={ward.id}>{ward.name}</option>
+                                                onChange={e => changeWar(e.target.value)}>
+                                            {wards.map((ward) => (
+                                                (ward.idDistrict == district.id) ?
+                                                <option value={ward.id}>{ward.name}</option> : null
                                             ))}
                                         </select>
                                     </div>
@@ -213,10 +258,12 @@ const SignUp = () => {
                                             className="w-10 z-10 pl-1 text-center pointer-events-none flex items-center justify-center">
                                             <i class="fa fa-location-arrow" aria-hidden="true"></i>
                                         </div>
-                                        <textarea
-                                            className=" w-full h-20 resize-none -ml-10 pl-10 pr-3 py-2 rounded-lg border-2 border-gray-200 outline-none focus:ring-2 focus:ring-amber-500 focus:border-amber-600"
+                                        <input id="addressDetail" name="addressDetail"
+                                               className={`w-full h-20 -ml-10 pl-10 pr-3 py-2 rounded-lg border-2 border-gray-200
+                                            outline-none focus:ring-2 focus:ring-amber-500 focus:border-amber-600
+                                            ${errors.addressDetail && "border-red-600 focus:ring-red-500 focus:border-red-600 border-1"}`}
                                             placeholder="Your address"
-                                        />
+                                               {...register("addressDetail",{required: true})}/>
                                     </div>
                                 </div>
                                 <div className="w-1/2 px-3 mb-5">
@@ -233,8 +280,6 @@ const SignUp = () => {
                                             <input id="image" name="image" type="file" {...register('image')}
                                                    className="ml-8 text-sm"/>
                                         </label>
-
-
                                     </div>
                                 </div>
                             </div>
@@ -250,12 +295,12 @@ const SignUp = () => {
                             <div class="flex items-center justify-between mt-4">
                                 <span class="w-1/6 border-b dark:border-slate-800 md:w-1/5"></span>
                                     Already have an account ? 
-                                    <a
+                                    <Link to="/pages/authentication/sign-in"
                                     href="sign-in"
                                     class="text-sm text-amber-600 capitalize font-semibold dark:text-amber-800 hover:underline"
                                     >
                                     Sign in here
-                                    </a>
+                                    </Link>
                                 <span class="w-1/6 border-b dark:border-slate-800 md:w-1/5"></span>
                             </div>
                         </div>
