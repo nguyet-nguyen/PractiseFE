@@ -1,7 +1,7 @@
 
 import {api} from "../utils/Api";
 
-
+// ---------------users------------------------?
 export const getAllProducts = () => {
     try {
         return api.get('/products');
@@ -11,6 +11,7 @@ export const getAllProducts = () => {
 
     }
 }
+
 export const getAllCategory = () => {
   try {
       return api.get('/categories');
@@ -39,6 +40,7 @@ export const SignUpApi = (data) => {
         console.log(error);
     }
 }
+
 export const SignInApiToken = (data) => {
     try {
         return api.post(`/login`, data);
@@ -52,5 +54,16 @@ export const SignInApiRole = (data) => {
         return api.post(`/users/email`, data);
     } catch (error) {
         console.log(error);
+    }
+}
+
+// ----------------------admin----------------------------------
+export const getAllUsers = () => {
+    try {
+        return api.get('/users');
+    }
+    catch (error) {
+        console.log(error);
+
     }
 }

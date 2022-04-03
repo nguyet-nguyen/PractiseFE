@@ -2,21 +2,16 @@ import $ from 'jquery'
 import dt from 'datatables.net'
 
 $.DataTable = dt
-import React, {Component, useEffect} from "react";
+import React, {useEffect} from "react";
 
 
 const PeoductsTable = () => {
     useEffect(() => {
             $('#usersTable').DataTable({
                 "bDestroy": true,
-                dom: 'Blfrtip',
-                buttons: [
-                    'copy', 'excel', 'pdf'
-                ]
             });
         }
     )
-
 
     let data = [
         {
