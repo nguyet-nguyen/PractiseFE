@@ -15,7 +15,7 @@ function HotDeal() {
             .catch((err) => {
                 console.warn(err);
             });
-    });
+    },[]);
     return (
         <section id="HotDealHome">
             <div className="md:flex md:justify-between md:items-center md:flex-wrap justify-start items-center w-full mb-2">

@@ -2,8 +2,10 @@ import {cities, district, ward} from "../../../address";
 import React, {useState} from 'react';
 import {useForm} from 'react-hook-form';
 import {SignUpApi} from "../../../features/Api";
+import {useNavigate} from 'react-router-dom';
 
 const SignUp = () => {
+    const navigate = useNavigate();
     const {register, handleSubmit, formState: {errors}} = useForm();
     const onSubmit = async (data, e) => {
         const formData = new FormData();
@@ -15,11 +17,11 @@ const SignUp = () => {
         formData.append("address", "aaaaaaaa");
         console.log(formData);
         SignUpApi(formData).then(response => {
+            navigate('/pages/authentication/sign-in');
             console.log(response.data);
-            alert(response.data);
         })
             .catch(err => {
-                    alert(response.data);
+                    alert(err.data);
                 }
             )
         e.target.reset();
