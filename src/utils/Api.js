@@ -8,3 +8,10 @@ export const api = axios.create({
         'Content-Type': 'application/json',
     },
 });
+
+export const apiadmin = axios.create({
+    baseURL,
+    headers: {
+        'Authorization': `Bearer ${window.localStorage.getItem('token')}`
+    },
+});

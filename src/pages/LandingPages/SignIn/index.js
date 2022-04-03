@@ -40,7 +40,7 @@ const SignIn = () => {
         })
         // console.log(token);
         console.log(userInfo.roles[0]);
-        // e.target.reset();
+        e.target.reset();
     }
     return (
         <main>
