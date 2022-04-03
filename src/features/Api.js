@@ -60,7 +60,7 @@ export const SignInApiRole = (data) => {
 // ----------------------admin----------------------------------
 export const getAllUsers = () => {
     try {
-        return api.get('/users');
+        return apiadmin.get('/admin/users');
     }
     catch (error) {
         console.log(error);
