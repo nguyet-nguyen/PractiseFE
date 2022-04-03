@@ -30,16 +30,16 @@ const SignIn = () => {
         SignInApiRole(bodyRole)
             .then(response => {
             setUserInfo(response.data);
-            if (userInfo[0].roles[0] === "ROLE_USER") {
-                navigate('/');
-            } else {
+            if (userInfo.roles[0] === "ROLE_ADMIN") {
                 navigate('/admin/dashboard');
+            } else {
+                navigate('/');
             }
         }).catch(err => {
             console.log(err);
         })
-        console.log(token);
-        console.log(userInfo[0].roles[0]);
+        // console.log(token);
+        console.log(userInfo.roles[0]);
         // e.target.reset();
     }
     return (

@@ -20,6 +20,7 @@
         "chroma-js": "2.1.2",
         "cors": "^2.8.5",
         "datatables.net": "^1.11.5",
+        "datatables.net-dt": "^1.11.5",
         "flatpickr": "4.6.9",
         "lodash": "^4.17.21",
         "prop-types": "15.7.2",
