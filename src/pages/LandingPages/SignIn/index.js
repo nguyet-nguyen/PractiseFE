@@ -16,23 +16,23 @@ const SignIn = () => {
             window.localStorage.setItem("token", response.data.token);
         })
             .catch(err => {
-                console.log(err)
+                    console.log(err)
                 }
             )
 // -------------------------------
         const bodyRole = {
-            email : data.email,
+            email: data.email,
         }
         SignInApiRole(bodyRole)
             .then(response => {
+                window.localStorage.setItem("userInfo", JSON.stringify(response.data));
 
-
-            if (response.data.roles[0] === "ROLE_ADMIN") {
-                navigate('/admin/dashboard');
-            } else {
-                navigate('/');
-            }
-        }).catch(err => {
+                if (response.data.roles[0] === "ROLE_ADMIN") {
+                    navigate('/admin/dashboard');
+                } else {
+                    navigate('/');
+                }
+            }).catch(err => {
             console.log(err);
         })
         // console.log(token);

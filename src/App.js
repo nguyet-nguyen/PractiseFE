@@ -1,5 +1,5 @@
 // react-router components
-import {Routes, Route} from "react-router-dom";
+import {Routes, Route, BrowserRouter} from "react-router-dom";
 
 // @mui material components
 import {ThemeProvider} from "@mui/material/styles";
@@ -16,6 +16,7 @@ import UsersPage from "layouts/pages/admin/users";
 import SignInAdminPage from "layouts/pages/admin/sign-in";
 import DashboardPage from "layouts/pages/admin/dashboard";
 import SignUpAdmin from "./pages/Admin/SignUp";
+import PrivateRoute from "./pages/PrivateRoute";
 
 export default function App() {
 
@@ -24,29 +25,54 @@ export default function App() {
             if (route.collapse) {
                 return getRoutes(route.collapse);
             }
-
             if (route.route) {
                 return <Route exact path={route.route} element={route.component} key={route.key}/>;
             }
-
             return null;
         });
 
     return (
         <ThemeProvider theme={theme}>
-            <Routes>
-                {/* User Page */}
-                {getRoutes(routes)}
+            {/*<BrowserRouter>*/}
+                <Routes>
+                    {/* User Page */}
+                    {getRoutes(routes)}
+                    <Route exact path="/all-items/item-detail" element={<ProductDetail/>}/>
+                    <Route
+                        path="/admin/dashboard"
+                        element={
+                            <PrivateRoute>
+                                <DashboardPage />
+                            </PrivateRoute>
+                        }
+                    />
+                    <Route
+                        path="/admin/sign-up"
+                        element={
+                            <PrivateRoute>
+                                <SignUpAdmin />
+                            </PrivateRoute>
+                        }
+                    />
+                    <Route
+                        path="/admin/products"
+                        element={
+                            <PrivateRoute>
+                                <ProductsPage />
+                            </PrivateRoute>
+                        }
+                    />
+                    <Route
+                        path="/admin/users"
+                        element={
+                            <PrivateRoute>
+                                <UsersPage />
+                            </PrivateRoute>
+                        }
+                    />
 
-                {/* Admin Page */}
-                <Route exact path="/admin/dashboard" element={<DashboardPage/>}/>
-                <Route exact path="/admin/sign-in" element={<SignInAdminPage/>}/>
-                <Route exact path="/admin/sign-up" element={<SignUpAdmin/>}/>
-                <Route exact path="/admin/products" element={<ProductsPage/>}/>
-                <Route exact path="/admin/users" element={<UsersPage/>}/>
-
-                <Route exact path="/all-items/item-detail" element={<ProductDetail/>}/>
-            </Routes>
+                </Routes>
         </ThemeProvider>
+
     );
 }
