@@ -13,7 +13,6 @@ import routes from "routes";
 import ProductDetail from "pages/LandingPages/ProductDetail";
 import ProductsPage from "layouts/pages/admin/products";
 import UsersPage from "layouts/pages/admin/users";
-import SignInAdminPage from "layouts/pages/admin/sign-in";
 import DashboardPage from "layouts/pages/admin/dashboard";
 import SignUpAdmin from "./pages/Admin/SignUp";
 import PrivateRoute from "./pages/PrivateRoute";
