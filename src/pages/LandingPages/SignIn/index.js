@@ -13,7 +13,7 @@ const SignIn = () => {
             password: data.password,
         };
         SignInApiToken(bodyToken).then(response => {
-            window.localStorage.setItem("token", response.data.token);
+           localStorage.setItem("token", response.data.token);
         })
             .catch(err => {
                     console.log(err)
@@ -25,7 +25,7 @@ const SignIn = () => {
         }
         SignInApiRole(bodyRole)
             .then(response => {
-                window.localStorage.setItem("userInfo", JSON.stringify(response.data));
+                localStorage.setItem("userInfo", JSON.stringify(response.data));
 
                 if (response.data.roles[0] === "ROLE_ADMIN") {
                     navigate('/admin/dashboard');
