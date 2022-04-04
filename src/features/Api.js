@@ -49,15 +49,6 @@ export const SignInApiRole = (data) => {
   }
 };
 
-// Get User Info By Id (User's Page) 
-export const getUserInfo = (id) => {
-  try {
-    return apiadmin.get(`/users/${id}`);
-  } catch (error) {
-    console.log(error);
-  }
-};
-
 // ----------------------admin----------------------------------
 export const getAllUsers = () => {
   try {
@@ -70,6 +61,26 @@ export const getAllUsers = () => {
 export const CreateUsers = (data) => {
   try {
     return apiadmin.post("/admin/users", data);
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+// ---------------------- for user and admin ----------------------------------
+
+// Get User Info By Id 
+export const getUserInfo = (id) => {
+  try {
+    return apiadmin.get(`/users/${id}`);
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+// Update User Info By Id
+export const updateUserInfo = (id, data) => {
+  try {
+    return apiadmin.put(`/users/${id}`, data);
   } catch (error) {
     console.log(error);
   }
