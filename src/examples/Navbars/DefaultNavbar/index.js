@@ -476,7 +476,7 @@ function DefaultNavbar({brand, routes, transparent, light, action, sticky, relat
                             <div className="md:flex items-center hidden">
                                 <img
                                     src={users.image}
-                                    className="rounded-full w-10 shadow-lg mr-3"
+                                    className="rounded-full w-10 h-10 shadow-lg mr-3"
                                     alt="Avatar"
                                 />
                                 <MKTypography variant="button" fontWeight="bold" color={light ? "white" : "dark"}>
