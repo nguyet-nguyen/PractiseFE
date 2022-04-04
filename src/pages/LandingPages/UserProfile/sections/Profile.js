@@ -1,23 +1,39 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { Link, useNavigate } from "react-router-dom";
 import { cities, districts, wards } from "../../../../address";
-import UserAvatar from "assets/images/user-profile/avatar-1.png";
+import {getUserInfo} from "../../../../features/Api";
 
 const Profile = () => {
   const navigate = useNavigate();
+  const [userInfo, setUserInfo] = useState({});
+  const [city, setCity] = useState({ id: cities[0].id, name: cities[0].name });
+  const [ward, setWard] = useState({ id: wards[0].id, name: wards[0].name });
+
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm();
 
-  const [city, setCity] = useState({ id: cities[0].id, name: cities[0].name });
+  const userId = (JSON.parse(localStorage.getItem('userInfo') || '{}')).id;
+
+  useEffect(() => {
+    getUserInfo(userId)
+        .then((response) => {
+            setUserInfo(response.data);
+            console.log(response.data);
+        })
+        .catch((err) => {
+            console.warn(err);
+        });
+  }, []);
+
   const [district, setDistrict] = useState({
     id: districts[0].id,
     name: districts[0].name,
   });
-  const [ward, setWard] = useState({ id: wards[0].id, name: wards[0].name });
+
   const changeCityId = (id) => {
     let cityName;
     cities.map((city) => {
@@ -62,9 +78,17 @@ const Profile = () => {
     formData.append("phone", data.phone);
     formData.append("password", data.password);
     formData.append("address", address);
-    console.log(address);
+
+    console.log(formData.get("image"));
+    console.log(formData.get("name"));
+    console.log(formData.get("email"));
+    console.log(formData.get("phone"));
+    console.log(formData.get("password"));
+    console.log(formData.get("address"));
 
     e.target.reset();
+    $('#exampleModalScrollable').modal('hide');
+
   };
 
   return (
@@ -110,23 +134,28 @@ const Profile = () => {
                 <div className="flex flex-wrap justify-center">
                   <div className="w-full lg:w-3/12 px-4 lg:order-2 flex justify-center">
                     <div className="relative">
+                      <span className="icon_change h-6 w-7 pt-1 text-sm bg-amber-400 hover:bg-amber-500 text-white rounded-xl leading-tight text-center absolute m-10 mb-4 mr-20 z-50 cursor-pointer">
+                        <i className="fa fa-plus" aria-hidden="true"></i>
+                      </span>
                       <img
-                        alt="..."
-                        src={UserAvatar}
-                        className="shadow-xl rounded-full h-auto align-middle border-none absolute -m-16 -ml-20 lg:-ml-16"
+                        alt="user avatar"
+                        src={userInfo.image}
+                        className="shadow-xl rounded-full h-auto align-middle border-none absolute -m-16 -ml-20 lg:-ml-20"
                         style={{ maxWidth: "150px" }}
                       />
+                      
                     </div>
                   </div>
-                  <div className="w-full lg:w-4/12 px-4 lg:order-3 lg:text-right lg:self-center">
+                  <div className="w-full lg:w-4/12 px-4 lg:order-3 lg:text-right lg:self-center ">
                     <div className="py-6 px-3 mt-32 sm:mt-0">
-                      <button
+                      <Link
+                        to="/"
                         className="bg-amber-500 active:bg-amber-600 uppercase text-white font-bold hover:shadow-md shadow text-xs px-4 py-2 rounded outline-none focus:outline-none sm:mr-2 mb-1"
                         type="button"
                         style={{ transition: "all .15s ease" }}
                       >
                         Continue Shopping
-                      </button>
+                      </Link>
                     </div>
                   </div>
                   <div className="w-full lg:w-4/12 px-4 lg:order-1">
@@ -148,21 +177,21 @@ const Profile = () => {
                     </div>
                   </div>
                 </div>
-                <div className="text-center mt-8">
+                <div className="text-center mt-6">
                   <h3 className="text-4xl font-semibold leading-normal text-center mb-2 text-gray-800">
-                    kieuanh
+                    {userInfo.name}
                   </h3>
                   <div className="text-sm leading-normal mt-0 mb-2 text-gray-500 font-bold uppercase">
                     <i className="fas fa-envelope mr-2 text-lg text-gray-500"></i>{" "}
-                    email@gmail.com
+                    {userInfo.email}
                   </div>
                   <div className="mb-2 text-gray-700 mt-10">
                     <i className="fas fa-phone mr-2 text-lg text-gray-500"></i>
-                    094232323232
+                    {userInfo.phone}
                   </div>
                   <div className="mb-4 text-gray-700">
                     <i className="fas fa-map-marker-alt mr-2 text-lg text-gray-500"></i>
-                    Nguyen Trai Street, Ninh Kieu District, Can Tho City
+                    {userInfo.address}
                   </div>
                 </div>
                 <div className="text-center">
@@ -181,7 +210,7 @@ const Profile = () => {
                 <div
                   className="modal fade fixed top-0 left-0 hidden w-full h-full outline-none overflow-x-hidden overflow-y-auto"
                   id="exampleModalScrollable"
-                  tabindex="-1"
+                  tabIndex="-1"
                   aria-labelledby="exampleModalScrollableLabel"
                   aria-hidden="true"
                 >
@@ -201,11 +230,12 @@ const Profile = () => {
                           aria-label="Close"
                         ></button>
                       </div>
-                      <div className="modal-body relative p-4">
-                        <form
+                      <form
                           className="px-6 pb-4 space-y-6 lg:px-8 sm:pb-6 xl:pb-8"
                           onSubmit={handleSubmit(onSubmit)}
                         >
+                      <div className="modal-body relative p-4">
+                       
                           <div className="flex -mx-3">
                             <div className="w-1/2 px-3 mb-5">
                               <label
@@ -251,7 +281,7 @@ const Profile = () => {
                               </label>
                               <div className="flex">
                                 <div className="w-10 z-10 pl-1 text-center pointer-events-none flex items-center justify-center">
-                                  <i class="fa fa-lock" aria-hidden="true"></i>
+                                  <i className="fa fa-lock" aria-hidden="true"></i>
                                 </div>
                                 <input
                                   type="password"
@@ -302,7 +332,7 @@ const Profile = () => {
                               <div className="flex">
                                 <div className="w-10 z-10 pl-1 text-center pointer-events-none flex items-center justify-center">
                                   <i
-                                    class="fa fa-envelope-o"
+                                    className="fa fa-envelope-o"
                                     aria-hidden="true"
                                   ></i>
                                 </div>
@@ -346,7 +376,7 @@ const Profile = () => {
                               </label>
                               <div className="flex">
                                 <div className="w-10 z-10 pl-1 text-center pointer-events-none flex items-center justify-center">
-                                  <i class="fa fa-phone" aria-hidden="true"></i>
+                                  <i className="fa fa-phone" aria-hidden="true"></i>
                                 </div>
                                 <input
                                   type="phone"
@@ -489,7 +519,7 @@ const Profile = () => {
                               <div className="flex">
                                 <div className="w-10 z-10 pl-1 text-center pointer-events-none flex items-center justify-center">
                                   <i
-                                    class="fa fa-location-arrow"
+                                    className="fa fa-location-arrow"
                                     aria-hidden="true"
                                   ></i>
                                 </div>
@@ -516,9 +546,9 @@ const Profile = () => {
                               >
                                 Avatar
                               </label>
-                              <div class="flex items-center justify-center w-full">
-                                <label class="flex flex-col w-full h-20 border-4 border-blue-200 border-dashed hover:bg-gray-100 hover:border-gray-300">
-                                  <div class="flex flex-col items-center justify-center pt-2">
+                              <div className="flex items-center justify-center w-full">
+                                <label className="flex flex-col w-full h-20 border-4 border-blue-200 border-dashed hover:bg-gray-100 hover:border-gray-300">
+                                  <div className="flex flex-col items-center justify-center pt-2">
                                     <p className="pt-1 text-sm tracking-wider text-gray-400 group-hover:text-gray-600">
                                       Attach a file
                                     </p>
@@ -534,23 +564,24 @@ const Profile = () => {
                               </div>
                             </div>
                           </div>
-                        </form>
                       </div>
-                      <div class="modal-footer flex flex-shrink-0 flex-wrap items-center justify-end p-4 border-t border-gray-200 rounded-b-md">
+                      <div className="modal-footer flex flex-shrink-0 flex-wrap items-center justify-end p-4 border-t border-gray-200 rounded-b-md">
                         <button
                           type="button"
-                          class="inline-block px-6 py-2.5 bg-gray-500 text-white font-medium text-xs leading-tight uppercase rounded shadow-md hover:bg-gray-700 hover:shadow-lg focus:bg-gray-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-gray-800 active:shadow-lg transition duration-150 ease-in-out"
+                          className="inline-block px-6 py-2.5 bg-gray-500 text-white font-medium text-xs leading-tight uppercase rounded shadow-md hover:bg-gray-700 hover:shadow-lg focus:bg-gray-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-gray-800 active:shadow-lg transition duration-150 ease-in-out"
                           data-bs-dismiss="modal"
                         >
                           Close
                         </button>
                         <button
-                          type="button"
-                          class="inline-block px-6 py-2.5 bg-amber-500 text-white font-medium text-xs leading-tight uppercase rounded shadow-md hover:bg-amber-600 hover:shadow-lg focus:bg-amber-600 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-amber-700 active:shadow-lg transition duration-150 ease-in-out ml-1"
+                          type="submit"
+                          className="inline-block px-6 py-2.5 bg-amber-500 text-white font-medium text-xs leading-tight uppercase rounded shadow-md hover:bg-amber-600 hover:shadow-lg focus:bg-amber-600 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-amber-700 active:shadow-lg transition duration-150 ease-in-out ml-1"
                         >
                           Save changes
                         </button>
                       </div>
+                      </form>
+
                     </div>
                   </div>
                 </div>
