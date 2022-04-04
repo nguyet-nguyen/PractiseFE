@@ -17,6 +17,8 @@ import SignInAdminPage from "layouts/pages/admin/sign-in";
 import DashboardPage from "layouts/pages/admin/dashboard";
 import SignUpAdmin from "./pages/Admin/SignUp";
 import PrivateRoute from "./pages/PrivateRoute";
+import AddProductForm from "./pages/Admin/Products/sections/AddProductForm";
+import ProductsTable from "./pages/Admin/Products/sections/ProductsTable";
 
 export default function App() {
 
@@ -44,8 +46,10 @@ export default function App() {
                             <PrivateRoute>
                                 <DashboardPage />
                             </PrivateRoute>
-                        }
-                    />
+                        }>
+                        <Route path="" element={<ProductsTable />} />
+                        <Route path="add-product" element={<AddProductForm />} />
+                    </Route>
                     <Route
                         path="/admin/sign-up"
                         element={
@@ -59,6 +63,14 @@ export default function App() {
                         element={
                             <PrivateRoute>
                                 <ProductsPage />
+                            </PrivateRoute>
+                        }
+                    />
+                    <Route
+                        path="/admin/products/add-product"
+                        element={
+                            <PrivateRoute>
+                                <AddProductForm />
                             </PrivateRoute>
                         }
                     />

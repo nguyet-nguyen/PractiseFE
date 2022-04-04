@@ -277,7 +277,7 @@ const SignUp = () => {
                                                 <p className="pt-1 text-sm tracking-wider text-gray-400 group-hover:text-gray-600">
                                                     Attach a file</p>
                                             </div>
-                                            <input id="image" name="image" type="file" {...register('image')}
+                                            <input id="image" name="image" accept=".jpg, .png" type="file" {...register('image')}
                                                    className="ml-8 text-sm"/>
                                         </label>
                                     </div>
