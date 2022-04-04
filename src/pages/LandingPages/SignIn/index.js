@@ -26,12 +26,14 @@ const SignIn = () => {
         SignInApiRole(bodyRole)
             .then(response => {
                 localStorage.setItem("userInfo", JSON.stringify(response.data));
+                console.log(response.data.roles[0])
 
-                if (response.data.roles[0] === "ROLE_ADMIN") {
+                if (response.data.roles[0] == "ROLE_ADMIN") {
                     navigate('/admin/dashboard');
-                } else {
-                    navigate('/');
                 }
+                // else {
+                //     navigate('/');
+                // }
             }).catch(err => {
             console.log(err);
         })
