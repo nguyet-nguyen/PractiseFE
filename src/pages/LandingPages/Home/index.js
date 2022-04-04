@@ -28,34 +28,11 @@ import ProductList from "./sections/ProductList";
 import Category from "./sections/Category";
 import BannerHomepage from "./sections/Banner";
 import HotDeal from "./sections/HotDeal";
+import Header from "../Header";
 function Home() {
     return (
         <>
-            <DefaultNavbar
-                routes={routes}
-                action={{
-                    route: "/pages/authentication/sign-in",
-                    label: "Sign In",
-                    color: "default",
-                }}
-                transparent
-                light
-            />
-            <MKBox
-                minHeight="85vh"
-                width="100%"
-                sx={{
-                    backgroundImage: ({ functions: { linearGradient, rgba }, palette: { gradients } }) =>
-                        `${linearGradient(
-                            rgba(gradients.dark.main, 0),
-                            rgba(gradients.dark.state, 0)
-                        )}, url(${bannerHome})`,
-                    backgroundSize: "cover",
-                    backgroundPosition: "center",
-                    display: "grid",
-                    placeItems: "center",
-                }}>
-            </MKBox>
+          <Header/>
             <section className="container h-auto mx-auto md:px-5 px-4 py-2 mx-auto md:py-12 md:px-32">
                 <div className="md:w-12/12 w-full h-auto transition-all rounded-lg mx-auto">
                     <Category />
