@@ -1,78 +1,64 @@
 import Sidebar from "../../Sidebar";
 import Header from "../../Header";
-import React, {useState} from "react";
+import React, {useState,useEffect} from "react";
 import {cities, districts, wards} from "../../../../address";
 import {Link, useNavigate} from "react-router-dom";
 import {useForm} from "react-hook-form";
-import {CreateUsers, getAllCategory} from "../../../../features/Api";
+import {CreateProducts, getAllCategory} from "../../../../features/Api";
+import {image} from "tailwindcss/lib/util/dataTypes";
 
 const AddProductForm = () => {
     const [sidebarOpen, setSidebarOpen] = useState(false);
 
     const navigate = useNavigate();
     const {register, handleSubmit, formState: {errors}} = useForm();
+    const imageArray = [];
 
-    const [city, setCity] = useState({id: cities[0].id, name: cities[0].name}) ;
-    const [district, setDistrict] = useState({id: districts[0].id, name: districts[0].name});
-    const [ward, setWard] = useState({id: wards[0].id, name: wards[0].name});
-    const changeCityId = (id) => {
-        let cityName;
-        cities.map((city) => {
-            if (city.id == id) {
-                cityName = city.name;
-            }
-        });
-        setCity({id: id, name: cityName});
-    };
-    const changeDistrictId = (id) => {
-        let districtName;
-        districts.map((dis) => {
-            if (dis.id == id) {
-                districtName = dis.name;
-            }
-        });
-        setDistrict({id: id, name: districtName});
-    };
 
-    const changeWar = (id) => {
-        let wardName;
-        wards.map((ward) => {
-            if (ward.id == id) {
-                wardName = ward.name;
-            }
-        });
-        setWard({id: id, name: wardName});
-    };
     const onSubmit = async (data, e) => {
-        let address = city.name + " - " + district.name + " - " + ward.name + " - " + data.addressDetail;
+        // -----image-------------
+        const sizes = [
+            {"size": 1, "amount": data.sizeS},
+            {"size": 2, "amount": data.sizeM},
+            {"size": 3, "amount": data.sizeL}
+        ];
+        // const imageCheck = ["127.0.0.1/uploads/images/Capture-624adf7b511b1.jpg"];
         const formData = new FormData();
-        formData.append("image", data.image[0]);
+        formData.append("category", data.category);
         formData.append("name", data.name);
-        formData.append("email", data.email);
-        formData.append("phone", data.phone);
-        formData.append("password", data.password);
-        formData.append("address", address);
-        console.log(address);
-        CreateUsers(formData).then(response => {
-            navigate('/pages/authentication/sign-in');
+        formData.append("color", data.color);
+        formData.append("description", data.description);
+        formData.append("price", data.price);
+        formData.append("material", data.material);
+        formData.append("productItems", sizes);
+        for (let i = 0; i < data.images.length; i++) {
+            formData.append(`images[${i}]`, data.images[i]);
+            console.log(data.images[i]);
+        }
+
+
+        CreateProducts(formData).then(response => {
+            // navigate('/pages/authentication/sign-in');
             console.log(response.data);
+
         })
             .catch(err => {
                     alert(err.data);
                 }
             )
-        e.target.reset();
 
     };
     const [categoryList, setCategoryList] = useState([]);
+    useEffect(() => {
+        getAllCategory()
+            .then((response) => {
+                setCategoryList(response.data);
+            })
+            .catch((err) => {
+                console.warn(err);
+            });
+    }, [])
 
-    getAllCategory()
-        .then((response) => {
-            setCategoryList(response.data);
-        })
-        .catch((err) => {
-            console.warn(err);
-        });
     return (
         <div className="flex h-screen overflow-hidden">
             {/* Sidebar */}
@@ -85,7 +71,7 @@ const AddProductForm = () => {
                     <div className="min-w-screen min-h-screen flex items-center justify-center px-5 py-5">
                         <div
                             className="bg-gray-100 text-gray-500 rounded-3xl shadow-xl w-full overflow-hidden"
-                            style={{maxWidth: "1000px"}}>
+                            style={{maxWidth: "800px"}}>
                             <div className="md:flex w-full">
                                 <form className="w-full md:w-full py-8 px-5 md:px-10" onSubmit={handleSubmit(onSubmit)}>
                                     <div className="text-center mb-7">
@@ -94,7 +80,7 @@ const AddProductForm = () => {
                                     </div>
                                     <div>
                                         <div className="flex -mx-3">
-                                            <div className="w-1/2 px-3 mb-5">
+                                            <div className="w-2/3 px-3 mb-5">
                                                 <label htmlFor="" className="text-xs font-semibold px-1">
                                                     Product's Name
                                                 </label>
@@ -116,7 +102,7 @@ const AddProductForm = () => {
                                                 {errors.name && errors.name.type === "required" &&
                                                     <p className="text-red-500 mt-3 text-xs italic">value required</p>}
                                             </div>
-                                            <div className="w-1/2 px-3 mb-5">
+                                            <div className="w-1/3 px-3 mb-5">
                                                 <label htmlFor="" className="text-xs font-semibold px-1">
                                                     Color
                                                 </label>
@@ -130,7 +116,7 @@ const AddProductForm = () => {
                                                         className={`w-full -ml-10 pl-10 pr-3 py-2 rounded-lg border-2 border-gray-200
                                             outline-none focus:ring-2 focus:ring-amber-500 focus:border-amber-600
                                             ${errors.color && "border-red-600 focus:ring-red-500 focus:border-red-600 border-1"}`}
-                                                        placeholder="Price"
+                                                        placeholder="color"
                                                         id="color"
                                                         name="color"
                                                         {...register("color", {required: true})}
@@ -154,12 +140,13 @@ const AddProductForm = () => {
                                                         type="number" min="0"
                                                         className={`w-full -ml-10 pl-10 pr-3 py-2 rounded-lg border-2 border-gray-200
                                             outline-none focus:ring-2 focus:ring-amber-500 focus:border-amber-600
-                                            ${errors.money && "border-red-600 focus:ring-red-500 focus:border-red-600 border-1"}`}
-                                                        placeholder="money"
-                                                        id="money"
-                                                        name='money'
-                                                        {...register("money", {
-                                                            required: true,})}
+                                            ${errors.price && "border-red-600 focus:ring-red-500 focus:border-red-600 border-1"}`}
+                                                        placeholder="price"
+                                                        id="price"
+                                                        name='price'
+                                                        {...register("price", {
+                                                            required: true,
+                                                        })}
                                                     />
                                                 </div>
                                                 {errors.money && errors.money.type === 'required' &&
@@ -183,7 +170,7 @@ const AddProductForm = () => {
                                                         placeholder="material"
                                                         id="material"
                                                         name='material'
-                                                        {...register("material", {required: true, minLength: 10, maxLength: 10})}
+                                                        {...register("material", {required: true})}
 
                                                     />
                                                 </div>
@@ -198,13 +185,12 @@ const AddProductForm = () => {
                                                     <select className={`w-full -ml-10 pl-10 pr-3 py-2 rounded-lg border-2 border-gray-200
                                             outline-none focus:ring-2 focus:ring-amber-500 focus:border-amber-600
                                             ${errors.categoryList && "border-red-600 focus:ring-red-500 focus:border-red-600 border-1"}`}
-                                                            id="city"
-                                                            name="city"
-                                                            {...register("city", )}
+                                                            id="category" name="category"
+                                                            {...register("category",)}
                                                             type="text">
-                                                        {categoryList.map((cate,i) => (
-                                                            i===0 ? "" :
-                                                            <option value={cate.id}>{cate.name}</option>
+                                                        {categoryList.map((category, i) => (
+                                                            i === 0 ? "" :
+                                                                <option value={category.id}>{category.name}</option>
                                                         ))}
                                                     </select>
                                                 </div>
@@ -228,12 +214,16 @@ const AddProductForm = () => {
                                                         placeholder="Amount of S size"
                                                         id="SizeS"
                                                         name='SizeS'
-                                                        {...register("SizeS", {required: true, minLength: 10, maxLength: 10})}
+                                                        {...register("SizeS", {required: true, min: 0})}
 
                                                     />
                                                 </div>
                                                 {errors.SizeS && errors.SizeS.type === "required" &&
                                                     <p className="text-red-500 text-xs mt-3 italic">Value required</p>}
+                                                {errors.SizeS && errors.SizeS.type === "min" &&
+                                                    <p className="text-red-500 text-xs mt-3 italic">quantity must be
+                                                        greater than 0</p>}
+
                                             </div>
                                             <div className="w-1/3 px-3 mb-5">
                                                 <label htmlFor="" className="text-xs font-semibold px-1">
@@ -252,12 +242,15 @@ const AddProductForm = () => {
                                                         placeholder="Amount of M size"
                                                         id="SizeM"
                                                         name='SizeM'
-                                                        {...register("SizeM", {required: true, minLength: 10, maxLength: 10})}
+                                                        {...register("SizeM", {required: true, min: 0})}
 
                                                     />
                                                 </div>
                                                 {errors.SizeM && errors.SizeM.type === "required" &&
                                                     <p className="text-red-500 text-xs mt-3 italic">Value required</p>}
+                                                {errors.SizeM && errors.SizeM.type === "min" &&
+                                                    <p className="text-red-500 text-xs mt-3 italic">quantity must be
+                                                        greater than 0</p>}
                                             </div>
                                             <div className="w-1/3 px-3 mb-5">
                                                 <label htmlFor="" className="text-xs font-semibold px-1">
@@ -276,12 +269,15 @@ const AddProductForm = () => {
                                                         placeholder="Amount of L size"
                                                         id="SizeL"
                                                         name='SizeL'
-                                                        {...register("SizeL", {required: true, minLength: 10, maxLength: 10})}
+                                                        {...register("SizeL", {required: true, min: 0})}
 
                                                     />
                                                 </div>
                                                 {errors.SizeL && errors.SizeL.type === "required" &&
                                                     <p className="text-red-500 text-xs mt-3 italic">Value required</p>}
+                                                {errors.SizeL && errors.SizeL.type === "min" &&
+                                                    <p className="text-red-500 text-xs mt-3 italic">quantity must be
+                                                        greater than 0</p>}
                                             </div>
                                         </div>
                                         <div className="flex -mx-3">
@@ -299,7 +295,7 @@ const AddProductForm = () => {
                                             outline-none focus:ring-2 focus:ring-amber-500 focus:border-amber-600
                                             ${errors.description && "border-red-600 focus:ring-red-500 focus:border-red-600 border-1"}`}
                                                               placeholder="Product's Decription"
-                                                              {...register("description", {required: true})}/>
+                                                              {...register("description")}/>
                                                 </div>
                                             </div>
                                             <div className="w-1/2 px-3 mb-5">
@@ -313,7 +309,8 @@ const AddProductForm = () => {
                                                             <p className="pt-1 text-sm tracking-wider text-gray-400 group-hover:text-gray-600">
                                                                 Attach a file</p>
                                                         </div>
-                                                        <input id="image" name="image" multiple accept=".jpg, .png" type="file" {...register('image')}
+                                                        <input id="images" name="images" multiple="multiple"
+                                                               accept=".jpg, .png" type="file" {...register('images')}
                                                                className="ml-8 text-sm"/>
                                                     </label>
                                                 </div>
@@ -323,21 +320,12 @@ const AddProductForm = () => {
                                         <div className="flex -mx-3">
                                             <div className="w-full px-3 mb-2">
                                                 <button
-                                                    className="block w-full max-w-xs mx-auto bg-amber-600 hover:bg-amber-700 focus:bg-amber-700 text-white rounded-lg px-3 py-3 font-semibold">
-                                                    REGISTER NOW
+                                                    className="block w-full max-w-xs mx-auto bg-amber-600
+                                                     hover:bg-amber-700 focus:bg-amber-700 text-white
+                                                     rounded-lg px-3 py-3 font-semibold uppercase">
+                                                    Add products
                                                 </button>
                                             </div>
-                                        </div>
-                                        <div className="flex items-center justify-between mt-4">
-                                            <span className="w-1/6 border-b dark:border-slate-800 md:w-1/5"></span>
-                                            Already have an account ?
-                                            <Link to="/pages/authentication/sign-in"
-                                                  href="sign-in"
-                                                  class="text-sm text-amber-600 capitalize font-semibold dark:text-amber-800 hover:underline"
-                                            >
-                                                Sign in here
-                                            </Link>
-                                            <span className="w-1/6 border-b dark:border-slate-800 md:w-1/5"></span>
                                         </div>
                                     </div>
                                 </form>

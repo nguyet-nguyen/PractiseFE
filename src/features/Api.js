@@ -94,3 +94,12 @@ export const updateUserAvatar = (id, data) => {
     console.log(error);
   }
 };
+
+export const CreateProducts = (data) => {
+    try {
+        return apiadmin.post('/admin/products', data);
+    } catch (error) {
+        console.log(error);
+    }
+}
+
