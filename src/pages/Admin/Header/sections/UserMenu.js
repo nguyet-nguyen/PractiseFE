@@ -31,7 +31,7 @@ function UserMenu() {
 // ----------------------------getusername-------------------------------
 
     const users = JSON.parse(localStorage.getItem("userInfo"));
-    console.log(users.image);
+    // console.log(users.image);
 
   const SignOut = () => {
     try {
