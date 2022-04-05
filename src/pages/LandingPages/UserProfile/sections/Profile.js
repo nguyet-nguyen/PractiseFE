@@ -3,6 +3,7 @@ import { Link, useNavigate } from "react-router-dom";
 import 'react-toastify/dist/ReactToastify.css';
 import { getUserInfo } from "../../../../features/Api";
 import ModalUpdateUser from "../sections/ModalUpdateUser";
+import ModalUpdateAvatar from "../sections/ModalUpdateAvatar";
 
 const Profile = () => {
   const navigate = useNavigate();
@@ -19,7 +20,7 @@ const Profile = () => {
       .catch((err) => {
         console.warn(err);
       });
-  }, []);
+  }, [userInfo]);
 
   return (
     <>
@@ -64,16 +65,20 @@ const Profile = () => {
                 <div className="flex flex-wrap justify-center">
                   <div className="w-full lg:w-3/12 px-4 lg:order-2 flex justify-center">
                     <div className="relative">
-                      <span className="icon_change h-6 w-7 pt-1 text-sm bg-amber-400 hover:bg-amber-500 text-white rounded-xl leading-tight text-center absolute m-10 mb-4 mr-20 z-50 cursor-pointer">
+                      {/* <!-- Button trigger modal --> */}
+                      <button className="icon_change h-6 w-7 pt-1 text-sm bg-amber-400 hover:bg-amber-500 text-white rounded-xl leading-tight text-center absolute m-10 mb-4 mr-20 z-50 cursor-pointer"
+                      data-bs-toggle="modal"
+                      data-bs-target="#modalUpdateAvatar">
                         <i className="fa fa-plus" aria-hidden="true"></i>
-                      </span>
+                      </button>
                       <img
                         alt="user avatar"
                         src={userInfo.image}
-                        className="shadow-xl rounded-full h-auto align-middle border-none absolute -m-16 -ml-20 lg:-ml-20"
-                        style={{ maxWidth: "150px" }}
+                        className="shadow-xl rounded-full h-40 w-56 align-middle border-none absolute -m-16 -ml-20 lg:-ml-20"
+                        style={{ maxWidth: "150px", height: "150px"}}
                       />
                     </div>
+                    <ModalUpdateAvatar userInfo = {userInfo} />
                   </div>
                   <div className="w-full lg:w-4/12 px-4 lg:order-3 lg:text-right lg:self-center ">
                     <div className="py-6 px-3 mt-32 sm:mt-0">
