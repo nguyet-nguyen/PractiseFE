@@ -8,6 +8,9 @@ import ProductListPages from "pages/LandingPages/ProductListPage";
 import SignUp from "pages/LandingPages/SignUp";
 import ShoppingCart from "pages/LandingPages/ShoppingCart";
 import UserProfile from "pages/LandingPages/UserProfile";
+import PrivateRoute from "./pages/PrivateRoute";
+import DashboardPage from "./layouts/pages/admin/dashboard";
+import PrivateRouteUser from "./pages/PrivateRouteUser";
 
 const routes = [
   {
@@ -37,7 +40,9 @@ const routes = [
           {
             name: "Profile",
             route: "/user-profile",
-            component: <UserProfile />,
+            component:  <PrivateRouteUser>
+              <UserProfile />
+            </PrivateRouteUser>,
           },
         ],
       },

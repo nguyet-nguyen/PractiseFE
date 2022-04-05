@@ -16,7 +16,7 @@ const SignIn = () => {
         };
         SignInApiToken(bodyToken).then(response => {
             localStorage.setItem("token", response.data.token);
-
+            navigate('/');
         })
             .catch(err => {
                     console.log(err);
@@ -33,11 +33,6 @@ const SignIn = () => {
             }).catch(err => {
             console.log(err);
         })
-        const users = JSON.parse(localStorage.getItem("userInfo"));
-        if (users.roles[0] == "ROLE_USER") {
-            navigate('/');
-        }
-
     }
     const [showMess, setShowMess] = useState(true);
     return (

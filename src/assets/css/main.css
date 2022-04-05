@@ -87,7 +87,6 @@ html {
 .breadcrumbsItemDetail {
     background-image: url('/src/assets/images/logos/banner-product-item.PNG');
 }
-
 .loading-id {
     position: absolute;
     z-index: 10;
@@ -103,11 +102,13 @@ html {
     top: 50%;
     left: 50%;
     transform: translate(-50%,-50%);
+    z-index: 100;
 }
 .loader {
     border-top-color: #3498db;
     -webkit-animation: spinner 1.5s linear infinite;
     animation: spinner 1.5s linear infinite;
+    z-index: 100;
 }
 
 @-webkit-keyframes spinner {

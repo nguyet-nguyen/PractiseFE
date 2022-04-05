@@ -48,6 +48,14 @@ export const SignInApiRole = (data) => {
     console.log(error);
   }
 };
+// product detail
+export const getProductDetail = (id) => {
+  try {
+    return api.get(`/products/${id}`);
+  } catch (error) {
+    console.log(error);
+  }
+};
 
 // ----------------------admin----------------------------------
 export const getAllUsers = () => {
@@ -57,7 +65,7 @@ export const getAllUsers = () => {
     console.log(error);
   }
 };
-
+// create user
 export const CreateUsers = (data) => {
   try {
     return apiadmin.post("/admin/users", data);
@@ -65,6 +73,15 @@ export const CreateUsers = (data) => {
     console.log(error);
   }
 };
+
+// add product
+export const CreateProducts = (data) => {
+  try {
+    return apiadmin.post('/admin/products', data);
+  } catch (error) {
+    console.log(error);
+  }
+}
 
 // ---------------------- for user and admin ----------------------------------
 
@@ -94,12 +111,4 @@ export const updateUserAvatar = (id, data) => {
     console.log(error);
   }
 };
-
-export const CreateProducts = (data) => {
-    try {
-        return apiadmin.post('/admin/products', data);
-    } catch (error) {
-        console.log(error);
-    }
-}
 

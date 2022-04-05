@@ -15,10 +15,23 @@ import bannerHome from "assets/images/logos/banner-home.PNG"
 import ListPage from "./sections/ListPage";
 import BreadcrumbsProductList from "./sections/Breadcrumbs";
 import SideNavFilter from "./sections/SideNavFilter";
-import { useState } from "react";
+import React, {useEffect, useState} from "react";
+import {getAllCategory, requestFilterCategory} from "../../../features/Api";
+import Loading from "../../../Loading";
 
 function ProductListPages() {
     const [sidebarOpen, setSidebarOpen] = useState(false);
+    const [categoryList, setCategoryList] = useState([]);
+    useEffect(() => {
+        getAllCategory()
+            .then((response) => {
+                setCategoryList(response.data);
+            })
+            .catch((err) => {
+                console.warn(err);
+            });
+
+    }, []);
 
     return (
         <>
@@ -55,7 +68,7 @@ function ProductListPages() {
                             <SideNavFilter sidebarOpen={sidebarOpen} setSidebarOpen={setSidebarOpen}/>
                         </div>
                         <div class="col-span-3">
-                            <ListPage  sidebarOpen={sidebarOpen} setSidebarOpen={setSidebarOpen}/>
+                            <ListPage categoryList={categoryList} sidebarOpen={sidebarOpen} setSidebarOpen={setSidebarOpen}/>
                         </div>
                     </div>
 

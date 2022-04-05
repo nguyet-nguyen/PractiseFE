@@ -19,13 +19,13 @@ const CardProduct = ({ proList, homePage }) => {
 
                             <div className="flex justify-center items-center px-2 pb-2 card-icon absolute">
                                 <div className="w-1/2 p-2">
-                                    <button className="block w-full bg-white hover:bg-amber-600
+                                    <Link to={`/all-items/item-detail/${product.id}`} className="block w-full bg-white hover:bg-amber-600
                                             border-2 border-amber-600 hover:border-inherit p-1 rounded uppercase font-small">
                                         <svg className="h-6 w-6 stroke-amber-600 hover:stroke-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
                                             <path strokeLinecap="round" strokeLinejoin="round"
                                                 d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v3m0 0v3m0-3h3m-3 0H7" />
                                         </svg>
-                                    </button>
+                                    </Link>
                                 </div>
                                 <div className="w-1/2 p-2">
                                     <button className="block w-full bg-white hover:bg-amber-600
