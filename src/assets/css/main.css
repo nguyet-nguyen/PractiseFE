@@ -87,6 +87,18 @@ html {
 .breadcrumbsItemDetail {
     background-image: url('/src/assets/images/logos/banner-product-item.PNG');
 }
+
+
+/* Set Toast Color */
+.Toastify__toast--default {
+    background: #fff;
+    color: rgb(161, 161, 161);
+}
+
+.Toastify__progress-bar {
+    background: #f1c40f;
+}
+
 .loading-id {
     position: absolute;
     z-index: 10;
@@ -128,6 +140,7 @@ html {
         transform: rotate(360deg);
     }
 }
+
 @keyframes circular {
     from {
         transform: rotate(0)
@@ -137,3 +150,4 @@ html {
         transform: rotate(360deg)
     }
 }
+
