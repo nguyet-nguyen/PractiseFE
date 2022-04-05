@@ -6,6 +6,7 @@ import {Link, useNavigate} from "react-router-dom";
 import {useForm} from "react-hook-form";
 import {CreateProducts, getAllCategory} from "../../../../features/Api";
 import {image} from "tailwindcss/lib/util/dataTypes";
+import {object} from "prop-types";
 
 const AddProductForm = () => {
     const [sidebarOpen, setSidebarOpen] = useState(false);
@@ -18,9 +19,9 @@ const AddProductForm = () => {
     const onSubmit = async (data, e) => {
         // -----image-------------
         const sizes = [
-            {"size": 1, "amount": data.sizeS},
-            {"size": 2, "amount": data.sizeM},
-            {"size": 3, "amount": data.sizeL}
+            {size: 1, amount: data.sizeS},
+            {size: 2, amount: data.sizeM},
+            {size: 3, amount: data.sizeL}
         ];
         // const imageCheck = ["127.0.0.1/uploads/images/Capture-624adf7b511b1.jpg"];
         const formData = new FormData();
@@ -30,11 +31,13 @@ const AddProductForm = () => {
         formData.append("description", data.description);
         formData.append("price", data.price);
         formData.append("material", data.material);
-        formData.append("productItems", sizes);
-        for (let i = 0; i < data.images.length; i++) {
-            formData.append(`images[${i}]`, data.images[i]);
-            console.log(data.images[i]);
-        }
+        formData.append("productItems[]", JSON.stringify([
+            {size: 1, amount: data.SizeS},
+            {size: 2, amount: data.SizeM},
+            {size: 3, amount: data.SizeL}
+        ]) );
+        console.log(data.SizeS);
+        [...data.images].map(f => formData.append("images[]", f));
 
 
         CreateProducts(formData).then(response => {
