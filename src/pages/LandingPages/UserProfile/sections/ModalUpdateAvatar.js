@@ -3,6 +3,7 @@ import { useForm } from "react-hook-form";
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { updateUserAvatar } from "../../../../features/Api";
+import CustomPopupMessage from "../../../CustomPopupMess";
 
 const ModalUpdateAvatar = ({ userInfo }) => {
   const {
@@ -19,7 +20,7 @@ const ModalUpdateAvatar = ({ userInfo }) => {
       .then((response) => {
         console.log(response.data);
         $("#modalUpdateAvatar").modal("hide");
-        toast.success("Update avatar successfully!");
+        toast(<CustomPopupMessage mess="Update avatar successfully!" />);
       })
       .catch((err) => {
         alert(err.data);
