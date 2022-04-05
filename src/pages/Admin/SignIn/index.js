@@ -16,14 +16,13 @@ function SignInAdmin() {
         };
         SignInApiToken(bodyToken).then(response => {
             localStorage.setItem("token", response.data.token);
-
+            navigate('/admin/dashboard');
         })
             .catch(err => {
                     console.log(err);
                     setMessErr(err.message)
                 }
             )
-// -------------------------------
         const bodyRole = {
             email: data.email,
         }
@@ -33,11 +32,6 @@ function SignInAdmin() {
             }).catch(err => {
             console.log(err);
         })
-        const users = JSON.parse(localStorage.getItem("userInfo"));
-        if (users.roles[0] == "ROLE_ADMIN") {
-            navigate('/admin/dashboard');
-        }
-
     }
     const [showMess, setShowMess] = useState(true);
 

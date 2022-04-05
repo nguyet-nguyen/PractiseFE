@@ -436,15 +436,13 @@ function DefaultNavbar({brand, routes, transparent, light, action, sticky, relat
             )}
         </Popper>
     );
-    const [loading, setLoading] = useState(false);
     useEffect(() => {
-        setLoading(true);
         getAllCategory()
             .then((response) => {
-                setLoading(false)
+
             })
             .catch((err) => {
-                setLoading(false)
+
             });
     }, [])
     const token = localStorage.getItem("token");
@@ -460,7 +458,6 @@ function DefaultNavbar({brand, routes, transparent, light, action, sticky, relat
     }
     return (
         <Container sx={sticky ? {position: "sticky", top: 0, zIndex: 10} : null}>
-            { loading ? <Loading /> : "" }
             <MKBox
                 py={1}
                 px={{xs: 4, sm: transparent ? 2 : 3, lg: transparent ? 0 : 2}}
