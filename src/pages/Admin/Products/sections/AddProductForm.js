@@ -1,6 +1,6 @@
 import Sidebar from "../../Sidebar";
 import Header from "../../Header";
-import React, {useState,useEffect} from "react";
+import React, {useState, useEffect} from "react";
 import {cities, districts, wards} from "../../../../address";
 import {Link, useNavigate} from "react-router-dom";
 import {useForm} from "react-hook-form";
@@ -13,8 +13,7 @@ const AddProductForm = () => {
 
     const navigate = useNavigate();
     const {register, handleSubmit, formState: {errors}} = useForm();
-    const imageArray = [];
-
+    const [messErr, setMessErr] = useState("")
 
     const onSubmit = async (data, e) => {
         // -----image-------------
@@ -35,18 +34,17 @@ const AddProductForm = () => {
             {size: 1, amount: data.SizeS},
             {size: 2, amount: data.SizeM},
             {size: 3, amount: data.SizeL}
-        ]) );
-        console.log(data.SizeS);
+        ]));
         [...data.images].map(f => formData.append("images[]", f));
-
-
         CreateProducts(formData).then(response => {
             // navigate('/pages/authentication/sign-in');
             console.log(response.data);
-
+            navigate("admin/products")
         })
             .catch(err => {
                     alert(err.data);
+                    console.log(err.data);
+                    setMessErr(err.message);
                 }
             )
 
@@ -56,12 +54,13 @@ const AddProductForm = () => {
         getAllCategory()
             .then((response) => {
                 setCategoryList(response.data);
+
             })
             .catch((err) => {
-                console.warn(err);
+                console.log(err.message);
             });
     }, [])
-
+    const [showMess, setShowMess] = useState(true);
     return (
         <div className="flex h-screen overflow-hidden">
             {/* Sidebar */}
@@ -80,6 +79,33 @@ const AddProductForm = () => {
                                     <div className="text-center mb-7">
                                         <h1 className="font-bold text-3xl text-gray-900">Add Product</h1>
                                         <p>Enter product information to register</p>
+
+                                        {(!showMess || messErr != "") ? (
+                                            <div
+                                                className="bg-red-600 shadow-lg mx-auto w-full text-sm pointer-events-auto
+                                            bg-clip-padding rounded-lg block mb-3 mt-3"
+                                                id="static-example" role="alert" aria-live="assertive"
+                                                aria-atomic="true"
+                                                data-mdb-autohide="false">
+                                                <div
+                                                    className="bg-red-600 flex justify-end items-center py-2 px-3 border-red-500 rounded-t-lg">
+                                                    <div className="flex items-center">
+                                                        <button type="button" onClick={() => {
+                                                            setShowMess(true);
+                                                            setMessErr("");
+                                                        }}
+                                                                className="btn-close btn-close-white box-content w-4 h-4 ml-2 text-white border-none
+                                                            rounded-none opacity-50 focus:shadow-none focus:outline-none focus:opacity-100
+                                                            hover:text-white hover:opacity-75 hover:no-underline"
+                                                                data-mdb-dismiss="toast" aria-label="Close"></button>
+                                                    </div>
+                                                </div>
+                                                <div className="p-3 bg-red-600 rounded-b-lg break-words text-white uppercase">
+                                                    Product addition fail
+                                                </div>
+                                            </div>
+                                        ) : null}
+
                                     </div>
                                     <div>
                                         <div className="flex -mx-3">

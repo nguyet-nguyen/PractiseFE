@@ -63,14 +63,15 @@ function ProductListPages() {
             <section className="container h-auto mx-auto px-4 py-2 mx-auto md:py-12 md:px-32 productListPage">
                 <div className="md:w-12/12 w-full h-auto transition-all rounded-lg mx-auto">
                     <BreadcrumbsProductList />
-                    <div className="grid md:grid-cols-4 grid-cols-1 gap-4">
-                        <div className="md:mt-14 mt-0">
-                            <SideNavFilter sidebarOpen={sidebarOpen} setSidebarOpen={setSidebarOpen}/>
-                        </div>
-                        <div class="col-span-3">
-                            <ListPage categoryList={categoryList} sidebarOpen={sidebarOpen} setSidebarOpen={setSidebarOpen}/>
-                        </div>
-                    </div>
+                    {/*<div className="grid md:grid-cols-4 grid-cols-1 gap-4">*/}
+                    {/*    <div className="md:mt-14 mt-0">*/}
+                    {/*        <SideNavFilter sidebarOpen={sidebarOpen} setSidebarOpen={setSidebarOpen}/>*/}
+                    {/*    </div>*/}
+                    {/*    <div class="col-span-3">*/}
+                    {/*        <ListPage categoryList={categoryList} sidebarOpen={sidebarOpen} setSidebarOpen={setSidebarOpen}/>*/}
+                    {/*    </div>*/}
+                    {/*</div>*/}
+                    <ListPage categoryList={categoryList} sidebarOpen={sidebarOpen} setSidebarOpen={setSidebarOpen}/>
 
                 </div>
             </section>
