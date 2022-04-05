@@ -58,7 +58,6 @@ const SignUp = () => {
                     alert(err.data);
                 }
             )
-        e.target.reset();
 
     };
 

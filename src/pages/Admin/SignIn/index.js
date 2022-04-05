@@ -1,7 +1,47 @@
-import React from "react";
-import {Link} from "react-router-dom";
+import React, {useState} from 'react';
+import {useForm} from 'react-hook-form';
+import {SignInApiRole, SignInApiToken} from "../../../features/Api";
+import {useNavigate} from 'react-router-dom';
 
 function SignInAdmin() {
+    const navigate = useNavigate();
+    const {register, handleSubmit, formState: {errors}} = useForm();
+    const [messErr, setMessErr] = useState("")
+
+
+    const onSubmit = async (data, e) => {
+        const bodyToken = {
+            username: data.email,
+            password: data.password,
+        };
+        SignInApiToken(bodyToken).then(response => {
+            localStorage.setItem("token", response.data.token);
+
+        })
+            .catch(err => {
+                    console.log(err);
+                    setMessErr(err.message)
+                }
+            )
+// -------------------------------
+        const bodyRole = {
+            email: data.email,
+        }
+        SignInApiRole(bodyRole)
+            .then(response => {
+                localStorage.setItem("userInfo", JSON.stringify(response.data));
+            }).catch(err => {
+            console.log(err);
+        })
+        const users = JSON.parse(localStorage.getItem("userInfo"));
+        if (users.roles[0] == "ROLE_ADMIN") {
+            navigate('/admin/dashboard');
+        }
+
+    }
+    const [showMess, setShowMess] = useState(true);
+
+
     return (
         <>
             <main>
@@ -23,12 +63,38 @@ function SignInAdmin() {
                                     <div className="rounded-t mb-0 px-6 py-6">
                                         <div className="text-center my-3">
                                             <h6 className="text-slate-700 uppercase text-xl md:text-2xl font-bold">
-                                                Sign in
+                                                Sign in for Admin
                                             </h6>
+                                            {(!showMess || messErr != "") ? (
+                                                <div
+                                                    className="bg-red-600 shadow-lg mx-auto w-96 max-w-full text-sm pointer-events-auto
+                                            bg-clip-padding rounded-lg block mb-3 mt-3"
+                                                    id="static-example" role="alert" aria-live="assertive"
+                                                    aria-atomic="true"
+                                                    data-mdb-autohide="false">
+                                                    <div
+                                                        className="bg-red-600 flex justify-end items-center py-2 px-3 border-red-500 rounded-t-lg">
+                                                        <div className="flex items-center">
+                                                            <button type="button" onClick={() => {
+                                                                setShowMess(true);
+                                                                setMessErr("");
+                                                            }}
+                                                                    className="btn-close btn-close-white box-content w-4 h-4 ml-2 text-white border-none
+                                                            rounded-none opacity-50 focus:shadow-none focus:outline-none focus:opacity-100
+                                                            hover:text-white hover:opacity-75 hover:no-underline"
+                                                                    data-mdb-dismiss="toast" aria-label="Close"></button>
+                                                        </div>
+                                                    </div>
+                                                    <div className="p-3 bg-red-600 rounded-b-lg break-words text-white">
+                                                        Email or Password in correct !!!!!!!
+                                                    </div>
+                                                </div>
+                                            ) : null}
+
                                         </div>
                                     </div>
                                     <div className="flex-auto px-4 lg:px-10 py-10 pt-0">
-                                        <form>
+                                        <form onSubmit={handleSubmit(onSubmit)}>
                                             <div className="relative w-full mb-3">
                                                 <label
                                                     className="block uppercase text-gray-700 text-xs font-bold mb-2"
@@ -38,10 +104,22 @@ function SignInAdmin() {
                                                 </label>
                                                 <input
                                                     type="name"
-                                                    className="border-0 px-3 py-3 placeholder-gray-400 text-gray-700 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full"
-                                                    placeholder="Username"
+                                                    id="email"
+                                                    name='email'
+                                                    className={`border-0 px-3 py-3 placeholder-gray-400 text-gray-700 bg-white 
+                                                    rounded text-sm shadow focus:outline-none focus:ring w-full
+                                                    ${errors.email && "border-red-600 ring-red-500 focus:ring-red-500 focus:border-red-600 border-1"}
+                                                    `}
+                                                    placeholder="Email"
                                                     style={{transition: "all .15s ease"}}
+                                                    {...register("email", {required: true,
+                                                        pattern: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i
+                                                    })}
                                                 />
+                                                {errors.email && errors.email.type === 'required' &&
+                                                    <p className="text-red-500 mt-3 text-xs italic">Value required</p>}
+                                                {errors.email && errors.email.type === 'pattern' &&
+                                                    <p className="text-red-500 mt-3 text-xs italic">Invalid email</p>}
                                             </div>
 
                                             <div className="relative w-full mb-3">
@@ -52,11 +130,25 @@ function SignInAdmin() {
                                                     Password
                                                 </label>
                                                 <input
+                                                    id="password"
+                                                    name="password"
                                                     type="password"
-                                                    className="border-0 px-3 py-3 placeholder-gray-400 text-gray-700 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full"
+                                                    className={`border-0 px-3 py-3 placeholder-gray-400 text-gray-700 bg-white 
+                                                    rounded text-sm shadow focus:outline-none focus:ring w-full
+                                                    ${errors.password && "border-red-600 ring-red-500 focus:ring-red-500 focus:border-red-600 border-1"}
+                                                    `}
                                                     placeholder="Password"
                                                     style={{transition: "all .15s ease"}}
+                                                    {...register("password", {required: true, minLength: 8, maxLength: 20})}
                                                 />
+                                                {errors.password && errors.password.type === "required" &&
+                                                    <p className="mt-3 text-red-500 text-xs italic">value required</p>}
+                                                {errors.password && errors.password.type === 'minLength' &&
+                                                    <p className="mt-3 text-red-500 text-xs italic">no less than 8
+                                                        characters</p>}
+                                                {errors.password && errors.password.type === 'maxLength' &&
+                                                    <p className="mt-3 text-red-500 text-xs italic">no more than 20
+                                                        characters</p>}
                                             </div>
                                             <div>
                                                 <label className="inline-flex items-center cursor-pointer">
@@ -76,21 +168,10 @@ function SignInAdmin() {
                                                 <button
                                                     className="bg-indigo-500 text-white active:bg-indigo-700 text-sm font-bold uppercase px-6 py-3
                            rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 w-full"
-                                                    type="button"
+                                                    type="submit"
                                                     style={{transition: "all .15s ease"}}>
                                                     Sign In
                                                 </button>
-                                            </div>
-                                            <div className="flex items-center justify-between mt-4">
-                                                <span className="w-1/6 border-b dark:border-slate-800 md:w-1/5"></span>
-                                                Already have an account ?
-                                                <Link to="/pages/authentication/sign-up"
-                                                      href="sign-in"
-                                                      class="text-sm text-amber-600 capitalize font-semibold dark:text-amber-800 hover:underline"
-                                                >
-                                                    Sign in here
-                                                </Link>
-                                                <span className="w-1/6 border-b dark:border-slate-800 md:w-1/5"></span>
                                             </div>
                                         </form>
                                     </div>

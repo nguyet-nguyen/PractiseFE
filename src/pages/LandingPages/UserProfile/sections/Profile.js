@@ -64,7 +64,7 @@ const Profile = () => {
     formData.append("address", address);
     console.log(address);
 
-    e.target.reset();
+
   };
 
   return (

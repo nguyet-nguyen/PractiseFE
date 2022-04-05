@@ -29,22 +29,43 @@ import Category from "./sections/Category";
 import BannerHomepage from "./sections/Banner";
 import HotDeal from "./sections/HotDeal";
 import Header from "../Header";
+import {useEffect, useState} from "react";
+import {getAllCategory} from "../../../features/Api";
+import Loading from "../../../Loading";
+
 function Home() {
+    const [categoryList, setCategoryList] = useState([]);
+    const [loading, setLoading] = useState(false);
+    useEffect(() => {
+        setLoading(true);
+        getAllCategory()
+            .then((response) => {
+                setCategoryList(response.data);
+                setLoading(false)
+            })
+            .catch((err) => {
+                console.warn(err);
+                setLoading(false)
+            });
+    }, [])
+
+
     return (
         <>
-          <Header/>
+            { loading ? <Loading /> : "" }
+            <Header/>
             <section className="container h-auto mx-auto md:px-5 px-4 py-2 mx-auto md:py-12 md:px-32">
                 <div className="md:w-12/12 w-full h-auto transition-all rounded-lg mx-auto">
-                    <Category />
-                    <ProductList />
-                    <BannerHomepage />
-                    <HotDeal />
+                    <Category categoryList={categoryList}/>
+                    <ProductList/>
+                    <BannerHomepage/>
+                    <HotDeal/>
 
                 </div>
             </section>
 
             <MKBox pt={6} px={1} mt={6}>
-                <DefaultFooter content={footerRoutes} />
+                <DefaultFooter content={footerRoutes}/>
             </MKBox>
         </>
     );

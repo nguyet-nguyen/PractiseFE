@@ -1,11 +1,13 @@
 import React, {useState} from 'react';
 import {useForm} from 'react-hook-form';
 import {SignInApiRole, SignInApiToken} from "../../../features/Api";
-import {useNavigate} from 'react-router-dom';
+import {Link, useNavigate} from 'react-router-dom';
 
 const SignIn = () => {
     const navigate = useNavigate();
     const {register, handleSubmit, formState: {errors}} = useForm();
+    const [messErr, setMessErr] = useState("")
+
 
     const onSubmit = async (data, e) => {
         const bodyToken = {
@@ -13,10 +15,12 @@ const SignIn = () => {
             password: data.password,
         };
         SignInApiToken(bodyToken).then(response => {
-           localStorage.setItem("token", response.data.token);
+            localStorage.setItem("token", response.data.token);
+
         })
             .catch(err => {
-                    console.log(err)
+                    console.log(err);
+                    setMessErr(err.message)
                 }
             )
 // -------------------------------
@@ -26,21 +30,16 @@ const SignIn = () => {
         SignInApiRole(bodyRole)
             .then(response => {
                 localStorage.setItem("userInfo", JSON.stringify(response.data));
-                console.log(response.data.roles[0])
-
-                if (response.data.roles[0] == "ROLE_ADMIN") {
-                    navigate('/admin/dashboard');
-                }
-                // else {
-                //     navigate('/');
-                // }
             }).catch(err => {
             console.log(err);
         })
-        // console.log(token);
+        const users = JSON.parse(localStorage.getItem("userInfo"));
+        if (users.roles[0] == "ROLE_USER") {
+            navigate('/');
+        }
 
-        e.target.reset();
     }
+    const [showMess, setShowMess] = useState(true);
     return (
         <main>
             <section className="absolute w-full h-full">
@@ -59,10 +58,37 @@ const SignIn = () => {
                             <div
                                 className="relative flex flex-col min-w-0 break-words w-full mb-6 shadow-lg rounded-lg border-0">
                                 <div className="rounded-t mb-0 px-6 py-6">
-                                    <div className="text-center my-3">
+                                    <div className="text-center">
                                         <h6 className="text-slate-700 uppercase text-xl md:text-2xl font-bold">
                                             Sign in
                                         </h6>
+
+                                        {(!showMess || messErr != "") ? (
+                                            <div
+                                                className="bg-red-600 shadow-lg mx-auto w-96 max-w-full text-sm pointer-events-auto
+                                            bg-clip-padding rounded-lg block mb-3 mt-3"
+                                                id="static-example" role="alert" aria-live="assertive"
+                                                aria-atomic="true"
+                                                data-mdb-autohide="false">
+                                                <div
+                                                    className="bg-red-600 flex justify-end items-center py-2 px-3 border-red-500 rounded-t-lg">
+                                                    <div className="flex items-center">
+                                                        <button type="button" onClick={() => {
+                                                            setShowMess(true);
+                                                            setMessErr("");
+                                                        }}
+                                                                className="btn-close btn-close-white box-content w-4 h-4 ml-2 text-white border-none
+                                                            rounded-none opacity-50 focus:shadow-none focus:outline-none focus:opacity-100
+                                                            hover:text-white hover:opacity-75 hover:no-underline"
+                                                                data-mdb-dismiss="toast" aria-label="Close"></button>
+                                                    </div>
+                                                </div>
+                                                <div className="p-3 bg-red-600 rounded-b-lg break-words text-white">
+                                                    Email or Password in correct !!!!!!!
+                                                </div>
+                                            </div>
+                                        ) : null}
+
                                     </div>
                                 </div>
                                 <div className="flex-auto px-4 lg:px-10 py-10 pt-0">
@@ -143,12 +169,12 @@ const SignIn = () => {
                                         </div>
                                         <div class="flex items-center justify-between mt-4">
                                             <span class="w-1/5 border-b dark:border-slate-800 md:w-1/4"></span>
-                                            <a
-                                                href="sign-up"
+                                            <Link
+                                                to="/pages/authentication/sign-up"
                                                 class="text-sm text-amber-600 uppercase font-semibold dark:text-amber-800 hover:underline"
                                             >
                                                 or sign up
-                                            </a>
+                                            </Link>
                                             <span class="w-1/5 border-b dark:border-slate-800 md:w-1/4"></span>
                                         </div>
                                     </form>

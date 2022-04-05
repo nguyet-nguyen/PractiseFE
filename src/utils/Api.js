@@ -12,6 +12,7 @@ export const api = axios.create({
 export const apiadmin = axios.create({
     baseURL,
     headers: {
-        'Authorization': `Bearer ${window.localStorage.getItem('token')}`
+        'Authorization': `Bearer ${window.localStorage.getItem('token')}`,
+        "Content-Type": "multipart/form-data"
     },
 });
