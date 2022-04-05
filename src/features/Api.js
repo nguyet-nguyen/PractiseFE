@@ -103,3 +103,10 @@ export const CreateProducts = (data) => {
     }
 }
 
+export const CreateProducts = (data) => {
+    try {
+        return apiadmin.post('/admin/products', data);
+    } catch (error) {
+        console.log(error);
+    }
+}
