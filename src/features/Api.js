@@ -85,3 +85,12 @@ export const updateUserInfo = (id, data) => {
     console.log(error);
   }
 };
+
+// Update User Profile Avatar By Id
+export const updateUserAvatar = (id, data) => {
+  try {
+    return apiadmin.post(`/users/${id}/image`, data);
+  } catch (error) {
+    console.log(error);
+  }
+};

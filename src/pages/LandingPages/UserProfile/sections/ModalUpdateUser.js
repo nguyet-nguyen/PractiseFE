@@ -150,7 +150,7 @@ const ModalUpdateUser = ({ userInfo }) => {
                     </div>
                     {errors.name && errors.name.type === "required" && (
                       <p className="text-red-500 mt-3 text-xs italic">
-                        value required
+                        * Value required
                       </p>
                     )}
                   </div>
@@ -182,17 +182,17 @@ const ModalUpdateUser = ({ userInfo }) => {
                     </div>
                     {errors.phone && errors.phone.type === "required" && (
                       <p className="text-red-500 text-xs mt-3 italic">
-                        Value required
+                        * Value required
                       </p>
                     )}
                     {errors.phone && errors.phone.type === "minLength" && (
                       <p className="text-red-500 mt-3 text-xs italic">
-                        PhoneNumber is 10 characters
+                        * PhoneNumber is 10 characters
                       </p>
                     )}
                     {errors.phone && errors.phone.type === "maxLength" && (
                       <p className="text-red-500 mt-3 text-xs italic">
-                        PhoneNumber is 10 characters
+                        * PhoneNumber is 10 characters
                       </p>
                     )}
                   </div>
@@ -225,12 +225,12 @@ const ModalUpdateUser = ({ userInfo }) => {
                     </div>
                     {errors.email && errors.email.type === "required" && (
                       <p className="text-red-500 mt-3 text-xs italic">
-                        Value required
+                        * Value required
                       </p>
                     )}
                     {errors.email && errors.email.type === "pattern" && (
                       <p className="text-red-500 mt-3 text-xs italic">
-                        Invalid email
+                        * Invalid email
                       </p>
                     )}
                   </div>
@@ -311,7 +311,7 @@ const ModalUpdateUser = ({ userInfo }) => {
                   </div>
                 </div>
                 <div className="flex -mx-3">
-                  <div className="w-full px-3 mb-5">
+                  <div className="w-full px-3">
                     <label htmlFor="" className="text-xs font-semibold px-1">
                       Address
                     </label>
@@ -337,6 +337,11 @@ const ModalUpdateUser = ({ userInfo }) => {
                         })}
                       />
                     </div>
+                    {errors.addressDetail && errors.addressDetail.type === "required" && (
+                      <p className="text-red-500 mt-3 text-xs italic">
+                        * Value required
+                      </p>
+                    )}
                   </div>
                 </div>
               </div>
