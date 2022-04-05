@@ -68,6 +68,15 @@ export const CreateUsers = (data) => {
 
 // ---------------------- for user and admin ----------------------------------
 
+// Validate Email (check if email exists)
+export const checkIfEmailExists = (data) => {
+  try {
+    return api.post("/users/check_email", data);
+  } catch (error) {
+    console.log(error);
+  }
+};
+
 // Get User Info By Id 
 export const getUserInfo = (id) => {
   try {
