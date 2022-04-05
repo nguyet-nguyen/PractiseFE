@@ -102,8 +102,9 @@ const SignIn = () => {
                                             </label>
                                             <input
                                                 type="name"
-                                                className="border-0 px-3 py-3 placeholder-gray-400 text-gray-700 bg-white rounded text-sm
-                          shadow focus:outline-none focus:ring-2 focus:ring-amber-500 focus:border-amber-600 w-full"
+                                                className={`border-0 px-3 py-3 placeholder-gray-400 text-gray-700 bg-white rounded text-sm
+                          shadow focus:outline-none focus:ring-2 focus:ring-amber-500 focus:border-amber-600 w-full
+                          ${errors.email && "border-red-600 ring-red-500 focus:ring-red-500 focus:border-red-600 border-1"}`}
                                                 style={{transition: "all .15s ease"}}
                                                 id="email"
                                                 name='email'
@@ -128,8 +129,9 @@ const SignIn = () => {
                                             </label>
                                             <input
                                                 type="password"
-                                                className="border-0 px-3 py-3 placeholder-gray-400 text-gray-700 bg-white rounded
-                          text-sm shadow focus:outline-none focus:ring-2 focus:ring-amber-500 focus:border-amber-600 w-full"
+                                                className={`border-0 px-3 py-3 placeholder-gray-400 text-gray-700 bg-white rounded
+                          text-sm shadow focus:outline-none focus:ring-2 focus:ring-amber-500 focus:border-amber-600 w-full
+                           ${errors.password && "border-red-600 ring-red-500 focus:ring-2 focus:ring-red-500 focus:border-red-600 border-1"}`}
                                                 placeholder="Password"
                                                 style={{transition: "all .15s ease"}}
                                                 id="password"

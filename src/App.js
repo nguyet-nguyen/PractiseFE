@@ -18,6 +18,7 @@ import SignUpAdmin from "./pages/Admin/SignUp";
 import PrivateRoute from "./pages/PrivateRoute";
 import AddProductForm from "./pages/Admin/Products/sections/AddProductForm";
 import ProductsTable from "./pages/Admin/Products/sections/ProductsTable";
+import SignInAdmin from "./pages/Admin/SignIn";
 
 export default function App() {
 
@@ -84,7 +85,7 @@ export default function App() {
                 <Route
                     path="/admin/sign-in"
                     element={
-                        <SignInAdminPage/>
+                        <SignInAdmin/>
                     }
                 />
 
