@@ -3,6 +3,9 @@ import { useForm } from "react-hook-form";
 import { SignUpApi, checkIfEmailExists } from "../../../features/Api";
 import { Link, useNavigate } from "react-router-dom";
 import { cities, districts, wards } from "../../../address";
+import { toast, ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import CustomPopupMessage from "../../CustomPopupMess";
 
 const SignUp = () => {
   const navigate = useNavigate();
@@ -48,23 +51,23 @@ const SignUp = () => {
     });
     setWard({ id: id, name: wardName });
   };
-  
+
   const validateEmail = (e) => {
     const email = e.target.value;
-    const data = {"email": email};
+    const data = { email: email };
 
     checkIfEmailExists(data)
       .then((response) => {
-        if(response.data){
-            setValidEmailMess(true);
-        }else{
-            setValidEmailMess(false);
+        if (response.data) {
+          setValidEmailMess(true);
+        } else {
+          setValidEmailMess(false);
         }
       })
       .catch((err) => {
         alert(err.data);
       });
-  }
+  };
 
   const onSubmit = async (data, e) => {
     let address =
@@ -85,8 +88,8 @@ const SignUp = () => {
     console.log(address);
     SignUpApi(formData)
       .then((response) => {
+        toast(<CustomPopupMessage mess={response.data.message} />);
         navigate("/pages/authentication/sign-in");
-        console.log(response.data.message);
       })
       .catch((err) => {
         alert(err.data);
@@ -197,7 +200,7 @@ const SignUp = () => {
                     <div className="w-10 z-10 pl-1 text-center pointer-events-none flex items-center justify-center">
                       <i className="fa fa-envelope-o" aria-hidden="true"></i>
                     </div>
-                    
+
                     <input
                       type="email"
                       className={`w-full -ml-10 pl-10 pr-3 py-2 rounded-lg border-2 border-gray-200
@@ -214,7 +217,6 @@ const SignUp = () => {
                         pattern: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
                       })}
                       onBlur={(e) => validateEmail(e)}
-                    
                     />
                   </div>
                   {errors.email && errors.email.type === "required" && (
@@ -229,7 +231,7 @@ const SignUp = () => {
                   )}
                   {validEmailMess && (
                     <p className="text-red-500 mt-3 text-xs italic">
-                        Email is already in use 
+                      Email is already in use
                     </p>
                   )}
                 </div>
@@ -358,7 +360,10 @@ const SignUp = () => {
                   </label>
                   <div className="flex">
                     <div className="w-10 z-10 pl-1 text-center pointer-events-none flex items-center justify-center">
-                      <i className="fa fa-location-arrow" aria-hidden="true"></i>
+                      <i
+                        className="fa fa-location-arrow"
+                        aria-hidden="true"
+                      ></i>
                     </div>
                     <textarea
                       id="addressDetail"
@@ -432,6 +437,7 @@ const SignUp = () => {
           </form>
         </div>
       </div>
+      <ToastContainer />
     </div>
   );
 };
