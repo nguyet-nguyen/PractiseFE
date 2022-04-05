@@ -4,6 +4,7 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { cities, districts, wards } from "../../../../address";
 import { updateUserInfo } from "../../../../features/Api";
+import CustomPopupMessage from "../../../CustomPopupMess";
 
 const ModalUpdateUser = ({ userInfo }) => {
   if (userInfo.address) {
@@ -81,7 +82,8 @@ const ModalUpdateUser = ({ userInfo }) => {
       .then((response) => {
         console.log(response.data);
         $("#modalUpdateUserInfo").modal("hide");
-        toast.success("Update successfully!");
+        toast(<CustomPopupMessage mess="Update user info successfully!" />);
+
       })
       .catch((err) => {
         alert(err.data);
