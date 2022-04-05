@@ -57,7 +57,6 @@ const SignUpAdmin = () => {
                     alert(err.data);
                 }
             )
-        e.target.reset();
 
     };
 

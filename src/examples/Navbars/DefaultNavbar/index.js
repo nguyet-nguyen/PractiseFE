@@ -28,6 +28,8 @@ import DefaultNavbarMobile from "examples/Navbars/DefaultNavbar/DefaultNavbarMob
 // Practise React React base styles
 import breakpoints from "assets/theme/base/breakpoints";
 import {useNavigate} from 'react-router-dom';
+import {getAllCategory} from "../../../features/Api";
+import Loading from "../../../Loading";
 
 function DefaultNavbar({brand, routes, transparent, light, action, sticky, relative, center}) {
     const [dropdown, setDropdown] = useState("");
@@ -434,6 +436,17 @@ function DefaultNavbar({brand, routes, transparent, light, action, sticky, relat
             )}
         </Popper>
     );
+    const [loading, setLoading] = useState(false);
+    useEffect(() => {
+        setLoading(true);
+        getAllCategory()
+            .then((response) => {
+                setLoading(false)
+            })
+            .catch((err) => {
+                setLoading(false)
+            });
+    }, [])
     const token = localStorage.getItem("token");
     const users = JSON.parse(localStorage.getItem("userInfo"));
     const navigate = useNavigate();
@@ -447,6 +460,7 @@ function DefaultNavbar({brand, routes, transparent, light, action, sticky, relat
     }
     return (
         <Container sx={sticky ? {position: "sticky", top: 0, zIndex: 10} : null}>
+            { loading ? <Loading /> : "" }
             <MKBox
                 py={1}
                 px={{xs: 4, sm: transparent ? 2 : 3, lg: transparent ? 0 : 2}}

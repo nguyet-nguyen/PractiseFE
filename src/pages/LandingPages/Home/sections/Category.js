@@ -3,16 +3,7 @@ import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import _ from "lodash";
 
-const Category = () => {
-    const [categoryList, setCategoryList] = useState([]);
-
-    getAllCategory()
-        .then((response) => {
-            setCategoryList(response.data);
-        })
-        .catch((err) => {
-            console.warn(err);
-        });
+const Category = ({categoryList}) => {
 
     return (
         <div id="categoryHome">
@@ -24,7 +15,7 @@ const Category = () => {
                         <div className={`flex md:flex-wrap md:w-1/5 w-1/2 flex-col category category-${index}`}>
                             <div className="w-full p-2 md:p-4">
                                 <div className="text-center">
-                                    <Link to="/product-list-page">
+                                    <Link to="/all-items">
                                         <div className="category-image mx-auto relative md:w-56 md:h-56 w-32 h-32 md:mb-4 mb-2">
                                             <img
                                                 src={category.image}

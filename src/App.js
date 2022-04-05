@@ -35,54 +35,60 @@ export default function App() {
     return (
         <ThemeProvider theme={theme}>
             {/*<BrowserRouter>*/}
-                <Routes>
-                    {/* User Page */}
-                    {getRoutes(routes)}
-                    <Route exact path="/all-items/item-detail" element={<ProductDetail/>}/>
-                    <Route
-                        path="/admin/dashboard"
-                        element={
-                            <PrivateRoute>
-                                <DashboardPage />
-                            </PrivateRoute>
-                        }>
-                        <Route path="" element={<ProductsTable />} />
-                        <Route path="add-product" element={<AddProductForm />} />
-                    </Route>
-                    <Route
-                        path="/admin/sign-up"
-                        element={
-                            <PrivateRoute>
-                                <SignUpAdmin />
-                            </PrivateRoute>
-                        }
-                    />
-                    <Route
-                        path="/admin/products"
-                        element={
-                            <PrivateRoute>
-                                <ProductsPage />
-                            </PrivateRoute>
-                        }
-                    />
-                    <Route
-                        path="/admin/products/add-product"
-                        element={
-                            <PrivateRoute>
-                                <AddProductForm />
-                            </PrivateRoute>
-                        }
-                    />
-                    <Route
-                        path="/admin/users"
-                        element={
-                            <PrivateRoute>
-                                <UsersPage />
-                            </PrivateRoute>
-                        }
-                    />
+            <Routes>
+                {/* User Page */}
+                {getRoutes(routes)}
+                <Route exact path="/all-items/item-detail" element={<ProductDetail/>}/>
+                <Route
+                    path="/admin/dashboard"
+                    element={
+                        <PrivateRoute>
+                            <DashboardPage/>
+                        </PrivateRoute>
+                    }>
+                    <Route path="" element={<ProductsTable/>}/>
+                    <Route path="add-product" element={<AddProductForm/>}/>
+                </Route>
+                <Route
+                    path="/admin/sign-up"
+                    element={
+                        <PrivateRoute>
+                            <SignUpAdmin/>
+                        </PrivateRoute>
+                    }
+                />
+                <Route
+                    path="/admin/products"
+                    element={
+                        <PrivateRoute>
+                            <ProductsPage/>
+                        </PrivateRoute>
+                    }
+                />
+                <Route
+                    path="/admin/products/add-product"
+                    element={
+                        <PrivateRoute>
+                            <AddProductForm/>
+                        </PrivateRoute>
+                    }
+                />
+                <Route
+                    path="/admin/users"
+                    element={
+                        <PrivateRoute>
+                            <UsersPage/>
+                        </PrivateRoute>
+                    }
+                />
+                <Route
+                    path="/admin/sign-in"
+                    element={
+                        <SignInAdminPage/>
+                    }
+                />
 
-                </Routes>
+            </Routes>
         </ThemeProvider>
 
     );
