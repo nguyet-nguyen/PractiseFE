@@ -122,7 +122,9 @@ html {
     animation: spinner 1.5s linear infinite;
     z-index: 100;
 }
-
+.icon-seemore:hover svg {
+    stroke: white;
+}
 @-webkit-keyframes spinner {
     0% {
         -webkit-transform: rotate(0deg);
