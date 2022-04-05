@@ -2,6 +2,8 @@ import React, {useState} from 'react';
 import {useForm} from 'react-hook-form';
 import {SignInApiRole, SignInApiToken} from "../../../features/Api";
 import {Link, useNavigate} from 'react-router-dom';
+import { toast, ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const SignIn = () => {
     const navigate = useNavigate();
@@ -164,15 +166,15 @@ const SignIn = () => {
                                                 Sign In
                                             </button>
                                         </div>
-                                        <div class="flex items-center justify-between mt-4">
-                                            <span class="w-1/5 border-b dark:border-slate-800 md:w-1/4"></span>
+                                        <div className="flex items-center justify-between mt-4">
+                                            <span className="w-1/5 border-b dark:border-slate-800 md:w-1/4"></span>
                                             <Link
                                                 to="/pages/authentication/sign-up"
-                                                class="text-sm text-amber-600 uppercase font-semibold dark:text-amber-800 hover:underline"
+                                                className="text-sm text-amber-600 uppercase font-semibold dark:text-amber-800 hover:underline"
                                             >
                                                 or sign up
                                             </Link>
-                                            <span class="w-1/5 border-b dark:border-slate-800 md:w-1/4"></span>
+                                            <span className="w-1/5 border-b dark:border-slate-800 md:w-1/4"></span>
                                         </div>
                                     </form>
                                 </div>
@@ -181,6 +183,7 @@ const SignIn = () => {
                     </div>
                 </div>
             </section>
+            <ToastContainer />
         </main>
     );
 }
