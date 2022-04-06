@@ -63,21 +63,21 @@ const ItemDetail = () => {
                                     />
                                 )}
                             </div>
-                            {/*<div className="carousel-inner relative w-full h-full overflow-hidden rounded-lg">*/}
-                            {/*    {itemDetail && itemDetail.images.map((image, index) => (*/}
-                            {/*        <div*/}
-                            {/*            className={`carousel-item relative  float-left w-full h-full ${index == 0 ? "active" : ""} `}>*/}
-                            {/*            <img*/}
-                            {/*                src={image}*/}
-                            {/*                className="block w-full h-full object-top object-cover"*/}
-                            {/*                alt="Motorbike Smoke"*/}
-                            {/*            />*/}
+                            <div className="carousel-inner relative w-full h-full overflow-hidden rounded-lg">
+                                {itemDetail && itemDetail.images.map((image, index) => (
+                                    <div
+                                        className={`image-detail carousel-item relative  float-left w-full h-full ${index == 0 ? "active" : ""} `}>
+                                        <img
+                                            src={image}
+                                            className="block w-full h-full object-top object-cover"
+                                            alt="Motorbike Smoke"
+                                        />
 
-                            {/*        </div>*/}
+                                    </div>
 
-                            {/*    ))}*/}
+                                ))}
 
-                            {/*</div>*/}
+                            </div>
                             <button
                                 className="carousel-control-prev absolute top-0 bottom-0 flex items-center justify-center p-0 text-center border-0 hover:outline-none hover:no-underline focus:outline-none focus:no-underline left-0"
                                 type="button" data-bs-target="#carouselDarkVariant" data-bs-slide="prev"
@@ -124,12 +124,12 @@ const ItemDetail = () => {
                                 <div className="flex items-center">
                                     <span className="mr-3">Size</span>
                                     <div className="relative">
-                                    {/*    <select onChange={e => changeSize(e.target.value)} className="rounded border appearance-none border-amber-600 py-2 focus:outline-none*/}
-                                    {/*focus:ring-2 focus:ring-amber-500 focus:border-amber-600 text-base pl-3 pr-10">*/}
-                                    {/*        {itemDetail && itemDetail.items.map((size) => (*/}
-                                    {/*            <option id={size.id} value={size.id}>{size.size}</option>*/}
-                                    {/*        ))}*/}
-                                    {/*    </select>*/}
+                                        <select onChange={e => changeSize(e.target.value)} className="rounded border appearance-none border-amber-600 py-2 focus:outline-none
+                                    focus:ring-2 focus:ring-amber-500 focus:border-amber-600 text-base pl-3 pr-10">
+                                            {itemDetail && itemDetail.items.map((size) => (
+                                                <option id={size.id} value={size.id}>{size.size}</option>
+                                            ))}
+                                        </select>
                                         <span
                                             className="absolute right-0 top-0 h-full w-10 text-center text-gray-600 pointer-events-none flex items-center justify-center">
                                         <svg

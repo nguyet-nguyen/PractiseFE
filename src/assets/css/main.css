@@ -152,4 +152,7 @@ html {
         transform: rotate(360deg)
     }
 }
+.image-detail {
+    height: 600px;
+}
 
