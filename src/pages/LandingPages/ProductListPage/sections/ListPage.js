@@ -63,7 +63,7 @@ const ListPage = ({sidebarOpen, setSidebarOpen, categoryList}) => {
 
     // ----------------filter-----------------
     const [sort,setSort]=useState("");
-    const [cate,setCate]=useState("");
+    const [cate,setCate]=useState(1);
     const [minPrice,setMinPrice]=useState(0);
     const [maxPrice,setMaxPrice]=useState("");
     const data = {
@@ -212,6 +212,7 @@ const ListPage = ({sidebarOpen, setSidebarOpen, categoryList}) => {
                                         <li className={`px-3 py-2 rounded-sm mb-0.5 last:mb-0 ${pathname === '/dashboard' && 'bg-slate-900'}`}>
                                             <div className="form-check">
                                                 <input
+                                                    checked = {cate == category.id}
                                                     onClick={getcategoryId}
                                                     className="form-check-input appearance-none rounded-full h-4 w-4
                                                 border border-gray-300 bg-white checked:bg-amber-600

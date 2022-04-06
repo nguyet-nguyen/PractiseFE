@@ -1,54 +1,65 @@
 import Sidebar from "../../Sidebar";
 import Header from "../../Header";
 import React, {useState, useEffect} from "react";
-import {Link, useNavigate} from "react-router-dom";
+import {useNavigate, useParams} from "react-router-dom";
 import {useForm} from "react-hook-form";
-import {CreateProducts, getAllCategory} from "../../../../features/Api";
-const AddProductForm = () => {
+import {CreateProducts, getAllCategory, getProductDetail, UpdateProduct} from "../../../../features/Api";
+const UpdateProductForm = () => {
     const [sidebarOpen, setSidebarOpen] = useState(false);
-
     const navigate = useNavigate();
-    const {register, handleSubmit, formState: {errors}} = useForm();
-    const [messErr, setMessErr] = useState("")
-
+    const {  register,
+        setValue,
+        handleSubmit,
+        formState: { errors },} = useForm();
+    const [messErr, setMessErr] = useState("");
+    let params = useParams();
+    const [itemDetail, setItemDetail] = useState([]);
+    const [categoryList, setCategoryList] = useState([]);
+    useEffect(() => {
+        getProductDetail(params.id)
+            .then(res => {
+                setItemDetail(res.data);
+                console.log(res.data.items[0]);
+            })
+            .catch(err => {
+                console.log(err);
+            })
+        // --------cate-----------------
+        getAllCategory()
+            .then((response) => {
+                setCategoryList(response.data);
+            })
+            .catch((err) => {
+                console.log(err.message);
+            });
+    },[]);
+    console.log()
+    setValue("name", itemDetail.name);
+    setValue("color", itemDetail.color);
+    setValue("description", itemDetail.description);
+    setValue("price", itemDetail.price);
+    setValue("material", itemDetail.material);
+    setValue("category", itemDetail.category);
     const onSubmit = async (data, e) => {
-        // const imageCheck = ["127.0.0.1/uploads/images/Capture-624adf7b511b1.jpg"];
-        const formData = new FormData();
-        formData.append("category", data.category);
-        formData.append("name", data.name);
-        formData.append("color", data.color);
-        formData.append("description", data.description);
-        formData.append("price", data.price);
-        formData.append("material", data.material);
-        formData.append("productItems[]", JSON.stringify([
-            {size: 1, amount: data.SizeS},
-            {size: 2, amount: data.SizeM},
-            {size: 3, amount: data.SizeL}
-        ]));
-        [...data.images].map(f => formData.append("images[]", f));
-        CreateProducts(formData).then(response => {
-            // navigate('/pages/authentication/sign-in');
+        const body = {
+            category: data.category,
+            name: data.name,
+            color: data.color,
+            description: data.description,
+            price: data.price,
+            material:  data.material,
+        };
+        UpdateProduct(body,itemDetail.id).then(response => {
             console.log(response.data);
             navigate("/admin/products");
         })
             .catch(err => {
-                    console.log(err.data);
+                    console.log(err);
                     setMessErr(err.message);
                 }
             )
 
     };
-    const [categoryList, setCategoryList] = useState([]);
-    useEffect(() => {
-        getAllCategory()
-            .then((response) => {
-                setCategoryList(response.data);
-
-            })
-            .catch((err) => {
-                console.log(err.message);
-            });
-    }, [])
     const [showMess, setShowMess] = useState(true);
     return (
         <div className="flex h-screen overflow-hidden">
@@ -66,8 +77,8 @@ const AddProductForm = () => {
                             <div className="md:flex w-full">
                                 <form className="w-full md:w-full py-8 px-5 md:px-10" onSubmit={handleSubmit(onSubmit)}>
                                     <div className="text-center mb-7">
-                                        <h1 className="font-bold text-3xl text-gray-900">Add Product</h1>
-                                        <p>Enter product information to register</p>
+                                        <h1 className="font-bold text-3xl text-gray-900 uppercase">Update Product</h1>
+                                        <p>Enter product information</p>
 
                                         {(!showMess || messErr != "") ? (
                                             <div
@@ -214,92 +225,9 @@ const AddProductForm = () => {
                                                 </div>
                                             </div>
                                         </div>
+
                                         <div className="flex -mx-3">
-                                            <div className="w-1/3 px-3 mb-5">
-                                                <label htmlFor="" className="text-xs font-semibold px-1">
-                                                    Amount of S size
-                                                </label>
-                                                <div className="flex">
-                                                    <div
-                                                        className="w-10 z-10 pl-1 text-center pointer-events-none flex items-center justify-center">
-                                                        <i className="fa fa-database" aria-hidden="true"></i>
-                                                    </div>
-                                                    <input
-                                                        type="number"
-                                                        className={`w-full -ml-10 pl-10 pr-3 py-2 rounded-lg border-2 border-gray-200
-                                            outline-none focus:ring-2 focus:ring-amber-500 focus:border-amber-600
-                                            ${errors.SizeS && "border-red-600 focus:ring-red-500 focus:border-red-600 border-1"}`}
-                                                        placeholder="Amount of S size"
-                                                        id="SizeS"
-                                                        name='SizeS'
-                                                        {...register("SizeS", {required: true, min: 0})}
-
-                                                    />
-                                                </div>
-                                                {errors.SizeS && errors.SizeS.type === "required" &&
-                                                    <p className="text-red-500 text-xs mt-3 italic">Value required</p>}
-                                                {errors.SizeS && errors.SizeS.type === "min" &&
-                                                    <p className="text-red-500 text-xs mt-3 italic">quantity must be
-                                                        greater than 0</p>}
-
-                                            </div>
-                                            <div className="w-1/3 px-3 mb-5">
-                                                <label htmlFor="" className="text-xs font-semibold px-1">
-                                                    Amount of M size
-                                                </label>
-                                                <div className="flex">
-                                                    <div
-                                                        className="w-10 z-10 pl-1 text-center pointer-events-none flex items-center justify-center">
-                                                        <i className="fa fa-database" aria-hidden="true"></i>
-                                                    </div>
-                                                    <input
-                                                        type="number"
-                                                        className={`w-full -ml-10 pl-10 pr-3 py-2 rounded-lg border-2 border-gray-200
-                                            outline-none focus:ring-2 focus:ring-amber-500 focus:border-amber-600
-                                            ${errors.SizeM && "border-red-600 focus:ring-red-500 focus:border-red-600 border-1"}`}
-                                                        placeholder="Amount of M size"
-                                                        id="SizeM"
-                                                        name='SizeM'
-                                                        {...register("SizeM", {required: true, min: 0})}
-
-                                                    />
-                                                </div>
-                                                {errors.SizeM && errors.SizeM.type === "required" &&
-                                                    <p className="text-red-500 text-xs mt-3 italic">Value required</p>}
-                                                {errors.SizeM && errors.SizeM.type === "min" &&
-                                                    <p className="text-red-500 text-xs mt-3 italic">quantity must be
-                                                        greater than 0</p>}
-                                            </div>
-                                            <div className="w-1/3 px-3 mb-5">
-                                                <label htmlFor="" className="text-xs font-semibold px-1">
-                                                    Amount of L size
-                                                </label>
-                                                <div className="flex">
-                                                    <div
-                                                        className="w-10 z-10 pl-1 text-center pointer-events-none flex items-center justify-center">
-                                                        <i className="fa fa-database" aria-hidden="true"></i>
-                                                    </div>
-                                                    <input
-                                                        type="number"
-                                                        className={`w-full -ml-10 pl-10 pr-3 py-2 rounded-lg border-2 border-gray-200
-                                            outline-none focus:ring-2 focus:ring-amber-500 focus:border-amber-600
-                                            ${errors.SizeL && "border-red-600 focus:ring-red-500 focus:border-red-600 border-1"}`}
-                                                        placeholder="Amount of L size"
-                                                        id="SizeL"
-                                                        name='SizeL'
-                                                        {...register("SizeL", {required: true, min: 0})}
-
-                                                    />
-                                                </div>
-                                                {errors.SizeL && errors.SizeL.type === "required" &&
-                                                    <p className="text-red-500 text-xs mt-3 italic">Value required</p>}
-                                                {errors.SizeL && errors.SizeL.type === "min" &&
-                                                    <p className="text-red-500 text-xs mt-3 italic">quantity must be
-                                                        greater than 0</p>}
-                                            </div>
-                                        </div>
-                                        <div className="flex -mx-3">
-                                            <div className="w-1/2 px-3 mb-5">
+                                            <div className="w-full px-3 mb-5">
                                                 <label htmlFor="" className="text-xs font-semibold px-1">
                                                     Product's Decription
                                                 </label>
@@ -316,23 +244,7 @@ const AddProductForm = () => {
                                                               {...register("description")}/>
                                                 </div>
                                             </div>
-                                            <div className="w-1/2 px-3 mb-5">
-                                                <label htmlFor="" className="text-xs font-semibold px-1">
-                                                    Avatar
-                                                </label>
-                                                <div className="flex items-center justify-center w-full">
-                                                    <label
-                                                        className="flex flex-col w-full h-20 border-4 border-blue-200 border-dashed hover:bg-gray-100 hover:border-gray-300">
-                                                        <div className="flex flex-col items-center justify-center pt-2">
-                                                            <p className="pt-1 text-sm tracking-wider text-gray-400 group-hover:text-gray-600">
-                                                                Attach a file</p>
-                                                        </div>
-                                                        <input id="images" name="images" multiple="multiple"
-                                                               accept=".jpg, .png" type="file" {...register('images')}
-                                                               className="ml-8 text-sm"/>
-                                                    </label>
-                                                </div>
-                                            </div>
+
                                         </div>
 
                                         <div className="flex -mx-3">
@@ -341,7 +253,7 @@ const AddProductForm = () => {
                                                     className="block w-full max-w-xs mx-auto bg-amber-600
                                                      hover:bg-amber-700 focus:bg-amber-700 text-white
                                                      rounded-lg px-3 py-3 font-semibold uppercase">
-                                                    Add products
+                                                    Update products
                                                 </button>
                                             </div>
                                         </div>
@@ -357,4 +269,4 @@ const AddProductForm = () => {
         </div>
     )
 }
-export default AddProductForm;
+export default UpdateProductForm;

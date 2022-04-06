@@ -16,3 +16,11 @@ export const apiadmin = axios.create({
         "Content-Type": "multipart/form-data"
     },
 });
+
+export const apiadminnoFormdata = axios.create({
+    baseURL,
+    headers: {
+        'Authorization': `Bearer ${window.localStorage.getItem('token')}`,
+        'Content-Type': 'application/json',
+    },
+});

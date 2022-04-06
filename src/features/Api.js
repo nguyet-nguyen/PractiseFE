@@ -1,4 +1,4 @@
-import { api, apiadmin } from "../utils/Api";
+import {api, apiadmin, apiadminnoFormdata} from "../utils/Api";
 
 // ---------------users------------------------?
 export const getAllProducts = () => {
@@ -96,6 +96,30 @@ export const CreateUsers = (data) => {
 export const CreateProducts = (data) => {
   try {
     return apiadmin.post('/admin/products', data);
+  } catch (error) {
+    console.log(error);
+  }
+}
+
+export const getAllProductsAdmin = () => {
+  try {
+    return apiadmin.get('/admin/products');
+  } catch (error) {
+    console.log(error);
+  }
+}
+
+export const DeleteProduct = (id) => {
+  try {
+    return apiadmin.delete(`/admin/products/${id}`);
+  } catch (error) {
+    console.log(error);
+  }
+}
+
+export const UpdateProduct = (data,id) => {
+  try {
+    return apiadminnoFormdata.put(`/admin/products/${id}`, data);
   } catch (error) {
     console.log(error);
   }
