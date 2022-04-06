@@ -57,6 +57,24 @@ export const getProductDetail = (id) => {
   }
 };
 
+// Add To Cart
+export const addToCart = (data) => {
+  try {
+    return apiadmin.post(`/users/carts`, data);
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+// Get all items in cart by user
+export const getAllItemsInCart = () => {
+  try {
+    return apiadmin.get(`/users/carts`);
+  } catch (error) {
+    console.log(error);
+  }
+};
+
 // ----------------------admin----------------------------------
 export const getAllUsers = () => {
   try {
@@ -108,6 +126,15 @@ export const UpdateProduct = (data,id) => {
 }
 
 // ---------------------- for user and admin ----------------------------------
+
+// Validate Email (check if email exists)
+export const checkIfEmailExists = (data) => {
+  try {
+    return api.post("/users/check_email", data);
+  } catch (error) {
+    console.log(error);
+  }
+};
 
 // Get User Info By Id 
 export const getUserInfo = (id) => {

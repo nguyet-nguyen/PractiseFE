@@ -1,8 +1,12 @@
-import React, {useEffect, useState} from "react";
-import {getProductDetail} from "../../../../features/Api";
-import {useParams} from "react-router-dom";
-import {numberFormat} from "../../Home/function/FormatMoney";
+
+import React, { useEffect, useState } from "react";
+import { getProductDetail, addToCart } from "../../../../features/Api";
+import { useParams } from "react-router-dom";
+import { numberFormat } from "../../Home/function/FormatMoney";
 import Loading from "../../../../Loading";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import CustomPopupMessage from "../../../CustomPopupMess";
 
 const ItemDetail = () => {
     let params = useParams();
@@ -22,27 +26,60 @@ const ItemDetail = () => {
             })
     }, []);
     const [counter, setCounter] = useState(1);
+
     const increase = () => {
-        if (counter < sizeAmount)
-        setCounter(count => count + 1);
+        if (counter < sizeAmount) {
+            setCounter(Number(counter) + 1);
+        }
     };
     //decrease counter
     const decrease = () => {
-        if (counter >0){
+        if (counter > 1) {
             setCounter(count => count - 1);
         }
     };
+
     const changeSize = (id) => {
-        setSizeState(id);
+        setSizeState(Number(id));
 
         itemDetail.items.map((size) => {
-            if (size.id == id){
-                setSizeAmount(size.amount)
+            if (size.id == id) {
+                setSizeAmount(size.amount);
+                if (counter > size.amount) {
+                    setCounter(size.amount);
+                }
             }
         })
-
     };
-    //console.log(itemDetail);
+
+    const changeQuantity = (e) => {
+        const quantity = e.target.value;
+        if (quantity > sizeAmount) {
+            setCounter(sizeAmount);
+        } else if (quantity == 0) {
+            setCounter(1);
+        }
+        else {
+            setCounter(quantity);
+        }
+    }
+
+    const onAddToCart = () => {
+        const total = itemDetail.price * counter;
+        const data = {
+            "productItem": sizeState,
+            "amount": counter,
+            "total": total
+        };
+        addToCart(data)
+            .then(res => {
+                toast(<CustomPopupMessage mess={`${itemDetail.name} has been added to your cart.`} />);
+            })
+            .catch(err => {
+                console.log(err);
+            })
+    }
+
     return (
         itemDetail ?
             <section className="text-gray-600 body-font overflow-hidden ItemDetail rounded-lg">
@@ -57,8 +94,8 @@ const ItemDetail = () => {
                                 className="carousel-indicators absolute right-0 bottom-0 left-0 flex justify-center p-0 mb-4">
                                 {itemDetail && itemDetail.images.map((image, index) =>
                                     <button data-bs-target="#carouselDarkVariant" data-bs-slide-to={index}
-                                            className="active"
-                                            aria-current="true" aria-label="Slide 1"
+                                        className="active"
+                                        aria-current="true" aria-label="Slide 1"
                                     />
                                 )}
                             </div>
@@ -81,10 +118,10 @@ const ItemDetail = () => {
                                 className="carousel-control-prev absolute top-0 bottom-0 flex items-center justify-center p-0 text-center border-0 hover:outline-none hover:no-underline focus:outline-none focus:no-underline left-0"
                                 type="button" data-bs-target="#carouselDarkVariant" data-bs-slide="prev"
                             >
-                            <span
-                                className="carousel-control-prev-icon inline-block bg-no-repeat"
-                                aria-hidden="true"
-                            />
+                                <span
+                                    className="carousel-control-prev-icon inline-block bg-no-repeat"
+                                    aria-hidden="true"
+                                />
                                 <span className="visually-hidden">Previous</span>
                             </button>
                             <button
@@ -93,10 +130,10 @@ const ItemDetail = () => {
                                 data-bs-target="#carouselDarkVariant"
                                 data-bs-slide="next"
                             >
-                            <span
-                                className="carousel-control-next-icon inline-block bg-no-repeat"
-                                aria-hidden="true"
-                            />
+                                <span
+                                    className="carousel-control-next-icon inline-block bg-no-repeat"
+                                    aria-hidden="true"
+                                />
                                 <span className="visually-hidden">Next</span>
                             </button>
                         </div>
@@ -131,26 +168,26 @@ const ItemDetail = () => {
                                         </select>
                                         <span
                                             className="absolute right-0 top-0 h-full w-10 text-center text-gray-600 pointer-events-none flex items-center justify-center">
-                                        <svg
-                                            fill="none"
-                                            stroke="currentColor"
-                                            strokeLinecap="round"
-                                            strokeLinejoin="round"
-                                            strokeWidth={2}
-                                            className="w-4 h-4"
-                                            viewBox="0 0 24 24"
-                                        >
-                                            <path d="M6 9l6 6 6-6"/>
-                                        </svg>
-                                    </span>
+                                            <svg
+                                                fill="none"
+                                                stroke="currentColor"
+                                                strokeLinecap="round"
+                                                strokeLinejoin="round"
+                                                strokeWidth={2}
+                                                className="w-4 h-4"
+                                                viewBox="0 0 24 24"
+                                            >
+                                                <path d="M6 9l6 6 6-6" />
+                                            </svg>
+                                        </span>
                                     </div>
                                 </div>
                                 <div className="flex">
                                     <span className="mr-2 text-base text-gray-500">Amount items:</span>
                                     {itemDetail && itemDetail.items.map((size) => (
                                         <span className="text-base text-bold text-amber-700">
-                                        {size.id == sizeState && size.amount}
-                                    </span>
+                                            {size.id == sizeState && size.amount}
+                                        </span>
 
                                     ))}
                                 </div>
@@ -164,20 +201,27 @@ const ItemDetail = () => {
                                 </label>
                                 <div className="flex ml-5 w-40 h-10  bg-white
                              border-amber-700 mt-1">
+                                    {/* Button - */}
                                     <button data-action="decrement"
-                                            onClick={decrease}
-                                            className="border-amber-600 border-2 rounded-l-lg bg-white text-gray-600 hover:text-white hover:bg-amber-600
-                                        h-full w-20 cursor-pointer outline-none">
+                                        onClick={decrease}
+                                        className="border-amber-600 border-2 rounded-l-lg bg-white text-gray-600 hover:text-white hover:bg-amber-600
+                                        h-full w-20 cursor-pointer outline-none"
+                                    >
+
                                         <span className="m-auto text-2xl font-thin">−</span>
                                     </button>
+                                    {/* Input quantity */}
                                     <input type="number"
-                                           className="border-amber-600 border-t-2 border-b-2 outline-none focus:outline-none text-center w-full bg-white
+                                        className="border-amber-600 border-t-2 border-b-2 outline-none focus:outline-none text-center w-full bg-white
                                        font-semibold text-md hover:text-black focus:text-black
-                                        md:text-basecursor-default flex items-center text-gray-700 outline-none"
-                                           value={counter} max={sizeAmount} min={0}/>
+                                        md:text-basecursor-default flex items-center text-gray-700"
+                                        onChange={(e) => changeQuantity(e)}
+                                        value={counter} max={sizeAmount} min={1}
+                                    />
+                                    {/* Button + */}
                                     <button data-action="increment"
-                                            onClick={increase}
-                                            className="border-amber-600 border-2 bg-white text-gray-600 hover:text-white hover:bg-amber-600 rounded-r-lg
+                                        onClick={increase}
+                                        className="border-amber-600 border-2 bg-white text-gray-600 hover:text-white hover:bg-amber-600 rounded-r-lg
                                          h-full w-20 cursor-pointer">
                                         <span className="m-auto text-2xl font-thin">+</span>
                                     </button>
@@ -188,6 +232,7 @@ const ItemDetail = () => {
                             <div className="flex justify-center mb-8">
                                 <button
                                     type="button"
+                                    onClick={onAddToCart}
                                     className="inline-block px-6 py-4 border-2 border-amber-600 text-amber-600 font-semibold text-base leading-tight
                                  uppercase rounded-full w-full
                                 hover:bg-amber-600 hover:text-white focus:outline-none focus:ring-0
@@ -201,8 +246,10 @@ const ItemDetail = () => {
                         </div>
                     </div>
                 </div>
+                <ToastContainer />
             </section>
-            : <Loading/>
+            : <Loading />
+            
     );
 }
 
