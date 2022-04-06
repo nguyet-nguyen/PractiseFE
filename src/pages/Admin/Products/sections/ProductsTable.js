@@ -54,12 +54,8 @@ const ProductsTable = () => {
             setProductList(searchData);
         }
     }
-    console.log("------------------------")
-    console.log(productList);
-    console.log("------------------------")
 
     return (
-        <>
             <div className="px-4 sm:px-6 lg:px-8 py-8 w-full max-w-9xl mx-auto">
                 <div className="flex space-x-2 justify-between">
                     <Link to="/admin/products/add-product"
@@ -108,8 +104,8 @@ const ProductsTable = () => {
                 {productList ?
                     <div className="flex flex-col">
                         <div className="overflow-x-auto sm:-mx-6 lg:-mx-8">
-                            <div className="py-4 inline-block min-w-full sm:px-6 lg:px-8">
-                                <div className="overflow-hidden">
+                            <div className="py-8 inline-block min-w-full sm:px-6 lg:px-8">
+                                <div className="overflow-hidden rounded-md">
                                     <table className="min-w-full text-center">
                                         <thead className="border-b bg-gray-800">
                                         <tr>
@@ -277,10 +273,6 @@ const ProductsTable = () => {
                 </div>
 
             </div>
-
-        </>
-
-
     )
 }
 
