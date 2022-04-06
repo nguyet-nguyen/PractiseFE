@@ -17,8 +17,8 @@ import DashboardPage from "layouts/pages/admin/dashboard";
 import SignUpAdmin from "./pages/Admin/SignUp";
 import PrivateRoute from "./pages/PrivateRoute";
 import AddProductForm from "./pages/Admin/Products/sections/AddProductForm";
-import ProductsTable from "./pages/Admin/Products/sections/ProductsTable";
 import SignInAdmin from "./pages/Admin/SignIn";
+import UpdateProductForm from "./pages/Admin/Products/sections/UpdateProductForm";
 
 export default function App() {
 
@@ -48,8 +48,8 @@ export default function App() {
                                 <DashboardPage/>
                             </PrivateRoute>
                         }>
-                        <Route path="" element={<ProductsTable/>}/>
-                        <Route path="add-product" element={<AddProductForm/>}/>
+                        {/*<Route path="" element={<ProductsTable/>}/>*/}
+                        {/*<Route path="add-product" element={<AddProductForm/>}/>*/}
                     </Route>
                     <Route
                         path="/admin/sign-up"
@@ -72,6 +72,14 @@ export default function App() {
                         element={
                             <PrivateRoute>
                                 <AddProductForm/>
+                            </PrivateRoute>
+                        }
+                    />
+                    <Route
+                        path="/admin/products/update-product/:id"
+                        element={
+                            <PrivateRoute>
+                                <UpdateProductForm/>
                             </PrivateRoute>
                         }
                     />

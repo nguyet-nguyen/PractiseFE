@@ -2,7 +2,6 @@ import React, {useEffect, useState} from "react";
 import {getProductDetail} from "../../../../features/Api";
 import {useParams} from "react-router-dom";
 import {numberFormat} from "../../Home/function/FormatMoney";
-import {cities} from "../../../../address";
 import Loading from "../../../../Loading";
 
 const ItemDetail = () => {
