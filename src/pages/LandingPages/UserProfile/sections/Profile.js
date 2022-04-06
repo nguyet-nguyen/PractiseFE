@@ -21,37 +21,7 @@ const Profile = () => {
       .catch((err) => {
         console.warn(err);
       });
-  }, [userInfo]);
-  const changeWar = (id) => {
-    let wardName;
-    wards.map((ward) => {
-      if (ward.id == id) {
-        wardName = ward.name;
-      }
-    });
-    setWard({ id: id, name: wardName });
-  };
-  const onSubmit = async (data, e) => {
-    let address =
-      city.name +
-      " - " +
-      district.name +
-      " - " +
-      ward.name +
-      " - " +
-      data.addressDetail;
-    const formData = new FormData();
-    formData.append("image", data.image[0]);
-    formData.append("name", data.name);
-    formData.append("email", data.email);
-    formData.append("phone", data.phone);
-    formData.append("password", data.password);
-    formData.append("address", address);
-    console.log(address);
-
-
-  };
-
+  }, []);
 
   return (
     <>

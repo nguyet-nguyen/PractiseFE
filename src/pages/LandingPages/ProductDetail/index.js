@@ -37,7 +37,6 @@ const ProductDetail = () => {
                     <ItemDetail />
                     <div className="my-16">
                         <HotDeal />
-
                     </div>
                 </div>
             </section>

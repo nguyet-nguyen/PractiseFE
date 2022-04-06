@@ -39,10 +39,9 @@ const AddProductForm = () => {
         CreateProducts(formData).then(response => {
             // navigate('/pages/authentication/sign-in');
             console.log(response.data);
-            navigate("admin/products")
+            navigate("/admin/products");
         })
             .catch(err => {
-                    alert(err.data);
                     console.log(err.data);
                     setMessErr(err.message);
                 }

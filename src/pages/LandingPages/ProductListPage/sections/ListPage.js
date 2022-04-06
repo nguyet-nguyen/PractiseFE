@@ -81,22 +81,22 @@ const ListPage = ({sidebarOpen, setSidebarOpen, categoryList}) => {
     const getPriceLevel = (e) => {
         if (e.target.value==1) {
             setMinPrice(0);
-            setMaxPrice(500000);
+            setMaxPrice(500);
         }
         else if (e.target.value==2) {
-            setMinPrice(500000);
-            setMaxPrice(1000000);
+            setMinPrice(500);
+            setMaxPrice(1000);
         }
         else if (e.target.value==3) {
-            setMinPrice(1000000);
-            setMaxPrice(3000000);
+            setMinPrice(1000);
+            setMaxPrice(3000);
         }
         else if (e.target.value==4) {
-            setMinPrice(3000000);
-            setMaxPrice(5000000);
+            setMinPrice(3000);
+            setMaxPrice(5000);
         }
         else if (e.target.value==5) {
-            setMinPrice(5000000);
+            setMinPrice(5000);
             setMaxPrice("");
         }
     }
@@ -107,26 +107,26 @@ const ListPage = ({sidebarOpen, setSidebarOpen, categoryList}) => {
         {
             id: 1,
             minPrice: 0,
-            maxPrice: 500000,
+            maxPrice: 500,
         },
         {
             id: 2,
-            minPrice: 500000,
-            maxPrice: 1000000,
+            minPrice: 500,
+            maxPrice: 1000,
         },
         {
             id: 3,
-            minPrice: 1000000,
-            maxPrice: 3000000,
+            minPrice: 1000,
+            maxPrice: 3000,
         },
         {
             id: 4,
-            minPrice: 3000000,
-            maxPrice: 5000000,
+            minPrice: 3000,
+            maxPrice: 5000,
         },
         {
             id: 5,
-            minPrice: 5000000,
+            minPrice: 5000,
         },
     ];
     const sortLevel = [

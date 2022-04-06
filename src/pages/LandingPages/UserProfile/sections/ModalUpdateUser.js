@@ -7,6 +7,7 @@ import { updateUserInfo } from "../../../../features/Api";
 import CustomPopupMessage from "../../../CustomPopupMess";
 
 const ModalUpdateUser = ({ userInfo }) => {
+
   if (userInfo.address) {
     const addressArray = userInfo.address.split(" - ");
     console.log(addressArray);

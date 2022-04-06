@@ -5,9 +5,9 @@ import { getAllProducts } from "../../../../features/Api";
 import { getAllCategory } from "features/Api";
 
 function ProductList() {
-    const [productList, setproductList] = useState([]);
-    const [categoryList, setCategoryList] = useState([]);
-    const [productListFilter, setProductListFilter] = useState([productList]);
+    const [productList, setproductList] = useState();
+    const [categoryList, setCategoryList] = useState();
+    const [productListFilter, setProductListFilter] = useState(productList);
 
     useEffect(() => {
         getAllProducts()
@@ -28,11 +28,11 @@ function ProductList() {
     }, []);
     var arrProduct = [];
     const getcategoryId = (e) => {
-        console.log(e.target.value);
+        // console.log(e.target.value);
         productList.forEach((item) => {
             if (item.category == e.target.value) {
                 arrProduct.push(item);
-            } else if (e.target.value == "all items") {
+            } else if (e.target.value == "All Items") {
                 arrProduct.push(item);
             };
         });
@@ -50,7 +50,7 @@ function ProductList() {
                     <ul className="nav nav-tabs md:flex flex-col md:flex-row flex-wrap list-none 
                     border-b-0 pl-0 hidden" id="tabs-tab"
                         role="tablist">
-                        {categoryList.map((category, index) =>
+                        {categoryList && categoryList.map((category, index) =>
                             <li className="nav-item nav-category mx-2" role="presentation" onClick={getcategoryId}>
                                 <button type="button" className={`nav-link block font-semibold text-sm leading-tight uppercase border-x-0 
                                border-t-0 border-b-2 hover:border-amber-600 focus:border-amber-600
@@ -66,7 +66,7 @@ function ProductList() {
                             text-amber-600 bg-white bg-clip-padding bg-no-repeat border border-2 capitalize
                             border-solid border-amber-600 rounded transition ease-in-out mx-2 focus:text-white
                             focus:bg-white focus:text-amber-600 focus:border-amber-600 focus:outline-none focus:shadow-inner" aria-label="Default select example">
-                                {categoryList.map((category) =>
+                                {categoryList && categoryList.map((category) =>
                                 <option id={category.id} value={category.name} className="p-2 m-2 capitalize">{category.name}</option>
                             )}
                             </select>
