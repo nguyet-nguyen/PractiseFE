@@ -65,10 +65,10 @@ const ModalUpdateAvatar = ({ userInfo }) => {
                         <label htmlFor="" className="text-xs font-semibold px-1">
                             Avatar
                         </label>
-                        <div class="flex items-center justify-center w-full">
+                        <div className="flex items-center justify-center w-full">
                             <label
-                                class="flex flex-col w-full h-20 border-4 border-blue-200 border-dashed hover:bg-gray-100 hover:border-gray-300">
-                                <div class="flex flex-col items-center justify-center pt-2">
+                                className="flex flex-col w-full h-20 border-4 border-blue-200 border-dashed hover:bg-gray-100 hover:border-gray-300">
+                                <div className="flex flex-col items-center justify-center pt-2">
                                     <p className="pt-1 text-sm tracking-wider text-gray-400 group-hover:text-gray-600">
                                         Attach a file</p>
                                 </div>
