@@ -75,6 +75,15 @@ export const getAllItemsInCart = () => {
   }
 };
 
+// Remove item from shopping cart
+export const removeItemFromCart = (id) => {
+  try {
+    return apiadmin.delete(`/users/carts/${id}`);
+  } catch (error) {
+    console.log(error);
+  }
+};
+
 // ----------------------admin----------------------------------
 export const getAllUsers = () => {
   try {
