@@ -1,7 +1,10 @@
 import React, { useEffect, useState } from "react";
 import "react-toastify/dist/ReactToastify.css";
 import { numberFormat } from "../../Home/function/FormatMoney";
-import { getAllItemsInCart } from "../../../../features/Api";
+import {
+  getAllItemsInCart,
+  removeItemFromCart,
+} from "../../../../features/Api";
 
 const ShoppingCart = () => {
   const [itemsInCart, setItemsInCart] = useState([]);
@@ -9,35 +12,54 @@ const ShoppingCart = () => {
   const [counter, setCounter] = useState();
   const [subtotal, setSubtotal] = useState();
   const [shippingFee, setShippingFee] = useState(20);
+  const [idItemDel, setIdItemDel] = useState();
 
   useEffect(() => {
     getAllItemsInCart()
-      .then(res => {
+      .then((res) => {
         setItemsInCart(res.data);
         const allItems = res.data;
         for (let i = 0; i < allItems.length; i++) {
           allItems[i].isSelected = false;
         }
-        const sum = allItems.reduce((partialSum, item) => partialSum + item.price, 0);
-        setSubtotal(sum);
-
+        updateTotal(allItems);
       })
-      .catch(err => {
+      .catch((err) => {
         console.log(err);
-      })
+      });
   }, []);
 
-  const increase = () => {
-
-  };
+  const increase = () => {};
   //decrease counter
-  const decrease = () => {
+  const decrease = () => {};
 
+  const changeQuantity = (e) => {};
+
+  const setIdYouWantToDel = (id) => {
+    setIdItemDel(id);
   };
 
-  const changeQuantity = (e) => {
+  const onRemoveItem = (id) => {    
+    removeItemFromCart(id)
+      .then((res) => {
+        const index = itemsInCart.findIndex((item) => item.id === id);
+        if (index !== -1) {
+          itemsInCart.splice(index, 1);
+          updateTotal(itemsInCart);
+        }
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
 
-  }
+  const updateTotal = (allItems) => {
+    const sum = allItems.reduce(
+      (partialSum, item) => partialSum + item.price,
+      0
+    );
+    setSubtotal(sum);
+  };
 
   return (
     <>
@@ -60,8 +82,11 @@ const ShoppingCart = () => {
               Select All
             </span> */}
           </label>
-          {itemsInCart.map((item) =>
-            <div key={item.id} className="md:flex items-strech py-8 md:py-10 lg:py-8 border-t border-gray-100">
+          {itemsInCart.map((item) => (
+            <div
+              key={item.id}
+              className="md:flex items-strech py-8 md:py-10 lg:py-8 border-t border-gray-100"
+            >
               {/* <input
               type="checkbox"    
               value={item.id}
@@ -83,43 +108,49 @@ const ShoppingCart = () => {
                 />
               </div>
               <div className="md:pl-3 lg:ml-7 md:w-8/12 2xl:w-3/4 flex flex-col justify-center">
-
                 <div className="flex items-center justify-between w-full md:pt-0 pt-4">
                   <p className="text-lg uppercase font-black leading-none text-gray-800 ">
                     {item.name}
                   </p>
 
                   {/* Input quantity */}
-                  <div className="flex ml-5 w-28 h-10  bg-white
-                             border-amber-700 mt-1">
+                  <div
+                    className="flex ml-5 w-28 h-10  bg-white
+                             border-amber-700 mt-1"
+                  >
                     {/* Button - */}
-                    <button data-action="decrement"
+                    <button
+                      data-action="decrement"
                       onClick={decrease}
                       className="border-amber-600 border-2 rounded-l-lg bg-white text-gray-600 hover:text-white hover:bg-amber-600
                                         h-full w-20 cursor-pointer outline-none"
                     >
-
                       <span className="m-auto text-2xl font-thin">−</span>
                     </button>
                     {/* Input quantity */}
-                    <input type="number"
+                    <input
+                      type="number"
                       className="border-amber-600 border-t-2 border-b-2 outline-none focus:outline-none text-center w-full bg-white
                                        font-semibold text-md hover:text-black focus:text-black
                                         md:text-basecursor-default flex items-center text-gray-700"
                       onChange={(e) => changeQuantity(e)}
-                      value={item.amount} max={sizeAmount} min={1}
+                      value={item.amount}
+                      max={sizeAmount}
+                      min={1}
                     />
                     {/* Button + */}
-                    <button data-action="increment"
+                    <button
+                      data-action="increment"
                       onClick={increase}
                       className="border-amber-600 border-2 bg-white text-gray-600 hover:text-white hover:bg-amber-600 rounded-r-lg
-                                         h-full w-20 cursor-pointer">
+                                         h-full w-20 cursor-pointer"
+                    >
                       <span className="m-auto text-2xl font-thin">+</span>
                     </button>
                   </div>
                 </div>
                 <p className="text-base font-semibold leading-3 text-gray-600  pt-2 pb-5">
-                  {numberFormat(item.unitPrice)}
+                  {numberFormat(item.unitPrice)} 
                 </p>
                 <div className="flex items-center pb-8">
                   <p className="text-sm font-semibold leading-3 text-gray-500  pr-3">
@@ -131,19 +162,72 @@ const ShoppingCart = () => {
                 </div>
 
                 <div className="flex items-center justify-between w-full md:pt-0 pt-4">
-
-                  <p className="text-sm leading-3 underline text-red-500 cursor-pointer mt-2">
+                  <button
+                    className="text-sm leading-3 underline text-red-500 cursor-pointer mt-2"
+                    data-bs-toggle="modal"
+                    data-bs-target="#modalRemoveItem"
+                    onClick={() => setIdYouWantToDel(item.id)}
+                  >
                     Remove
-                  </p>
-
+                  </button>
+                  <div
+                    className="modal fade fixed top-0 left-0 hidden w-full h-full outline-none overflow-x-hidden overflow-y-auto"
+                    id="modalRemoveItem"
+                    tabIndex={-1}
+                    aria-labelledby="exampleModalCenterTitle"
+                    aria-modal="true"
+                    role="dialog"
+                  >
+                    <div className="modal-dialog modal-dialog-centered relative w-auto pointer-events-none">
+                      <div className="modal-content border-none shadow-lg relative flex flex-col w-full pointer-events-auto bg-white bg-clip-padding rounded-md outline-none text-current">
+                        <div className="modal-header flex flex-shrink-0 items-center justify-between p-4 border-b border-gray-200 rounded-t-md">
+                          <h5
+                            className="text-xl font-medium uppercase leading-normal text-amber-700"
+                            id="exampleModalScrollableLabel"
+                          >
+                            Warning
+                          </h5>
+                          <button
+                            type="button"
+                            className="btn-close box-content w-4 h-4 p-1 text-black border-none rounded-none opacity-50 focus:shadow-none focus:outline-none focus:opacity-100 hover:text-black hover:opacity-75 hover:no-underline"
+                            data-bs-dismiss="modal"
+                            aria-label="Close"
+                          />
+                        </div>
+                        <div className="modal-body relative p-4">
+                          <p>Are you sure you want to remove this item ?</p>
+                        </div>
+                        <div className="modal-footer flex flex-shrink-0 flex-wrap items-center justify-end p-4 border-t border-gray-200 rounded-b-md">
+                          <button
+                            type="button"
+                            className="inline-block px-6 py-2 border-2 border-neutral-800 text-neutral-800 font-medium text-xs
+                              leading-tight uppercase rounded hover:bg-neutral-800 hover:text-white focus:outline-none focus:ring-0 transition
+                              duration-150 ease-in-out mr-4"
+                            data-bs-dismiss="modal"
+                          >
+                            Cancel
+                          </button>
+                          <button
+                            type="button"
+                            className="inline-block px-6 py-2 border-2 border-amber-500 text-amber-600 font-medium text-xs
+                              leading-tight uppercase rounded hover:bg-amber-500 hover:text-white focus:outline-none focus:ring-0 transition
+                              duration-150 ease-in-out"
+                            data-bs-dismiss="modal"
+                            onClick={() => onRemoveItem(idItemDel)}
+                          >
+                            Delete
+                          </button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
                   <p className="text-md font-bold leading-3 text-gray-800">
                     {numberFormat(item.price)}
                   </p>
-
                 </div>
               </div>
             </div>
-          )}
+          ))}
         </div>
 
         <div className="lg:w-1/3 lg:ml-20 md:w-8/12 w-full bg-gray-100  h-full">
@@ -168,7 +252,6 @@ const ShoppingCart = () => {
                   {numberFormat(shippingFee)}
                 </p>
               </div>
-
             </div>
             <div>
               <div className="flex items-center pb-6 justify-between lg:pt-12 py-5 pt-20 border-t border-gray-300">
