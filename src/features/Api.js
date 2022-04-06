@@ -66,6 +66,15 @@ export const addToCart = (data) => {
   }
 };
 
+// Get all items in cart by user
+export const getAllItemsInCart = () => {
+  try {
+    return apiadmin.get(`/users/carts`);
+  } catch (error) {
+    console.log(error);
+  }
+};
+
 // ----------------------admin----------------------------------
 export const getAllUsers = () => {
   try {
