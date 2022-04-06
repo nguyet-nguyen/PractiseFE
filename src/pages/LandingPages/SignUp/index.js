@@ -122,7 +122,10 @@ const SignUp = () => {
               <div className="flex -mx-3">
                 <div className="w-1/2 px-3 mb-5">
                   <label htmlFor="" className="text-xs font-semibold px-1">
-                    Username
+                    Username  
+                    <span className="text-red-500 ml-1">
+                      *
+                    </span>
                   </label>
                   <div className="flex">
                     <div className="w-10 z-10 pl-1 text-center pointer-events-none flex items-center justify-center">
@@ -132,10 +135,9 @@ const SignUp = () => {
                       type="text"
                       className={`w-full -ml-10 pl-10 pr-3 py-2 rounded-lg border-2 border-gray-200
                                             outline-none focus:ring-2 focus:ring-amber-500 focus:border-amber-600
-                                            ${
-                                              errors.name &&
-                                              "border-red-600 focus:ring-red-500 focus:border-red-600 border-1"
-                                            }`}
+                                            ${errors.name &&
+                        "border-red-600 focus:ring-red-500 focus:border-red-600 border-1"
+                        }`}
                       placeholder="username"
                       id="name"
                       name="name"
@@ -150,7 +152,10 @@ const SignUp = () => {
                 </div>
                 <div className="w-1/2 px-3 mb-5">
                   <label htmlFor="" className="text-xs font-semibold px-1">
-                    Password
+                    Password 
+                    <span className="text-red-500 ml-1">
+                      *
+                    </span>
                   </label>
                   <div className="flex">
                     <div className="w-10 z-10 pl-1 text-center pointer-events-none flex items-center justify-center">
@@ -160,10 +165,9 @@ const SignUp = () => {
                       type="password"
                       className={`w-full -ml-10 pl-10 pr-3 py-2 rounded-lg border-2 border-gray-200
                                             outline-none focus:ring-2 focus:ring-amber-500 focus:border-amber-600
-                                            ${
-                                              errors.password &&
-                                              "border-red-600 focus:ring-red-500 focus:border-red-600 border-1"
-                                            }`}
+                                            ${errors.password &&
+                        "border-red-600 focus:ring-red-500 focus:border-red-600 border-1"
+                        }`}
                       placeholder="************"
                       id="password"
                       name="password"
@@ -194,7 +198,10 @@ const SignUp = () => {
               <div className="flex -mx-3">
                 <div className="w-1/2 px-3 mb-5">
                   <label htmlFor="" className="text-xs font-semibold px-1">
-                    Email
+                    Email 
+                    <span className="text-red-500 ml-1">
+                      *
+                    </span>
                   </label>
                   <div className="flex">
                     <div className="w-10 z-10 pl-1 text-center pointer-events-none flex items-center justify-center">
@@ -205,10 +212,9 @@ const SignUp = () => {
                       type="email"
                       className={`w-full -ml-10 pl-10 pr-3 py-2 rounded-lg border-2 border-gray-200
                                             outline-none focus:ring-2 focus:ring-amber-500 focus:border-amber-600
-                                            ${
-                                              errors.email &&
-                                              "border-red-600 focus:ring-red-500 focus:border-red-600 border-1"
-                                            }`}
+                                            ${errors.email &&
+                        "border-red-600 focus:ring-red-500 focus:border-red-600 border-1"
+                        }`}
                       placeholder="youremail@example.com"
                       id="email"
                       name="email"
@@ -237,7 +243,10 @@ const SignUp = () => {
                 </div>
                 <div className="w-1/2 px-3 mb-5">
                   <label htmlFor="" className="text-xs font-semibold px-1">
-                    Phone
+                    Phone 
+                    <span className="text-red-500 ml-1">
+                      *
+                    </span>
                   </label>
                   <div className="flex">
                     <div className="w-10 z-10 pl-1 text-center pointer-events-none flex items-center justify-center">
@@ -247,10 +256,9 @@ const SignUp = () => {
                       type="phone"
                       className={`w-full -ml-10 pl-10 pr-3 py-2 rounded-lg border-2 border-gray-200
                                             outline-none focus:ring-2 focus:ring-amber-500 focus:border-amber-600
-                                            ${
-                                              errors.phone &&
-                                              "border-red-600 focus:ring-red-500 focus:border-red-600 border-1"
-                                            }`}
+                                            ${errors.phone &&
+                        "border-red-600 focus:ring-red-500 focus:border-red-600 border-1"
+                        }`}
                       placeholder="0933549878"
                       id="phone"
                       name="phone"
@@ -281,16 +289,18 @@ const SignUp = () => {
               <div className="flex -mx-3">
                 <div className="w-1/3 px-3 mb-5">
                   <label htmlFor="" className="text-xs font-semibold px-1">
-                    Province/City
+                    Province/City 
+                    <span className="text-red-500 ml-1">
+                      *
+                    </span>
                   </label>
                   <div className="flex justify-end">
                     <select
                       className={`w-full -ml-10 pl-5 pr-3 py-2 rounded-lg border-2 border-gray-200
                                             outline-none focus:ring-2 focus:ring-amber-500 focus:border-amber-600
-                                            ${
-                                              errors.city &&
-                                              "border-red-600 focus:ring-red-500 focus:border-red-600 border-1"
-                                            }`}
+                                            ${errors.city &&
+                        "border-red-600 focus:ring-red-500 focus:border-red-600 border-1"
+                        }`}
                       id="city"
                       name="city"
                       type="text"
@@ -304,16 +314,18 @@ const SignUp = () => {
                 </div>
                 <div className="w-1/3 px-3 mb-5">
                   <label htmlFor="" className="text-xs font-semibold px-1">
-                    District
+                    District 
+                    <span className="text-red-500 ml-1">
+                      *
+                    </span>
                   </label>
                   <div className="flex justify-end">
                     <select
                       className={`w-full -ml-10 pl-5 pr-3 py-2 rounded-lg border-2 border-gray-200
                                             outline-none focus:ring-2 focus:ring-amber-500 focus:border-amber-600
-                                            ${
-                                              errors.district &&
-                                              "border-red-600 focus:ring-red-500 focus:border-red-600 border-1"
-                                            }`}
+                                            ${errors.district &&
+                        "border-red-600 focus:ring-red-500 focus:border-red-600 border-1"
+                        }`}
                       id="district"
                       name="district"
                       type="text"
@@ -329,16 +341,18 @@ const SignUp = () => {
                 </div>
                 <div className="w-1/3 px-3 mb-5">
                   <label htmlFor="" className="text-xs font-semibold px-1">
-                    Ward/Commune
+                    Ward/Commune 
+                    <span className="text-red-500 ml-1">
+                      *
+                    </span>
                   </label>
                   <div className="flex justify-end">
                     <select
                       className={`w-full -ml-10 pl-5 pr-3 py-2 rounded-lg border-2 border-gray-200
                                             outline-none focus:ring-2 focus:ring-amber-500 focus:border-amber-600
-                                            ${
-                                              errors.wards &&
-                                              "border-red-600 focus:ring-red-500 focus:border-red-600 border-1"
-                                            }`}
+                                            ${errors.wards &&
+                        "border-red-600 focus:ring-red-500 focus:border-red-600 border-1"
+                        }`}
                       id="ward"
                       name="ward"
                       type="text"
@@ -356,7 +370,10 @@ const SignUp = () => {
               <div className="flex -mx-3">
                 <div className="w-1/2 px-3 mb-5">
                   <label htmlFor="" className="text-xs font-semibold px-1">
-                    Address
+                    Address 
+                    <span className="text-red-500 ml-1">
+                      *
+                    </span>
                   </label>
                   <div className="flex">
                     <div className="w-10 z-10 pl-1 text-center pointer-events-none flex items-center justify-center">
@@ -370,10 +387,9 @@ const SignUp = () => {
                       name="addressDetail"
                       className={`w-full h-20 -ml-10 pl-10 pr-3 py-2 rounded-lg border-2 border-gray-200
                                             outline-none focus:ring-2 focus:ring-amber-500 focus:border-amber-600
-                                            ${
-                                              errors.addressDetail &&
-                                              "border-red-600 focus:ring-red-500 focus:border-red-600 border-1"
-                                            }`}
+                                            ${errors.addressDetail &&
+                        "border-red-600 focus:ring-red-500 focus:border-red-600 border-1"
+                        }`}
                       placeholder="Your address"
                       {...register("addressDetail", { required: true })}
                     />
@@ -387,7 +403,10 @@ const SignUp = () => {
                 </div>
                 <div className="w-1/2 px-3 mb-5">
                   <label htmlFor="" className="text-xs font-semibold px-1">
-                    Avatar
+                    Avatar 
+                    <span className="text-red-500 ml-1">
+                      *
+                    </span>
                   </label>
                   <div className="flex items-center justify-center w-full">
                     <label className="flex flex-col w-full h-20 border-4 border-blue-200 border-dashed hover:bg-gray-100 hover:border-gray-300">

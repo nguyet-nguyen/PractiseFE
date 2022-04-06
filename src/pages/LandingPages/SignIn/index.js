@@ -1,13 +1,13 @@
-import React, {useState} from 'react';
-import {useForm} from 'react-hook-form';
-import {SignInApiRole, SignInApiToken} from "../../../features/Api";
-import {Link, useNavigate} from 'react-router-dom';
+import React, { useState } from 'react';
+import { useForm } from 'react-hook-form';
+import { SignInApiRole, SignInApiToken } from "../../../features/Api";
+import { Link, useNavigate } from 'react-router-dom';
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 const SignIn = () => {
     const navigate = useNavigate();
-    const {register, handleSubmit, formState: {errors}} = useForm();
+    const { register, handleSubmit, formState: { errors } } = useForm();
     const [messErr, setMessErr] = useState("")
 
 
@@ -21,11 +21,11 @@ const SignIn = () => {
             navigate('/');
         })
             .catch(err => {
-                    console.log(err);
-                    setMessErr(err.message)
-                }
+                console.log(err);
+                setMessErr(err.message)
+            }
             )
-// -------------------------------
+        // -------------------------------
         const bodyRole = {
             email: data.email,
         }
@@ -33,8 +33,8 @@ const SignIn = () => {
             .then(response => {
                 localStorage.setItem("userInfo", JSON.stringify(response.data));
             }).catch(err => {
-            console.log(err);
-        })
+                console.log(err);
+            })
     }
     const [showMess, setShowMess] = useState(true);
     return (
@@ -74,10 +74,10 @@ const SignIn = () => {
                                                             setShowMess(true);
                                                             setMessErr("");
                                                         }}
-                                                                className="btn-close btn-close-white box-content w-4 h-4 ml-2 text-white border-none
+                                                            className="btn-close btn-close-white box-content w-4 h-4 ml-2 text-white border-none
                                                             rounded-none opacity-50 focus:shadow-none focus:outline-none focus:opacity-100
                                                             hover:text-white hover:opacity-75 hover:no-underline"
-                                                                data-mdb-dismiss="toast" aria-label="Close"></button>
+                                                            data-mdb-dismiss="toast" aria-label="Close"></button>
                                                     </div>
                                                 </div>
                                                 <div className="p-3 bg-red-600 rounded-b-lg break-words text-white">
@@ -96,13 +96,16 @@ const SignIn = () => {
                                                 htmlFor="grid-username"
                                             >
                                                 Email
+                                                <span className="text-red-500 ml-1">
+                                                    *
+                                                </span>
                                             </label>
                                             <input
                                                 type="name"
                                                 className={`border-0 px-3 py-3 placeholder-gray-400 text-gray-700 bg-white rounded text-sm
                           shadow focus:outline-none focus:ring-2 focus:ring-amber-500 focus:border-amber-600 w-full
                           ${errors.email && "border-red-600 ring-red-500 focus:ring-red-500 focus:border-red-600 border-1"}`}
-                                                style={{transition: "all .15s ease"}}
+                                                style={{ transition: "all .15s ease" }}
                                                 id="email"
                                                 name='email'
                                                 placeholder="email"
@@ -123,6 +126,9 @@ const SignIn = () => {
                                                 htmlFor="grid-password"
                                             >
                                                 Password
+                                                <span className="text-red-500 ml-1">
+                                                    *
+                                                </span>
                                             </label>
                                             <input
                                                 type="password"
@@ -130,10 +136,10 @@ const SignIn = () => {
                           text-sm shadow focus:outline-none focus:ring-2 focus:ring-amber-500 focus:border-amber-600 w-full
                            ${errors.password && "border-red-600 ring-red-500 focus:ring-2 focus:ring-red-500 focus:border-red-600 border-1"}`}
                                                 placeholder="Password"
-                                                style={{transition: "all .15s ease"}}
+                                                style={{ transition: "all .15s ease" }}
                                                 id="password"
                                                 name="password"
-                                                {...register("password", {required: true, minLength: 8, maxLength: 20})}
+                                                {...register("password", { required: true, minLength: 8, maxLength: 20 })}
                                             />
                                             {errors.password && errors.password.type === "required" &&
                                                 <p className="mt-3 text-red-500 text-xs italic">value required</p>}
@@ -150,11 +156,11 @@ const SignIn = () => {
                                                     id="customCheckLogin"
                                                     type="checkbox"
                                                     className="form-checkbox border-0 rounded text-gray-800 ml-1 w-5 h-5"
-                                                    style={{transition: "all .15s ease"}}
+                                                    style={{ transition: "all .15s ease" }}
                                                 />
                                                 <span className="ml-2 text-sm font-semibold text-gray-700">
-                            Remember me
-                          </span>
+                                                    Remember me
+                                                </span>
                                             </label>
                                         </div>
 
@@ -162,7 +168,7 @@ const SignIn = () => {
                                             <button
                                                 className="bg-amber-600 text-white active:bg-amber-800 text-sm font-bold uppercase px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 w-full"
                                                 type="submit"
-                                                style={{transition: "all .15s ease"}}>
+                                                style={{ transition: "all .15s ease" }}>
                                                 Sign In
                                             </button>
                                         </div>

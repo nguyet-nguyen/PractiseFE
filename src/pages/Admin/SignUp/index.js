@@ -82,6 +82,9 @@ const SignUpAdmin = () => {
                                 <div className="w-1/2 px-3 mb-5">
                                     <label htmlFor="" className="text-xs font-semibold px-1">
                                         Username
+                                        <span className="text-red-500 ml-1">
+                                            *
+                                        </span>
                                     </label>
                                     <div className="flex">
                                         <div
@@ -104,6 +107,9 @@ const SignUpAdmin = () => {
                                 <div className="w-1/2 px-3 mb-5">
                                     <label htmlFor="" className="text-xs font-semibold px-1">
                                         Password
+                                        <span className="text-red-500 ml-1">
+                                            *
+                                        </span>
                                     </label>
                                     <div className="flex">
                                         <div
@@ -133,6 +139,9 @@ const SignUpAdmin = () => {
                                 <div className="w-1/2 px-3 mb-5">
                                     <label htmlFor="" className="text-xs font-semibold px-1">
                                         Email
+                                        <span className="text-red-500 ml-1">
+                                            *
+                                        </span>
                                     </label>
                                     <div className="flex">
                                         <div
@@ -161,6 +170,9 @@ const SignUpAdmin = () => {
                                 <div className="w-1/2 px-3 mb-5">
                                     <label htmlFor="" className="text-xs font-semibold px-1">
                                         Phone
+                                        <span className="text-red-500 ml-1">
+                                            *
+                                        </span>
                                     </label>
                                     <div className="flex">
                                         <div
@@ -193,6 +205,9 @@ const SignUpAdmin = () => {
                                 <div className="w-1/3 px-3 mb-5">
                                     <label htmlFor="" className="text-xs font-semibold px-1">
                                         Province/City
+                                        <span className="text-red-500 ml-1">
+                                            *
+                                        </span>
                                     </label>
                                     <div className="flex justify-end">
                                         <select className={`w-full -ml-10 pl-10 pr-3 py-2 rounded-lg border-2 border-gray-200
@@ -211,6 +226,9 @@ const SignUpAdmin = () => {
                                 <div className="w-1/3 px-3 mb-5">
                                     <label htmlFor="" className="text-xs font-semibold px-1">
                                         District
+                                        <span className="text-red-500 ml-1">
+                                            *
+                                        </span>
                                     </label>
                                     <div className="flex justify-end">
                                         <select className={`w-full -ml-10 pl-10 pr-3 py-2 rounded-lg border-2 border-gray-200
@@ -230,6 +248,9 @@ const SignUpAdmin = () => {
                                 <div className="w-1/3 px-3 mb-5">
                                     <label htmlFor="" className="text-xs font-semibold px-1">
                                         Ward/Commune
+                                        <span className="text-red-500 ml-1">
+                                            *
+                                        </span>
                                     </label>
                                     <div className="flex justify-end">
                                         <select className={`w-full -ml-10 pl-10 pr-3 py-2 rounded-lg border-2 border-gray-200
@@ -251,6 +272,9 @@ const SignUpAdmin = () => {
                                 <div className="w-1/2 px-3 mb-5">
                                     <label htmlFor="" className="text-xs font-semibold px-1">
                                         Address
+                                        <span className="text-red-500 ml-1">
+                                            *
+                                        </span>
                                     </label>
                                     <div className="flex">
                                         <div
@@ -268,6 +292,9 @@ const SignUpAdmin = () => {
                                 <div className="w-1/2 px-3 mb-5">
                                     <label htmlFor="" className="text-xs font-semibold px-1">
                                         Avatar
+                                        <span className="text-red-500 ml-1">
+                                            *
+                                        </span>
                                     </label>
                                     <div className="flex items-center justify-center w-full">
                                         <label

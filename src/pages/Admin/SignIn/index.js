@@ -1,11 +1,11 @@
-import React, {useState} from 'react';
-import {useForm} from 'react-hook-form';
-import {SignInApiRole, SignInApiToken} from "../../../features/Api";
-import {useNavigate} from 'react-router-dom';
+import React, { useState } from 'react';
+import { useForm } from 'react-hook-form';
+import { SignInApiRole, SignInApiToken } from "../../../features/Api";
+import { useNavigate } from 'react-router-dom';
 
 function SignInAdmin() {
     const navigate = useNavigate();
-    const {register, handleSubmit, formState: {errors}} = useForm();
+    const { register, handleSubmit, formState: { errors } } = useForm();
     const [messErr, setMessErr] = useState("")
 
 
@@ -19,9 +19,9 @@ function SignInAdmin() {
             navigate('/admin/dashboard');
         })
             .catch(err => {
-                    console.log(err);
-                    setMessErr(err.message)
-                }
+                console.log(err);
+                setMessErr(err.message)
+            }
             )
         const bodyRole = {
             email: data.email,
@@ -30,8 +30,8 @@ function SignInAdmin() {
             .then(response => {
                 localStorage.setItem("userInfo", JSON.stringify(response.data));
             }).catch(err => {
-            console.log(err);
-        })
+                console.log(err);
+            })
     }
     const [showMess, setShowMess] = useState(true);
 
@@ -73,10 +73,10 @@ function SignInAdmin() {
                                                                 setShowMess(true);
                                                                 setMessErr("");
                                                             }}
-                                                                    className="btn-close btn-close-white box-content w-4 h-4 ml-2 text-white border-none
+                                                                className="btn-close btn-close-white box-content w-4 h-4 ml-2 text-white border-none
                                                             rounded-none opacity-50 focus:shadow-none focus:outline-none focus:opacity-100
                                                             hover:text-white hover:opacity-75 hover:no-underline"
-                                                                    data-mdb-dismiss="toast" aria-label="Close"></button>
+                                                                data-mdb-dismiss="toast" aria-label="Close"></button>
                                                         </div>
                                                     </div>
                                                     <div className="p-3 bg-red-600 rounded-b-lg break-words text-white">
@@ -95,6 +95,9 @@ function SignInAdmin() {
                                                     htmlFor="grid-username"
                                                 >
                                                     Name
+                                                    <span className="text-red-500 ml-1">
+                                                        *
+                                                    </span>
                                                 </label>
                                                 <input
                                                     type="name"
@@ -105,8 +108,9 @@ function SignInAdmin() {
                                                     ${errors.email && "border-red-600 ring-red-500 focus:ring-red-500 focus:border-red-600 border-1"}
                                                     `}
                                                     placeholder="Email"
-                                                    style={{transition: "all .15s ease"}}
-                                                    {...register("email", {required: true,
+                                                    style={{ transition: "all .15s ease" }}
+                                                    {...register("email", {
+                                                        required: true,
                                                         pattern: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i
                                                     })}
                                                 />
@@ -122,6 +126,9 @@ function SignInAdmin() {
                                                     htmlFor="grid-password"
                                                 >
                                                     Password
+                                                    <span className="text-red-500 ml-1">
+                                                        *
+                                                    </span>
                                                 </label>
                                                 <input
                                                     id="password"
@@ -132,8 +139,8 @@ function SignInAdmin() {
                                                     ${errors.password && "border-red-600 ring-red-500 focus:ring-red-500 focus:border-red-600 border-1"}
                                                     `}
                                                     placeholder="Password"
-                                                    style={{transition: "all .15s ease"}}
-                                                    {...register("password", {required: true, minLength: 8, maxLength: 20})}
+                                                    style={{ transition: "all .15s ease" }}
+                                                    {...register("password", { required: true, minLength: 8, maxLength: 20 })}
                                                 />
                                                 {errors.password && errors.password.type === "required" &&
                                                     <p className="mt-3 text-red-500 text-xs italic">value required</p>}
@@ -150,11 +157,11 @@ function SignInAdmin() {
                                                         id="customCheckLogin"
                                                         type="checkbox"
                                                         className="form-checkbox border-0 rounded text-gray-800 ml-1 w-5 h-5"
-                                                        style={{transition: "all .15s ease"}}
+                                                        style={{ transition: "all .15s ease" }}
                                                     />
                                                     <span className="ml-2 text-sm font-semibold text-gray-700">
-                            Remember me
-                          </span>
+                                                        Remember me
+                                                    </span>
                                                 </label>
                                             </div>
 
@@ -163,7 +170,7 @@ function SignInAdmin() {
                                                     className="bg-indigo-500 text-white active:bg-indigo-700 text-sm font-bold uppercase px-6 py-3
                            rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 w-full"
                                                     type="submit"
-                                                    style={{transition: "all .15s ease"}}>
+                                                    style={{ transition: "all .15s ease" }}>
                                                     Sign In
                                                 </button>
                                             </div>
