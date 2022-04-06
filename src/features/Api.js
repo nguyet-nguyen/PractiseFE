@@ -57,6 +57,15 @@ export const getProductDetail = (id) => {
   }
 };
 
+// Add To Cart
+export const addToCart = (data) => {
+  try {
+    return apiadmin.post(`/users/carts`, data);
+  } catch (error) {
+    console.log(error);
+  }
+};
+
 // ----------------------admin----------------------------------
 export const getAllUsers = () => {
   try {
