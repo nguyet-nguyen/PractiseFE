@@ -11,17 +11,15 @@ const Profile = () => {
 
   const userId = JSON.parse(localStorage.getItem("userInfo") || "{}").id;
 
- 
   useEffect(() => {
     getUserInfo(userId)
       .then((response) => {
         setUserInfo(response.data);
-        console.log(response.data);
       })
       .catch((err) => {
         console.warn(err);
       });
-  }, []);
+  },);
 
   return (
     <>
