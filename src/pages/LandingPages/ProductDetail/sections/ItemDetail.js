@@ -78,12 +78,27 @@ const ItemDetail = () => {
         const existingItem = itemsInCart.find((i) => {
             return i.idProductItem == sizeState;
         });
-        console.log(existingItem);
-        const totalQtyOrd = existingItem.amount + counter;
-
-        if (existingItem && totalQtyOrd >= existingItem.totalAmount) {
-            toast(<CustomPopupMessage mess={`The product's quantity for this order has been exceeded`} icon="exclamation-triangle"/>);
-        } else {
+        if(existingItem){
+            const totalQtyOrd = existingItem.amount + counter;
+            if (existingItem.totalAmount < totalQtyOrd) {
+                toast(<CustomPopupMessage mess={`The product's quantity for this order has been exceeded`} icon="exclamation-triangle"/>);
+            }else{
+                const total = itemDetail.price * counter;
+                const data = {
+                "productItem": sizeState,
+                "amount": counter,
+                "total": total
+            };
+            addToCart(data)
+                .then(res => {
+                    toast(<CustomPopupMessage mess={`${itemDetail.name} has been added to your cart.`} icon="check"/>);
+                })
+                .catch(err => {
+                    console.log(err);
+                })
+            }
+        }
+         else {
             const total = itemDetail.price * counter;
             const data = {
                 "productItem": sizeState,
