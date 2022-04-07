@@ -1,8 +1,8 @@
 /* eslint-disable no-param-reassign */
-import {Fragment, useState, useEffect} from "react";
+import { Fragment, useState, useEffect } from "react";
 
 // react-router components
-import {Link} from "react-router-dom";
+import { Link } from "react-router-dom";
 
 // prop-types is a library for typechecking of props.
 import PropTypes from "prop-types";
@@ -27,11 +27,11 @@ import DefaultNavbarMobile from "examples/Navbars/DefaultNavbar/DefaultNavbarMob
 
 // Practise React React base styles
 import breakpoints from "assets/theme/base/breakpoints";
-import {useNavigate} from 'react-router-dom';
-import {getAllCategory} from "../../../features/Api";
+import { useNavigate } from 'react-router-dom';
+import { getAllCategory } from "../../../features/Api";
 import Loading from "../../../Loading";
 
-function DefaultNavbar({brand, routes, transparent, light, action, sticky, relative, center}) {
+function DefaultNavbar({ brand, routes, transparent, light, action, sticky, relative, center }) {
     const [dropdown, setDropdown] = useState("");
     const [dropdownEl, setDropdownEl] = useState("");
     const [dropdownName, setDropdownName] = useState("");
@@ -69,7 +69,7 @@ function DefaultNavbar({brand, routes, transparent, light, action, sticky, relat
         return () => window.removeEventListener("resize", displayMobileNavbar);
     }, []);
 
-    const renderNavbarItems = routes.map(({name, icon, href, route, collapse}) => (
+    const renderNavbarItems = routes.map(({ name, icon, href, route, collapse }) => (
         <DefaultNavbarDropdown
             key={name}
             name={name}
@@ -77,7 +77,7 @@ function DefaultNavbar({brand, routes, transparent, light, action, sticky, relat
             href={href}
             route={route}
             collapse={Boolean(collapse)}
-            onMouseEnter={({currentTarget}) => {
+            onMouseEnter={({ currentTarget }) => {
                 if (collapse) {
                     setDropdown(currentTarget);
                     setDropdownEl(currentTarget);
@@ -90,7 +90,7 @@ function DefaultNavbar({brand, routes, transparent, light, action, sticky, relat
     ));
 
     // Render the routes on the dropdown menu
-    const renderRoutes = routes.map(({name, collapse, columns, rowsPerColumn}) => {
+    const renderRoutes = routes.map(({ name, collapse, columns, rowsPerColumn }) => {
         let template;
 
         // Render the dropdown menu that should be display as columns
@@ -114,7 +114,7 @@ function DefaultNavbar({brand, routes, transparent, light, action, sticky, relat
                         const dividerKey = `divider-${key}`;
 
                         return (
-                            <Grid key={gridKey} item xs={12 / columns} sx={{position: "relative"}}>
+                            <Grid key={gridKey} item xs={12 / columns} sx={{ position: "relative" }}>
                                 {cols.map((col, index) => (
                                     <Fragment key={col.name}>
                                         <MKTypography
@@ -144,7 +144,7 @@ function DefaultNavbar({brand, routes, transparent, light, action, sticky, relat
                                                 fontWeight="regular"
                                                 py={0.625}
                                                 px={2}
-                                                sx={({palette: {grey, dark}, borders: {borderRadius}}) => ({
+                                                sx={({ palette: { grey, dark }, borders: { borderRadius } }) => ({
                                                     borderRadius: borderRadius.md,
                                                     cursor: "pointer",
                                                     transition: "all 300ms linear",
@@ -208,7 +208,7 @@ function DefaultNavbar({brand, routes, transparent, light, action, sticky, relat
                         fontWeight={item.description ? "bold" : "regular"}
                         py={item.description ? 1 : 0.625}
                         px={2}
-                        sx={({palette: {grey, dark}, borders: {borderRadius}}) => ({
+                        sx={({ palette: { grey, dark }, borders: { borderRadius } }) => ({
                             borderRadius: borderRadius.md,
                             cursor: "pointer",
                             transition: "all 300ms linear",
@@ -222,7 +222,7 @@ function DefaultNavbar({brand, routes, transparent, light, action, sticky, relat
                                 },
                             },
                         })}
-                        onMouseEnter={({currentTarget}) => {
+                        onMouseEnter={({ currentTarget }) => {
                             if (item.dropdown) {
                                 setNestedDropdown(currentTarget);
                                 setNestedDropdownEl(currentTarget);
@@ -243,7 +243,7 @@ function DefaultNavbar({brand, routes, transparent, light, action, sticky, relat
                                     variant="button"
                                     color="text"
                                     fontWeight="regular"
-                                    sx={{transition: "all 300ms linear"}}
+                                    sx={{ transition: "all 300ms linear" }}
                                 >
                                     {item.description}
                                 </MKTypography>
@@ -254,7 +254,7 @@ function DefaultNavbar({brand, routes, transparent, light, action, sticky, relat
                         {item.collapse && (
                             <Icon
                                 fontSize="small"
-                                sx={{fontWeight: "normal", verticalAlign: "middle", mr: -0.5}}
+                                sx={{ fontWeight: "normal", verticalAlign: "middle", mr: -0.5 }}
                             >
                                 keyboard_arrow_right
                             </Icon>
@@ -275,7 +275,7 @@ function DefaultNavbar({brand, routes, transparent, light, action, sticky, relat
             open={Boolean(dropdown)}
             placement="top-start"
             transition
-            style={{zIndex: 10}}
+            style={{ zIndex: 10 }}
             modifiers={[
                 {
                     name: "arrow",
@@ -293,17 +293,17 @@ function DefaultNavbar({brand, routes, transparent, light, action, sticky, relat
                 }
             }}
         >
-            {({TransitionProps}) => (
+            {({ TransitionProps }) => (
                 <Grow
                     {...TransitionProps}
                     sx={{
                         transformOrigin: "left top",
-                        background: ({palette: {white}}) => white.main,
+                        background: ({ palette: { white } }) => white.main,
                     }}
                 >
                     <MKBox borderRadius="lg">
                         <MKTypography variant="h1" color="white">
-                            <Icon ref={setArrowRef} sx={{mt: -3}}>
+                            <Icon ref={setArrowRef} sx={{ mt: -3 }}>
                                 arrow_drop_up
                             </Icon>
                         </MKTypography>
@@ -317,9 +317,9 @@ function DefaultNavbar({brand, routes, transparent, light, action, sticky, relat
     );
 
     // Render routes that are nested inside the dropdown menu routes
-    const renderNestedRoutes = routes.map(({collapse, columns}) =>
+    const renderNestedRoutes = routes.map(({ collapse, columns }) =>
         collapse && !columns
-            ? collapse.map(({name: parentName, collapse: nestedCollapse}) => {
+            ? collapse.map(({ name: parentName, collapse: nestedCollapse }) => {
                 let template;
 
                 if (parentName === nestedDropdownName) {
@@ -352,7 +352,7 @@ function DefaultNavbar({brand, routes, transparent, light, action, sticky, relat
                                     fontWeight={item.description ? "bold" : "regular"}
                                     py={item.description ? 1 : 0.625}
                                     px={2}
-                                    sx={({palette: {grey, dark}, borders: {borderRadius}}) => ({
+                                    sx={({ palette: { grey, dark }, borders: { borderRadius } }) => ({
                                         borderRadius: borderRadius.md,
                                         cursor: "pointer",
                                         transition: "all 300ms linear",
@@ -375,7 +375,7 @@ function DefaultNavbar({brand, routes, transparent, light, action, sticky, relat
                                                 variant="button"
                                                 color="text"
                                                 fontWeight="regular"
-                                                sx={{transition: "all 300ms linear"}}
+                                                sx={{ transition: "all 300ms linear" }}
                                             >
                                                 {item.description}
                                             </MKTypography>
@@ -386,7 +386,7 @@ function DefaultNavbar({brand, routes, transparent, light, action, sticky, relat
                                     {item.collapse && (
                                         <Icon
                                             fontSize="small"
-                                            sx={{fontWeight: "normal", verticalAlign: "middle", mr: -0.5}}
+                                            sx={{ fontWeight: "normal", verticalAlign: "middle", mr: -0.5 }}
                                         >
                                             keyboard_arrow_right
                                         </Icon>
@@ -409,7 +409,7 @@ function DefaultNavbar({brand, routes, transparent, light, action, sticky, relat
             open={Boolean(nestedDropdown)}
             placement="right-start"
             transition
-            style={{zIndex: 10}}
+            style={{ zIndex: 10 }}
             onMouseEnter={() => {
                 setNestedDropdown(nestedDropdownEl);
             }}
@@ -419,12 +419,12 @@ function DefaultNavbar({brand, routes, transparent, light, action, sticky, relat
                 setDropdown(null);
             }}
         >
-            {({TransitionProps}) => (
+            {({ TransitionProps }) => (
                 <Grow
                     {...TransitionProps}
                     sx={{
                         transformOrigin: "left top",
-                        background: ({palette: {white}}) => white.main,
+                        background: ({ palette: { white } }) => white.main,
                     }}
                 >
                     <MKBox ml={2.5} mt={-2.5} borderRadius="lg">
@@ -457,10 +457,10 @@ function DefaultNavbar({brand, routes, transparent, light, action, sticky, relat
         }
     }
     return (
-        <Container sx={sticky ? {position: "sticky", top: 0, zIndex: 10} : null}>
+        <Container sx={sticky ? { position: "sticky", top: 0, zIndex: 10 } : null}>
             <MKBox
                 py={1}
-                px={{xs: 4, sm: transparent ? 2 : 3, lg: transparent ? 0 : 2}}
+                px={{ xs: 4, sm: transparent ? 2 : 3, lg: transparent ? 0 : 2 }}
                 my={relative ? 0 : 2}
                 mx={relative ? 0 : 3}
                 width={relative ? "100%" : "calc(100% - 48px)"}
@@ -470,7 +470,7 @@ function DefaultNavbar({brand, routes, transparent, light, action, sticky, relat
                 position={relative ? "relative" : "absolute"}
                 left={0}
                 zIndex={3}
-                sx={({palette: {transparent: transparentColor, white}, functions: {rgba}}) => ({
+                sx={({ palette: { transparent: transparentColor, white }, functions: { rgba } }) => ({
                     backgroundColor: transparent ? transparentColor.main : rgba(white.main, 0.8),
                     backdropFilter: transparent ? "none" : `saturate(200%) blur(30px)`,
                 })}
@@ -481,7 +481,7 @@ function DefaultNavbar({brand, routes, transparent, light, action, sticky, relat
                         to="/"
                         lineHeight={1}
                         py={transparent ? 1.5 : 0.75}
-                        pl={relative || transparent ? 0 : {xs: 0, lg: 1}}
+                        pl={relative || transparent ? 0 : { xs: 0, lg: 1 }}
                     >
                         {token ?
                             <div className="md:flex items-center hidden">
@@ -501,21 +501,30 @@ function DefaultNavbar({brand, routes, transparent, light, action, sticky, relat
                     </MKBox>
                     <MKBox
                         color="inherit"
-                        display={{xs: "none", lg: "flex"}}
+                        display={{ xs: "none", lg: "flex" }}
                         ml="auto"
                         mr={center ? "auto" : 0}
                     >
                         {renderNavbarItems}
                     </MKBox>
                     {token ?
-                        <Link to="/"
-                              onClick={SignOut}
-                              className="inline-block px-6 py-2 border-2 hover:bg-white hover:text-amber-700 border-amber-600 font-bold
-                  text-sm leading-tight uppercase rounded bg-amber-600 text-white
-                  focus:outline-none focus:ring-0 transition duration-150 ease-in-out">Sign out
-                        </Link>
+                        <div>
+                            <Link to="/shopping-cart" >
+                                <i className={`fa fa-shopping-cart pr-4 text-amber-500`} aria-hidden="true"></i>
+                            </Link>
+                            <Link to="/"
+                                onClick={SignOut}
+                                className="inline-block px-6 py-2 border-2 hover:bg-white hover:text-amber-700 border-amber-600 font-bold
+                                text-sm leading-tight uppercase rounded bg-amber-600 text-white
+                                focus:outline-none focus:ring-0 transition duration-150 ease-in-out">Sign out
+                            </Link>
+                          
+                        </div>
+
+
+
                         :
-                        <MKBox ml={{xs: "auto", lg: 0}}>
+                        <MKBox ml={{ xs: "auto", lg: 0 }}>
                             {action &&
                                 (action.type === "internal" ? (
                                     <MKButton
@@ -551,12 +560,12 @@ function DefaultNavbar({brand, routes, transparent, light, action, sticky, relat
                         </MKBox>
                     }
                     <MKBox
-                        display={{xs: "inline-block", lg: "none"}}
+                        display={{ xs: "inline-block", lg: "none" }}
                         lineHeight={0}
                         py={1.5}
                         pl={1.5}
                         color={transparent ? "white" : "inherit"}
-                        sx={{cursor: "pointer"}}
+                        sx={{ cursor: "pointer" }}
                         onClick={openMobileNavbar}
                     >
                         <Icon fontSize="default">{mobileNavbar ? "close" : "menu"}</Icon>
@@ -568,7 +577,7 @@ function DefaultNavbar({brand, routes, transparent, light, action, sticky, relat
                     borderRadius="xl"
                     px={transparent ? 2 : 0}
                 >
-                    {mobileView && <DefaultNavbarMobile routes={routes} open={mobileNavbar}/>}
+                    {mobileView && <DefaultNavbarMobile routes={routes} open={mobileNavbar} />}
                 </MKBox>
             </MKBox>
             {dropdownMenu}
