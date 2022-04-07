@@ -71,7 +71,7 @@ const UsersTable = () => {
                         <div className="py-8 inline-block min-w-full sm:px-6 lg:px-8">
                             <div className="overflow-hidden rounded-md">
                                 <table className="min-w-full text-center">
-                                    <thead className="border-b bg-gray-800">
+                                    <thead className="border-b bg-slate-800">
                                     <tr>
                                         <th
                                             scope="col"
@@ -112,7 +112,8 @@ const UsersTable = () => {
                                     </thead>
                                     <tbody>
                                     {users && users.map((user, index) => (
-                                        <tr className="bg-white border-b">
+                                        <tr className={`${user.roles == "bg-white" ? "bg-slate-400" : "bg-white"}
+                                         border-b-2 border-black-800 border-solid`}>
                                             <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
                                                 {index + 1}
                                             </td>
@@ -167,7 +168,7 @@ const UsersTable = () => {
                                     ))}
 
                                     </tbody>
-                                    <tfoot className="border-b bg-gray-800">
+                                    <tfoot className="border-b bg-slate-800">
                                     <tr>
                                         <th
                                             scope="col"
