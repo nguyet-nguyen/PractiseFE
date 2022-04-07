@@ -94,7 +94,7 @@ function SignInAdmin() {
                                                     className="block uppercase text-gray-700 text-xs font-bold mb-2"
                                                     htmlFor="grid-username"
                                                 >
-                                                    Name
+                                                    Email
                                                     <span className="text-red-500 ml-1">
                                                         *
                                                     </span>

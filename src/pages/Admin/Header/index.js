@@ -2,7 +2,7 @@ import React, {useState} from 'react';
 import UserMenu from './sections/UserMenu';
 
 function Header({sidebarOpen, setSidebarOpen}) {
-    const [themeDark, setThemeDark] = useState(false);
+    const [themeDark, setThemeDark] = useState(true);
     const changeTheme = () => {
         setThemeDark(!themeDark);
         localStorage.setItem("theme", themeDark);

@@ -66,9 +66,10 @@ const ItemDetail = () => {
         const quantity = e.target.value;
         if (quantity > sizeAmount) {
             setCounter(sizeAmount);
-        } else if (quantity == 0) {
-            setCounter(1);
         }
+        // else if (quantity == 0) {
+        //     setCounter(1);
+        // }
         else {
             setCounter(quantity);
         }

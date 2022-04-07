@@ -52,9 +52,9 @@ const ProductsTable = () => {
         let searchList = [];
         let searchKey = e.target.value;
         productList.forEach(product => {
-            if ((product.name.toLowerCase().indexOf(searchKey) > -1)
-                || (product.category.toLowerCase().indexOf(searchKey) > -1)
-                || (product.color.toLowerCase().indexOf(searchKey) > -1)
+            if ((product.name.toString().toLowerCase().indexOf(searchKey) > -1)
+                || (product.category.toString().toLowerCase().indexOf(searchKey) > -1)
+                || (product.color.toString().toLowerCase().indexOf(searchKey) > -1)
                 || (product.price.toString().toLowerCase().indexOf(searchKey) > -1)
             ) {
                 searchList.push(product);
