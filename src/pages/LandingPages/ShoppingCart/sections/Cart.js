@@ -319,7 +319,7 @@ const ShoppingCart = () => {
                   Shipping
                 </p>
                 <p className="text-base  font-bold leading-none text-gray-700">
-                  {shippingFee == 0 ? "Free Shipping" : numberFormat(shippingFee)} 
+                  {shippingFee == 0 ? "Free" : numberFormat(shippingFee)} 
                 </p>
               </div>
             </div>
@@ -332,9 +332,11 @@ const ShoppingCart = () => {
                   {numberFormat(subtotal + shippingFee)}
                 </p>
               </div>
-              <button className="text-lg leading-none w-full py-5 bg-amber-500 hover:bg-amber-600 font-bold rounded-lg focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-amber-800 text-white">
-                Checkout
-              </button>
+              <Link to="/checkout">
+                <button className="text-lg leading-none w-full py-5 bg-amber-500 hover:bg-amber-600 font-bold rounded-lg focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-amber-800 text-white">
+                  Checkout
+                </button>
+              </Link>
             </div>
           </div>
         </div>

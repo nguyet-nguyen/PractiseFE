@@ -20,6 +20,7 @@ import AddProductForm from "./pages/Admin/Products/sections/AddProductForm";
 import SignInAdmin from "./pages/Admin/SignIn";
 import UpdateProductForm from "./pages/Admin/Products/sections/UpdateProductForm";
 import ShoppingCart from "pages/LandingPages/ShoppingCart";
+import Checkout from "pages/LandingPages/Checkout";
 
 export default function App() {
 
@@ -48,7 +49,12 @@ export default function App() {
                                 <ShoppingCart/>
                         }
                     />
-                    
+                    <Route
+                        path="/checkout"
+                        element={
+                                <Checkout/>
+                        }
+                    />
                     <Route
                         path="/admin/dashboard"
                         element={
