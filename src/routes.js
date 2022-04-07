@@ -32,11 +32,11 @@ const routes = [
             route: "/all-items",
             component: <ProductListPages/>,
           },
-          {
-            name: "Shopping Cart",
-            route: "/shopping-cart",
-            component: <ShoppingCart />,
-          },
+          // {
+          //   name: "Shopping Cart",
+          //   route: "/shopping-cart",
+          //   component: <ShoppingCart />,
+          // },
           {
             name: "Profile",
             route: "/user-profile",

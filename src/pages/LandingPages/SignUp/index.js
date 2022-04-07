@@ -88,7 +88,7 @@ const SignUp = () => {
     console.log(address);
     SignUpApi(formData)
       .then((response) => {
-        toast(<CustomPopupMessage mess={response.data.message} />);
+        toast(<CustomPopupMessage mess={response.data.message} icon="check"/>);
         navigate("/pages/authentication/sign-in");
       })
       .catch((err) => {

@@ -1,45 +1,61 @@
 import React, { useEffect, useState } from "react";
 import "react-toastify/dist/ReactToastify.css";
+import { Link } from "react-router-dom";
 import { numberFormat } from "../../Home/function/FormatMoney";
 import {
   getAllItemsInCart,
   removeItemFromCart,
+  updateCart,
 } from "../../../../features/Api";
 
 const ShoppingCart = () => {
   const [itemsInCart, setItemsInCart] = useState([]);
-  const [sizeAmount, setSizeAmount] = useState(1);
-  const [counter, setCounter] = useState();
   const [subtotal, setSubtotal] = useState();
-  const [shippingFee, setShippingFee] = useState(20);
+  const [shippingFee, setShippingFee] = useState(0);
   const [idItemDel, setIdItemDel] = useState();
 
   useEffect(() => {
-    getAllItemsInCart()
-      .then((res) => {
-        setItemsInCart(res.data);
-        const allItems = res.data;
-        for (let i = 0; i < allItems.length; i++) {
-          allItems[i].isSelected = false;
-        }
-        updateTotal(allItems);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  }, []);
+    getAllItems();
+  }, [itemsInCart]);
 
-  const increase = () => {};
+  const increase = (item) => {
+    if (item.amount < item.totalAmount) {
+      item.amount = Number(item.amount) + 1;
+      onUpdateCart(item);
+    }
+  };
+
   //decrease counter
-  const decrease = () => {};
+  const decrease = (item) => {
+    if (item.amount > 1) {
+      const quantity = item.amount - 1;
+      item.amount = quantity;
+      onUpdateCart(item);
+    }
+  };
 
-  const changeQuantity = (e) => {};
+  const changeQuantity = (e, item) => {   
+    const quantity = e.target.value;  
+    
+    if (quantity > item.totalAmount) {
+        item.amount = item.totalAmount;
+    } else if (quantity == 0) {
+        item.amount = 1;
+    }
+    else {
+        item.amount = quantity;
+        console.log("quantity");
+    }
+    onUpdateCart(item);
+  };
 
+  // Set id you want to remove from shopping cart
   const setIdYouWantToDel = (id) => {
     setIdItemDel(id);
   };
 
-  const onRemoveItem = (id) => {    
+  // Remove item from shopping cart
+  const onRemoveItem = (id) => {
     removeItemFromCart(id)
       .then((res) => {
         const index = itemsInCart.findIndex((item) => item.id === id);
@@ -53,6 +69,58 @@ const ShoppingCart = () => {
       });
   };
 
+  const onUpdateCart = (item) => {
+    const total = item.unitPrice * item.amount;
+    const data = {
+      amount: item.amount,
+      total: total,
+    };
+    console.log(item.id);
+    // const index = itemsInCart.findIndex((x) => x.id === item.id);
+    // itemsInCart[index] = item;
+    // let items = [...itemsInCart];
+    // setItemsInCart(items);
+    // console.log(items);
+
+    updateCart(item.id, data)
+      .then((res) => {
+        getAllItems();
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+
+  const getAllItems = () => {
+    getAllItemsInCart()
+      .then((res) => {
+        setItemsInCart(res.data);
+        // const allItems = res.data;
+        // for (let i = 0; i < allItems.length; i++) {
+        //   allItems[i].isSelected = false;
+        // }
+        updateShippingFee(res.data)
+        updateTotal(res.data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+
+  // Update shipping fee
+  const updateShippingFee = (allItems) => {
+    const qtyTotal = allItems.reduce(
+      (partialSum, item) => partialSum + item.amount,
+      0
+    );
+    if(qtyTotal < 5){
+      setShippingFee(20);
+    }else {
+      setShippingFee(0);
+    }
+  }
+
+  // Update total
   const updateTotal = (allItems) => {
     const sum = allItems.reduce(
       (partialSum, item) => partialSum + item.price,
@@ -95,18 +163,20 @@ const ShoppingCart = () => {
               onClick = {onSelect}
 
             /> */}
-              <div className="md:w-4/12 2xl:w-1/4 w-full">
-                <img
-                  src={item.images[0]}
-                  alt="product image"
-                  className="h-full object-center object-cover md:block hidden"
-                />
-                <img
-                  src={item.images[0]}
-                  alt="product image"
-                  className="md:hidden w-full h-full object-center object-cover"
-                />
-              </div>
+              <Link to={`/all-items/item-detail/${item.id}`}>
+                <div className="md:w-4/12 2xl:w-1/4 w-full">
+                  <img
+                    src={item.images[0]}
+                    alt="product image"
+                    className="h-full object-center object-cover md:block hidden"
+                  />
+                  <img
+                    src={item.images[0]}
+                    alt="product image"
+                    className="md:hidden w-full h-full object-center object-cover"
+                  />
+                </div>
+              </Link>
               <div className="md:pl-3 lg:ml-7 md:w-8/12 2xl:w-3/4 flex flex-col justify-center">
                 <div className="flex items-center justify-between w-full md:pt-0 pt-4">
                   <p className="text-lg uppercase font-black leading-none text-gray-800 ">
@@ -121,7 +191,7 @@ const ShoppingCart = () => {
                     {/* Button - */}
                     <button
                       data-action="decrement"
-                      onClick={decrease}
+                      onClick={() => decrease(item)}
                       className="border-amber-600 border-2 rounded-l-lg bg-white text-gray-600 hover:text-white hover:bg-amber-600
                                         h-full w-20 cursor-pointer outline-none"
                     >
@@ -133,15 +203,15 @@ const ShoppingCart = () => {
                       className="border-amber-600 border-t-2 border-b-2 outline-none focus:outline-none text-center w-full bg-white
                                        font-semibold text-md hover:text-black focus:text-black
                                         md:text-basecursor-default flex items-center text-gray-700"
-                      onChange={(e) => changeQuantity(e)}
+                      onChange={(e) => changeQuantity(e, item)}
                       value={item.amount}
-                      max={sizeAmount}
+                      max={item.totalAmount}
                       min={1}
                     />
                     {/* Button + */}
                     <button
                       data-action="increment"
-                      onClick={increase}
+                      onClick={() => increase(item)}
                       className="border-amber-600 border-2 bg-white text-gray-600 hover:text-white hover:bg-amber-600 rounded-r-lg
                                          h-full w-20 cursor-pointer"
                     >
@@ -150,7 +220,7 @@ const ShoppingCart = () => {
                   </div>
                 </div>
                 <p className="text-base font-semibold leading-3 text-gray-600  pt-2 pb-5">
-                  {numberFormat(item.unitPrice)} 
+                  {numberFormat(item.unitPrice)}
                 </p>
                 <div className="flex items-center pb-8">
                   <p className="text-sm font-semibold leading-3 text-gray-500  pr-3">
@@ -249,14 +319,14 @@ const ShoppingCart = () => {
                   Shipping
                 </p>
                 <p className="text-base  font-bold leading-none text-gray-700">
-                  {numberFormat(shippingFee)}
+                  {shippingFee == 0 ? "Free Shipping" : numberFormat(shippingFee)} 
                 </p>
               </div>
             </div>
             <div>
               <div className="flex items-center pb-6 justify-between lg:pt-12 py-5 pt-20 border-t border-gray-300">
                 <p className="text-xl font-bold leading-normal text-gray-800">
-                  Total
+                  Total ( {itemsInCart.length} { itemsInCart.length > 1 ? "items" : "item"} )
                 </p>
                 <p className="text-xl font-bold leading-normal text-right text-gray-800 ">
                   {numberFormat(subtotal + shippingFee)}

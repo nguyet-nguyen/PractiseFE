@@ -20,7 +20,7 @@ const ModalUpdateAvatar = ({ userInfo }) => {
       .then((response) => {
         console.log(response.data);
         $("#modalUpdateAvatar").modal("hide");
-        toast(<CustomPopupMessage mess="Update avatar successfully!" />);
+        toast(<CustomPopupMessage mess="Update avatar successfully!" icon="check"/>);
       })
       .catch((err) => {
         alert(err.data);

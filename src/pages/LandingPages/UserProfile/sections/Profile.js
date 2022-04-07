@@ -96,7 +96,7 @@ const Profile = () => {
       .then((response) => {
         getUserInformation(userId);
         $("#modalUpdateUserInfo").modal("hide");
-        toast(<CustomPopupMessage mess="Update user information successfully!" />);
+        toast(<CustomPopupMessage mess="Update user information successfully!" icon="check"/>);
         
       })
       .catch((err) => {

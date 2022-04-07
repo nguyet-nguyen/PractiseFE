@@ -19,6 +19,7 @@ import PrivateRoute from "./pages/PrivateRoute";
 import AddProductForm from "./pages/Admin/Products/sections/AddProductForm";
 import SignInAdmin from "./pages/Admin/SignIn";
 import UpdateProductForm from "./pages/Admin/Products/sections/UpdateProductForm";
+import ShoppingCart from "pages/LandingPages/ShoppingCart";
 
 export default function App() {
 
@@ -41,6 +42,13 @@ export default function App() {
                     {/* User Page */}
                     {getRoutes(routes)}
                     <Route exact path="/all-items/item-detail/:id" element={<ProductDetail/>}/>
+                    <Route
+                        path="/shopping-cart"
+                        element={
+                                <ShoppingCart/>
+                        }
+                    />
+                    
                     <Route
                         path="/admin/dashboard"
                         element={
