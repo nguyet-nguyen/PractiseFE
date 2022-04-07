@@ -3,9 +3,10 @@ import Loading from "../../../../Loading";
 import {numberFormat} from "../../../LandingPages/Home/function/FormatMoney";
 
 const ProductDetailPopup = (products) => {
+    console.log(products.products)
 
     return (
-        products ?
+        products.products ?
             <div
                 className="modal fade fixed top-0 left-0 hidden w-full max-h-min outline-none overflow-x-hidden overflow-y-auto"
                 id="exampleModalLg" tabindex="-1" aria-labelledby="exampleModalLgLabel" aria-modal="true" role="dialog">
@@ -218,7 +219,7 @@ const ProductDetailPopup = (products) => {
                     </div>
                 </div>
             </div>
-            : <Loading/>
+            : null
     )
 }
 export default ProductDetailPopup;
