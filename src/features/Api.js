@@ -101,6 +101,15 @@ export const getAllUsers = () => {
     console.log(error);
   }
 };
+
+// -------------------------- pagination ---------------------------
+export const getAllUsersPagination = (page,limit) => {
+  try {
+    return apiadmin.get("/admin/users");
+  } catch (error) {
+    console.log(error);
+  }
+};
 // create user
 export const CreateUsers = (data) => {
   try {

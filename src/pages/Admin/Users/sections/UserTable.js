@@ -1,7 +1,3 @@
-import "./../../../../assets/css/jquery.dataTables.css"
-import $ from 'jquery'
-import dt from 'datatables.net'
-$.DataTable = dt
 import React, {useEffect, useState} from "react";
 import {getAllUsers} from "../../../../features/Api";
 import {Link} from "react-router-dom";
@@ -9,32 +5,52 @@ import Loading from "../../../../Loading";
 
 const UsersTable = () => {
     const [users, setUsers] = useState();
+    const [searchData, setSearchList] = useState();
     useEffect(() => {
         getAllUsers()
             .then((res) => {
-                setUsers(res.data)
+                setUsers(res.data);
+                setSearchList(response.data);
             })
             .catch(err => {
                 console.log(err);
             })
         },[]);
-    console.log(users);
+
+    const searchProduct = (e) => {
+        let searchList = [];
+        let searchKey = e.target.value;
+        users.forEach(user => {
+            if ((user.name.toString().toLowerCase().indexOf(searchKey) > -1)
+                || (user.email.toString().toLowerCase().indexOf(searchKey) > -1)
+                || (user.phone.toString().toLowerCase().indexOf(searchKey) > -1)
+                || (user.roles.toString().toLowerCase().indexOf(searchKey) > -1)
+                || ((user.address).toString().toLowerCase().indexOf(searchKey) > -1)
+            ) {
+                searchList.push(user);
+            }
+        })
+        setUsers(searchList);
+        if (searchKey == null || searchKey == "" || searchKey.isEmpty()) {
+            setUsers(searchData);
+        }
+    }
     return (
         <div className="px-4 sm:px-6 lg:px-8 py-8 w-full max-w-9xl mx-auto">
             <div className="flex space-x-2 justify-between">
-                <Link to="/admin/products/add-product"
+                <Link to="/admin/sign-up"
                       type="button"
                       data-mdb-ripple="true"
                       data-mdb-ripple-color="light"
                       className="inline-block px-6 py-2.5 bg-blue-600 text-white font-medium text-xs
                                 leading-tight uppercase rounded shadow-md hover:bg-blue-700 hover:shadow-lg focus:bg-blue-700
                                 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg transition
-                                duration-150 ease-in-out">Add Product
+                                duration-150 ease-in-out">Add Admin
                 </Link>
                 <div className="xl:w-96">
                     <div className="input-group relative flex flex-wrap items-stretch w-full">
                         <input
-                            // onChange={searchProduct}
+                            onChange={searchProduct}
                             type="search"
                             className="form-control relative flex-auto min-w-0 block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
                             placeholder="Search"
@@ -81,6 +97,11 @@ const UsersTable = () => {
                                         <th
                                             scope="col"
                                             className="text-sm font-medium text-white px-6 py-4 uppercase">
+                                            Avarta
+                                        </th>
+                                        <th
+                                            scope="col"
+                                            className="text-sm font-medium text-white px-6 py-4 uppercase">
                                             Name
                                         </th>
                                         <th
@@ -98,11 +119,7 @@ const UsersTable = () => {
                                             className="text-sm font-medium text-white px-6 py-4 uppercase">
                                             roles
                                         </th>
-                                        <th
-                                            scope="col"
-                                            className="text-sm font-medium text-white px-6 py-4 uppercase">
-                                            actions
-                                        </th>
+
                                         <th
                                             scope="col"
                                             className="text-sm font-medium text-white px-6 py-4 uppercase">
@@ -118,6 +135,14 @@ const UsersTable = () => {
                                             <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
                                                 {index + 1}
                                             </td>
+                                            <td className="text-sm h-32 text-gray-900 font-light py-4 whitespace-nowrap">
+                                                <img
+                                                    src={user.image}
+                                                    className="w-40 h-full rounded-lg transition-shadow ease-in-out duration-300 shadow-none hover:shadow-xl"
+                                                    alt=""
+                                                />
+
+                                            </td>
                                             <td className="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
                                                 {user.name}
                                             </td>
@@ -130,9 +155,7 @@ const UsersTable = () => {
                                             <td className="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
                                                 {user.roles}
                                             </td>
-                                            <td className="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
 
-                                            </td>
                                             <td className="text-sm w-50 text-gray-900 font-light px-6 py-4
                                             whitespace-normal">
                                                 {user.address}
@@ -172,7 +195,7 @@ const UsersTable = () => {
                                         <th
                                             scope="col"
                                             className="text-sm font-medium text-white px-6 py-4 uppercase">
-                                            actions
+                                            Avatar
                                         </th>
                                         <th
                                             scope="col"
