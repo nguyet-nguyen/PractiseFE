@@ -84,6 +84,15 @@ export const removeItemFromCart = (id) => {
   }
 };
 
+// Update quantity in shopping cart by cart id
+export const updateCart = (id, data) => {
+  try {
+    return apiadmin.put(`/users/carts/${id}`, data);
+  } catch (error) {
+    console.log(error);
+  }
+};
+
 // ----------------------admin----------------------------------
 export const getAllUsers = () => {
   try {

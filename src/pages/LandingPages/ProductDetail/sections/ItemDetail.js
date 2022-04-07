@@ -1,6 +1,6 @@
 
 import React, { useEffect, useState } from "react";
-import { getProductDetail, addToCart } from "../../../../features/Api";
+import { getProductDetail, addToCart, getAllItemsInCart } from "../../../../features/Api";
 import { useParams } from "react-router-dom";
 import { numberFormat } from "../../Home/function/FormatMoney";
 import Loading from "../../../../Loading";
@@ -9,29 +9,39 @@ import "react-toastify/dist/ReactToastify.css";
 import CustomPopupMessage from "../../../CustomPopupMess";
 
 const ItemDetail = () => {
+
     let params = useParams();
     const [itemDetail, setItemDetail] = useState();
+    const [itemsInCart, setItemsInCart] = useState([]);
     const [sizeState, setSizeState] = useState();
     const [sizeAmount, setSizeAmount] = useState(1);
+    const [counter, setCounter] = useState(1);
 
     useEffect(() => {
         getProductDetail(params.id)
             .then(res => {
                 setItemDetail(res.data);
                 setSizeState(res.data.items[0].id);
-                setSizeAmount(res.data.items[0].amount)
+                setSizeAmount(res.data.items[0].amount);
+                getAllItemsInCart()
+                    .then((res) => {
+                        setItemsInCart(res.data);
+                    })
+                    .catch((err) => {
+                        console.log(err);
+                    });
             })
             .catch(err => {
                 console.log(err);
             })
     }, []);
-    const [counter, setCounter] = useState(1);
 
     const increase = () => {
         if (counter < sizeAmount) {
             setCounter(Number(counter) + 1);
         }
     };
+
     //decrease counter
     const decrease = () => {
         if (counter > 1) {
@@ -64,20 +74,31 @@ const ItemDetail = () => {
         }
     }
 
-    const onAddToCart = () => {
-        const total = itemDetail.price * counter;
-        const data = {
-            "productItem": sizeState,
-            "amount": counter,
-            "total": total
-        };
-        addToCart(data)
-            .then(res => {
-                toast(<CustomPopupMessage mess={`${itemDetail.name} has been added to your cart.`} />);
-            })
-            .catch(err => {
-                console.log(err);
-            })
+    const onAddToCart = (item) => {
+        const existingItem = itemsInCart.find((i) => {
+            return i.idProductItem == sizeState;
+        });
+        console.log(existingItem);
+        const totalQtyOrd = existingItem.amount + counter;
+
+        if (existingItem && totalQtyOrd >= existingItem.totalAmount) {
+            toast(<CustomPopupMessage mess={`The product's quantity for this order has been exceeded`} icon="exclamation-triangle"/>);
+        } else {
+            const total = itemDetail.price * counter;
+            const data = {
+                "productItem": sizeState,
+                "amount": counter,
+                "total": total
+            };
+            addToCart(data)
+                .then(res => {
+                    toast(<CustomPopupMessage mess={`${itemDetail.name} has been added to your cart.`} icon="check"/>);
+                })
+                .catch(err => {
+                    console.log(err);
+                })
+        }
+
     }
 
     return (
@@ -232,7 +253,7 @@ const ItemDetail = () => {
                             <div className="flex justify-center mb-8">
                                 <button
                                     type="button"
-                                    onClick={onAddToCart}
+                                    onClick={() => onAddToCart(itemDetail)}
                                     className="inline-block px-6 py-4 border-2 border-amber-600 text-amber-600 font-semibold text-base leading-tight
                                  uppercase rounded-full w-full
                                 hover:bg-amber-600 hover:text-white focus:outline-none focus:ring-0
@@ -249,7 +270,7 @@ const ItemDetail = () => {
                 <ToastContainer />
             </section>
             : <Loading />
-            
+
     );
 }
 
