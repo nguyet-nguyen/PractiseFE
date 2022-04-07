@@ -133,7 +133,13 @@ export const UpdateProduct = (data,id) => {
     console.log(error);
   }
 }
-
+export const UpdateProductItems = (data,id) => {
+  try {
+    return apiadminnoFormdata.put(`/admin/products/${id}/productItem`, data);
+  } catch (error) {
+    console.log(error);
+  }
+}
 // ---------------------- for user and admin ----------------------------------
 
 // Validate Email (check if email exists)
