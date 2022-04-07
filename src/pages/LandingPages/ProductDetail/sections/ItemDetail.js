@@ -155,6 +155,10 @@ const ItemDetail = () => {
                                 <span className="mr-2 text-base text-gray-500">Color: </span>
                                 <span className="text-base text-amber-700">{itemDetail.color}</span>
                             </div>
+                            <div className="flex">
+                                <span className="mr-2 text-base text-gray-500">Category: </span>
+                                <span className="text-base text-amber-700">{itemDetail.category}</span>
+                            </div>
                             <div className="flex justify-between my-6 items-center">
 
                                 <div className="flex items-center">
