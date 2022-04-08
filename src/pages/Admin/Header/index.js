@@ -9,10 +9,11 @@ function Header({sidebarOpen, setSidebarOpen}) {
     }
 
     return (
-        <header className={`sticky top-0 border-b z-30  
-        ${localStorage.getItem("theme") == "true" ? "bg-slate-900 border-slate-800 text-white"
-        : "bg-white border-slate-200"
-        }`}>
+        // <header className={`sticky top-0 border-b z-30 bg-slate-900 border-slate-800 text-white
+        // ${localStorage.getItem("theme") == "true" ? "bg-slate-900 border-slate-800 text-white"
+        // : "bg-white border-slate-200"
+        // }`}>
+            <header className={`sticky top-0 border-b z-30 bg-slate-900 border-slate-800 text-white`}>
             <div className="px-4 sm:px-6 lg:px-8">
                 <div className="flex items-center justify-end h-16 -mb-px">
 
