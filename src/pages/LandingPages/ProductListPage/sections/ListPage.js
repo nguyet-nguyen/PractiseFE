@@ -45,7 +45,6 @@ const ListPage = ({sidebarOpen, setSidebarOpen, categoryList}) => {
         }
     }, [sidebarExpanded]);
     // ----------------------------------
-
     const [productListFilter, setProductListFilter] = useState([]);
     const [loading, setLoading] = useState(false);
     useEffect(() => {
@@ -155,12 +154,11 @@ const ListPage = ({sidebarOpen, setSidebarOpen, categoryList}) => {
         }
     ]
     requestFilterCategory(data).then(res => {
-        console.log("da update");
-        console.log(res.data);
         setProductListFilter(res.data);
     }).catch(err =>{
         console.log(err);
     })
+    console.log(productListFilter);
     return (
         <div className="grid md:grid-cols-4 grid-cols-1 gap-4">
             <div className="md:mt-14 mt-0">

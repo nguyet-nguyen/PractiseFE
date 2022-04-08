@@ -103,22 +103,14 @@ export const addOrder = (data) => {
 };
 
 // ----------------------admin----------------------------------
-export const getAllUsers = () => {
+export const getAllUsers = (page,limit) => {
   try {
-    return apiadmin.get("/admin/users");
+    return apiadmin.get(`/admin/users?limit=${limit}&page=${page}`);
   } catch (error) {
     console.log(error);
   }
 };
 
-// -------------------------- pagination ---------------------------
-export const getAllUsersPagination = (page,limit) => {
-  try {
-    return apiadmin.get("/admin/users");
-  } catch (error) {
-    console.log(error);
-  }
-};
 // create user
 export const CreateUsers = (data) => {
   try {
@@ -137,9 +129,9 @@ export const CreateProducts = (data) => {
   }
 }
 
-export const getAllProductsAdmin = () => {
+export const getAllProductsAdmin = (page,limit) => {
   try {
-    return apiadmin.get('/admin/products');
+    return apiadmin.get(`/admin/products?limit=${limit}&page=${page}`);
   } catch (error) {
     console.log(error);
   }
