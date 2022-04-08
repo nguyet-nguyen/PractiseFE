@@ -22,6 +22,8 @@ import UpdateProductForm from "./pages/Admin/Products/sections/UpdateProductForm
 import ShoppingCart from "pages/LandingPages/ShoppingCart";
 import AdminProfile from "./pages/Admin/AdminProfile";
 
+import Checkout from "pages/LandingPages/Checkout";
+
 export default function App() {
 
     const getRoutes = (allRoutes) =>
@@ -49,7 +51,12 @@ export default function App() {
                                 <ShoppingCart/>
                         }
                     />
-                    
+                    <Route
+                        path="/checkout"
+                        element={
+                                <Checkout/>
+                        }
+                    />
                     <Route
                         path="/admin/dashboard"
                         element={

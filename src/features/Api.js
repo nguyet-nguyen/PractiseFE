@@ -93,6 +93,15 @@ export const updateCart = (id, data) => {
   }
 };
 
+// Checkout
+export const addOrder = (data) => {
+  try {
+    return apiadminnoFormdata.post(`/users/orders`, data);
+  } catch (error) {
+    console.log(error);
+  }
+};
+
 // ----------------------admin----------------------------------
 export const getAllUsers = (page,limit) => {
   try {
