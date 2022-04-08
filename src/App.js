@@ -23,6 +23,7 @@ import ShoppingCart from "pages/LandingPages/ShoppingCart";
 import AdminProfile from "./pages/Admin/AdminProfile";
 
 import Checkout from "pages/LandingPages/Checkout";
+import OrderListAdmin from "./pages/Admin/OrderListAdmin";
 
 export default function App() {
 
@@ -86,6 +87,14 @@ export default function App() {
                         element={
                             <PrivateRoute>
                                 <ProductsPage/>
+                            </PrivateRoute>
+                        }
+                    />
+                    <Route
+                        path="/admin/orders-list"
+                        element={
+                            <PrivateRoute>
+                                <OrderListAdmin/>
                             </PrivateRoute>
                         }
                     />

@@ -61,12 +61,13 @@ const ListPage = ({sidebarOpen, setSidebarOpen, categoryList}) => {
     }, []);
 
     // ----------------filter-----------------
-    const [sort,setSort]=useState("");
-    const [cate,setCate]=useState(1);
-    const [minPrice,setMinPrice]=useState(0);
-    const [maxPrice,setMaxPrice]=useState("");
+    const [sort, setSort] = useState("");
+    const [cate, setCate] = useState(1);
+    const [priceState, setPriceState] = useState(1);
+    const [minPrice, setMinPrice] = useState(0);
+    const [maxPrice, setMaxPrice] = useState("");
     const data = {
-        sort: sort ,
+        sort: sort,
         category: cate,
         minPrice: minPrice,
         maxPrice: maxPrice
@@ -74,27 +75,26 @@ const ListPage = ({sidebarOpen, setSidebarOpen, categoryList}) => {
     console.log(data);
 
     const getcategoryId = (e) => {
-        console.log(e.target.value);
         setCate(e.target.value);
     }
     const getPriceLevel = (e) => {
-        if (e.target.value==1) {
+        setPriceState(e.target.value);
+        if (e.target.value == 1) {
+            setMinPrice("");
+            setMaxPrice("");
+        } else if (e.target.value == 2) {
             setMinPrice(0);
             setMaxPrice(500);
-        }
-        else if (e.target.value==2) {
+        } else if (e.target.value == 3) {
             setMinPrice(500);
             setMaxPrice(1000);
-        }
-        else if (e.target.value==3) {
+        } else if (e.target.value == 4) {
             setMinPrice(1000);
             setMaxPrice(3000);
-        }
-        else if (e.target.value==4) {
+        } else if (e.target.value == 5) {
             setMinPrice(3000);
             setMaxPrice(5000);
-        }
-        else if (e.target.value==5) {
+        } else if (e.target.value == 6) {
             setMinPrice(5000);
             setMaxPrice("");
         }
@@ -104,27 +104,30 @@ const ListPage = ({sidebarOpen, setSidebarOpen, categoryList}) => {
     }
     const priceLevel = [
         {
-            id: 1,
+            id: 1
+        },
+        {
+            id: 2,
             minPrice: 0,
             maxPrice: 500,
         },
         {
-            id: 2,
+            id: 3,
             minPrice: 500,
             maxPrice: 1000,
         },
         {
-            id: 3,
+            id: 4,
             minPrice: 1000,
             maxPrice: 3000,
         },
         {
-            id: 4,
+            id: 5,
             minPrice: 3000,
             maxPrice: 5000,
         },
         {
-            id: 5,
+            id: 6,
             minPrice: 5000,
         },
     ];
@@ -139,7 +142,7 @@ const ListPage = ({sidebarOpen, setSidebarOpen, categoryList}) => {
             name: "price-ASC",
             description: "Low - High Price",
 
-        } ,
+        },
         {
             id: 3,
             name: "createdAt-DESC",
@@ -155,7 +158,7 @@ const ListPage = ({sidebarOpen, setSidebarOpen, categoryList}) => {
     ]
     requestFilterCategory(data).then(res => {
         setProductListFilter(res.data);
-    }).catch(err =>{
+    }).catch(err => {
         console.log(err);
     })
     console.log(productListFilter);
@@ -210,7 +213,7 @@ const ListPage = ({sidebarOpen, setSidebarOpen, categoryList}) => {
                                         <li className={`px-3 py-2 rounded-sm mb-0.5 last:mb-0 ${pathname === '/dashboard' && 'bg-slate-900'}`}>
                                             <div className="form-check">
                                                 <input
-                                                    checked = {cate == category.id}
+                                                    checked={cate == category.id}
                                                     onClick={getcategoryId}
                                                     className="form-check-input appearance-none rounded-full h-4 w-4
                                                 border border-gray-300 bg-white checked:bg-amber-600
@@ -245,40 +248,13 @@ const ListPage = ({sidebarOpen, setSidebarOpen, categoryList}) => {
                                         className="text-amber-700 ml-3 text-lg lg:hidden lg:sidebar-expanded:block 2xl:block uppercase">price level</span>
                                 </h3>
                                 <ul className="mt-3">
-                                    {priceLevel.map((price,index) =>
+                                    {priceLevel.map((price, index) =>
                                         <li className={`px-3 py-2 rounded-sm mb-0.5 last:mb-0 ${pathname === '/dashboard' && 'bg-slate-900'}`}>
-                                            {(index == 0 || index == 4) ?
-                                            <div className="form-check">
-                                                <input
-                                                    onClick={getPriceLevel}
-                                                    className="form-check-input appearance-none rounded-full h-4 w-4
-                                                border border-gray-300 bg-white checked:bg-amber-600
-                                                checked:border-amber-600 focus:outline-none
-                                                transition duration-200 mt-1
-                                                align-top bg-no-repeat bg-center bg-contain float-left mr-2 cursor-pointer"
-                                                    type="radio"
-                                                    name="price"
-                                                    value={price.id}
-                                                    id={price.id}
-                                                />
-                                                {index == 0 ?
-                                                    <label
-                                                        className="form-check-label inline-block text-gray-800 capitalize"
-                                                        htmlFor="flexCheckDefault">
-                                                        Under {price.maxPrice}
-                                                    </label>
-                                                    :
-                                                    <label
-                                                        className="form-check-label inline-block text-gray-800 capitalize"
-                                                        htmlFor="flexCheckDefault">
-                                                         Over {price.minPrice}
-                                                    </label>
-                                                }
-
-                                            </div>
-                                            :
+                                            {index == 0
+                                                ?
                                                 <div className="form-check">
                                                     <input
+                                                        checked={priceState == price.id}
                                                         onClick={getPriceLevel}
                                                         className="form-check-input appearance-none rounded-full h-4 w-4
                                                 border border-gray-300 bg-white checked:bg-amber-600
@@ -293,11 +269,65 @@ const ListPage = ({sidebarOpen, setSidebarOpen, categoryList}) => {
                                                     <label
                                                         className="form-check-label inline-block text-gray-800 capitalize"
                                                         htmlFor="flexCheckDefault">
-                                                        {price.minPrice} - {price.maxPrice}
+                                                        At all
                                                     </label>
                                                 </div>
+                                                :
+                                                (index == 1 || index == 5) ?
+                                                    <div className="form-check">
+                                                        <input
+                                                            checked={priceState == price.id}
+                                                            onClick={getPriceLevel}
+                                                            className="form-check-input appearance-none rounded-full h-4 w-4
+                                                border border-gray-300 bg-white checked:bg-amber-600
+                                                checked:border-amber-600 focus:outline-none
+                                                transition duration-200 mt-1
+                                                align-top bg-no-repeat bg-center bg-contain float-left mr-2 cursor-pointer"
+                                                            type="radio"
+                                                            name="price"
+                                                            value={price.id}
+                                                            id={price.id}
+                                                        />
+                                                        {index == 1 ?
+                                                            <label
+                                                                className="form-check-label inline-block text-gray-800 capitalize"
+                                                                htmlFor="flexCheckDefault">
+                                                                Under {price.maxPrice}
+                                                            </label>
+                                                            :
+                                                            <label
+                                                                className="form-check-label inline-block text-gray-800 capitalize"
+                                                                htmlFor="flexCheckDefault">
+                                                                Over {price.minPrice}
+                                                            </label>
+                                                        }
+
+                                                    </div>
+                                                    :
+                                                    <div className="form-check">
+                                                        <input
+                                                            onClick={getPriceLevel}
+                                                            className="form-check-input appearance-none rounded-full h-4 w-4
+                                                border border-gray-300 bg-white checked:bg-amber-600
+                                                checked:border-amber-600 focus:outline-none
+                                                transition duration-200 mt-1
+                                                align-top bg-no-repeat bg-center bg-contain float-left mr-2 cursor-pointer"
+                                                            type="radio"
+                                                            name="price"
+                                                            value={price.id}
+                                                            id={price.id}
+                                                        />
+                                                        <label
+                                                            className="form-check-label inline-block text-gray-800 capitalize"
+                                                            htmlFor="flexCheckDefault">
+                                                            {price.minPrice} - {price.maxPrice}
+                                                        </label>
+                                                    </div>
+
 
                                             }
+
+
                                         </li>
                                     )}
 
