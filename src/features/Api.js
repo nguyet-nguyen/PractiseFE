@@ -102,6 +102,15 @@ export const addOrder = (data) => {
   }
 };
 
+// Users order history
+export const getUsersOrdHistory = () => {
+  try {
+    return apiadmin.get(`/users/orders`);
+  } catch (error) {
+    console.log(error);
+  }
+};
+
 // ----------------------admin----------------------------------
 export const getAllUsers = (page,limit) => {
   try {
