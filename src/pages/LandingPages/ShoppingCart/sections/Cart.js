@@ -34,17 +34,16 @@ const ShoppingCart = () => {
     }
   };
 
-  const changeQuantity = (e, item) => {   
-    const quantity = e.target.value;  
-    
+  const changeQuantity = (e, item) => {
+    const quantity = e.target.value;
+
     if (quantity > item.totalAmount) {
-        item.amount = item.totalAmount;
+      item.amount = item.totalAmount;
     } else if (quantity == 0) {
-        item.amount = 1;
-    }
-    else {
-        item.amount = quantity;
-        console.log("quantity");
+      item.amount = 1;
+    } else {
+      item.amount = quantity;
+      console.log("quantity");
     }
     onUpdateCart(item);
   };
@@ -99,7 +98,7 @@ const ShoppingCart = () => {
         // for (let i = 0; i < allItems.length; i++) {
         //   allItems[i].isSelected = false;
         // }
-        updateShippingFee(res.data)
+        updateShippingFee(res.data);
         updateTotal(res.data);
       })
       .catch((err) => {
@@ -113,12 +112,12 @@ const ShoppingCart = () => {
       (partialSum, item) => partialSum + item.amount,
       0
     );
-    if(qtyTotal < 5){
+    if (qtyTotal < 5) {
       setShippingFee(20);
-    }else {
+    } else {
       setShippingFee(0);
     }
-  }
+  };
 
   // Update total
   const updateTotal = (allItems) => {
@@ -163,8 +162,8 @@ const ShoppingCart = () => {
               onClick = {onSelect}
 
             /> */}
-              <Link to={`/all-items/item-detail/${item.id}`}>
-                <div className="md:w-4/12 2xl:w-1/4 w-full">
+              <div className="md:w-4/12 2xl:w-1/4 w-full">
+                <Link to={`/all-items/item-detail/${item.idProduct}`}>
                   <img
                     src={item.images[0]}
                     alt="product image"
@@ -175,8 +174,8 @@ const ShoppingCart = () => {
                     alt="product image"
                     className="md:hidden w-full h-full object-center object-cover"
                   />
-                </div>
-              </Link>
+                </Link>
+              </div>
               <div className="md:pl-3 lg:ml-7 md:w-8/12 2xl:w-3/4 flex flex-col justify-center">
                 <div className="flex items-center justify-between w-full md:pt-0 pt-4">
                   <p className="text-lg uppercase font-black leading-none text-gray-800 ">
@@ -319,14 +318,15 @@ const ShoppingCart = () => {
                   Shipping
                 </p>
                 <p className="text-base  font-bold leading-none text-gray-700">
-                  {shippingFee == 0 ? "Free" : numberFormat(shippingFee)} 
+                  {shippingFee == 0 ? "Free" : numberFormat(shippingFee)}
                 </p>
               </div>
             </div>
             <div>
               <div className="flex items-center pb-6 justify-between lg:pt-12 py-5 pt-20 border-t border-gray-300">
                 <p className="text-xl font-bold leading-normal text-gray-800">
-                  Total ( {itemsInCart.length} { itemsInCart.length > 1 ? "items" : "item"} )
+                  Total ( {itemsInCart.length}{" "}
+                  {itemsInCart.length > 1 ? "items" : "item"} )
                 </p>
                 <p className="text-xl font-bold leading-normal text-right text-gray-800 ">
                   {numberFormat(subtotal + shippingFee)}

@@ -94,8 +94,12 @@ const Profile = () => {
       .then((response) => {
         getUserInformation(userId);
         $("#modalUpdateUserInfo").modal("hide");
-        toast(<CustomPopupMessage mess="Update user information successfully!" icon="check"/>);
-        
+        toast(
+          <CustomPopupMessage
+            mess="Update user information successfully!"
+            icon="check"
+          />
+        );
       })
       .catch((err) => {
         alert(err.data);
@@ -106,26 +110,25 @@ const Profile = () => {
 
   const getUserInformation = (userId) => {
     getUserInfo(userId)
-    .then((response) => {
-      setUserInfo(response.data);
-      const addressArr = response.data.address.split(" - ");
-      setAddressArray(addressArr);
-      setValue("email", response.data.email);
-      setValue("addressDetail", addressArr[3]);
+      .then((response) => {
+        setUserInfo(response.data);
+        const addressArr = response.data.address.split(" - ");
+        setAddressArray(addressArr);
+        setValue("phone", response.data.phone);
+        setValue("addressDetail", addressArr[3]);
 
-      const cityObj = cities.find(x => x.name === addressArr[0]);
-      setCity(cityObj);
-      const distObj = districts.find(x => x.name === addressArr[1]);
-      setDistrict(distObj);
-      const wardObj = wards.find(x => x.name === addressArr[2]);
-      setWard(wardObj);
-    })
-    .catch((err) => {
-      console.warn(err);
-    });
+        const cityObj = cities.find((x) => x.name === addressArr[0]);
+        setCity(cityObj);
+        const distObj = districts.find((x) => x.name === addressArr[1]);
+        setDistrict(distObj);
+        const wardObj = wards.find((x) => x.name === addressArr[2]);
+        setWard(wardObj);
+      })
+      .catch((err) => {
+        console.warn(err);
+      });
+  };
 
-  }
-  
   return (
     <>
       <main className="profile-page">
@@ -202,9 +205,9 @@ const Profile = () => {
                     <div className="flex justify-center py-4 lg:pt-4 pt-8">
                       <div className="mr-4 p-3 text-center">
                         <Link to="/shopping-cart">
-                        <span className="text-xl font-bold block uppercase tracking-wide text-gray-700 hover:text-amber-600">
-                          {itemsInCart.length}
-                        </span>
+                          <span className="text-xl font-bold block uppercase tracking-wide text-gray-700 hover:text-amber-600">
+                            {itemsInCart.length}
+                          </span>
                         </Link>
                         <span className="text-sm text-gray-500">
                           Items In Cart
@@ -224,7 +227,7 @@ const Profile = () => {
                     {userInfo.name}
                   </h3>
                   <div className="text-sm leading-normal mt-0 mb-2 text-gray-500 font-bold uppercase">
-                    <i className="fas fa-envelope mr-2 text-lg text-gray-500"></i>{" "}
+                    <i className="fas fa-envelope mr-2 text-lg text-gray-500"></i>
                     {userInfo.email}
                   </div>
                   <div className="mb-2 text-gray-700 mt-10">
@@ -352,7 +355,10 @@ const Profile = () => {
                                   onClick={(e) => changeCityId(e.target.value)}
                                 >
                                   {cities.map((cities) => (
-                                    <option value={cities.id} selected={city.id === cities.id}>
+                                    <option
+                                      value={cities.id}
+                                      selected={city.id === cities.id}
+                                    >
                                       {cities.name}
                                     </option>
                                   ))}
@@ -377,14 +383,16 @@ const Profile = () => {
                                   id="district"
                                   name="district"
                                   type="text"
-                                  
                                   onClick={(e) =>
                                     changeDistrictId(e.target.value)
                                   }
                                 >
                                   {districts.map((dist) =>
                                     dist.idCity == city.id ? (
-                                      <option value={dist.id} selected={district.id == dist.id}>
+                                      <option
+                                        value={dist.id}
+                                        selected={district.id == dist.id}
+                                      >
                                         {dist.name}
                                       </option>
                                     ) : null
@@ -414,7 +422,10 @@ const Profile = () => {
                                 >
                                   {wards.map((w) =>
                                     w.idDistrict == district.id ? (
-                                      <option value={w.id} selected={ward.id == w.id }>
+                                      <option
+                                        value={w.id}
+                                        selected={ward.id == w.id}
+                                      >
                                         {w.name}
                                       </option>
                                     ) : null
@@ -483,10 +494,153 @@ const Profile = () => {
                 </div>
                 <div className="mt-8 py-10 border-t border-gray-300">
                   <div className="flex flex-wrap justify-center">
-                    <div className="w-full lg:w-9/12 px-4">
-                      <p className="mb-4 text-lg leading-relaxed text-gray-800">
-                        Order List
-                      </p>
+                    <div className="w-full px-4">
+                      <div className="max-w-screen-xl px-4 mx-auto md:px-8">
+                        <div className="mb-5 md:mb-8">
+                          <h2 className="text-2xl font-bold uppercase mb-4">
+                            Order List
+                          </h2>
+                          <button className=" active:bg-amber-500 uppercase text-amber-500 border border-amber-500 font-bold hover:shadow-md shadow text-xs px-4 py-2 rounded outline-none focus:outline-none sm:mr-2 mb-1">
+                            Pending
+                          </button>
+                          <button className=" active:bg-blue-500 uppercase text-blue-500 border border-blue-500 font-bold hover:shadow-md shadow text-xs px-4 py-2 rounded outline-none focus:outline-none sm:mr-2 mb-1">
+                            Shipping
+                          </button>
+                          <button className=" active:bg-green-500 uppercase text-green-500 border border-green-500 font-bold hover:shadow-md shadow text-xs px-4 py-2 rounded outline-none focus:outline-none sm:mr-2 mb-1">
+                            Complete
+                          </button>
+                          <button className=" active:bg-red-500 uppercase text-red-500 border border-red-500 font-bold hover:shadow-md shadow text-xs px-4 py-2 rounded outline-none focus:outline-none sm:mr-2 mb-1">
+                            Decline
+                          </button>
+                        </div>
+
+                        <div className="grid gap-4 md:grid-cols-3">
+                          <div className="p-4 border-2 shadow overflow-hidden rounded-lg h-auto">
+                            <div className="h-60 mb-2  lg:h-48">
+                              <div className="md:flex items-strech py-1">
+                                <div className="pl-1 md:w-8/12 2xl:w-3/4 flex flex-col justify-center">
+                                  <p className="text-base uppercase font-black leading-none text-gray-800 ">
+                                    ORDER #123
+                                  </p>
+                                  <p className="text-sm font-semibold leading-3 text-gray-400  pt-2 pb-5">
+                                    29 September 2022
+                                  </p>
+                                </div>
+                                <div className="md:w-4/12 2xl:w-1/4 w-full">
+                                  <Link to={`/all-items/item-detail/23`}>
+                                    <img
+                                      src=""
+                                      alt="product image"
+                                      className="h-full object-center object-cover md:block hidden"
+                                    />
+                                    <img
+                                      src=""
+                                      alt="product image"
+                                      className="md:hidden w-full h-full object-center object-cover"
+                                    />
+                                  </Link>
+                                </div>
+                              </div>
+
+                              <div className="md:flex items-strech py-8 md:py-10 lg:py-8 border-t border-gray-200">
+                                <div className="md:w-4/12 2xl:w-2/12 w-full">
+                                  <Link to={`/all-items/item-detail/23`}>
+                                    <img
+                                      src=""
+                                      alt="product image"
+                                      className="h-full object-center object-cover md:block hidden"
+                                    />
+                                    <img
+                                      src=""
+                                      alt="product image"
+                                      className="md:hidden w-full h-full object-center object-cover"
+                                    />
+                                  </Link>
+                                </div>
+                                <div className="md:pl-3 lg:ml-7 md:w-8/12 2xl:w-10/12 flex flex-col justify-center">
+                                  <p className="text-sm uppercase font-black leading-none text-gray-600 ">
+                                    Name
+                                  </p>
+
+                                  <div className="flex items-center py-3">
+                                    <p className="text-xs font-semibold leading-3 text-gray-400  pr-3">
+                                      Purple
+                                    </p>
+                                    <p className="text-xs font-semibold leading-3 text-gray-400  border-l border-gray-300 pl-3">
+                                      M
+                                    </p>
+                                  </div>
+
+                                  <div className="flex items-center justify-between w-full md:pt-0 mt-3">
+                                    <p className="text-sm font-bold leading-3 text-gray-800">
+                                      $45.0
+                                    </p>
+                                    <p className="text-sm font-bold leading-3 text-gray-800">
+                                      Qty : 23
+                                    </p>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+
+                            <div className="flex justify-between items-center border-t border-gray-200 py-4 px-1">
+                              <span className="text-lg font-bold text-amber-600 dark:text-white">
+                                $599
+                              </span>
+                              <div className="flex flex-col lg:flex-row justify-center">
+                                <a
+                                  href="#"
+                                  className="active:bg-red-500 uppercase text-red-500 border border-red-500 focus:ring-4 hover:shadow-md shadow font-semibold rounded-md text-sm px-5 py-1.5 text-center lg:mr-2"
+                                >
+                                  <i
+                                    className="fa fa-close"
+                                    aria-hidden="true"
+                                  ></i>
+                                </a>
+
+                                <a
+                                  href="#"
+                                  className="active:bg-green-500 uppercase text-green-500 border border-green-500 focus:ring-4 hover:shadow-md shadow font-semibold rounded-md text-sm px-5 py-1.5 text-center lg:mr-2"
+                                >
+                                  <i
+                                    className="fa fa-check"
+                                    aria-hidden="true"
+                                  ></i>
+                                </a>
+                                <a
+                                  href="#"
+                                  className="active:bg-gray-500 uppercase text-gray-500 border border-gray-500 focus:ring-4 hover:shadow-md shadow font-semibold rounded-md text-sm px-5 py-1.5 text-center"
+                                >
+                                  <i
+                                    className="fa fa-eye"
+                                    aria-hidden="true"
+                                  ></i>
+                                </a>
+                              </div>
+                              {/* <div className="flex lg:flex-row flex-col justify-center">
+                                <a
+                                  className="= cursor-default uppercase text-green-500 border border-green-500  font-semibold rounded-md text-sm px-5 py-1.5 text-center lg:mr-2"
+                                >
+                                  <i
+                                    className="fa fa-check pr-2"
+                                    aria-hidden="true"
+                                  ></i>
+                                  Complete 
+                                </a>
+                                <a
+                                  href="#"
+                                  className="active:bg-gray-500 uppercase text-gray-500 border border-gray-500 focus:ring-4 hover:shadow-md shadow font-semibold rounded-md text-sm px-5 py-1.5 text-center"
+                                >
+                                  <i
+                                    className="fa fa-eye"
+                                    aria-hidden="true"
+                                  ></i>
+                                </a>
+                                </div> */}
+                            </div>
+                          </div>
+                        </div>
+                      </div>
                     </div>
                   </div>
                 </div>
