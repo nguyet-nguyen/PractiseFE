@@ -159,6 +159,23 @@ export const UpdateProductItems = (data,id) => {
     console.log(error);
   }
 }
+
+// get all order list
+export const getAllOrderListAdmin = (page,limit) => {
+  try {
+    return apiadmin.get(`/admin/orders?limit=${limit}&page=${page}`);
+  } catch (error) {
+    console.log(error);
+  }
+}
+// update status orders list
+export const UpdateStatusOrderList = (data,id) => {
+  try {
+    return apiadminnoFormdata.put(`/admin/orders/${id}`, data);
+  } catch (error) {
+    console.log(error);
+  }
+}
 // ---------------------- for user and admin ----------------------------------
 
 // Validate Email (check if email exists)
