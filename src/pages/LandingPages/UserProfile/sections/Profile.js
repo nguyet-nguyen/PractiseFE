@@ -86,8 +86,6 @@ const Profile = () => {
     console.log(data);
 
     const dataUpdate = {
-      name: data.name,
-      email: data.email,
       phone: data.phone,
       address: address,
     };
@@ -112,8 +110,6 @@ const Profile = () => {
       setUserInfo(response.data);
       const addressArr = response.data.address.split(" - ");
       setAddressArray(addressArr);
-      setValue("name", response.data.name);
-      setValue("phone", response.data.phone);
       setValue("email", response.data.email);
       setValue("addressDetail", addressArr[3]);
 
@@ -263,10 +259,10 @@ const Profile = () => {
                     <div className="modal-content border-none shadow-lg relative flex flex-col w-full pointer-events-auto bg-white bg-clip-padding rounded-md outline-none text-current">
                       <div className="modal-header flex flex-shrink-0 items-center justify-between p-4 border-b border-gray-200 rounded-t-md">
                         <h5
-                          className="text-xl font-medium leading-normal pl-8 text-gray-800"
+                          className="text-xl font-medium leading-normal pl-8 text-gray-800 uppercase"
                           id="modalUpdateUserInfoLabel"
                         >
-                          User Information
+                          UPDATE User Information
                         </h5>
                         <button
                           type="button"
@@ -281,42 +277,6 @@ const Profile = () => {
                       >
                         <div className="modal-body relative p-4">
                           <div className="flex -mx-3">
-                            <div className="w-1/2 px-3 mb-5">
-                              <label
-                                htmlFor=""
-                                className="text-xs font-semibold px-1"
-                              >
-                                Username
-                              </label>
-                              <div className="flex">
-                                <div className="w-10 z-10 pl-1 text-center pointer-events-none flex items-center justify-center">
-                                  <i
-                                    className="fa fa-user-circle-o"
-                                    aria-hidden="true"
-                                  ></i>
-                                </div>
-                                <input
-                                  type="text"
-                                  className={`w-full -ml-10 pl-10 pr-3 py-2 rounded-lg border-2 border-gray-200
-                                            outline-none focus:ring-2 focus:ring-amber-500 focus:border-amber-600
-                                            ${
-                                              errors.name &&
-                                              "border-red-600 focus:ring-red-500 focus:border-red-600 border-1"
-                                            }`}
-                                  placeholder="username"
-                                  id="name"
-                                  name="name"
-                                  // defaultValue={userInfo.name}
-                                  {...register("name", { required: true })}
-                                />
-                              </div>
-                              {errors.name &&
-                                errors.name.type === "required" && (
-                                  <p className="text-red-500 mt-3 text-xs italic">
-                                    Value required
-                                  </p>
-                                )}
-                            </div>
                             <div className="w-1/2 px-3 mb-5">
                               <label
                                 htmlFor=""
@@ -369,53 +329,7 @@ const Profile = () => {
                                 )}
                             </div>
                           </div>
-                          <div className="flex -mx-3">
-                            <div className="w-full px-3 mb-5">
-                              <label
-                                htmlFor=""
-                                className="text-xs font-semibold px-1"
-                              >
-                                Email
-                              </label>
-                              <div className="flex">
-                                <div className="w-10 z-10 pl-1 text-center pointer-events-none flex items-center justify-center">
-                                  <i
-                                    className="fa fa-envelope-o"
-                                    aria-hidden="true"
-                                  ></i>
-                                </div>
-                                <input
-                                  type="email"
-                                  className={`w-full -ml-10 pl-10 pr-3 py-2 rounded-lg border-2 border-gray-200
-                                            outline-none focus:ring-2 focus:ring-amber-500 focus:border-amber-600
-                                            ${
-                                              errors.email &&
-                                              "border-red-600 focus:ring-red-500 focus:border-red-600 border-1"
-                                            }`}
-                                  placeholder="youremail@example.com"
-                                  id="email"
-                                  name="email"
-                                  {...register("email", {
-                                    required: true,
-                                    pattern:
-                                      /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
-                                  })}
-                                />
-                              </div>
-                              {errors.email &&
-                                errors.email.type === "required" && (
-                                  <p className="text-red-500 mt-3 text-xs italic">
-                                    Value required
-                                  </p>
-                                )}
-                              {errors.email &&
-                                errors.email.type === "pattern" && (
-                                  <p className="text-red-500 mt-3 text-xs italic">
-                                    Invalid email
-                                  </p>
-                                )}
-                            </div>
-                          </div>
+
                           <div className="flex -mx-3">
                             <div className="w-1/3 px-3 mb-5">
                               <label
