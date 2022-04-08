@@ -20,6 +20,8 @@ import AddProductForm from "./pages/Admin/Products/sections/AddProductForm";
 import SignInAdmin from "./pages/Admin/SignIn";
 import UpdateProductForm from "./pages/Admin/Products/sections/UpdateProductForm";
 import ShoppingCart from "pages/LandingPages/ShoppingCart";
+import AdminProfile from "./pages/Admin/AdminProfile";
+
 import Checkout from "pages/LandingPages/Checkout";
 
 export default function App() {
@@ -71,6 +73,12 @@ export default function App() {
                             <PrivateRoute>
                                 <SignUpAdmin/>
                             </PrivateRoute>
+                        }
+                    />
+                    <Route
+                        path="/admin/profile"
+                        element={
+                                <AdminProfile/>
                         }
                     />
                     <Route

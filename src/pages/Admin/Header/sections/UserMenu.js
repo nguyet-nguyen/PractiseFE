@@ -1,8 +1,10 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import Transition from '../../utils/Transition';
+import { useNavigate } from 'react-router-dom';
 
 function UserMenu() {
+  const navigate = useNavigate();
 
   const [dropdownOpen, setDropdownOpen] = useState(false);
 
@@ -33,9 +35,10 @@ function UserMenu() {
     const users = JSON.parse(localStorage.getItem("userInfo"));
     // console.log(users.image);
 
-  const SignOut = () => {
+  const SignOutAdmin = () => {
     try {
       localStorage.clear();
+      navigate("/admin/sign-in");
 
     } catch {
       console.log("loi !!!")
@@ -77,24 +80,24 @@ function UserMenu() {
           onBlur={() => setDropdownOpen(false)}
         >
           <div className="pt-0.5 pb-2 px-3 mb-1 border-b border-slate-200">
-            <div className="font-medium text-slate-800">Acme Inc.</div>
+            <div className="font-medium text-slate-800">{users.email}.</div>
             <div className="text-xs text-slate-500 italic">Administrator</div>
           </div>
           <ul>
             <li>
               <Link
                 className="font-medium text-sm text-indigo-500 hover:text-indigo-600 flex items-center py-1 px-3"
-                to="/"
+                to="/admin/profile"
                 onClick={() => setDropdownOpen(!dropdownOpen)}
               >
-                Settings
+                Profile
               </Link>
             </li>
             <li>
               <Link
                 className="font-medium text-sm text-indigo-500 hover:text-indigo-600 flex items-center py-1 px-3"
-                to="/"
-                onClick={SignOut}
+                to="/admin/sign-in"
+                onClick={SignOutAdmin}
               >
                 Sign Out
               </Link>
