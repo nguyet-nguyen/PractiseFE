@@ -5,12 +5,17 @@ import "react-toastify/dist/ReactToastify.css";
 import { getUserInfo } from "../../../../features/Api";
 import ModalUpdateAvatar from "../sections/ModalUpdateAvatar";
 import { cities, districts, wards } from "../../../../address";
-import { updateUserInfo, getAllItemsInCart } from "../../../../features/Api";
+import {
+  updateUserInfo,
+  getAllItemsInCart,
+  getUsersOrdHistory,
+} from "../../../../features/Api";
 import { ToastContainer, toast } from "react-toastify";
 import CustomPopupMessage from "../../../CustomPopupMess";
+import { numberFormat } from "../../Home/function/FormatMoney";
 
 const Profile = () => {
-  const navigate = useNavigate();
+  // Profile
   const [userInfo, setUserInfo] = useState({});
   const [addressArray, setAddressArray] = useState();
   const [itemsInCart, setItemsInCart] = useState([]);
@@ -31,8 +36,13 @@ const Profile = () => {
 
   const userId = JSON.parse(localStorage.getItem("userInfo") || "{}").id;
 
+  // Users Order History
+  const [usersOrd, setUsersOrd] = useState([]);
+
   useEffect(() => {
     getUserInformation(userId);
+    // Get users ord history
+    getUsersOrderList();
 
     // Get total items
     getAllItemsInCart()
@@ -129,6 +139,18 @@ const Profile = () => {
       });
   };
 
+  // Get users order history
+  const getUsersOrderList = () => {
+    getUsersOrdHistory()
+      .then((response) => {
+        setUsersOrd(response.data.data);
+        console.log(response.data.data[0].orderDate);
+      })
+      .catch((err) => {
+        console.warn(err);
+      });
+  };
+
   return (
     <>
       <main className="profile-page">
@@ -215,7 +237,7 @@ const Profile = () => {
                       </div>
                       <div className="mr-4 p-3 text-center">
                         <span className="text-xl font-bold block uppercase tracking-wide text-gray-700">
-                          10
+                          {usersOrd.length}
                         </span>
                         <span className="text-sm text-gray-500">Orders</span>
                       </div>
@@ -501,123 +523,125 @@ const Profile = () => {
                             Order List
                           </h2>
                           <button className=" active:bg-amber-500 uppercase text-amber-500 border border-amber-500 font-bold hover:shadow-md shadow text-xs px-4 py-2 rounded outline-none focus:outline-none sm:mr-2 mb-1">
+                            <i
+                              className="fa fa-clock pr-2"
+                              aria-hidden="true"
+                            ></i>
                             Pending
                           </button>
                           <button className=" active:bg-blue-500 uppercase text-blue-500 border border-blue-500 font-bold hover:shadow-md shadow text-xs px-4 py-2 rounded outline-none focus:outline-none sm:mr-2 mb-1">
+                            <i
+                              className="fa fa-car pr-2"
+                              aria-hidden="true"
+                            ></i>
                             Shipping
                           </button>
                           <button className=" active:bg-green-500 uppercase text-green-500 border border-green-500 font-bold hover:shadow-md shadow text-xs px-4 py-2 rounded outline-none focus:outline-none sm:mr-2 mb-1">
+                            <i
+                              className="fa fa-check pr-2"
+                              aria-hidden="true"
+                            ></i>
                             Complete
                           </button>
                           <button className=" active:bg-red-500 uppercase text-red-500 border border-red-500 font-bold hover:shadow-md shadow text-xs px-4 py-2 rounded outline-none focus:outline-none sm:mr-2 mb-1">
+                            <i
+                              className="fa fa-close pr-2"
+                              aria-hidden="true"
+                            ></i>
                             Decline
                           </button>
                         </div>
 
                         <div className="grid gap-4 md:grid-cols-3">
-                          <div className="p-4 border-2 shadow overflow-hidden rounded-lg h-auto">
-                            <div className="h-60 mb-2  lg:h-48">
-                              <div className="md:flex items-strech py-1">
-                                <div className="pl-1 md:w-8/12 2xl:w-3/4 flex flex-col justify-center">
-                                  <p className="text-base uppercase font-black leading-none text-gray-800 ">
-                                    ORDER #123
-                                  </p>
-                                  <p className="text-sm font-semibold leading-3 text-gray-400  pt-2 pb-5">
-                                    29 September 2022
-                                  </p>
-                                </div>
-                                <div className="md:w-4/12 2xl:w-1/4 w-full">
-                                  <Link to={`/all-items/item-detail/23`}>
-                                    <img
-                                      src=""
-                                      alt="product image"
-                                      className="h-full object-center object-cover md:block hidden"
-                                    />
-                                    <img
-                                      src=""
-                                      alt="product image"
-                                      className="md:hidden w-full h-full object-center object-cover"
-                                    />
-                                  </Link>
-                                </div>
-                              </div>
-
-                              <div className="md:flex items-strech py-8 md:py-10 lg:py-8 border-t border-gray-200">
-                                <div className="md:w-4/12 2xl:w-2/12 w-full">
-                                  <Link to={`/all-items/item-detail/23`}>
-                                    <img
-                                      src=""
-                                      alt="product image"
-                                      className="h-full object-center object-cover md:block hidden"
-                                    />
-                                    <img
-                                      src=""
-                                      alt="product image"
-                                      className="md:hidden w-full h-full object-center object-cover"
-                                    />
-                                  </Link>
-                                </div>
-                                <div className="md:pl-3 lg:ml-7 md:w-8/12 2xl:w-10/12 flex flex-col justify-center">
-                                  <p className="text-sm uppercase font-black leading-none text-gray-600 ">
-                                    Name
-                                  </p>
-
-                                  <div className="flex items-center py-3">
-                                    <p className="text-xs font-semibold leading-3 text-gray-400  pr-3">
-                                      Purple
+                          {usersOrd.map((order) => (
+                            <div
+                              key={order.id}
+                              className="p-4 border-2 shadow overflow-hidden rounded-lg h-auto mr-1"
+                            >
+                              <div className="h-60 mb-2  lg:h-48">
+                                <div className="md:flex items-strech py-1">
+                                  <div className="pl-1 md:w-8/12 2xl:w-3/4 flex flex-col justify-center">
+                                    <p className="text-base uppercase font-black leading-none text-gray-800 ">
+                                      Order #{order.id}
                                     </p>
-                                    <p className="text-xs font-semibold leading-3 text-gray-400  border-l border-gray-300 pl-3">
-                                      M
+                                    <p className="text-sm font-semibold leading-3 text-gray-400  pt-2 pb-5">
+                                      {order.orderDate}
                                     </p>
                                   </div>
+                                  <div className="md:w-4/12 2xl:w-1/4 w-full"></div>
+                                </div>
 
-                                  <div className="flex items-center justify-between w-full md:pt-0 mt-3">
-                                    <p className="text-sm font-bold leading-3 text-gray-800">
-                                      $45.0
+                                <div className="md:flex items-strech py-8 md:py-10 lg:py-8 border-t border-gray-200">
+                                  <div className="md:w-4/12 2xl:w-2/12 w-full">
+                                    <Link
+                                      to={`/all-items/item-detail/${order.firstItem[0].id}`}
+                                    >
+                                      <img
+                                        // src={order.firstItem[0].image[0]}
+                                        alt="product image"
+                                        className="h-full object-center object-cover md:block hidden"
+                                      />
+                                      <img
+                                        // src={order.firstItem[0].image[0]}
+                                        alt="product image"
+                                        className="md:hidden w-full h-full object-center object-cover"
+                                      />
+                                    </Link>
+                                  </div>
+                                  <div className="md:pl-3 lg:ml-7 md:w-8/12 2xl:w-10/12 flex flex-col justify-center">
+                                    <p className="text-sm uppercase font-black leading-none text-gray-600 ">
+                                      {order.firstItem[0].name}
                                     </p>
-                                    <p className="text-sm font-bold leading-3 text-gray-800">
-                                      Qty : 23
-                                    </p>
+
+                                    <div className="flex items-center py-3">
+                                      <p className="text-xs font-semibold leading-3 text-gray-400  pr-3">
+                                        {order.firstItem[0].color}
+                                      </p>
+                                      <p className="text-xs font-semibold leading-3 text-gray-400  border-l border-gray-300 pl-3">
+                                        Size {order.firstItem[0].size}
+                                      </p>
+                                    </div>
+
+                                    <div className="flex items-center justify-between w-full md:pt-0 mt-3">
+                                      <p className="text-sm font-bold leading-3 text-gray-800">
+                                        {numberFormat(
+                                          order.firstItem[0].unitPrice
+                                        )}
+                                      </p>
+                                      <p className="text-sm font-bold leading-3 text-gray-800">
+                                        Qty : {order.firstItem[0].amount}
+                                      </p>
+                                    </div>
                                   </div>
                                 </div>
                               </div>
-                            </div>
 
-                            <div className="flex justify-between items-center border-t border-gray-200 py-4 px-1">
-                              <span className="text-lg font-bold text-amber-600 dark:text-white">
-                                $599
-                              </span>
-                              <div className="flex flex-col lg:flex-row justify-center">
-                                <a
-                                  href="#"
-                                  className="active:bg-red-500 uppercase text-red-500 border border-red-500 focus:ring-4 hover:shadow-md shadow font-semibold rounded-md text-sm px-5 py-1.5 text-center lg:mr-2"
-                                >
-                                  <i
-                                    className="fa fa-close"
-                                    aria-hidden="true"
-                                  ></i>
-                                </a>
+                              <div className="flex justify-between items-center border-t border-gray-200 py-4 px-1">
+                                <span className="text-lg font-bold text-amber-600 dark:text-white">
+                                  {numberFormat(order.totalPrice)}
+                                </span>
+                                <div className="flex flex-col lg:flex-row justify-center">
+                                  <a
+                                    href="#"
+                                    className="active:bg-red-500 uppercase text-red-500 border border-red-500 focus:ring-4 hover:shadow-md shadow font-semibold rounded-md text-sm px-5 py-1.5 text-center lg:mr-2"
+                                  >
+                                    <i
+                                      className="fa fa-close"
+                                      aria-hidden="true"
+                                    ></i>
+                                  </a>
 
-                                <a
-                                  href="#"
-                                  className="active:bg-green-500 uppercase text-green-500 border border-green-500 focus:ring-4 hover:shadow-md shadow font-semibold rounded-md text-sm px-5 py-1.5 text-center lg:mr-2"
-                                >
-                                  <i
-                                    className="fa fa-check"
-                                    aria-hidden="true"
-                                  ></i>
-                                </a>
-                                <a
-                                  href="#"
-                                  className="active:bg-gray-500 uppercase text-gray-500 border border-gray-500 focus:ring-4 hover:shadow-md shadow font-semibold rounded-md text-sm px-5 py-1.5 text-center"
-                                >
-                                  <i
-                                    className="fa fa-eye"
-                                    aria-hidden="true"
-                                  ></i>
-                                </a>
-                              </div>
-                              {/* <div className="flex lg:flex-row flex-col justify-center">
+                                  <a
+                                    href="#"
+                                    className="active:bg-gray-500 uppercase text-gray-500 border border-gray-500 focus:ring-4 hover:shadow-md shadow font-semibold rounded-md text-sm px-5 py-1.5 text-center"
+                                  >
+                                    <i
+                                      className="fa fa-eye"
+                                      aria-hidden="true"
+                                    ></i>
+                                  </a>
+                                </div>
+                                {/* <div className="flex lg:flex-row flex-col justify-center">
                                 <a
                                   className="= cursor-default uppercase text-green-500 border border-green-500  font-semibold rounded-md text-sm px-5 py-1.5 text-center lg:mr-2"
                                 >
@@ -637,8 +661,9 @@ const Profile = () => {
                                   ></i>
                                 </a>
                                 </div> */}
+                              </div>
                             </div>
-                          </div>
+                          ))}
                         </div>
                       </div>
                     </div>
