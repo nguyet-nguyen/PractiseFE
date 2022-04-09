@@ -194,6 +194,25 @@ export const UpdateStatusOrderList = (data,id) => {
     console.log(error);
   }
 }
+
+// Get user order history detail - by admin
+export const getUserOrderDetailByAdmin = (id) => {
+  try {
+    return apiadmin.get(`/admin/orders/${id}`);
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+// Export invoice file
+export const exportInvoiceFile = (id) => {
+  try {
+    return apiadmin.get(`/admin/orders/${id}/export`);
+  } catch (error) {
+    console.log(error);
+  }
+};
+
 // ---------------------- for user and admin ----------------------------------
 
 // Validate Email (check if email exists)
