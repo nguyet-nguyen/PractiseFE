@@ -1,9 +1,9 @@
 import React, {useState} from "react";
 import Sidebar from "../Sidebar";
 import Header from "../Header";
-import ProductsTable from "./sections/ProductsTable";
+import OrderListTable from "./sections/OrderList.table";
 
-const Products = () => {
+const OrderListAdmin = () => {
     const [sidebarOpen, setSidebarOpen] = useState(false);
     return (
         <div className="flex h-screen overflow-hidden">
@@ -15,12 +15,12 @@ const Products = () => {
                 <Header sidebarOpen={sidebarOpen} setSidebarOpen={setSidebarOpen}/>
                 <main>
                     <div className="px-4 sm:px-6 lg:px-8 py-8 w-full max-w-9xl mx-auto">
-                        <ProductsTable/>
+                    <OrderListTable/>
                     </div>
                 </main>
             </div>
         </div>
     )
-}
 
-export default Products;
+}
+export default OrderListAdmin;

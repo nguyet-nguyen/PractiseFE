@@ -22,7 +22,7 @@ const ProductsTable = () => {
         formState: {errors},
     } = useForm();
 
-    const [productList, setProductList] = useState([]);
+    const [productList, setProductList] = useState();
     const [searchData, setSearchList] = useState();
     const [idDelete, setIdDelete] = useState();
     const [page, setPage] = useState(1);
@@ -79,6 +79,7 @@ const ProductsTable = () => {
         getProductDetail(id)
             .then(res => {
                 setItemDetail(res.data);
+
             })
             .catch(err => {
                 console.log(err);
@@ -119,6 +120,7 @@ const ProductsTable = () => {
         getAllProductsAdmin(item, 5)
             .then((response) => {
                 setProductList(response.data.data);
+                setSearchList(response.data.data);
             })
             .catch((err) => {
                 console.warn(err);
@@ -131,6 +133,7 @@ const ProductsTable = () => {
             getAllProductsAdmin(item, 5)
                 .then((response) => {
                     setProductList(response.data.data);
+                    setSearchList(response.data.data);
                 })
                 .catch((err) => {
                     console.warn(err);
@@ -144,6 +147,7 @@ const ProductsTable = () => {
             getAllProductsAdmin(item, 5)
                 .then((response) => {
                     setProductList(response.data.data);
+                    setSearchList(response.data.data);
                 })
                 .catch((err) => {
                     console.warn(err);
@@ -156,6 +160,8 @@ const ProductsTable = () => {
     return (
         <>
             <div className="px-4 sm:px-6 lg:px-8 py-8 w-full max-w-9xl mx-auto">
+                <h2 className="font-bold text-4xl text-slate-800 uppercase mb-5">
+                    <i className="fa fa-product-hunt" aria-hidden="true"></i> Products list</h2>
                 <div className="flex space-x-2 justify-between mb-4">
                     <Link to="/admin/products/add-product"
                           type="button"
@@ -215,7 +221,7 @@ const ProductsTable = () => {
                                             </th>
                                             <th
                                                 scope="col"
-                                                className="text-sm font-medium text-white px-6 py-4 uppercase">
+                                                className="text-left text-sm font-medium text-white px-6 py-4 uppercase">
                                                 Name
                                             </th>
                                             <th
@@ -246,7 +252,7 @@ const ProductsTable = () => {
                                                 <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
                                                     {index + 1}
                                                 </td>
-                                                <td className="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
+                                                <td className="text-left text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
                                                     {product.name}
                                                 </td>
                                                 <td className="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
@@ -302,7 +308,7 @@ const ProductsTable = () => {
                                             </th>
                                             <th
                                                 scope="col"
-                                                className="text-sm font-medium text-white px-6 py-4 uppercase">
+                                                className="text-left text-sm font-medium text-white px-6 py-4 uppercase">
                                                 Name
                                             </th>
                                             <th
