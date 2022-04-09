@@ -111,6 +111,15 @@ export const getUsersOrdHistory = () => {
   }
 };
 
+// Get user order history detail
+export const getUserOrderDetail = (id) => {
+  try {
+    return apiadmin.get(`/users/orders/${id}`);
+  } catch (error) {
+    console.log(error);
+  }
+};
+
 // ----------------------admin----------------------------------
 export const getAllUsers = (page,limit) => {
   try {
