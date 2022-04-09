@@ -79,6 +79,7 @@ const ProductsTable = () => {
         getProductDetail(id)
             .then(res => {
                 setItemDetail(res.data);
+
             })
             .catch(err => {
                 console.log(err);
@@ -119,6 +120,7 @@ const ProductsTable = () => {
         getAllProductsAdmin(item, 5)
             .then((response) => {
                 setProductList(response.data.data);
+                setSearchList(response.data.data);
             })
             .catch((err) => {
                 console.warn(err);
@@ -131,6 +133,7 @@ const ProductsTable = () => {
             getAllProductsAdmin(item, 5)
                 .then((response) => {
                     setProductList(response.data.data);
+                    setSearchList(response.data.data);
                 })
                 .catch((err) => {
                     console.warn(err);
@@ -144,6 +147,7 @@ const ProductsTable = () => {
             getAllProductsAdmin(item, 5)
                 .then((response) => {
                     setProductList(response.data.data);
+                    setSearchList(response.data.data);
                 })
                 .catch((err) => {
                     console.warn(err);

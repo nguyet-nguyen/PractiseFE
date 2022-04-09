@@ -50,6 +50,7 @@ const OrderListTable = () => {
         getAllOrderListAdmin(item, 2)
             .then((response) => {
                 setOrderlist(response.data.data);
+                setSearchList(res.data.data);
             })
             .catch((err) => {
                 console.warn(err);
@@ -62,6 +63,7 @@ const OrderListTable = () => {
             getAllOrderListAdmin(item, 2)
                 .then((response) => {
                     setOrderlist(response.data.data);
+                    setSearchList(response.data.data);
                 })
                 .catch((err) => {
                     console.warn(err);
@@ -75,6 +77,7 @@ const OrderListTable = () => {
             getAllOrderListAdmin(item, 2)
                 .then((response) => {
                     setOrderlist(response.data.data);
+                    setSearchList(response.data.data);
                 })
                 .catch((err) => {
                     console.warn(err);

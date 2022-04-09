@@ -49,6 +49,7 @@ const UsersTable = () => {
         getAllUsers(item, 5)
             .then((response) => {
                 setUsers(response.data.data);
+                setSearchList(response.data.data);
             })
             .catch((err) => {
                 console.warn(err);
@@ -61,6 +62,7 @@ const UsersTable = () => {
             getAllUsers(item, 5)
                 .then((response) => {
                     setUsers(response.data.data);
+                    setSearchList(response.data.data);
                 })
                 .catch((err) => {
                     console.warn(err);
@@ -74,6 +76,7 @@ const UsersTable = () => {
             getAllUsers(item, 5)
                 .then((response) => {
                     setUsers(response.data.data);
+                    setSearchList(response.data.data);
                 })
                 .catch((err) => {
                     console.warn(err);
