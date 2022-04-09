@@ -26,6 +26,7 @@ import Checkout from "pages/LandingPages/Checkout";
 import PrivateRouteUser from "pages/PrivateRouteUser";
 import OrderDetail from "pages/LandingPages/OrderDetail";
 import OrderListAdmin from "./pages/Admin/OrderListAdmin";
+import OrderDetailAdmin from "pages/Admin/OrderListAdmin/sections/OrderDetail";
 
 export default function App() {
 
@@ -109,6 +110,14 @@ export default function App() {
                         element={
                             <PrivateRoute>
                                 <OrderListAdmin/>
+                            </PrivateRoute>
+                        }
+                    />
+                    <Route
+                        path="/admin/orders-list/order-detail/:id"
+                        element={
+                            <PrivateRoute>
+                                <OrderDetailAdmin />
                             </PrivateRoute>
                         }
                     />
