@@ -75,7 +75,14 @@ const CheckoutForm = () => {
     });
   }
   const onSubmit = async (data, e) => {
-    addOrder(data)
+    const dataCheckout = {
+      "recipientName": data.recipientName,
+      "recipientEmail": data.recipientEmail,
+      "recipientPhone": data.recipientPhone,
+      "addressDelivery": data.addressDelivery,
+      "shippingCost": shippingFee
+    };
+    addOrder(dataCheckout)
       .then((response) => {
         toast(<CustomPopupMessage mess={response.data.message} icon="check"/>);
         navigate("/user-profile");
