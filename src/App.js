@@ -23,6 +23,8 @@ import ShoppingCart from "pages/LandingPages/ShoppingCart";
 import AdminProfile from "./pages/Admin/AdminProfile";
 
 import Checkout from "pages/LandingPages/Checkout";
+import PrivateRouteUser from "pages/PrivateRouteUser";
+import OrderDetail from "pages/LandingPages/OrderDetail";
 import OrderListAdmin from "./pages/Admin/OrderListAdmin";
 
 export default function App() {
@@ -49,13 +51,25 @@ export default function App() {
                     <Route
                         path="/shopping-cart"
                         element={
+                            <PrivateRouteUser>
                                 <ShoppingCart/>
+                            </PrivateRouteUser>
                         }
                     />
                     <Route
                         path="/checkout"
                         element={
+                            <PrivateRouteUser>
                                 <Checkout/>
+                            </PrivateRouteUser>
+                        }
+                    />
+                     <Route
+                        path="/order-detail/:id"
+                        element={
+                            <PrivateRouteUser>
+                                <OrderDetail/>
+                            </PrivateRouteUser>
                         }
                     />
                     <Route

@@ -631,15 +631,15 @@ const Profile = () => {
                                     ></i>
                                   </a>
 
-                                  <a
-                                    href="#"
+                                  <Link
+                                    to={`/order-detail/${order.id}`}
                                     className="active:bg-gray-500 uppercase text-gray-500 border border-gray-500 focus:ring-4 hover:shadow-md shadow font-semibold rounded-md text-sm px-5 py-1.5 text-center"
                                   >
                                     <i
                                       className="fa fa-eye"
                                       aria-hidden="true"
                                     ></i>
-                                  </a>
+                                  </Link>
                                 </div>
                                 {/* <div className="flex lg:flex-row flex-col justify-center">
                                 <a
