@@ -16,6 +16,7 @@ export const getAllCategory = () => {
         console.log(error);
     }
 };
+
 // get hot deal
 export const getProductHotDeal = () => {
     try {
@@ -56,6 +57,7 @@ export const SignInApiRole = (data) => {
         console.log(error);
     }
 };
+
 // product detail
 export const getProductDetail = (id) => {
     try {
@@ -64,7 +66,6 @@ export const getProductDetail = (id) => {
         console.log(error);
     }
 };
-
 
 // Add To Cart
 export const addToCart = (data) => {
@@ -179,6 +180,7 @@ export const UpdateProduct = (data, id) => {
         console.log(error);
     }
 }
+
 export const UpdateProductItems = (data, id) => {
     try {
         return apiadminnoFormdata.put(`/admin/products/${id}/productItem`, data);
@@ -195,6 +197,7 @@ export const getAllOrderListAdmin = (page, limit) => {
         console.log(error);
     }
 }
+
 // update status orders list
 export const UpdateStatusOrderList = (data, id) => {
     try {
@@ -213,6 +216,7 @@ export const getReports = () => {
         console.log(error);
     }
 }
+
 // Get user order history detail - by admin
 export const getUserOrderDetailByAdmin = (id) => {
     try {
@@ -234,49 +238,49 @@ export const getReportsChart = () => {
 };
 
 // Export invoice file
-        export const exportInvoiceFile = (id) => {
-            try {
-                return apiadmin.get(`/admin/orders/${id}/export`);
-            } catch (error) {
-                console.log(error);
-            }
-        };
+export const exportInvoiceFile = (id) => {
+    try {
+        return apiadmin.get(`/admin/orders/${id}/export`);
+    } catch (error) {
+        console.log(error);
+    }
+};
 
 // ---------------------- for user and admin ----------------------------------
 
 // Validate Email (check if email exists)
-        export const checkIfEmailExists = (data) => {
-            try {
-                return api.post("/users/check_email", data);
-            } catch (error) {
-                console.log(error);
-            }
-        };
+export const checkIfEmailExists = (data) => {
+    try {
+        return api.post("/users/check_email", data);
+    } catch (error) {
+        console.log(error);
+    }
+};
 
 // Get User Info By Id 
-        export const getUserInfo = (id) => {
-            try {
-                return apiadmin.get(`/users/${id}`);
-            } catch (error) {
-                console.log(error);
-            }
-        };
+export const getUserInfo = (id) => {
+    try {
+        return apiadmin.get(`/users/${id}`);
+    } catch (error) {
+        console.log(error);
+    }
+};
 
 // Update User Info By Id
-        export const updateUserInfo = (id, data) => {
-            try {
-                return apiadmin.put(`/users/${id}`, data);
-            } catch (error) {
-                console.log(error);
-            }
-        };
+export const updateUserInfo = (id, data) => {
+    try {
+        return apiadmin.put(`/users/${id}`, data);
+    } catch (error) {
+        console.log(error);
+    }
+};
 
 // Update User Profile Avatar By Id
-        export const updateUserAvatar = (id, data) => {
-            try {
-                return apiadmin.post(`/users/${id}/image`, data);
-            } catch (error) {
-                console.log(error);
-            }
-        };
+export const updateUserAvatar = (id, data) => {
+    try {
+        return apiadmin.post(`/users/${id}/image`, data);
+    } catch (error) {
+        console.log(error);
+    }
+};
 
