@@ -16,6 +16,14 @@ export const getAllCategory = () => {
     console.log(error);
   }
 };
+// get hot deal
+export const getProductHotDeal = () => {
+  try {
+    return api.get("/bestSelling");
+  } catch (error) {
+    console.log(error);
+  }
+};
 
 export const requestFilterCategory = (data) => {
   try {
@@ -56,6 +64,7 @@ export const getProductDetail = (id) => {
     console.log(error);
   }
 };
+
 
 // Add To Cart
 export const addToCart = (data) => {
@@ -165,7 +174,7 @@ export const DeleteProduct = (id) => {
 
 export const UpdateProduct = (data,id) => {
   try {
-    return apiadminnoFormdata.put(`/admin/products/${id}`, data);
+    return apiadmin.post(`/admin/products/${id}`, data);
   } catch (error) {
     console.log(error);
   }
@@ -195,14 +204,27 @@ export const UpdateStatusOrderList = (data,id) => {
   }
 }
 
+// report
+export const getReports = () => {
+  try {
+    return apiadmin.get("/admin/reports");
+
+
 // Get user order history detail - by admin
 export const getUserOrderDetailByAdmin = (id) => {
   try {
     return apiadmin.get(`/admin/orders/${id}`);
+
   } catch (error) {
     console.log(error);
   }
 };
+
+// report chart
+export const getReportsChart = () => {
+  try {
+    return apiadmin.get("/admin/reports/chart");
+
 
 // Export invoice file
 export const exportInvoiceFile = (id) => {

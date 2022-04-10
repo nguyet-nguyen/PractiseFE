@@ -108,7 +108,6 @@ const ProductsTable = () => {
             .catch((err) => {
                 console.warn(err);
             });
-        console.log(body);
     };
     if (itemDetail.items != null) {
         itemDetail.items.forEach(size => {
@@ -125,7 +124,6 @@ const ProductsTable = () => {
             .catch((err) => {
                 console.warn(err);
             });
-        console.log(item);
     }
     const changePagePrevious = (item) => {
         if(item >= 1) {
@@ -139,7 +137,6 @@ const ProductsTable = () => {
                     console.warn(err);
                 });
         }
-        console.log(item);
     }
     const changePageNext = (item) => {
         if(item <= page) {
@@ -153,9 +150,7 @@ const ProductsTable = () => {
                     console.warn(err);
                 });
         }
-        console.log(item)
     }
-    console.log(productList);
 
     return (
         <>

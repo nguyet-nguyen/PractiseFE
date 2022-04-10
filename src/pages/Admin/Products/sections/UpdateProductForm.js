@@ -19,7 +19,6 @@ const UpdateProductForm = () => {
         getProductDetail(params.id)
             .then(res => {
                 setItemDetail(res.data);
-                console.log(res.data.items[0]);
             })
             .catch(err => {
                 console.log(err);
@@ -41,15 +40,16 @@ const UpdateProductForm = () => {
     setValue("material", itemDetail.material);
     setValue("category", itemDetail.category);
     const onSubmit = async (data, e) => {
-        const body = {
-            category: data.category,
-            name: data.name,
-            color: data.color,
-            description: data.description,
-            price: data.price,
-            material:  data.material,
-        };
-        UpdateProduct(body,itemDetail.id).then(response => {
+        const formData = new FormData();
+        formData.append("category", data.category);
+        formData.append("name", data.name);
+        formData.append("color", data.color);
+        formData.append("description", data.description);
+        formData.append("price", data.price);
+        formData.append("material", data.material);
+        [...data.images].map(f => formData.append("images[]", f));
+        console.log(formData);
+        UpdateProduct(formData,itemDetail.id).then(response => {
             console.log(response.data);
             navigate("/admin/products");
         })
@@ -105,7 +105,6 @@ const UpdateProductForm = () => {
                                                 </div>
                                             </div>
                                         ) : null}
-
                                     </div>
                                     <div>
                                         <div className="flex -mx-3">
@@ -217,9 +216,9 @@ const UpdateProductForm = () => {
                                                             id="category" name="category"
                                                             {...register("category",)}
                                                             type="text">
-                                                        {categoryList.map((category, i) => (
+                                                        {categoryList.map((cate, i) => (
                                                             i === 0 ? "" :
-                                                                <option value={category.id}>{category.name}</option>
+                                                                <option value={cate.id}>{cate.name}</option>
                                                         ))}
                                                     </select>
                                                 </div>
@@ -227,7 +226,7 @@ const UpdateProductForm = () => {
                                         </div>
 
                                         <div className="flex -mx-3">
-                                            <div className="w-full px-3 mb-5">
+                                            <div className="w-1/2 px-3 mb-5">
                                                 <label htmlFor="" className="text-xs font-semibold px-1">
                                                     Product's Decription
                                                 </label>
@@ -244,7 +243,23 @@ const UpdateProductForm = () => {
                                                               {...register("description")}/>
                                                 </div>
                                             </div>
-
+                                            <div className="w-1/2 px-3 mb-5">
+                                                <label htmlFor="" className="text-xs font-semibold px-1">
+                                                    Avatar
+                                                </label>
+                                                <div className="flex items-center justify-center w-full">
+                                                    <label
+                                                        className="flex flex-col w-full h-20 border-4 border-blue-200 border-dashed hover:bg-gray-100 hover:border-gray-300">
+                                                        <div className="flex flex-col items-center justify-center pt-2">
+                                                            <p className="pt-1 text-sm tracking-wider text-gray-400 group-hover:text-gray-600">
+                                                                Attach a file</p>
+                                                        </div>
+                                                        <input id="images" name="images" multiple="multiple"
+                                                               accept=".jpg, .png" type="file" {...register('images')}
+                                                               className="ml-8 text-sm"/>
+                                                    </label>
+                                                </div>
+                                            </div>
                                         </div>
 
                                         <div className="flex -mx-3">
