@@ -281,7 +281,7 @@ const ProductsTable = () => {
                                             hover:shadow-lg  focus:shadow-lg focus:outline-none
                                             focus:ring-0 transition duration-150
                                             ease-in-out"
-                                                            type="button" typebutton="edit" size="small"
+                                                             typebutton="edit" size="small"
                                                             data-bs-toggle="modal" data-bs-target="#modalDeleteUser"
                                                             onClick={() => getIdDelete(product.id)}
                                                     >

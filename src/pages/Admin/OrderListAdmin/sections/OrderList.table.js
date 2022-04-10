@@ -264,11 +264,13 @@ const OrderListTable = () => {
                                                     }
                                                 </td>
                                                 <td className="text-right text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
-                                                    <button type="button"
-                                                            className="inline-block mr-2 px-4 py-2.5 bg-purple-600 text-white
-                                                            font-medium text-xs leading-tight uppercase rounded shadow-md">
-                                                        Detail
-                                                    </button>
+                                                    <Link to={`/admin/orders-list/order-detail/${order.id}`}>
+                                                        <button type="button"
+                                                                className="inline-block mr-2 px-4 py-2.5 bg-purple-600 text-white
+                                                                font-medium text-xs leading-tight uppercase rounded shadow-md">
+                                                            Detail
+                                                        </button>
+                                                    </Link>
                                                     {order.status == "Pending" ? (
                                                             <>
                                                                 <button type="button"

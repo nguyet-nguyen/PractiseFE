@@ -120,6 +120,15 @@ export const getUsersOrdHistory = () => {
   }
 };
 
+// Get user order history detail
+export const getUserOrderDetail = (id) => {
+  try {
+    return apiadmin.get(`/users/orders/${id}`);
+  } catch (error) {
+    console.log(error);
+  }
+};
+
 // ----------------------admin----------------------------------
 export const getAllUsers = (page,limit) => {
   try {
@@ -194,22 +203,38 @@ export const UpdateStatusOrderList = (data,id) => {
     console.log(error);
   }
 }
+
 // report
 export const getReports = () => {
   try {
     return apiadmin.get("/admin/reports");
+
+
+// Get user order history detail - by admin
+export const getUserOrderDetailByAdmin = (id) => {
+  try {
+    return apiadmin.get(`/admin/orders/${id}`);
+
   } catch (error) {
     console.log(error);
   }
 };
+
 // report chart
 export const getReportsChart = () => {
   try {
     return apiadmin.get("/admin/reports/chart");
+
+
+// Export invoice file
+export const exportInvoiceFile = (id) => {
+  try {
+    return apiadmin.get(`/admin/orders/${id}/export`);
   } catch (error) {
     console.log(error);
   }
 };
+
 // ---------------------- for user and admin ----------------------------------
 
 // Validate Email (check if email exists)
