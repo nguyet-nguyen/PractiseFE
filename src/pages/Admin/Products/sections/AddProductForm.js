@@ -12,7 +12,6 @@ const AddProductForm = () => {
     const [messErr, setMessErr] = useState("")
 
     const onSubmit = async (data, e) => {
-        // const imageCheck = ["127.0.0.1/uploads/images/Capture-624adf7b511b1.jpg"];
         const formData = new FormData();
         formData.append("category", data.category);
         formData.append("name", data.name);

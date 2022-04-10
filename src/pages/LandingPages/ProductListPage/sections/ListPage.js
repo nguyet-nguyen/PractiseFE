@@ -66,11 +66,13 @@ const ListPage = ({sidebarOpen, setSidebarOpen, categoryList}) => {
     const [priceState, setPriceState] = useState(1);
     const [minPrice, setMinPrice] = useState(0);
     const [maxPrice, setMaxPrice] = useState("");
+    const [search, setSearch] = useState("");
     const data = {
         sort: sort,
         category: cate,
         minPrice: minPrice,
-        maxPrice: maxPrice
+        maxPrice: maxPrice,
+        keyword: search,
     }
     console.log(data);
 
@@ -156,6 +158,11 @@ const ListPage = ({sidebarOpen, setSidebarOpen, categoryList}) => {
 
         }
     ]
+    const searchProduct = (e) => {
+        console.log(e.target.value);
+        setSearch(e.target.value);
+
+    }
     requestFilterCategory(data).then(res => {
         setProductListFilter(res.data);
     }).catch(err => {
@@ -164,6 +171,7 @@ const ListPage = ({sidebarOpen, setSidebarOpen, categoryList}) => {
     console.log(productListFilter);
     return (
         <div className="grid md:grid-cols-4 grid-cols-1 gap-4">
+
             <div className="md:mt-14 mt-0">
                 <div className='-left-4'>
                     <div
@@ -354,7 +362,20 @@ const ListPage = ({sidebarOpen, setSidebarOpen, categoryList}) => {
                     </button>
                     <div className="flex justify-between">
                         <h2 className="font-bold text-color leading-tight text-3xl mb-2 text-center uppercase">All
-                            Items</h2>
+                            Items
+                        </h2>
+                        <form className="w-full max-w-sm">
+                            <div className="flex items-center rounded-full border-2 border-amber-600 py-2">
+                                <input
+                                    onBlur={searchProduct}
+                                    className="appearance-none bg-transparent border-none w-full text-gray-700 mr-3 py-1 px-2 leading-tight focus:outline-none"
+                                    type="text"
+                                    placeholder="Jane Doe"
+                                    aria-label="Full name"
+                                />
+                            </div>
+                        </form>
+
                         <div className="w-52 w-full">
                             <select onChange={getSortLevel}
                                     className="form-select appearance-none block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding bg-no-repeat border border-solid border-gray-300 rounded transition ease-in-out m-0
