@@ -1,4 +1,4 @@
-import {getAllCategory, getAllProducts} from "features/Api";
+import {getAllCategory, getAllProducts, getAllUsers} from "features/Api";
 import React, {useState, useEffect, useRef} from 'react';
 import CardProduct from "pages/LandingPages/Home/function/CardProduct";
 import {requestFilterCategory} from "features/Api";
@@ -47,18 +47,64 @@ const ListPage = ({sidebarOpen, setSidebarOpen, categoryList}) => {
     // ----------------------------------
     const [productListFilter, setProductListFilter] = useState([]);
     const [loading, setLoading] = useState(false);
+    const [page, setPage] = useState(1);
+    const [pageItem, setPageItem] = useState(1);
     useEffect(() => {
         setLoading(true);
-        getAllProducts()
+        requestFilterCategory(data, pageItem, 6)
             .then((response) => {
                 setLoading(false)
-                setProductListFilter(response.data);
+                setProductListFilter(response.data.data);
+                if (response.data.total % 6 == 0) {
+                    setPage(response.data.total / 6);
+                } else {
+                    setPage(Math.floor((response.data.total / 6)) + 1);
+                }
             })
             .catch((err) => {
                 setLoading(false)
                 console.warn(err);
             });
     }, []);
+    // -------------pagination--------------
+    console.log(page)
+    const changePage = (item) => {
+        setPageItem(item)
+        requestFilterCategory(data ,item, 6)
+            .then((response) => {
+                setProductListFilter(response.data.data);
+            })
+            .catch((err) => {
+                console.warn(err);
+            });
+        console.log(item);
+    }
+    const changePagePrevious = (item) => {
+        if (item >= 1) {
+            setPageItem(item)
+            requestFilterCategory(data ,item, 6)
+                .then((response) => {
+                    setProductListFilter(response.data.data);
+                })
+                .catch((err) => {
+                    console.warn(err);
+                });
+        }
+        console.log(item);
+    }
+    const changePageNext = (item) => {
+        if (item <= page) {
+            setPageItem(item)
+            requestFilterCategory(data ,item, 6)
+                .then((response) => {
+                    setProductListFilter(response.data.data);
+                })
+                .catch((err) => {
+                    console.warn(err);
+                });
+        }
+        console.log(item)
+    }
 
     // ----------------filter-----------------
     const [sort, setSort] = useState("");
@@ -163,8 +209,8 @@ const ListPage = ({sidebarOpen, setSidebarOpen, categoryList}) => {
         setSearch(e.target.value);
 
     }
-    requestFilterCategory(data).then(res => {
-        setProductListFilter(res.data);
+    requestFilterCategory(data, pageItem, 6).then(res => {
+        setProductListFilter(res.data.data);
     }).catch(err => {
         console.log(err);
     })
@@ -360,17 +406,19 @@ const ListPage = ({sidebarOpen, setSidebarOpen, categoryList}) => {
                             <path strokeLinecap="round" strokeLinejoin="round" d="M4 6h16M4 12h16M4 18h16"/>
                         </svg>
                     </button>
-                    <div className="flex justify-between">
-                        <h2 className="font-bold text-color leading-tight text-3xl mb-2 text-center uppercase">All
+                    <div className="flex justify-between items-center">
+                        <h2 className="font-bold text-color leading-tight text-3xl text-center uppercase">All
                             Items
                         </h2>
-                        <form className="w-full max-w-sm">
+                        <form className="w-full max-w-sm bg-white">
                             <div className="flex items-center rounded-full border-2 border-amber-600 py-2">
                                 <input
                                     onBlur={searchProduct}
-                                    className="appearance-none bg-transparent border-none w-full text-gray-700 mr-3 py-1 px-2 leading-tight focus:outline-none"
+                                    className="appearance-none bg-transparent border-none w-full
+                                    text-gray-700 mr-3 py-1 px-2 leading-tight focus:outline-none
+                                    placeholder:text-center"
                                     type="text"
-                                    placeholder="Jane Doe"
+                                    placeholder="Search"
                                     aria-label="Full name"
                                 />
                             </div>
@@ -390,6 +438,35 @@ const ListPage = ({sidebarOpen, setSidebarOpen, categoryList}) => {
                     </div>
                     <div className="grid md:grid-cols-3 grid-cols-2 gap-6 md:mt-6 mt-3">
                         <CardProduct proList={productListFilter}/>
+
+                    </div>
+                    <div className="hidden sm:flex-1 sm:flex sm:justify-end sm:justify-end mt-5">
+                        <div>
+                            <nav
+                                className="relative z-0 inline-flex rounded-md shadow-sm -space-x-px"
+                                aria-label="Pagination">
+                                <button
+                                    onClick={() => changePagePrevious(pageItem - 1)}
+                                    className="relative inline-flex items-center px-2 py-2 rounded-l-md border border-amber-600
+                                bg-white text-sm font-medium text-amber-600 hover:text-white hover:bg-amber-600">
+                                    <span className="sr-only">Previous</span>
+                                    <i className="fa fa-angle-double-left" aria-hidden="true"></i>
+                                </button>
+                                {Array.from(Array(page), (e, item) => {
+                                    return <button
+                                        onClick={() => changePage(item + 1)}
+                                        className={`z-10 border-amber-600 relative
+                                 inline-flex items-center px-4 py-2 border text-sm font-medium hover:text-white 
+                                 hover:bg-amber-600 ${(pageItem == (item + 1)) ? "text-white bg-amber-600" : "text-amber-600 bg-white"}`}>{item + 1}
+                                    </button>
+                                })}
+                                <button onClick={() => changePageNext(pageItem + 1)}
+                                        className="relative inline-flex items-center px-2 py-2 rounded-r-md border border-amber-600
+                                bg-white text-sm font-medium text-amber-600 hover:text-white hover:bg-amber-600">
+                                    <i className="fa fa-angle-double-right" aria-hidden="true"></i>
+                                </button>
+                            </nav>
+                        </div>
                     </div>
                 </div>
             </div>

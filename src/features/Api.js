@@ -26,9 +26,9 @@ export const getProductHotDeal = () => {
     }
 };
 
-export const requestFilterCategory = (data) => {
+export const requestFilterCategory = (data, page, limit) => {
     try {
-        return api.post("/products/filter", data);
+        return api.post(`/products/filter?limit=${limit}&page=${page}`, data);
     } catch (error) {
         console.log(error);
     }

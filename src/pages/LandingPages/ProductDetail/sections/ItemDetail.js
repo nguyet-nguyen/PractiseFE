@@ -119,7 +119,7 @@ const ItemDetail = () => {
 
     return (
         itemDetail ?
-            <section className="text-gray-600 body-font overflow-hidden ItemDetail rounded-lg">
+            <section id="ProductDetail" className="text-gray-600 body-font overflow-hidden ItemDetail rounded-lg">
                 <div className="container p-10 mx-auto">
                     <div className="grid md:grid-cols-2 grid-cols-1 gap-4 mx-auto">
                         <div
@@ -145,11 +145,8 @@ const ItemDetail = () => {
                                             className="block w-full h-full object-top object-cover"
                                             alt="Motorbike Smoke"
                                         />
-
                                     </div>
-
                                 ))}
-
                             </div>
                             <button
                                 className="carousel-control-prev absolute top-0 bottom-0 flex items-center justify-center p-0 text-center border-0 hover:outline-none hover:no-underline focus:outline-none focus:no-underline left-0"
