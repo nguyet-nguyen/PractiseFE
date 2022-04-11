@@ -84,7 +84,6 @@ function WelcomeBanner() {
                                 className="relative flex items-center w-full py-4 px-5 text-3xl font-bold
                                  text-slate-600 text-left bg-white border-0 rounded-none transition focus:outline-no uppercase"
                                 type="button"
-
                             >
                                 General report
                             </button>
