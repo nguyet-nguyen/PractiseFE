@@ -139,6 +139,15 @@ export const getUserOrderDetail = (id) => {
   }
 };
 
+// User cancel order for reason
+export const cancelOrder = (data, id) => {
+  try {
+    return apiadminnoFormdata.put(`/users/orders/${id}`, data);
+  } catch (error) {
+    console.log(error);
+  }
+}
+
 // ----------------------admin----------------------------------
 export const getAllUsers = (page, limit) => {
   try {
@@ -292,4 +301,5 @@ export const updateUserAvatar = (id, data) => {
     console.log(error);
   }
 };
+
 

@@ -2,13 +2,14 @@ import React, { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { Link, useNavigate } from "react-router-dom";
 import "react-toastify/dist/ReactToastify.css";
-import { getUserInfo } from "../../../../features/Api";
 import ModalUpdateAvatar from "../sections/ModalUpdateAvatar";
 import { cities, districts, wards } from "../../../../address";
 import {
+  getUserInfo,
   updateUserInfo,
   getAllItemsInCart,
   getUsersOrdHistory,
+  cancelOrder
 } from "../../../../features/Api";
 import { ToastContainer, toast } from "react-toastify";
 import CustomPopupMessage from "../../../CustomPopupMess";
@@ -26,6 +27,8 @@ const Profile = () => {
     name: districts[0].name,
   });
   const [ward, setWard] = useState({ id: wards[0].id, name: wards[0].name });
+  const [idOrderCancel, setIdOrderCancel] = useState();
+  const [reasonForCancel, setReasonForCancel] = useState();
 
   const {
     register,
@@ -139,6 +142,47 @@ const Profile = () => {
       });
   };
 
+  // Change value of reason
+  const onChangeReason = (e) => {
+    setReasonForCancel(e.target.value);
+  };
+
+  // Set order id you want to cancel
+  const setIdYouWantToCancel = (id) => {
+    setIdOrderCancel(id);
+  };
+
+
+  // Update status for order cancel
+  const onSubmitCancelOrd = (id) => {
+    
+    const dataCancel = {
+      status: 3,
+      reasonCancel: reasonForCancel,
+    };
+
+    console.log(dataCancel);
+
+    // cancelOrder(dataCancel, id)
+    //   .then((res) => {
+    //     console.log(res.data);
+    //     $("#modalUserCancelOrd").modal("hide");
+    //     toast(
+    //       <CustomPopupMessage
+    //         mess="Your order has been cancelled successfully!"
+    //         icon="check"
+    //       />
+    //     );
+    //     getUsersOrderList();
+    //   })
+    //   .catch((err) => {
+    //     console.log(err);
+    //   });
+
+    //   console.log(reasonForCancel);
+
+  };
+
   // Get users order history
   const getUsersOrderList = () => {
     getUsersOrdHistory()
@@ -150,7 +194,6 @@ const Profile = () => {
         console.warn(err);
       });
   };
-
   return (
     <>
       <main className="profile-page">
@@ -297,6 +340,7 @@ const Profile = () => {
                         ></button>
                       </div>
                       <form
+                      key={1}
                         className="px-6 pb-4 space-y-6 lg:px-8 sm:pb-6 xl:pb-8"
                         onSubmit={handleSubmit(onSubmit)}
                       >
@@ -534,21 +578,21 @@ const Profile = () => {
                               className="fa fa-car pr-2"
                               aria-hidden="true"
                             ></i>
-                            Shipping
+                            Approved
                           </button>
                           <button className=" active:bg-green-500 uppercase text-green-500 border border-green-500 font-bold hover:shadow-md shadow text-xs px-4 py-2 rounded outline-none focus:outline-none sm:mr-2 mb-1">
                             <i
                               className="fa fa-check pr-2"
                               aria-hidden="true"
                             ></i>
-                            Complete
+                            Completed
                           </button>
                           <button className=" active:bg-red-500 uppercase text-red-500 border border-red-500 font-bold hover:shadow-md shadow text-xs px-4 py-2 rounded outline-none focus:outline-none sm:mr-2 mb-1">
                             <i
                               className="fa fa-close pr-2"
                               aria-hidden="true"
                             ></i>
-                            Decline
+                            Canceled
                           </button>
                         </div>
 
@@ -568,7 +612,32 @@ const Profile = () => {
                                       {order.orderDate}
                                     </p>
                                   </div>
-                                  <div className="md:w-4/12 2xl:w-1/4 w-full"></div>
+                                  <div className="md:w-4/12 2xl:w-1/4 w-full">
+                                 {order.status == "Completed" && <span
+                                  className="inline-block px-4 py-2.5 text-green-600
+                                                            font-semibold text-xs leading-tight uppercase "
+                                >
+                                  {order.status}
+                                </span> } 
+                                {order.status == "Pending" && <span
+                                  className="inline-block px-4 py-2.5 text-amber-600
+                                                            font-semibold text-xs leading-tight uppercase "
+                                >
+                                  {order.status}
+                                </span> } 
+                                {order.status == "Canceled" && <span
+                                  className="inline-block px-4 py-2.5 text-red-600
+                                                            font-semibold text-xs leading-tight uppercase "
+                                >
+                                  {order.status}
+                                </span> } 
+                                {order.status == "Approved" && <span
+                                  className="inline-block px-4 py-2.5 text-blue-600
+                                                            font-semibold text-xs leading-tight uppercase "
+                                >
+                                  {order.status}
+                                </span> } 
+                                  </div>
                                 </div>
 
                                 <div className="md:flex items-strech py-8 md:py-10 lg:py-8 border-t border-gray-200">
@@ -577,12 +646,12 @@ const Profile = () => {
                                       to={`/all-items/item-detail/${order.firstItem[0].id}`}
                                     >
                                       <img
-                                        // src={order.firstItem[0].image[0]}
+                                        src={order.firstItem[0].image[0]}
                                         alt="product image"
                                         className="h-full object-center object-cover md:block hidden"
                                       />
                                       <img
-                                        // src={order.firstItem[0].image[0]}
+                                        src={order.firstItem[0].image[0]}
                                         alt="product image"
                                         className="md:hidden w-full h-full object-center object-cover"
                                       />
@@ -621,16 +690,86 @@ const Profile = () => {
                                   {numberFormat(order.totalPrice)}
                                 </span>
                                 <div className="flex flex-col lg:flex-row justify-center">
-                                  <a
-                                    href="#"
+                                  <button
                                     className="active:bg-red-500 uppercase text-red-500 border border-red-500 focus:ring-4 hover:shadow-md shadow font-semibold rounded-md text-sm px-5 py-1.5 text-center lg:mr-2"
-                                  >
+                                    data-bs-toggle="modal"
+                                    data-bs-target="#modalUserCancelOrd"
+                                    onClick={() =>
+                                      setIdYouWantToCancel(order.id)
+                                    }
+                                 >
                                     <i
                                       className="fa fa-close"
                                       aria-hidden="true"
                                     ></i>
-                                  </a>
+                                  </button>
 
+                                  {/* <!-- Modal --> */}
+                                  <div
+                                    className="modal fade fixed top-0 left-0 hidden w-full h-full outline-none overflow-x-hidden overflow-y-auto"
+                                    id="modalUserCancelOrd"
+                                    tabIndex="-1"
+                                    aria-labelledby="modalUserCancelOrdLabel"
+                                    aria-hidden="true"
+                                  >
+                                    <div className="modal-dialog modal-md modal-dialog-centered modal-dialog-scrollable relative w-auto pointer-events-none">
+                                      <div className="modal-content border-none shadow-lg relative flex flex-col w-full pointer-events-auto bg-white bg-clip-padding rounded-md outline-none text-current">
+                                        <div className="modal-header flex flex-shrink-0 items-center justify-between p-4 border-b border-gray-200 rounded-t-md">
+                                          <h5
+                                            className="text-xl font-medium leading-normal pl-8 text-gray-800 uppercase"
+                                            id="modalUserCancelOrdLabel"
+                                          >
+                                            Order Canceled
+                                          </h5>
+                                          <button
+                                            type="button"
+                                            className="btn-close box-content w-4 h-4 p-1 text-black border-none rounded-none opacity-50 focus:shadow-none focus:outline-none focus:opacity-100 hover:text-black hover:opacity-75 hover:no-underline"
+                                            data-bs-dismiss="modal"
+                                            aria-label="Close"
+                                          ></button>
+                                        </div>
+                                        <form
+                                          className="px-6 pb-4 space-y-6 lg:px-8 sm:pb-6 xl:pb-8"
+                                        >
+                                          <div className="modal-body relative p-4">
+                                            <div className="flex -mx-3">
+                                              <div className="w-full px-3">
+                                                <div className="flex">
+                                                  <textarea
+                                                    onChange={(e) => onChangeReason(e)}
+                                                    id="reasonCancelUser"
+                                                    name="reasonCancelUser"
+                                                    className={`w-full h-16 pl-5 pr-3 py-2 rounded-lg border-2 border-gray-200
+                                            outline-none focus:ring-2 focus:ring-amber-500 focus:border-amber-600
+                                            `}
+                                                    placeholder="Reason For Order Cancellation"
+                                                   
+                                                  />
+                                                </div>
+
+                                              </div>
+                                            </div>
+                                          </div>
+                                          <div className="modal-footer flex flex-shrink-0 flex-wrap items-center justify-end p-4 border-t border-gray-200 rounded-b-md">
+                                            <button
+                                              type="button"
+                                              className="inline-block px-6 py-2.5 bg-gray-500 text-white font-medium text-xs leading-tight uppercase rounded shadow-md hover:bg-gray-700 hover:shadow-lg focus:bg-gray-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-gray-800 active:shadow-lg transition duration-150 ease-in-out"
+                                              data-bs-dismiss="modal"
+                                            >
+                                              Close
+                                            </button>
+                                            <button
+                                              type="submit"
+                                              className="inline-block px-6 py-2.5 bg-red-600 text-white font-medium text-xs leading-tight uppercase rounded shadow-md hover:bg-amber-600 hover:shadow-lg focus:bg-amber-600 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-amber-700 active:shadow-lg transition duration-150 ease-in-out ml-1"
+                                              onClick={onSubmitCancelOrd(idOrderCancel)}
+                                            >
+                                              Cancel Order
+                                            </button>
+                                          </div>
+                                        </form>
+                                      </div>
+                                    </div>
+                                  </div>
                                   <Link
                                     to={`/order-detail/${order.id}`}
                                     className="active:bg-gray-500 uppercase text-gray-500 border border-gray-500 focus:ring-4 hover:shadow-md shadow font-semibold rounded-md text-sm px-5 py-1.5 text-center"
