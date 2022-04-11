@@ -1,19 +1,16 @@
 import React, { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
+import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import ModalUpdateAvatar from "../sections/ModalUpdateAvatar";
 import { cities, districts, wards } from "../../../../address";
 import {
-  getUserInfo,
-  updateUserInfo,
-  getAllItemsInCart,
-  getUsersOrdHistory,
-  cancelOrder
+  cancelOrder,
+  filterOrdByStatus, getAllItemsInCart, getUserInfo, getUsersOrdHistory, updateUserInfo
 } from "../../../../features/Api";
-import { ToastContainer, toast } from "react-toastify";
 import CustomPopupMessage from "../../../CustomPopupMess";
 import { numberFormat } from "../../Home/function/FormatMoney";
+import ModalUpdateAvatar from "../sections/ModalUpdateAvatar";
 
 const Profile = () => {
   // Profile
@@ -176,6 +173,21 @@ const Profile = () => {
         console.log(err);
       });
   };
+
+  const onFilterStatus = (statusId) => {
+    console.log(statusId);
+    if (statusId == 0){
+      getUsersOrderList();
+    }else {
+      filterOrdByStatus(statusId)
+      .then((response) => {
+        setUsersOrd(response.data.data);
+      })
+      .catch((err) => {
+        console.warn(err);
+      });
+    }
+  }
 
   // Get users order history
   const getUsersOrderList = () => {
@@ -558,28 +570,53 @@ const Profile = () => {
                           <h2 className="text-2xl font-bold uppercase mb-4">
                             Order List
                           </h2>
-                          <button className=" active:bg-amber-500 uppercase text-amber-500 border border-amber-500 font-bold hover:shadow-md shadow text-xs px-4 py-2 rounded outline-none focus:outline-none sm:mr-2 mb-1">
+                          <button 
+                            className=" active:bg-gray-500 uppercase text-gray-500 border border-gray-500 font-bold hover:shadow-md 
+                              shadow text-xs px-4 py-2 rounded outline-none focus:outline-none sm:mr-2 mb-1"
+                              onClick={() =>
+                                onFilterStatus(0)
+                              }
+                            >
+                            <i
+                              className="fa fa-list pr-2"
+                              aria-hidden="true"
+                            ></i>
+                            All Status
+                          </button>
+                          <button className=" active:bg-amber-500 uppercase text-amber-500 border border-amber-500 font-bold hover:shadow-md shadow text-xs px-4 py-2 rounded outline-none focus:outline-none sm:mr-2 mb-1"
+                          onClick={() =>
+                            onFilterStatus(1)
+                          }>
                             <i
                               className="fa fa-clock pr-2"
                               aria-hidden="true"
                             ></i>
                             Pending
                           </button>
-                          <button className=" active:bg-blue-500 uppercase text-blue-500 border border-blue-500 font-bold hover:shadow-md shadow text-xs px-4 py-2 rounded outline-none focus:outline-none sm:mr-2 mb-1">
+                          <button className=" active:bg-blue-500 uppercase text-blue-500 border border-blue-500 font-bold hover:shadow-md shadow text-xs px-4 py-2 rounded outline-none focus:outline-none sm:mr-2 mb-1"
+                          onClick={() =>
+                            onFilterStatus(2)
+                          }>
                             <i
                               className="fa fa-car pr-2"
                               aria-hidden="true"
                             ></i>
                             Approved
                           </button>
-                          <button className=" active:bg-green-500 uppercase text-green-500 border border-green-500 font-bold hover:shadow-md shadow text-xs px-4 py-2 rounded outline-none focus:outline-none sm:mr-2 mb-1">
+                          <button type="button" className=" active:bg-green-500  uppercase text-green-500 border border-green-500 font-bold hover:shadow-md shadow text-xs px-4 py-2 rounded outline-none focus:outline-none sm:mr-2 mb-1"
+                          onClick={() =>
+                            onFilterStatus(4)
+                          }>
                             <i
                               className="fa fa-check pr-2"
                               aria-hidden="true"
                             ></i>
                             Completed
                           </button>
-                          <button className=" active:bg-red-500 uppercase text-red-500 border border-red-500 font-bold hover:shadow-md shadow text-xs px-4 py-2 rounded outline-none focus:outline-none sm:mr-2 mb-1">
+                          <button className=" active:bg-red-500 uppercase text-red-500 border border-red-500 font-bold hover:shadow-md shadow text-xs px-4 py-2 rounded outline-none focus:outline-none sm:mr-2 mb-1"
+                          onClick={() =>
+                            onFilterStatus(3)
+                          }>
                             <i
                               className="fa fa-close pr-2"
                               aria-hidden="true"
