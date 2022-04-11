@@ -144,8 +144,8 @@ function WelcomeBanner() {
                                             </div>
                                         </div>
                                         <div className="block ">
-                                            <h5 className="font-bold leading-tight text-2xl mt-0 mb-2 text-slate-800">{report.order.pending}</h5>
-                                            <p className="font-medium leading-tight text-md mt-0 text-slate-400 uppercase">New order</p>
+                                            <h5 className="font-bold leading-tight text-2xl mt-0 mb-2 text-slate-800">{report.totalOrder}</h5>
+                                            <p className="font-medium leading-tight text-md mt-0 text-slate-400 uppercase">All order</p>
                                         </div>
                                     </div>
                                 </div>

@@ -1,8 +1,10 @@
 import {cities, districts, wards} from "../../../address";
 import React, {useState} from 'react';
 import {useForm} from 'react-hook-form';
-import {CreateUsers} from "../../../features/Api";
+import {checkIfEmailExists, CreateUsers, SignUpApi} from "../../../features/Api";
 import {Link, useNavigate} from 'react-router-dom';
+import {toast} from "react-toastify";
+import CustomPopupMessage from "../../CustomPopupMess";
 
 const SignUpAdmin = () => {
     const navigate = useNavigate();
@@ -11,6 +13,8 @@ const SignUpAdmin = () => {
     const [city, setCity] = useState({id: cities[0].id, name: cities[0].name}) ;
     const [district, setDistrict] = useState({id: districts[0].id, name: districts[0].name});
     const [ward, setWard] = useState({id: wards[0].id, name: wards[0].name});
+    const [validEmailMess, setValidEmailMess] = useState(false);
+
     const changeCityId = (id) => {
         let cityName;
         cities.map((city) => {
@@ -39,6 +43,23 @@ const SignUpAdmin = () => {
         });
         setWard({id: id, name: wardName});
     };
+    const validateEmail = (e) => {
+        const email = e.target.value;
+        const data = { email: email };
+
+        checkIfEmailExists(data)
+            .then((response) => {
+                if (response.data) {
+                    setValidEmailMess(true);
+                } else {
+                    setValidEmailMess(false);
+                }
+            })
+            .catch((err) => {
+                alert(err.data);
+            });
+    };
+    const [errConfirmPass,setErrConfirmPass] = useState(false)
     const onSubmit = async (data, e) => {
         let address = city.name + " - " + district.name + " - " + ward.name + " - " + data.addressDetail;
         const formData = new FormData();
@@ -49,14 +70,19 @@ const SignUpAdmin = () => {
         formData.append("password", data.password);
         formData.append("address", address);
         console.log(address);
-        CreateUsers(formData).then(response => {
-            navigate('/pages/authentication/sign-in');
-            console.log(response.data);
-        })
-            .catch(err => {
-                    alert(err.data);
-                }
-            )
+        if(data.password == data.confirmPassword) {
+            CreateUsers(formData).then(response => {
+                navigate('/pages/authentication/sign-in');
+                console.log(response.data);
+            })
+                .catch(err => {
+                        alert(err.data);
+                    }
+                )
+        } else {
+            setErrConfirmPass(true);
+        }
+
 
     };
 
@@ -83,122 +109,218 @@ const SignUpAdmin = () => {
                                     <label htmlFor="" className="text-xs font-semibold px-1">
                                         Username
                                         <span className="text-red-500 ml-1">
-                                            *
-                                        </span>
+                      *
+                    </span>
                                     </label>
                                     <div className="flex">
-                                        <div
-                                            className="w-10 z-10 pl-1 text-center pointer-events-none flex items-center justify-center">
+                                        <div className="w-10 z-10 pl-1 text-center pointer-events-none flex items-center justify-center">
                                             <i className="fa fa-user-circle-o" aria-hidden="true"></i>
                                         </div>
                                         <input
                                             type="text"
                                             className={`w-full -ml-10 pl-10 pr-3 py-2 rounded-lg border-2 border-gray-200
                                             outline-none focus:ring-2 focus:ring-amber-500 focus:border-amber-600
-                                            ${errors.name && "border-red-600 focus:ring-red-500 focus:border-red-600 border-1"}`}
+                                            ${errors.name &&
+                                            "border-red-600 focus:ring-red-500 focus:border-red-600 border-1"
+                                            }`}
                                             placeholder="username"
                                             id="name"
                                             name="name"
-                                            {...register("name", {required: true})}/>
-                                    </div>
-                                    {errors.name && errors.name.type === "required" &&
-                                        <p className="text-red-500 mt-3 text-xs italic">value required</p>}
-                                </div>
-                                <div className="w-1/2 px-3 mb-5">
-                                    <label htmlFor="" className="text-xs font-semibold px-1">
-                                        Password
-                                        <span className="text-red-500 ml-1">
-                                            *
-                                        </span>
-                                    </label>
-                                    <div className="flex">
-                                        <div
-                                            className="w-10 z-10 pl-1 text-center pointer-events-none flex items-center justify-center">
-                                            <i className="fa fa-lock" aria-hidden="true"></i>
-                                        </div>
-                                        <input
-                                            type="password"
-                                            className={`w-full -ml-10 pl-10 pr-3 py-2 rounded-lg border-2 border-gray-200
-                                            outline-none focus:ring-2 focus:ring-amber-500 focus:border-amber-600
-                                            ${errors.password && "border-red-600 focus:ring-red-500 focus:border-red-600 border-1"}`}
-                                            placeholder="************"
-                                            id="password"
-                                            name="password"
-                                            {...register("password", {required: true, minLength: 8, maxLength: 20})}
+                                            {...register("name", { required: true })}
                                         />
                                     </div>
-                                    {errors.password && errors.password.type === "required" &&
-                                        <p className="mt-3 text-red-500 text-xs italic">value required</p>}
-                                    {errors.password && errors.password.type === 'minLength' &&
-                                        <p className="mt-3 text-red-500 text-xs italic">no less than 8 characters</p>}
-                                    {errors.password && errors.password.type === 'maxLength' &&
-                                        <p className="mt-3 text-red-500 text-xs italic">no more than 20 characters</p>}
-                                </div>
-                            </div>
-                            <div className="flex -mx-3">
-                                <div className="w-1/2 px-3 mb-5">
-                                    <label htmlFor="" className="text-xs font-semibold px-1">
-                                        Email
-                                        <span className="text-red-500 ml-1">
-                                            *
-                                        </span>
-                                    </label>
-                                    <div className="flex">
-                                        <div
-                                            className="w-10 z-10 pl-1 text-center pointer-events-none flex items-center justify-center">
-                                            <i className="fa fa-envelope-o" aria-hidden="true"></i>
-                                        </div>
-                                        <input
-                                            type="email"
-                                            className={`w-full -ml-10 pl-10 pr-3 py-2 rounded-lg border-2 border-gray-200
-                                            outline-none focus:ring-2 focus:ring-amber-500 focus:border-amber-600
-                                            ${errors.email && "border-red-600 focus:ring-red-500 focus:border-red-600 border-1"}`}
-                                            placeholder="youremail@example.com"
-                                            id="email"
-                                            name='email'
-                                            {...register("email", {
-                                                required: true,
-                                                pattern: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i
-                                            })}
-                                        />
-                                    </div>
-                                    {errors.email && errors.email.type === 'required' &&
-                                        <p className="text-red-500 mt-3 text-xs italic">Value required</p>}
-                                    {errors.email && errors.email.type === 'pattern' &&
-                                        <p className="text-red-500 mt-3 text-xs italic">Invalid email</p>}
+                                    {errors.name && errors.name.type === "required" && (
+                                        <p className="text-red-500 mt-3 text-xs italic">
+                                            value required
+                                        </p>
+                                    )}
                                 </div>
                                 <div className="w-1/2 px-3 mb-5">
                                     <label htmlFor="" className="text-xs font-semibold px-1">
                                         Phone
                                         <span className="text-red-500 ml-1">
-                                            *
-                                        </span>
+                      *
+                    </span>
                                     </label>
                                     <div className="flex">
-                                        <div
-                                            className="w-10 z-10 pl-1 text-center pointer-events-none flex items-center justify-center">
+                                        <div className="w-10 z-10 pl-1 text-center pointer-events-none flex items-center justify-center">
                                             <i className="fa fa-phone" aria-hidden="true"></i>
                                         </div>
                                         <input
                                             type="phone"
                                             className={`w-full -ml-10 pl-10 pr-3 py-2 rounded-lg border-2 border-gray-200
                                             outline-none focus:ring-2 focus:ring-amber-500 focus:border-amber-600
-                                            ${errors.phone && "border-red-600 focus:ring-red-500 focus:border-red-600 border-1"}`}
+                                            ${errors.phone &&
+                                            "border-red-600 focus:ring-red-500 focus:border-red-600 border-1"
+                                            }`}
                                             placeholder="0933549878"
                                             id="phone"
-                                            name='phone'
-                                            {...register("phone", {required: true, minLength: 10, maxLength: 10})}
-
+                                            name="phone"
+                                            {...register("phone", {
+                                                required: true,
+                                                minLength: 10,
+                                                maxLength: 10,
+                                            })}
                                         />
                                     </div>
-                                    {errors.phone && errors.phone.type === "required" &&
-                                        <p className="text-red-500 text-xs mt-3 italic">Value required</p>}
-                                    {errors.phone && errors.phone.type === 'minLength' &&
-                                        <p className="text-red-500 mt-3 text-xs italic">PhoneNumber is 10
-                                            characters</p>}
-                                    {errors.phone && errors.phone.type === 'maxLength' &&
-                                        <p className="text-red-500 mt-3 text-xs italic">PhoneNumber is 10
-                                            characters</p>}
+                                    {errors.phone && errors.phone.type === "required" && (
+                                        <p className="text-red-500 text-xs mt-3 italic">
+                                            Value required
+                                        </p>
+                                    )}
+                                    {errors.phone && errors.phone.type === "minLength" && (
+                                        <p className="text-red-500 mt-3 text-xs italic">
+                                            PhoneNumber is 10 characters
+                                        </p>
+                                    )}
+                                    {errors.phone && errors.phone.type === "maxLength" && (
+                                        <p className="text-red-500 mt-3 text-xs italic">
+                                            PhoneNumber is 10 characters
+                                        </p>
+                                    )}
+                                </div>
+                            </div>
+                            <div className="flex -mx-3">
+                                <div className="w-1/2 px-3 mb-5">
+                                    <label htmlFor="" className="text-xs font-semibold px-1">
+                                        Password
+                                        <span className="text-red-500 ml-1">
+                      *
+                    </span>
+                                    </label>
+                                    <div className="flex">
+                                        <div className="w-10 z-10 pl-1 text-center pointer-events-none flex items-center justify-center">
+                                            <i className="fa fa-lock" aria-hidden="true"></i>
+                                        </div>
+                                        <input
+                                            type="password"
+                                            className={`w-full -ml-10 pl-10 pr-3 py-2 rounded-lg border-2 border-gray-200
+                                            outline-none focus:ring-2 focus:ring-amber-500 focus:border-amber-600
+                                            ${errors.password &&
+                                            "border-red-600 focus:ring-red-500 focus:border-red-600 border-1"
+                                            }`}
+                                            placeholder="************"
+                                            id="password"
+                                            name="password"
+                                            {...register("password", {
+                                                required: true,
+                                                minLength: 8,
+                                                maxLength: 20,
+                                            })}
+                                        />
+                                    </div>
+                                    {errors.password && errors.password.type === "required" && (
+                                        <p className="mt-3 text-red-500 text-xs italic">
+                                            value required
+                                        </p>
+                                    )}
+                                    {errors.password && errors.password.type === "minLength" && (
+                                        <p className="mt-3 text-red-500 text-xs italic">
+                                            no less than 8 characters
+                                        </p>
+                                    )}
+                                    {errors.password && errors.password.type === "maxLength" && (
+                                        <p className="mt-3 text-red-500 text-xs italic">
+                                            no more than 20 characters
+                                        </p>
+                                    )}
+                                </div>
+                                <div className="w-1/2 px-3 mb-5">
+                                    <label htmlFor="" className="text-xs font-semibold px-1">
+                                        Confirm password
+                                        <span className="text-red-500 ml-1">
+                      *
+                    </span>
+                                    </label>
+                                    <div className="flex">
+                                        <div className="w-10 z-10 pl-1 text-center pointer-events-none flex items-center justify-center">
+                                            <i className="fa fa-lock" aria-hidden="true"></i>
+                                        </div>
+                                        <input
+                                            type="password"
+                                            className={`w-full -ml-10 pl-10 pr-3 py-2 rounded-lg border-2 border-gray-200
+                                            outline-none focus:ring-2 focus:ring-amber-500 focus:border-amber-600
+                                            ${errors.confirmPassword &&
+                                            "border-red-600 focus:ring-red-500 focus:border-red-600 border-1"
+                                            }`}
+                                            placeholder="************"
+                                            id="confirmPassword"
+                                            name="confirmPassword"
+                                            {...register("confirmPassword", {
+                                                required: true,
+                                                minLength: 8,
+                                                maxLength: 20,
+                                            })}
+                                        />
+                                    </div>
+                                    {errors.confirmPassword && errors.confirmPassword.type === "required" && (
+                                        <p className="mt-3 text-red-500 text-xs italic">
+                                            value required
+                                        </p>
+                                    )}
+                                    {errors.confirmPassword && errors.confirmPassword.type === "minLength" && (
+                                        <p className="mt-3 text-red-500 text-xs italic">
+                                            no less than 8 characters
+                                        </p>
+                                    )}
+                                    {errors.confirmPassword && errors.confirmPassword.type === "maxLength" && (
+                                        <p className="mt-3 text-red-500 text-xs italic">
+                                            no more than 20 characters
+                                        </p>
+                                    )}
+                                    {errConfirmPass==true ?
+                                        <p className="mt-3 text-red-500 text-xs italic">
+                                            Passwords must be same, Please try again !
+                                        </p>
+                                        : null
+                                    }
+                                </div>
+                            </div>
+                            <div className="flex -mx-3">
+                                <div className="w-full px-3 mb-5">
+                                    <label htmlFor="" className="text-xs font-semibold px-1">
+                                        Email
+                                        <span className="text-red-500 ml-1">
+                      *
+                    </span>
+                                    </label>
+                                    <div className="flex">
+                                        <div className="w-10 z-10 pl-1 text-center pointer-events-none flex items-center justify-center">
+                                            <i className="fa fa-envelope-o" aria-hidden="true"></i>
+                                        </div>
+
+                                        <input
+                                            type="email"
+                                            className={`w-full -ml-10 pl-10 pr-3 py-2 rounded-lg border-2 border-gray-200
+                                            outline-none focus:ring-2 focus:ring-amber-500 focus:border-amber-600
+                                            ${errors.email &&
+                                            "border-red-600 focus:ring-red-500 focus:border-red-600 border-1"
+                                            }`}
+                                            placeholder="youremail@example.com"
+                                            id="email"
+                                            name="email"
+                                            {...register("email", {
+                                                required: true,
+                                                pattern: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
+                                            })}
+                                            onBlur={(e) => validateEmail(e)}
+                                        />
+                                    </div>
+                                    {errors.email && errors.email.type === "required" && (
+                                        <p className="text-red-500 mt-3 text-xs italic">
+                                            Value required
+                                        </p>
+                                    )}
+                                    {errors.email && errors.email.type === "pattern" && (
+                                        <p className="text-red-500 mt-3 text-xs italic">
+                                            Invalid email
+                                        </p>
+                                    )}
+                                    {validEmailMess && (
+                                        <p className="text-red-500 mt-3 text-xs italic">
+                                            Email is already in use
+                                        </p>
+                                    )}
                                 </div>
                             </div>
                             <div className="flex -mx-3">
@@ -313,22 +435,23 @@ const SignUpAdmin = () => {
                             <div className="flex -mx-3">
                                 <div className="w-full px-3 mb-2">
                                     <button
-                                        className="block w-full max-w-xs mx-auto bg-amber-600 hover:bg-amber-700 focus:bg-amber-700 text-white rounded-lg px-3 py-3 font-semibold">
+                                        className="block w-full max-w-xs mx-auto bg-slate-200 border-2 border-slate-500 text-slate-500
+                                        hover:bg-slate-500 focus:bg-slate-500 focus:text-white hover:text-white rounded-lg px-3 py-3 font-semibold">
                                         REGISTER NOW
                                     </button>
                                 </div>
                             </div>
-                            <div className="flex items-center justify-between mt-4">
-                                <span className="w-1/6 border-b dark:border-slate-800 md:w-1/5"></span>
-                                Already have an account ?
-                                <Link to="/pages/authentication/sign-in"
-                                      href="sign-in"
-                                      class="text-sm text-amber-600 capitalize font-semibold dark:text-amber-800 hover:underline"
-                                >
-                                    Sign in here
-                                </Link>
-                                <span className="w-1/6 border-b dark:border-slate-800 md:w-1/5"></span>
-                            </div>
+                            {/*<div className="flex items-center justify-between mt-4">*/}
+                            {/*    <span className="w-1/6 border-b dark:border-slate-800 md:w-1/5"></span>*/}
+                            {/*    Already have an account ?*/}
+                            {/*    <Link to="/pages/authentication/sign-in"*/}
+                            {/*          href="sign-in"*/}
+                            {/*          class="text-sm text-amber-600 capitalize font-semibold dark:text-amber-800 hover:underline"*/}
+                            {/*    >*/}
+                            {/*        Sign in here*/}
+                            {/*    </Link>*/}
+                            {/*    <span className="w-1/6 border-b dark:border-slate-800 md:w-1/5"></span>*/}
+                            {/*</div>*/}
                         </div>
                     </form>
                 </div>

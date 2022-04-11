@@ -68,20 +68,20 @@ const SignIn = () => {
                                                 aria-atomic="true"
                                                 data-mdb-autohide="false">
                                                 <div
-                                                    className="bg-red-600 flex justify-end items-center py-2 px-3 border-red-500 rounded-t-lg">
+                                                    className="bg-red-600 flex justify-end items-center px-3 pt-2 border-red-500 rounded-t-lg">
                                                     <div className="flex items-center">
                                                         <button type="button" onClick={() => {
                                                             setShowMess(true);
                                                             setMessErr("");
                                                         }}
-                                                            className="btn-close btn-close-white box-content w-4 h-4 ml-2 text-white border-none
+                                                                className="btn-close btn-close-white box-content w-4 h-4 ml-2 text-white border-none
                                                             rounded-none opacity-50 focus:shadow-none focus:outline-none focus:opacity-100
                                                             hover:text-white hover:opacity-75 hover:no-underline"
-                                                            data-mdb-dismiss="toast" aria-label="Close"></button>
+                                                                data-mdb-dismiss="toast" aria-label="Close"></button>
                                                     </div>
                                                 </div>
-                                                <div className="p-3 bg-red-600 rounded-b-lg break-words text-white">
-                                                    Email or Password in correct !!!!!!!
+                                                <div className="pb-3 px-3 bg-red-600 rounded-b-lg break-words text-white">
+                                                    Email or Password is incorrect !!!!!!!
                                                 </div>
                                             </div>
                                         ) : null}
@@ -150,19 +150,7 @@ const SignIn = () => {
                                                 <p className="mt-3 text-red-500 text-xs italic">no more than 20
                                                     characters</p>}
                                         </div>
-                                        <div>
-                                            <label className="inline-flex items-center cursor-pointer">
-                                                <input
-                                                    id="customCheckLogin"
-                                                    type="checkbox"
-                                                    className="form-checkbox border-0 rounded text-gray-800 ml-1 w-5 h-5"
-                                                    style={{ transition: "all .15s ease" }}
-                                                />
-                                                <span className="ml-2 text-sm font-semibold text-gray-700">
-                                                    Remember me
-                                                </span>
-                                            </label>
-                                        </div>
+
 
                                         <div className="text-center mt-6">
                                             <button

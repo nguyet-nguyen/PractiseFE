@@ -37,13 +37,6 @@ const routes = [
           //   route: "/shopping-cart",
           //   component: <ShoppingCart />,
           // },
-          {
-            name: "Profile",
-            route: "/user-profile",
-            component:  <PrivateRouteUser>
-              <UserProfile />
-            </PrivateRouteUser>,
-          },
         ],
       },
       {

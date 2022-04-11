@@ -34,6 +34,7 @@ export const requestFilterCategory = (data, page, limit) => {
   }
 };
 
+
 export const SignUpApi = (data) => {
   try {
     return api.post(`/register`, data);
@@ -71,6 +72,14 @@ export const getProductDetail = (id) => {
 export const addToCart = (data) => {
   try {
     return apiadmin.post(`/users/carts`, data);
+  } catch (error) {
+    console.log(error);
+  }
+};
+// Get count item in shopping cart
+export const getCountItemsInCart = () => {
+  try {
+    return apiadmin.get(`/users/carts/count`);
   } catch (error) {
     console.log(error);
   }

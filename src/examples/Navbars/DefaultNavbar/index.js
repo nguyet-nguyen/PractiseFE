@@ -28,7 +28,7 @@ import DefaultNavbarMobile from "examples/Navbars/DefaultNavbar/DefaultNavbarMob
 // Practise React React base styles
 import breakpoints from "assets/theme/base/breakpoints";
 import { useNavigate } from 'react-router-dom';
-import { getAllCategory } from "../../../features/Api";
+import {getAllCategory, getCountItemsInCart} from "../../../features/Api";
 import Loading from "../../../Loading";
 
 function DefaultNavbar({ brand, routes, transparent, light, action, sticky, relative, center }) {
@@ -436,15 +436,18 @@ function DefaultNavbar({ brand, routes, transparent, light, action, sticky, rela
             )}
         </Popper>
     );
+    const [countItemCart, setCountItemCart] = useState(0)
     useEffect(() => {
-        getAllCategory()
+        getCountItemsInCart()
             .then((response) => {
-
+                setCountItemCart(response.data.count);
+                console.log(countItemCart);
             })
             .catch((err) => {
-
+                console.log(err);
             });
-    }, [])
+    })
+
     const token = localStorage.getItem("token");
     const users = JSON.parse(localStorage.getItem("userInfo"));
     const navigate = useNavigate();
@@ -484,16 +487,18 @@ function DefaultNavbar({ brand, routes, transparent, light, action, sticky, rela
                         pl={relative || transparent ? 0 : { xs: 0, lg: 1 }}
                     >
                         {token ?
-                            <div className="md:flex items-center hidden">
-                                <img
-                                    src={users.image}
-                                    className="rounded-full w-10 h-10 shadow-lg mr-3"
-                                    alt="Avatar"
-                                />
-                                <MKTypography variant="button" fontWeight="bold" color={light ? "white" : "dark"}>
-                                    {users.name}
-                                </MKTypography>
-                            </div>
+                            <Link to="/user-profile">
+                                <div className="md:flex items-center hidden">
+                                    <img
+                                        src={users.image}
+                                        className="rounded-full w-10 h-10 shadow-lg mr-3"
+                                        alt="Avatar"
+                                    />
+                                    <MKTypography variant="button" fontWeight="bold" color={light ? "white" : "dark"}>
+                                        {users.name}
+                                    </MKTypography>
+                                </div>
+                            </Link>
                             : ""
 
                         }
@@ -510,11 +515,31 @@ function DefaultNavbar({ brand, routes, transparent, light, action, sticky, rela
                     {token ?
                         <div>
                             <Link to="/shopping-cart" >
-                                <i className={`fa fa-shopping-cart pr-4 text-amber-500`} aria-hidden="true"></i>
+                                <div className="inline-flex relative w-fit mr-8">
+                                    <div className="absolute inline-block top-0 right-0
+                                    bottom-auto left-auto translate-x-1/3 -translate-y-0
+                                     rotate-0 skew-x-0 skew-y-0 scale-x-100 scale-y-100 py-1.5 px-2
+                                      text-xs leading-none text-center whitespace-nowrap align-baseline
+                                       font-bold bg-amber-600 text-white rounded-full z-10">
+                                        {countItemCart}
+                                    </div>
+                                    <div
+                                        data-mdb-ripple="true"
+                                        data-mdb-ripple-color="light"
+                                        className="inline-block px-2 py-2.5 mb-2 text-white
+                                        text-xs leading-tight uppercase rounded hover:shadow-lg
+                                        focus:shadow-lg focus:outline-none focus:ring-0 active:shadow-lg
+                                         transition duration-150 ease-in-out"
+                                    >
+                                        <i className={`fa fa-shopping-cart pr-2 text-white text-2xl`} aria-hidden="true"></i>
+
+                                    </div>
+                                </div>
+
                             </Link>
                             <Link to="/"
                                 onClick={SignOut}
-                                className="inline-block px-6 py-2 border-2 hover:bg-white hover:text-amber-700 border-amber-600 font-bold
+                                className="inline-block px-6 py-2 border-2 hover:bg-white rounded-lg hover:text-amber-700 border-amber-600 font-bold
                                 text-sm leading-tight uppercase rounded bg-amber-600 text-white
                                 focus:outline-none focus:ring-0 transition duration-150 ease-in-out">Sign out
                             </Link>

@@ -68,7 +68,7 @@ const SignUp = () => {
         alert(err.data);
       });
   };
-
+  const [errConfirmPass,setErrConfirmPass] = useState(false)
   const onSubmit = async (data, e) => {
     let address =
       city.name +
@@ -85,15 +85,19 @@ const SignUp = () => {
     formData.append("phone", data.phone);
     formData.append("password", data.password);
     formData.append("address", address);
-    console.log(address);
-    SignUpApi(formData)
-      .then((response) => {
-        toast(<CustomPopupMessage mess={response.data.message} icon="check"/>);
-        navigate("/pages/authentication/sign-in");
-      })
-      .catch((err) => {
-        alert(err.data);
-      });
+   if(data.password == data.confirmPassword) {
+     SignUpApi(formData)
+         .then((response) => {
+           toast(<CustomPopupMessage mess={response.data.message} icon="check"/>);
+           navigate("/pages/authentication/sign-in");
+         })
+         .catch((err) => {
+           alert(err.data);
+         });
+   } else {
+     setErrConfirmPass(true);
+   }
+
   };
 
   return (
@@ -152,7 +156,53 @@ const SignUp = () => {
                 </div>
                 <div className="w-1/2 px-3 mb-5">
                   <label htmlFor="" className="text-xs font-semibold px-1">
-                    Password 
+                    Phone
+                    <span className="text-red-500 ml-1">
+                      *
+                    </span>
+                  </label>
+                  <div className="flex">
+                    <div className="w-10 z-10 pl-1 text-center pointer-events-none flex items-center justify-center">
+                      <i className="fa fa-phone" aria-hidden="true"></i>
+                    </div>
+                    <input
+                        type="phone"
+                        className={`w-full -ml-10 pl-10 pr-3 py-2 rounded-lg border-2 border-gray-200
+                                            outline-none focus:ring-2 focus:ring-amber-500 focus:border-amber-600
+                                            ${errors.phone &&
+                        "border-red-600 focus:ring-red-500 focus:border-red-600 border-1"
+                        }`}
+                        placeholder="0933549878"
+                        id="phone"
+                        name="phone"
+                        {...register("phone", {
+                          required: true,
+                          minLength: 10,
+                          maxLength: 10,
+                        })}
+                    />
+                  </div>
+                  {errors.phone && errors.phone.type === "required" && (
+                      <p className="text-red-500 text-xs mt-3 italic">
+                        Value required
+                      </p>
+                  )}
+                  {errors.phone && errors.phone.type === "minLength" && (
+                      <p className="text-red-500 mt-3 text-xs italic">
+                        PhoneNumber is 10 characters
+                      </p>
+                  )}
+                  {errors.phone && errors.phone.type === "maxLength" && (
+                      <p className="text-red-500 mt-3 text-xs italic">
+                        PhoneNumber is 10 characters
+                      </p>
+                  )}
+                </div>
+              </div>
+              <div className="flex -mx-3">
+                <div className="w-1/2 px-3 mb-5">
+                  <label htmlFor="" className="text-xs font-semibold px-1">
+                    Password
                     <span className="text-red-500 ml-1">
                       *
                     </span>
@@ -162,43 +212,93 @@ const SignUp = () => {
                       <i className="fa fa-lock" aria-hidden="true"></i>
                     </div>
                     <input
-                      type="password"
-                      className={`w-full -ml-10 pl-10 pr-3 py-2 rounded-lg border-2 border-gray-200
+                        type="password"
+                        className={`w-full -ml-10 pl-10 pr-3 py-2 rounded-lg border-2 border-gray-200
                                             outline-none focus:ring-2 focus:ring-amber-500 focus:border-amber-600
                                             ${errors.password &&
                         "border-red-600 focus:ring-red-500 focus:border-red-600 border-1"
                         }`}
-                      placeholder="************"
-                      id="password"
-                      name="password"
-                      {...register("password", {
-                        required: true,
-                        minLength: 8,
-                        maxLength: 20,
-                      })}
+                        placeholder="************"
+                        id="password"
+                        name="password"
+                        {...register("password", {
+                          required: true,
+                          minLength: 8,
+                          maxLength: 20,
+                        })}
                     />
                   </div>
                   {errors.password && errors.password.type === "required" && (
-                    <p className="mt-3 text-red-500 text-xs italic">
-                      value required
-                    </p>
+                      <p className="mt-3 text-red-500 text-xs italic">
+                        value required
+                      </p>
                   )}
                   {errors.password && errors.password.type === "minLength" && (
-                    <p className="mt-3 text-red-500 text-xs italic">
-                      no less than 8 characters
-                    </p>
+                      <p className="mt-3 text-red-500 text-xs italic">
+                        no less than 8 characters
+                      </p>
                   )}
                   {errors.password && errors.password.type === "maxLength" && (
-                    <p className="mt-3 text-red-500 text-xs italic">
-                      no more than 20 characters
-                    </p>
+                      <p className="mt-3 text-red-500 text-xs italic">
+                        no more than 20 characters
+                      </p>
                   )}
+                </div>
+                <div className="w-1/2 px-3 mb-5">
+                  <label htmlFor="" className="text-xs font-semibold px-1">
+                    Confirm password
+                    <span className="text-red-500 ml-1">
+                      *
+                    </span>
+                  </label>
+                  <div className="flex">
+                    <div className="w-10 z-10 pl-1 text-center pointer-events-none flex items-center justify-center">
+                      <i className="fa fa-lock" aria-hidden="true"></i>
+                    </div>
+                    <input
+                        type="password"
+                        className={`w-full -ml-10 pl-10 pr-3 py-2 rounded-lg border-2 border-gray-200
+                                            outline-none focus:ring-2 focus:ring-amber-500 focus:border-amber-600
+                                            ${errors.confirmPassword &&
+                        "border-red-600 focus:ring-red-500 focus:border-red-600 border-1"
+                        }`}
+                        placeholder="************"
+                        id="confirmPassword"
+                        name="confirmPassword"
+                        {...register("confirmPassword", {
+                          required: true,
+                          minLength: 8,
+                          maxLength: 20,
+                        })}
+                    />
+                  </div>
+                  {errors.confirmPassword && errors.confirmPassword.type === "required" && (
+                      <p className="mt-3 text-red-500 text-xs italic">
+                        value required
+                      </p>
+                  )}
+                  {errors.confirmPassword && errors.confirmPassword.type === "minLength" && (
+                      <p className="mt-3 text-red-500 text-xs italic">
+                        no less than 8 characters
+                      </p>
+                  )}
+                  {errors.confirmPassword && errors.confirmPassword.type === "maxLength" && (
+                      <p className="mt-3 text-red-500 text-xs italic">
+                        no more than 20 characters
+                      </p>
+                  )}
+                  {errConfirmPass==true ?
+                      <p className="mt-3 text-red-500 text-xs italic">
+                        Passwords must be same, Please try again !
+                      </p>
+                      : null
+                  }
                 </div>
               </div>
               <div className="flex -mx-3">
-                <div className="w-1/2 px-3 mb-5">
+                <div className="w-full px-3 mb-5">
                   <label htmlFor="" className="text-xs font-semibold px-1">
-                    Email 
+                    Email
                     <span className="text-red-500 ml-1">
                       *
                     </span>
@@ -209,80 +309,36 @@ const SignUp = () => {
                     </div>
 
                     <input
-                      type="email"
-                      className={`w-full -ml-10 pl-10 pr-3 py-2 rounded-lg border-2 border-gray-200
+                        type="email"
+                        className={`w-full -ml-10 pl-10 pr-3 py-2 rounded-lg border-2 border-gray-200
                                             outline-none focus:ring-2 focus:ring-amber-500 focus:border-amber-600
                                             ${errors.email &&
                         "border-red-600 focus:ring-red-500 focus:border-red-600 border-1"
                         }`}
-                      placeholder="youremail@example.com"
-                      id="email"
-                      name="email"
-                      {...register("email", {
-                        required: true,
-                        pattern: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
-                      })}
-                      onBlur={(e) => validateEmail(e)}
+                        placeholder="youremail@example.com"
+                        id="email"
+                        name="email"
+                        {...register("email", {
+                          required: true,
+                          pattern: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
+                        })}
+                        onBlur={(e) => validateEmail(e)}
                     />
                   </div>
                   {errors.email && errors.email.type === "required" && (
-                    <p className="text-red-500 mt-3 text-xs italic">
-                      Value required
-                    </p>
+                      <p className="text-red-500 mt-3 text-xs italic">
+                        Value required
+                      </p>
                   )}
                   {errors.email && errors.email.type === "pattern" && (
-                    <p className="text-red-500 mt-3 text-xs italic">
-                      Invalid email
-                    </p>
+                      <p className="text-red-500 mt-3 text-xs italic">
+                        Invalid email
+                      </p>
                   )}
                   {validEmailMess && (
-                    <p className="text-red-500 mt-3 text-xs italic">
-                      Email is already in use
-                    </p>
-                  )}
-                </div>
-                <div className="w-1/2 px-3 mb-5">
-                  <label htmlFor="" className="text-xs font-semibold px-1">
-                    Phone 
-                    <span className="text-red-500 ml-1">
-                      *
-                    </span>
-                  </label>
-                  <div className="flex">
-                    <div className="w-10 z-10 pl-1 text-center pointer-events-none flex items-center justify-center">
-                      <i className="fa fa-phone" aria-hidden="true"></i>
-                    </div>
-                    <input
-                      type="phone"
-                      className={`w-full -ml-10 pl-10 pr-3 py-2 rounded-lg border-2 border-gray-200
-                                            outline-none focus:ring-2 focus:ring-amber-500 focus:border-amber-600
-                                            ${errors.phone &&
-                        "border-red-600 focus:ring-red-500 focus:border-red-600 border-1"
-                        }`}
-                      placeholder="0933549878"
-                      id="phone"
-                      name="phone"
-                      {...register("phone", {
-                        required: true,
-                        minLength: 10,
-                        maxLength: 10,
-                      })}
-                    />
-                  </div>
-                  {errors.phone && errors.phone.type === "required" && (
-                    <p className="text-red-500 text-xs mt-3 italic">
-                      Value required
-                    </p>
-                  )}
-                  {errors.phone && errors.phone.type === "minLength" && (
-                    <p className="text-red-500 mt-3 text-xs italic">
-                      PhoneNumber is 10 characters
-                    </p>
-                  )}
-                  {errors.phone && errors.phone.type === "maxLength" && (
-                    <p className="text-red-500 mt-3 text-xs italic">
-                      PhoneNumber is 10 characters
-                    </p>
+                      <p className="text-red-500 mt-3 text-xs italic">
+                        Email is already in use
+                      </p>
                   )}
                 </div>
               </div>

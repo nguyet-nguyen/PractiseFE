@@ -27,6 +27,7 @@ import PrivateRouteUser from "pages/PrivateRouteUser";
 import OrderDetail from "pages/LandingPages/OrderDetail";
 import OrderListAdmin from "./pages/Admin/OrderListAdmin";
 import OrderDetailAdmin from "pages/Admin/OrderListAdmin/sections/OrderDetail";
+import UserProfile from "./pages/LandingPages/UserProfile";
 
 export default function App() {
 
@@ -54,6 +55,14 @@ export default function App() {
                         element={
                             <PrivateRouteUser>
                                 <ShoppingCart/>
+                            </PrivateRouteUser>
+                        }
+                    />
+                    <Route
+                        path="/user-profile"
+                        element={
+                            <PrivateRouteUser>
+                                <UserProfile />
                             </PrivateRouteUser>
                         }
                     />
