@@ -47,12 +47,8 @@ const OrdDetailAdmin = () => {
   const exportFile = (id) => {
     exportInvoiceFile(id)
       .then((res) => {
-        console.log(res.data);
-        // const dataBlob = res.data.blob();
-        // const content = res.headers.content-disposition;
-        // const filename = content.split('"');
-        // console.log(filename);
-        // FileSaver.saveAs(dataBlob, 'nameFile.zip');
+        const filename = res.data.split("files/");
+        FileSaver.saveAs(res.data, filename[1]);
       })
       .catch((err) => {
         console.log(err);
