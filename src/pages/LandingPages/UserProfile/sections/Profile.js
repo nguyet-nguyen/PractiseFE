@@ -145,8 +145,9 @@ const Profile = () => {
   // Change value of reason
   const onChangeReason = (e) => {
     setReasonForCancel(e.target.value);
-  };
 
+  };
+  console.log(reasonForCancel);
   // Set order id you want to cancel
   const setIdYouWantToCancel = (id) => {
     setIdOrderCancel(id);
@@ -163,23 +164,23 @@ const Profile = () => {
 
     console.log(dataCancel);
 
-    // cancelOrder(dataCancel, id)
-    //   .then((res) => {
-    //     console.log(res.data);
-    //     $("#modalUserCancelOrd").modal("hide");
-    //     toast(
-    //       <CustomPopupMessage
-    //         mess="Your order has been cancelled successfully!"
-    //         icon="check"
-    //       />
-    //     );
-    //     getUsersOrderList();
-    //   })
-    //   .catch((err) => {
-    //     console.log(err);
-    //   });
+    cancelOrder(dataCancel, id)
+      .then((res) => {
+        console.log(res.data);
+        $("#modalUserCancelOrd").modal("hide");
+        toast(
+          <CustomPopupMessage
+            mess="Your order has been cancelled successfully!"
+            icon="check"
+          />
+        );
+        getUsersOrderList();
+      })
+      .catch((err) => {
+        console.log(err);
+      });
 
-    //   console.log(reasonForCancel);
+      console.log(reasonForCancel);
 
   };
 
@@ -736,7 +737,7 @@ const Profile = () => {
                                               <div className="w-full px-3">
                                                 <div className="flex">
                                                   <textarea
-                                                    onChange={(e) => onChangeReason(e)}
+                                                    onBlur={(e) => onChangeReason(e)}
                                                     id="reasonCancelUser"
                                                     name="reasonCancelUser"
                                                     className={`w-full h-16 pl-5 pr-3 py-2 rounded-lg border-2 border-gray-200
@@ -761,7 +762,7 @@ const Profile = () => {
                                             <button
                                               type="submit"
                                               className="inline-block px-6 py-2.5 bg-red-600 text-white font-medium text-xs leading-tight uppercase rounded shadow-md hover:bg-amber-600 hover:shadow-lg focus:bg-amber-600 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-amber-700 active:shadow-lg transition duration-150 ease-in-out ml-1"
-                                              onClick={onSubmitCancelOrd(idOrderCancel)}
+                                              onClick={() => onSubmitCancelOrd(idOrderCancel)}
                                             >
                                               Cancel Order
                                             </button>
