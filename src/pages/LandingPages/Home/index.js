@@ -30,11 +30,12 @@ import BannerHomepage from "./sections/Banner";
 import HotDeal from "./sections/HotDeal";
 import Header from "../Header";
 import {useEffect, useState} from "react";
-import {getAllCategory} from "../../../features/Api";
+import {getAllCategory, getProductHotDeal} from "../../../features/Api";
 import Loading from "../../../Loading";
 
 function Home() {
     const [categoryList, setCategoryList] = useState([]);
+
     const [loading, setLoading] = useState(false);
     useEffect(() => {
         setLoading(true);
@@ -47,6 +48,7 @@ function Home() {
                 console.warn(err);
                 setLoading(false)
             });
+
     }, [])
 
 
