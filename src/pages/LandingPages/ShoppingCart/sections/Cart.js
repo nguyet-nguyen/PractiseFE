@@ -75,11 +75,6 @@ const ShoppingCart = () => {
       total: total,
     };
     console.log(item.id);
-    // const index = itemsInCart.findIndex((x) => x.id === item.id);
-    // itemsInCart[index] = item;
-    // let items = [...itemsInCart];
-    // setItemsInCart(items);
-    // console.log(items);
 
     updateCart(item.id, data)
       .then((res) => {
@@ -94,10 +89,7 @@ const ShoppingCart = () => {
     getAllItemsInCart()
       .then((res) => {
         setItemsInCart(res.data);
-        // const allItems = res.data;
-        // for (let i = 0; i < allItems.length; i++) {
-        //   allItems[i].isSelected = false;
-        // }
+  
         updateShippingFee(res.data);
         updateTotal(res.data);
       })
