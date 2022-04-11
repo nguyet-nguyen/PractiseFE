@@ -148,6 +148,15 @@ export const cancelOrder = (data, id) => {
   }
 }
 
+// Filter order list by ord status id - users ord history
+export const filterOrdByStatus = (id) => {
+  try {
+    return apiadmin.get(`/user/orders/filter?status=${id}`);
+  } catch (error) {
+    console.log(error);
+  }
+};
+
 // ----------------------admin----------------------------------
 export const getAllUsers = (page, limit) => {
   try {
