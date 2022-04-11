@@ -145,24 +145,19 @@ const Profile = () => {
   // Change value of reason
   const onChangeReason = (e) => {
     setReasonForCancel(e.target.value);
-
   };
-  console.log(reasonForCancel);
+  
   // Set order id you want to cancel
   const setIdYouWantToCancel = (id) => {
     setIdOrderCancel(id);
   };
 
-
   // Update status for order cancel
   const onSubmitCancelOrd = (id) => {
-    
     const dataCancel = {
       status: 3,
       reasonCancel: reasonForCancel,
     };
-
-    console.log(dataCancel);
 
     cancelOrder(dataCancel, id)
       .then((res) => {
@@ -174,14 +169,12 @@ const Profile = () => {
             icon="check"
           />
         );
+        setReasonForCancel("");
         getUsersOrderList();
       })
       .catch((err) => {
         console.log(err);
       });
-
-      console.log(reasonForCancel);
-
   };
 
   // Get users order history
@@ -189,7 +182,6 @@ const Profile = () => {
     getUsersOrdHistory()
       .then((response) => {
         setUsersOrd(response.data.data);
-        console.log(response.data.data[0].orderDate);
       })
       .catch((err) => {
         console.warn(err);
@@ -341,7 +333,6 @@ const Profile = () => {
                         ></button>
                       </div>
                       <form
-                      key={1}
                         className="px-6 pb-4 space-y-6 lg:px-8 sm:pb-6 xl:pb-8"
                         onSubmit={handleSubmit(onSubmit)}
                       >
@@ -687,10 +678,11 @@ const Profile = () => {
                               </div>
 
                               <div className="flex justify-between items-center border-t border-gray-200 py-4 px-1">
-                                <span className="text-lg font-bold text-amber-600 dark:text-white">
+                                <span className="text-lg font-bold text-amber-600">
                                   {numberFormat(order.totalPrice)}
                                 </span>
                                 <div className="flex flex-col lg:flex-row justify-center">
+                                  {order.status == "Pending" && 
                                   <button
                                     className="active:bg-red-500 uppercase text-red-500 border border-red-500 focus:ring-4 hover:shadow-md shadow font-semibold rounded-md text-sm px-5 py-1.5 text-center lg:mr-2"
                                     data-bs-toggle="modal"
@@ -704,6 +696,7 @@ const Profile = () => {
                                       aria-hidden="true"
                                     ></i>
                                   </button>
+                                  }
 
                                   {/* <!-- Modal --> */}
                                   <div
@@ -730,6 +723,7 @@ const Profile = () => {
                                           ></button>
                                         </div>
                                         <form
+
                                           className="px-6 pb-4 space-y-6 lg:px-8 sm:pb-6 xl:pb-8"
                                         >
                                           <div className="modal-body relative p-4">
@@ -737,9 +731,10 @@ const Profile = () => {
                                               <div className="w-full px-3">
                                                 <div className="flex">
                                                   <textarea
-                                                    onBlur={(e) => onChangeReason(e)}
-                                                    id="reasonCancelUser"
-                                                    name="reasonCancelUser"
+                                                    onChange={(e) => onChangeReason(e)}
+                                                    id="reason"
+                                                    name="reason"
+                                                    value={reasonForCancel}
                                                     className={`w-full h-16 pl-5 pr-3 py-2 rounded-lg border-2 border-gray-200
                                             outline-none focus:ring-2 focus:ring-amber-500 focus:border-amber-600
                                             `}
@@ -760,8 +755,9 @@ const Profile = () => {
                                               Close
                                             </button>
                                             <button
-                                              type="submit"
+                                              type="button"
                                               className="inline-block px-6 py-2.5 bg-red-600 text-white font-medium text-xs leading-tight uppercase rounded shadow-md hover:bg-amber-600 hover:shadow-lg focus:bg-amber-600 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-amber-700 active:shadow-lg transition duration-150 ease-in-out ml-1"
+                                              data-bs-dismiss="modal"
                                               onClick={() => onSubmitCancelOrd(idOrderCancel)}
                                             >
                                               Cancel Order
@@ -771,6 +767,7 @@ const Profile = () => {
                                       </div>
                                     </div>
                                   </div>
+                                  
                                   <Link
                                     to={`/order-detail/${order.id}`}
                                     className="active:bg-gray-500 uppercase text-gray-500 border border-gray-500 focus:ring-4 hover:shadow-md shadow font-semibold rounded-md text-sm px-5 py-1.5 text-center"
@@ -781,26 +778,7 @@ const Profile = () => {
                                     ></i>
                                   </Link>
                                 </div>
-                                {/* <div className="flex lg:flex-row flex-col justify-center">
-                                <a
-                                  className="= cursor-default uppercase text-green-500 border border-green-500  font-semibold rounded-md text-sm px-5 py-1.5 text-center lg:mr-2"
-                                >
-                                  <i
-                                    className="fa fa-check pr-2"
-                                    aria-hidden="true"
-                                  ></i>
-                                  Complete 
-                                </a>
-                                <a
-                                  href="#"
-                                  className="active:bg-gray-500 uppercase text-gray-500 border border-gray-500 focus:ring-4 hover:shadow-md shadow font-semibold rounded-md text-sm px-5 py-1.5 text-center"
-                                >
-                                  <i
-                                    className="fa fa-eye"
-                                    aria-hidden="true"
-                                  ></i>
-                                </a>
-                                </div> */}
+                              
                               </div>
                             </div>
                           ))}

@@ -142,7 +142,7 @@ export const getUserOrderDetail = (id) => {
 // User cancel order for reason
 export const cancelOrder = (data, id) => {
   try {
-    return apiadminnoFormdata.put(`/users/orders/${id}`, data);
+    return apiadminnoFormdata.put(`/user/orders/${id}`, data);
   } catch (error) {
     console.log(error);
   }
