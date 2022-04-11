@@ -6,6 +6,7 @@ import { getUserOrderDetailByAdmin, exportInvoiceFile } from "../../../../featur
 import { numberFormat } from "../../../LandingPages/Home/function/FormatMoney";
 import Sidebar from "../../Sidebar";
 import Header from "../../Header";
+import FileSaver from 'file-saver';
 
 const OrdDetailAdmin = () => {
   const [sidebarOpen, setSidebarOpen] = useState(false);
@@ -46,7 +47,8 @@ const OrdDetailAdmin = () => {
   const exportFile = (id) => {
     exportInvoiceFile(id)
       .then((res) => {
-        console.log(res.data);
+        const filename = res.data.split("files/");
+        FileSaver.saveAs(res.data, filename[1]);
       })
       .catch((err) => {
         console.log(err);
