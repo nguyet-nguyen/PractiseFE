@@ -4,15 +4,16 @@ import { useNavigate, Link } from "react-router-dom";
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import {
-    addOrder, getAllItemsInCart,
-    getUserInfo
+  addOrder,
+  getAllItemsInCart,
+  getUserInfo,
 } from "../../../../features/Api";
 import CustomPopupMessage from "../../../CustomPopupMess";
 import { numberFormat } from "../../Home/function/FormatMoney";
 
 const CheckoutForm = () => {
   const [itemsInCart, setItemsInCart] = useState([]);
-  const [subtotal, setSubtotal] = useState();
+  const [subtotal, setSubtotal] = useState(0);
   const [shippingFee, setShippingFee] = useState(0);
   const {
     register,
@@ -64,16 +65,16 @@ const CheckoutForm = () => {
 
   const getUserInformation = (userId) => {
     getUserInfo(userId)
-    .then((response) => {
-      setValue("recipientName", response.data.name);
-      setValue("recipientPhone", response.data.phone);
-      setValue("recipientEmail", response.data.email);
-      setValue("addressDelivery", response.data.address);
-    })
-    .catch((err) => {
-      console.warn(err);
-    });
-  }
+      .then((response) => {
+        setValue("recipientName", response.data.name);
+        setValue("recipientPhone", response.data.phone);
+        setValue("recipientEmail", response.data.email);
+        setValue("addressDelivery", response.data.address);
+      })
+      .catch((err) => {
+        console.warn(err);
+      });
+  };
   const onSubmit = async (data, e) => {
     const dataCheckout = {
       "recipientName": data.recipientName,
@@ -84,13 +85,23 @@ const CheckoutForm = () => {
     };
     addOrder(dataCheckout)
       .then((response) => {
-        toast(<CustomPopupMessage mess={response.data.message} icon="check"/>);
-        navigate("/user-profile");
+        $("#modalCheckoutSuccess").modal("show");
       })
       .catch((err) => {
         alert(err.data);
       });
   };
+
+  const goShopping = () => {
+    $("#modalCheckoutSuccess").modal("hide");
+    navigate("/all-items");
+    
+  }
+
+  const goListCustomerOrds = () => {
+    $("#modalCheckoutSuccess").modal("hide");
+    navigate("/user-profile");
+  }
 
   return (
     <>
@@ -272,40 +283,39 @@ const CheckoutForm = () => {
           <ul className="py-6 border-b space-y-6 px-8">
             {itemsInCart.map((item) => (
               <Link to={`/all-items/item-detail/${item.idProduct}`}>
-              <li key={item.id} className="grid grid-cols-7 gap-2 border-b-1">
-                <div className="col-span-1 self-center">
-                  <img
-                    src={item.images[0]}
-                    alt="Product Image"
-                    className="rounded w-full"
-                  />
-                </div>
-                <div className="flex flex-col col-span-3 pt-2">
-                  <span className="text-gray-600 uppercase text-md font-semi-bold">
-                    {item.name}
-                  </span>
-                  <div className="flex items-center pt-2">
-                    <p className="text-sm font-semibold capitalize leading-3 text-gray-500 pr-3">
-                      {item.color}
-                    </p>
-                    <p className="text-sm font-semibold uppercase leading-3 text-gray-500  border-l border-gray-300 pl-3">
-                      {item.size}
-                    </p>
+                <li key={item.id} className="grid grid-cols-7 gap-2 border-b-1">
+                  <div className="col-span-1 self-center">
+                    <img
+                      src={item.images[0]}
+                      alt="Product Image"
+                      className="rounded w-full"
+                    />
                   </div>
-                </div>
-                <div className="col-span-3 pt-3">
-                  <div className="flex items-center text-sm justify-between">
-                    <span className="text-gray-500">
-                      {item.amount} x {numberFormat(item.unitPrice)}
+                  <div className="flex flex-col col-span-3 pt-2">
+                    <span className="text-gray-600 uppercase text-md font-semi-bold">
+                      {item.name}
                     </span>
-                    <span className="text-gray-700 font-semibold inline-block">
-                      {numberFormat(item.price)}
-                    </span>
+                    <div className="flex items-center pt-2">
+                      <p className="text-sm font-semibold capitalize leading-3 text-gray-500 pr-3">
+                        {item.color}
+                      </p>
+                      <p className="text-sm font-semibold uppercase leading-3 text-gray-500  border-l border-gray-300 pl-3">
+                        {item.size}
+                      </p>
+                    </div>
                   </div>
-                </div>
-              </li>
+                  <div className="col-span-3 pt-3">
+                    <div className="flex items-center text-sm justify-between">
+                      <span className="text-gray-500">
+                        {item.amount} x {numberFormat(item.unitPrice)}
+                      </span>
+                      <span className="text-gray-700 font-semibold inline-block">
+                        {numberFormat(item.price)}
+                      </span>
+                    </div>
+                  </div>
+                </li>
               </Link>
-
             ))}
           </ul>
           <div className="px-8 border-b">
@@ -325,6 +335,61 @@ const CheckoutForm = () => {
           <div className="font-semibold text-xl uppercase px-8 flex justify-between py-8 text-amber-500">
             <span>Total</span>
             <span>{numberFormat(subtotal + shippingFee)}</span>
+          </div>
+        </div>
+      </div>
+      {/* <!-- Modal --> */}
+      <div
+        className="modal fade fixed top-0 left-0 hidden w-full h-full outline-none overflow-x-hidden overflow-y-auto"
+        id="modalCheckoutSuccess"
+        tabIndex="-1"
+        aria-labelledby="modalCheckoutSuccessLabel"
+        aria-hidden="true"
+      >
+        <div className="modal-dialog modal-md modal-dialog-centered modal-dialog-scrollable relative w-auto pointer-events-none">
+          <div className="modal-content border-none shadow-lg relative flex flex-col w-full pointer-events-auto bg-white bg-clip-padding rounded-md outline-none text-current">
+            <div className="modal-header flex flex-shrink-0 items-center justify-between p-4 rounded-t-md">
+              <button
+                type="button"
+                className="btn-close box-content w-4 h-4 p-1 text-black border-none rounded-none opacity-50 focus:shadow-none focus:outline-none focus:opacity-100 hover:text-black hover:opacity-75 hover:no-underline"
+                data-bs-dismiss="modal"
+                aria-label="Close"
+              ></button>
+            </div>
+            <div className="modal-body relative text-center">
+              <div className="w-full px-3">
+                <i
+                  className={`fa fa-check-circle-o text-5xl text-amber-500`}
+                  aria-hidden="true"
+                ></i>
+                <p className="font-bold text-xl uppercase mt-5">
+                  Thank you for your order
+                </p>
+                <p className="text-base mt-2">
+                  Your order has been approved
+                </p>
+                <p className="text-base  mt-1">
+                  We'll send you an email with order details and tracking information.{" "} 
+                </p>
+              </div>
+              
+            </div>
+            <div className="modal-footer flex flex-shrink-0 flex-wrap items-center justify-between p-4 mt-2 rounded-b-md">
+              <button
+                type="button"
+                className="inline-block px-6 py-2.5  border border-amber-500 text-amber-600 font-medium text-xs leading-tight uppercase rounded shadow-md hover:border-amber-600 hover:shadow-lg focus:border-amber-600 focus:shadow-lg focus:outline-none focus:ring-0 active:border-amber-800 active:shadow-lg transition duration-150 ease-in-out"
+                onClick={goShopping}
+              >
+                Continue Shopping
+              </button>
+              <button
+                type="button"
+                className="inline-block px-6 py-2.5 bg-amber-500 text-white font-medium text-xs leading-tight uppercase rounded shadow-md hover:bg-amber-600 hover:shadow-lg focus:bg-amber-600 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-amber-700 active:shadow-lg transition duration-150 ease-in-out ml-1"
+                onClick={goListCustomerOrds}
+              >
+                View Order List
+              </button>
+            </div>
           </div>
         </div>
       </div>
