@@ -127,7 +127,7 @@ const SignUp = () => {
               <div className="flex -mx-3">
                 <div className="w-1/2 px-3 mb-5">
                   <label htmlFor="" className="text-xs font-semibold px-1">
-                    Username  
+                    Full Name  
                     <span className="text-red-500 ml-1">
                       *
                     </span>
@@ -143,7 +143,7 @@ const SignUp = () => {
                                             ${errors.name &&
                         "border-red-600 focus:ring-red-500 focus:border-red-600 border-1"
                         }`}
-                      placeholder="username"
+                      placeholder="full name"
                       id="name"
                       name="name"
                       {...register("name", { required: true })}
@@ -151,7 +151,7 @@ const SignUp = () => {
                   </div>
                   {errors.name && errors.name.type === "required" && (
                     <p className="text-red-500 mt-3 text-xs italic">
-                      value required
+                      Value required
                     </p>
                   )}
                 </div>
@@ -231,7 +231,7 @@ const SignUp = () => {
                   </div>
                   {errors.password && errors.password.type === "required" && (
                       <p className="mt-3 text-red-500 text-xs italic">
-                        value required
+                        Value required
                       </p>
                   )}
                   {errors.password && errors.password.type === "minLength" && (
@@ -247,7 +247,7 @@ const SignUp = () => {
                 </div>
                 <div className="w-1/2 px-3 mb-5">
                   <label htmlFor="" className="text-xs font-semibold px-1">
-                    Confirm password
+                    Confirm Password
                     <span className="text-red-500 ml-1">
                       *
                     </span>
@@ -275,7 +275,7 @@ const SignUp = () => {
                   </div>
                   {errors.confirmPassword && errors.confirmPassword.type === "required" && (
                       <p className="mt-3 text-red-500 text-xs italic">
-                        value required
+                        Value required
                       </p>
                   )}
                   {errors.confirmPassword && errors.confirmPassword.type === "minLength" && (
