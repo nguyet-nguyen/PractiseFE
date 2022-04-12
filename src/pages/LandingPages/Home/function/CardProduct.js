@@ -65,14 +65,10 @@ const CardProduct = ({proList, homePage, hotDeal}) => {
                                 <div className="flex justify-center items-center px-2 pb-2 card-icon absolute">
                                     <div className="w-full p-2">
                                         <Link to={`/all-items/item-detail/${product.id}`}
-                                              className="block w-9 bg-white hover:bg-amber-600
+                                              className="block w-9 bg-white hover:bg-amber-600 mx-auto
                                             border-2 border-amber-600 hover:border-inherit p-1 rounded
                                             uppercase font-small icon-seemore">
-                                            <svg className="h-6 w-6 stroke-amber-600"
-                                                 fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-                                                <path strokeLinecap="round" strokeLinejoin="round"
-                                                      d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v3m0 0v3m0-3h3m-3 0H7"/>
-                                            </svg>
+                                            <i className="fa fa-eye text-amber-600 font-bold pl-1 " aria-hidden="true"></i>
                                         </Link>
                                     </div>
 
@@ -80,11 +76,10 @@ const CardProduct = ({proList, homePage, hotDeal}) => {
                                 {hotDeal ==true ?
 
                                     <span
-                                        className="px-4 z-50 py-2 rounded-full border border-white absolute top-1 right-1 bg-amber-600
-                                            text-white font-semibold text-sm flex align-center flex items-center
+                                        className="px-2 z-50 p-1 rounded-full border border-white absolute top-1 right-1 bg-amber-600
+                                            text-white font-semibold text-sm flex align-center flex items-center opacity-90
                                             w-max cursor-pointer active:bg-gray-300 transition duration-300 ease">
-                                    <i className="fa fa-shopping-cart mr-2" aria-hidden="true"></i>
-                                        {product.totalQuantity}
+                                        {product.totalQuantity} sold
                                           </span>
                                     : null
                                 }

@@ -134,9 +134,10 @@ input[type=number] {
     animation: spinner 1.5s linear infinite;
     z-index: 100;
 }
-.icon-seemore:hover svg {
-    stroke: white;
+.icon-seemore:hover i {
+color: white;
 }
+
 @-webkit-keyframes spinner {
     0% {
         -webkit-transform: rotate(0deg);
