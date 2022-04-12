@@ -213,7 +213,7 @@ const CheckoutForm = () => {
                     </div>
                     <input
                       type="text"
-                      className={`w-6/7 pl-4 py-2 outline-none`}
+                      className={`w-80 pl-4 py-2 outline-none`}
                       placeholder="Email"
                       id="recipientEmail"
                       name="recipientEmail"
@@ -244,7 +244,7 @@ const CheckoutForm = () => {
                     </div>
                     <input
                       type="text"
-                      className={`w-6/7 pl-4 py-2 outline-none`}
+                      className={`w-80 pl-4 py-2 outline-none`}
                       placeholder="Address"
                       id="addressDelivery"
                       name="addressDelivery"
