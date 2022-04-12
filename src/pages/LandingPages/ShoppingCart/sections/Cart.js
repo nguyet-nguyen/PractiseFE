@@ -10,9 +10,10 @@ import {
 
 const ShoppingCart = () => {
   const [itemsInCart, setItemsInCart] = useState([]);
-  const [subtotal, setSubtotal] = useState();
+  const [subtotal, setSubtotal] = useState(0);
   const [shippingFee, setShippingFee] = useState(0);
   const [idItemDel, setIdItemDel] = useState();
+  const [qtyTotal, setQtyTotal] = useState(0);
 
   useEffect(() => {
     getAllItems();
@@ -100,11 +101,12 @@ const ShoppingCart = () => {
 
   // Update shipping fee
   const updateShippingFee = (allItems) => {
-    const qtyTotal = allItems.reduce(
+    const qty = allItems.reduce(
       (partialSum, item) => partialSum + item.amount,
       0
     );
-    if (qtyTotal < 5) {
+    setQtyTotal(qty);
+    if (qty < 5) {
       setShippingFee(20);
     } else {
       setShippingFee(0);
@@ -315,10 +317,11 @@ const ShoppingCart = () => {
                   {shippingFee == 0 ? "Free" : numberFormat(shippingFee)}
                 </p>
               </div>
-              <p className="text-sm  font-semibold leading-normal italic text-amber-700 mb-3 ">
+              {qtyTotal < 5 && (<p className="text-sm  font-semibold leading-normal italic text-amber-700 mb-3 ">
                 ( Shipping is free if your order contains at least 5 quantities.
                 )
-              </p>
+              </p>) }
+             
             </div>
             <div>
               <div className="flex items-center pb-6 justify-between lg:pt-12 py-5 pt-20 border-t border-gray-300">
