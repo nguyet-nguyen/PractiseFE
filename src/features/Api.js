@@ -158,9 +158,9 @@ export const filterOrdByStatus = (id) => {
 };
 
 // ----------------------admin----------------------------------
-export const getAllUsers = (page, limit) => {
+export const getAllUsers = () => {
   try {
-    return apiadmin.get(`/admin/users?limit=${limit}&page=${page}`);
+    return apiadmin.get(`/admin/users`);
   } catch (error) {
     console.log(error);
   }
@@ -184,9 +184,9 @@ export const CreateProducts = (data) => {
   }
 }
 
-export const getAllProductsAdmin = (page, limit) => {
+export const getAllProductsAdmin = () => {
   try {
-    return apiadmin.get(`/admin/products?limit=${limit}&page=${page}`);
+    return apiadmin.get(`/admin/products?limit`);
   } catch (error) {
     console.log(error);
   }
@@ -217,9 +217,9 @@ export const UpdateProductItems = (data, id) => {
 }
 
 // get all order list
-export const getAllOrderListAdmin = (page, limit) => {
+export const getAllOrderListAdmin = () => {
   try {
-    return apiadmin.get(`/admin/orders?limit=${limit}&page=${page}`);
+    return apiadmin.get(`/admin/orders`);
   } catch (error) {
     console.log(error);
   }

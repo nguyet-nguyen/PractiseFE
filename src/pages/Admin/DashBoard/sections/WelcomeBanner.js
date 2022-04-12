@@ -37,7 +37,7 @@ function WelcomeBanner() {
     let lineChartData=[];
 
     if(lineChart) {
-        lineChart.reverse().forEach(chart  => {
+        lineChart.forEach(chart  => {
             lineChartLables.push(chart.year +"/"+ chart.month);
             lineChartData.push(chart.revenue);
         })
@@ -62,7 +62,7 @@ function WelcomeBanner() {
     };
 
     const dataLine = {
-        labels: lineChartLables,
+        labels: lineChartLables.reverse(),
         datasets: [
             {
                 label: "monthly revenue",

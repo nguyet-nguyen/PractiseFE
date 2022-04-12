@@ -71,19 +71,23 @@ html {
     border-color: rgb(217 119 6);
     color: rgb(180 83 9);
 }
+
 .productListPage {
     position: relative;
 }
+
 .buttonSideNav {
     position: sticky;
     top: 50%;
     left: 0;
     z-index: 500;
-    transform: translate(-16px,0);
+    transform: translate(-16px, 0);
 }
+
 .ItemDetail {
-    box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
 }
+
 .breadcrumbsItemDetail {
     background-image: url('/src/assets/images/logos/banner-product-item.PNG');
 }
@@ -121,23 +125,29 @@ input[type=number] {
     background-color: black;
     opacity: 0.7;
 }
+
 .loading-data {
     position: absolute;
     top: 50%;
     left: 50%;
-    transform: translate(-50%,-50%);
+    transform: translate(-50%, -50%);
     z-index: 100;
 }
+
 .loader {
     border-top-color: #3498db;
     -webkit-animation: spinner 1.5s linear infinite;
     animation: spinner 1.5s linear infinite;
     z-index: 100;
 }
-.icon-seemore:hover i {
-color: white;
-}
 
+.icon-seemore:hover i {
+    color: white;
+}
+.rdt_TableCell,.rdt_TableHeadRow {
+    font-size: 16px;
+    text-align: center;
+}
 @-webkit-keyframes spinner {
     0% {
         -webkit-transform: rotate(0deg);
@@ -165,8 +175,23 @@ color: white;
         transform: rotate(360deg)
     }
 }
+
 .image-detail {
     height: 600px;
+}
+.rdt_TableCell {
+    padding-top: 4px;
+    padding-bottom: 4px;
+    display: flex;
+    justify-content: center;
+}
+.rdt_TableCol {
+    display: flex;
+    justify-content: center;
+}
+.rdt_TableCell img {
+    height: 65px;
+    width: 65px;
 }
 /*----------------------------------------*/
 .dataDoughnut canvas {

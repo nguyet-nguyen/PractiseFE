@@ -2,28 +2,27 @@ import React, {useEffect, useState} from "react";
 import {getAllProductsAdmin, getAllUsers} from "../../../../features/Api";
 import {Link} from "react-router-dom";
 import Loading from "../../../../Loading";
+import {numberFormat} from "../../../LandingPages/Home/function/FormatMoney";
+import DataTable from "react-data-table-component";
 
 const UsersTable = () => {
-    const [users, setUsers] = useState();
+    const [users, setUsers] = useState([]);
     const [searchData, setSearchList] = useState();
-    const [page, setPage] = useState(1);
-    const [pageItem, setPageItem] = useState(1);
+    const [pending, setPending] = useState(true);
+
     useEffect(() => {
-        getAllUsers(pageItem, 5)
+        getAllUsers()
             .then((res) => {
                 setUsers(res.data.data);
                 setSearchList(res.data.data);
-                if (res.data.total % 5 == 0) {
-                    setPage(res.data.total / 5);
-                } else {
-                    setPage(Math.floor((res.data.total / 5)) + 1);
-                }
+                setPending(false);
             })
             .catch(err => {
                 console.log(err);
+                setPending(false);
             })
     }, [getAllUsers]);
-    console.log(page)
+
     const searchProduct = (e) => {
         let searchList = [];
         let searchKey = e.target.value;
@@ -44,53 +43,79 @@ const UsersTable = () => {
     }
 
 
-    const changePage = (item) => {
-        setPageItem(item)
-        getAllUsers(item, 5)
-            .then((response) => {
-                setUsers(response.data.data);
-                setSearchList(response.data.data);
-            })
-            .catch((err) => {
-                console.warn(err);
-            });
-        console.log(item);
-    }
-    const changePagePrevious = (item) => {
-        if (item >= 1) {
-            setPageItem(item)
-            getAllUsers(item, 5)
-                .then((response) => {
-                    setUsers(response.data.data);
-                    setSearchList(response.data.data);
-                })
-                .catch((err) => {
-                    console.warn(err);
-                });
+    const columns = [
+        {
+            name: 'No',
+            sortable: true,
+            width: '100px',
+            selector: row => row.no,
+        },
+        {
+            name: 'Avatar',
+            selector: row => <div><img src={row.avatar}/></div>,
+            disableFilters: true,
+            width: "120px"
+        },
+        {
+            name: 'Name',
+            sortable: true,
+            selector: row => row.name,
+            width: "150px"
+        },
+        {
+            name: 'Eamil',
+            sortable: true,
+            selector: row => row.email,
+            width: "280px"
+        },
+        {
+            name: 'Phone',
+            sortable: true,
+            width: '170px',
+            selector: row => row.phone,
+        },
+        {
+            name: 'Roles',
+            sortable: true,
+            selector: row => row.roles,
+            width: "130px"
+        },
+        {
+            name: 'Address',
+            sortable: true,
+            selector: row => row.address,
+            width: "350px"
+        },
+    ];
+    const customStyles = {
+        headCells: {
+            style: {
+                color: "white",
+                background: "rgb(30 41 59)",
+                font: "bold"
+            },
+        },
+    };
+    const data = []
+    for (let i = 0; i < users.length; i++) {
+        const user = {
+            no: i + 1,
+            id:  users[i].id,
+            avatar:  users[i].image,
+            email: users[i].email,
+            name: users[i].name,
+            phone: users[i].phone,
+            roles: users[i].roles,
+            address: users[i].address,
         }
-        console.log(item);
+        data.push(user);
     }
-    const changePageNext = (item) => {
-        if (item <= page) {
-            setPageItem(item)
-            getAllUsers(item, 5)
-                .then((response) => {
-                    setUsers(response.data.data);
-                    setSearchList(response.data.data);
-                })
-                .catch((err) => {
-                    console.warn(err);
-                });
-        }
-        console.log(item)
-    }
-    console.log(users);
     return (
         <>
             <div className="px-4 sm:px-6 lg:px-8 py-8 w-full max-w-9xl mx-auto">
                 <h2 className="font-bold text-4xl text-slate-800 uppercase mb-5">
                     <i className="fa fa-users" aria-hidden="true"></i> users list</h2>
-                <div className="flex space-x-2 justify-between">
+                <div className="flex space-x-2 justify-between mb-5">
                     <Link to="/admin/sign-up"
                           type="button"
                           data-mdb-ripple="true"
@@ -134,195 +159,16 @@ const UsersTable = () => {
                         </div>
                     </div>
                 </div>
-                {users ?
-                    <div className="flex flex-col">
-                        <div className="overflow-x-auto sm:-mx-6 lg:-mx-8">
-                            <div className="py-8 inline-block min-w-full sm:px-6 lg:px-8">
-                                <div className="overflow-hidden rounded-md">
-                                    <table className="min-w-full text-center">
-                                        <thead className="border-b bg-slate-800">
-                                        <tr>
-                                            <th
-                                                scope="col"
-                                                className="text-sm font-medium text-white px-6 py-4 uppercase">
-                                                No
-                                            </th>
-                                            <th
-                                                scope="col"
-                                                className="text-sm font-medium text-white px-6 py-4 uppercase">
-                                                Avarta
-                                            </th>
-                                            <th
-                                                scope="col"
-                                                className="text-sm text-left font-medium text-white px-6 py-4 uppercase">
-                                                Name
-                                            </th>
-                                            <th
-                                                scope="col"
-                                                className="text-sm font-medium text-white px-6 py-4 uppercase">
-                                                Email
-                                            </th>
-                                            <th
-                                                scope="col"
-                                                className="text-sm font-medium text-white px-6 py-4 uppercase">
-                                                Phone
-                                            </th>
-                                            <th
-                                                scope="col"
-                                                className="text-sm font-medium text-white px-6 py-4 uppercase">
-                                                roles
-                                            </th>
-
-                                            <th
-                                                scope="col"
-                                                className="text-sm font-medium text-white px-6 py-4 uppercase">
-                                                address
-                                            </th>
-
-                                        </tr>
-                                        </thead>
-                                        <tbody>
-                                        {users && users.map((user, index) => (
-                                            <tr className={`${user.roles == "ROLE_ADMIN" ? "bg-slate-100" : "bg-white"}
-                                         border-b-2 border-black-800 border-solid`}>
-                                                <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
-                                                    {index + 1}
-                                                </td>
-                                                <td className="text-sm h-20 text-gray-900 font-light py-4 whitespace-nowrap">
-                                                    <img
-                                                        src={user.image}
-                                                        className="mx-auto w-12 h-full rounded-lg transition-shadow ease-in-out duration-300 shadow-none hover:shadow-xl"
-                                                        alt=""
-                                                    />
-
-                                                </td>
-                                                <td className="text-sm text-gray-900 text-left font-light px-6 py-4 whitespace-nowrap">
-                                                    {user.name}
-                                                </td>
-                                                <td className="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
-                                                    {user.email}
-                                                </td>
-                                                <td className="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
-                                                    {user.phone}
-                                                </td>
-                                                <td className="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
-                                                    {user.roles == "ROLE_ADMIN" ?
-                                                        <span
-                                                            className="inline-block px-6 py-2.5 bg-green-500 text-white font-medium
-                                                            text-xs leading-tight uppercase rounded shadow-md hover:bg-green-600
-                                                             hover:shadow-lg focus:bg-green-600 focus:shadow-lg focus:outline-none
-                                                             focus:ring-0 active:bg-green-700 active:shadow-lg transition duration-150
-                                                              ease-in-out">Administrator
-                                                    </span>
-                                                        :
-                                                        <span
-                                                                className="inline-block px-6 py-2.5 bg-yellow-500 text-white
-                                                                font-medium text-xs leading-tight uppercase rounded shadow-md
-                                                                hover:bg-yellow-600 hover:shadow-lg focus:bg-yellow-600 focus:shadow-lg
-                                                                \focus:outline-none focus:ring-0 active:bg-yellow-700 active:shadow-lg
-                                                                transition duration-150 ease-in-out">
-                                                            Buyer
-                                                        </span>
-                                                    }
-                                                </td>
-
-                                                <td className="text-sm w-50 text-gray-900 font-light px-6 py-4
-                                            whitespace-normal">
-                                                    {user.address}
-                                                </td>
-
-                                            </tr>
-                                        ))}
-
-                                        </tbody>
-                                        <tfoot className="border-b bg-slate-800">
-                                        <tr>
-                                            <th
-                                                scope="col"
-                                                className="text-sm font-medium text-white px-6 py-4 uppercase">
-                                                no
-                                            </th>
-                                            <th
-                                                scope="col"
-                                                className="text-sm font-medium text-white px-6 py-4 uppercase">
-                                                avatar
-                                            </th>
-                                            <th
-                                                scope="col"
-                                                className="text-left text-sm font-medium text-white px-6 py-4 uppercase">
-                                                Name
-                                            </th>
-                                            <th
-                                                scope="col"
-                                                className="text-sm font-medium text-white px-6 py-4 uppercase">
-                                                Email
-                                            </th>
-                                            <th
-                                                scope="col"
-                                                className="text-sm font-medium text-white px-6 py-4 uppercase">
-                                                Phone
-                                            </th>
-                                            <th
-                                                scope="col"
-                                                className="text-sm font-medium text-white px-6 py-4 uppercase">
-                                                roles
-                                            </th>
-                                            <th
-                                                scope="col"
-                                                className="text-sm font-medium text-white px-6 py-4 uppercase">
-                                                address
-                                            </th>
-
-                                        </tr>
-                                        </tfoot>
-                                    </table>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    : <Loading/>}
+                <DataTable
+                    columns={columns}
+                    data={data}
+                    pagination
+                    customStyles={customStyles}
+                    progressPending={pending}
+                    // progressComponent={<Loading />}
+                />
             </div>
 
-            <div className="bg-white px-4 flex items-center justify-between sm:px-6">
-                <div className="flex-1 flex justify-between sm:hidden">
-                    <a href="#" className="relative inline-flex items-center px-4 py-2 border border-gray-300
-                    text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50">
-                        Previous
-                    </a>
-                    <a href="#" className="ml-3 relative inline-flex items-center px-4 py-2 border border-gray-300
-                     text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50">
-                        Next
-                    </a>
-                </div>
-                <div className="hidden sm:flex-1 sm:flex sm:justify-end sm:justify-end">
-                    <div>
-                        <nav
-                            className="relative z-0 inline-flex rounded-md shadow-sm -space-x-px"
-                            aria-label="Pagination">
-                            <button
-                                onClick={() => changePagePrevious(pageItem - 1)}
-                                className="relative inline-flex items-center px-2 py-2 rounded-l-md border border-slate-600
-                                bg-white text-sm font-medium text-gray-500 hover:text-white hover:bg-slate-500">
-                                <span className="sr-only">Previous</span>
-                                <i className="fa fa-angle-double-left" aria-hidden="true"></i>
-                            </button>
-                            {Array.from(Array(page), (e, item) => {
-                                return <button
-                                    onClick={() => changePage(item + 1)}
-                                    className={`z-10 border-slate-600 relative
-                                 inline-flex items-center px-4 py-2 border text-sm font-medium hover:text-white 
-                                 hover:bg-slate-500 ${(pageItem == (item + 1)) ? "text-white bg-slate-500" : "text-slate-600 bg-white"}`}>{item + 1}
-                                </button>
-                            })}
-                            <button onClick={() => changePageNext(pageItem + 1)}
-                                    className="relative inline-flex items-center px-2 py-2 rounded-r-md border border-slate-600
-                                bg-white text-sm font-medium text-gray-500 hover:text-white hover:bg-slate-500">
-                                <i className="fa fa-angle-double-right" aria-hidden="true"></i>
-                            </button>
-                        </nav>
-                    </div>
-                </div>
-            </div>
         </>
 
     )
