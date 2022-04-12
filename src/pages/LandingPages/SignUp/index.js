@@ -92,7 +92,7 @@ const SignUp = () => {
            navigate("/pages/authentication/sign-in");
          })
          .catch((err) => {
-           alert(err.data);
+           console.log(err)
          });
    } else {
      setErrConfirmPass(true);

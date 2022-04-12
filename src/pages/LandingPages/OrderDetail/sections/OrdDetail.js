@@ -93,40 +93,45 @@ const OrdDetail = () => {
             </div>
             <div className="bg-gray-100 p-10">
               <div className="flex items-center justify-around w-full md:pt-2 pt-6">
-                <p className="text-lg capitalize font-black leading-none text-gray-800 ">
-                  Pending
                   {order.status == 1 && (
+
+                      <p className="text-lg capitalize font-black leading-none text-gray-800 ">
+                  Pending
                     <span className="bg-amber-500 rounded-lg text-sm p-1 ml-2">
                       <i
                         className={`fa fa-check text-white text-center`}
                         aria-hidden="true"
                       ></i>
                     </span>
-                  )}
                 </p>
-                <p className="text-lg capitalize font-black leading-none text-gray-800 ">
-                  Shipping
+                  )}
                   {order.status == 2 && (
+
+                  <p className="text-lg capitalize font-black leading-none text-gray-800 ">
+                  Shipping
                     <span className="bg-amber-500 rounded-lg text-sm p-1 ml-2">
                       <i
                         className={`fa fa-check text-white text-center`}
                         aria-hidden="true"
                       ></i>
                     </span>
-                  )}
                 </p>
-                <p className="text-lg capitalize font-black leading-none text-gray-800 ">
-                  Completed
+                  )}
+
                   {order.status == 4 && (
+
+                  <p className="text-lg capitalize font-black leading-none text-gray-800 ">
+                  Completed
                     <span className="bg-amber-500 rounded-lg text-sm p-1 ml-2">
                       <i
                         className={`fa fa-check text-white text-center`}
                         aria-hidden="true"
                       ></i>
                     </span>
-                  )}
                 </p>
-                {order.status == 3 && (
+                  )}
+
+                  {order.status == 3 && (
                   <p className="text-lg uppercase font-black leading-none text-gray-800 ">
                     Order Canceled
                     <i
