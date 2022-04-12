@@ -235,10 +235,9 @@ export const UpdateStatusOrderList = (data, id) => {
 }
 
 // report
-export const getReports = () => {
+export const getReports = (data) => {
   try {
-      return apiadmin.get("/admin/reports");
-
+      return apiadminnoFormdata.post("/admin/reports",data);
   } catch (error) {
       console.log(error);
   }

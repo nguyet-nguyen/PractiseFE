@@ -193,6 +193,10 @@ input[type=number] {
     height: 65px;
     width: 65px;
 }
+#actionId {
+    display: flex;
+    align-items: end;
+}
 /*----------------------------------------*/
 .dataDoughnut canvas {
     height: 450px !important;
