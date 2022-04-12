@@ -2,9 +2,7 @@ import Loading from "Loading";
 import React, { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import "react-toastify/dist/ReactToastify.css";
-import {
-  getUserOrderDetail
-} from "../../../../features/Api";
+import { getUserOrderDetail } from "../../../../features/Api";
 import { numberFormat } from "../../Home/function/FormatMoney";
 
 const OrdDetail = () => {
@@ -91,58 +89,51 @@ const OrdDetail = () => {
                 </div>
               </div>
             </div>
-            <div className="bg-gray-100 p-10">
-              <div className="flex items-center justify-around w-full md:pt-2 pt-6">
-
-                  {order.status != 3 && (
-                      <p className="text-lg capitalize font-black leading-none text-gray-800 ">
-                  Pending
-                          {order.status == 1 && (
-
-                              <span className="bg-amber-500 rounded-lg text-sm p-1 ml-2">
-                      <i
-                        className={`fa fa-check text-white text-center`}
-                        aria-hidden="true"
-                      ></i>
-                    </span>
-                          )}
-                      </p>
-                  )}
-
-                  {order.status != 3 && (
-
+            <div className="bg-gray-100 py-2 px-10">
+              <div className="flex items-center justify-around w-full pt-2">
+                {order.status != 3 && (
                   <p className="text-lg capitalize font-black leading-none text-gray-800 ">
-                  Shipping
-                      {order.status == 2 && (
-
-                          <span className="bg-amber-500 rounded-lg text-sm p-1 ml-2">
-                      <i
-                        className={`fa fa-check text-white text-center`}
-                        aria-hidden="true"
-                      ></i>
-                    </span>
-                      )}
+                    Approved
+                    {order.status == 1 && (
+                      <span className="bg-amber-500 rounded-lg text-sm p-1 ml-2">
+                        <i
+                          className={`fa fa-check text-white text-center`}
+                          aria-hidden="true"
+                        ></i>
+                      </span>
+                    )}
                   </p>
-                  )}
+                )}
 
-
-                  {order.status != 3 && (
-                      <p className="text-lg capitalize font-black leading-none text-gray-800 ">
-                  Completed
-                      {order.status == 4 && (
-
-                          <span className="bg-amber-500 rounded-lg text-sm p-1 ml-2">
-                      <i
-                        className={`fa fa-check text-white text-center`}
-                        aria-hidden="true"
-                      ></i>
-                    </span>
-                      )}
-
+                {order.status != 3 && (
+                  <p className="text-lg capitalize font-black leading-none text-gray-800 ">
+                    Shipping
+                    {order.status == 2 && (
+                      <span className="bg-amber-500 rounded-lg text-sm p-1 ml-2">
+                        <i
+                          className={`fa fa-check text-white text-center`}
+                          aria-hidden="true"
+                        ></i>
+                      </span>
+                    )}
                   </p>
-                  )}
+                )}
 
-                  {order.status == 3 && (
+                {order.status != 3 && (
+                  <p className="text-lg capitalize font-black leading-none text-gray-800 ">
+                    Completed
+                    {order.status == 4 && (
+                      <span className="bg-amber-500 rounded-lg text-sm p-1 ml-2">
+                        <i
+                          className={`fa fa-check text-white text-center`}
+                          aria-hidden="true"
+                        ></i>
+                      </span>
+                    )}
+                  </p>
+                )}
+
+                {order.status == 3 && (
                   <p className="text-lg uppercase font-black leading-none text-gray-800 ">
                     Order Canceled
                     <i
@@ -201,7 +192,7 @@ const OrdDetail = () => {
                       <p className="text-md uppercase font-black leading-none text-gray-800 ">
                         {item.name}
                       </p>
-                      <p className="text-md uppercase font-black leading-none text-gray-800 ">
+                      <p className="text-md uppercase font-black leading-none text-amber-800 ">
                         {numberFormat(item.price)}
                       </p>
                     </div>
@@ -209,10 +200,10 @@ const OrdDetail = () => {
                       {numberFormat(item.unitPrice)} x {item.amount}
                     </p>
                     <div className="flex items-center ">
-                      <p className="text-sm font-semibold leading-3 text-gray-500  pr-3">
+                      <p className="text-sm font-semibold capitalize leading-3 text-gray-500  pr-3">
                         {item.color}
                       </p>
-                      <p className="text-sm font-semibold leading-3 text-gray-500  border-l border-gray-300 pl-3">
+                      <p className="text-sm font-semibold uppercase leading-3 text-gray-500  border-l border-gray-300 pl-3">
                         {item.size}
                       </p>
                     </div>

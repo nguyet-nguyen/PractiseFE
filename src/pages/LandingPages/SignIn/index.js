@@ -108,7 +108,7 @@ const SignIn = () => {
                                                 style={{ transition: "all .15s ease" }}
                                                 id="email"
                                                 name='email'
-                                                placeholder="email"
+                                                placeholder="Email"
                                                 {...register("email", {
                                                     required: true,
                                                     pattern: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i
@@ -142,7 +142,7 @@ const SignIn = () => {
                                                 {...register("password", { required: true, minLength: 8, maxLength: 20 })}
                                             />
                                             {errors.password && errors.password.type === "required" &&
-                                                <p className="mt-3 text-red-500 text-xs italic">value required</p>}
+                                                <p className="mt-3 text-red-500 text-xs italic">Value required</p>}
                                             {errors.password && errors.password.type === 'minLength' &&
                                                 <p className="mt-3 text-red-500 text-xs italic">no less than 8
                                                     characters</p>}
@@ -177,7 +177,6 @@ const SignIn = () => {
                     </div>
                 </div>
             </section>
-            <ToastContainer />
         </main>
     );
 }

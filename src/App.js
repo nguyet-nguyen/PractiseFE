@@ -9,6 +9,7 @@ import theme from "assets/theme";
 
 // Practise React React routes
 import routes from "routes";
+import { ToastContainer } from "react-toastify";
 
 import ProductDetail from "pages/LandingPages/ProductDetail";
 import ProductsPage from "layouts/pages/admin/products";
@@ -162,6 +163,8 @@ export default function App() {
                     />
 
                 </Routes>
+                <ToastContainer />
+
             </ThemeProvider>
 
 

@@ -9,7 +9,6 @@ import "react-toastify/dist/ReactToastify.css";
 import CustomPopupMessage from "../../../CustomPopupMess";
 
 const ItemDetail = () => {
-
     let params = useParams();
     const [itemDetail, setItemDetail] = useState();
     const [itemsInCart, setItemsInCart] = useState([]);
@@ -187,10 +186,10 @@ const ItemDetail = () => {
                             <div className="border-solid border-b-2 border-gray-100 my-5"></div>
                             <div className="flex">
                                 <span className="mr-2 text-base text-gray-500">Color: </span>
-                                <span className="text-base text-amber-700">{itemDetail.color}</span>
+                                <span className="text-base capitalize text-amber-700">{itemDetail.color}</span>
                             </div>
                             <div className="flex">
-                                <span className="mr-2 text-base text-gray-500">Category: </span>
+                                <span className="mr-2 capitalize text-base text-gray-500">Category: </span>
                                 <span className="text-base text-amber-700">{itemDetail.category}</span>
                             </div>
                             <div className="flex justify-between my-6 items-center">
@@ -221,8 +220,9 @@ const ItemDetail = () => {
                                     </div>
                                 </div>
                                 <div className="flex">
-                                    <span className="mr-2 text-base text-gray-500">Amount items:</span>
-                                    {itemDetail && itemDetail.items.map((size) => (
+                                    {sizeAmount==0 && <span className="mr-2 text-base rotate-12 font-semibold text-red-500 border-2 border-red-500 p-2 uppercase">Sold out</span>}
+                                    {sizeAmount != 0 && <span className="mr-2 text-base text-gray-500">Amount items:</span>}
+                                    {itemDetail && sizeAmount !=0 && itemDetail.items.map((size) => (
                                         <span className="text-base text-bold text-amber-700">
                                             {size.id == sizeState && size.amount}
                                         </span>
@@ -270,10 +270,11 @@ const ItemDetail = () => {
                                 <button
                                     type="button"
                                     onClick={() => onAddToCart(itemDetail)}
+                                    disabled= {sizeAmount==0}
                                     className="inline-block px-6 py-4 border-2 border-amber-600 text-amber-600 font-semibold text-base leading-tight
                                  uppercase rounded-full w-full
                                 hover:bg-amber-600 hover:text-white focus:outline-none focus:ring-0
-                                transition duration-150 ease-in-out">
+                                transition duration-150 ease-in-out disabled:bg-gray-300 disabled:text-white disabled:border-gray-300">
                                     Add to cart
                                 </button>
                             </div>

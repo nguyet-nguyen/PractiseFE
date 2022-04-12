@@ -89,7 +89,7 @@ const ShoppingCart = () => {
     getAllItemsInCart()
       .then((res) => {
         setItemsInCart(res.data);
-  
+
         updateShippingFee(res.data);
         updateTotal(res.data);
       })
@@ -120,7 +120,7 @@ const ShoppingCart = () => {
     setSubtotal(sum);
   };
 
-  return (
+  return itemsInCart.length > 0 ? (
     <>
       <div className="px-4 md:px-3">
         <p className="lg:text-4xl text-3xl font-black leading-10 text-[#63584c] py-3">
@@ -170,9 +170,11 @@ const ShoppingCart = () => {
               </div>
               <div className="md:pl-3 lg:ml-7 md:w-8/12 2xl:w-3/4 flex flex-col justify-center">
                 <div className="flex items-center justify-between w-full md:pt-0 pt-4">
-                  <p className="text-lg uppercase font-black leading-none text-gray-800 ">
-                    {item.name}
-                  </p>
+                  <Link to={`/all-items/item-detail/${item.idProduct}`}>
+                    <p className="text-lg uppercase font-black leading-none text-gray-800 ">
+                      {item.name}
+                    </p>
+                  </Link>
 
                   {/* Input quantity */}
                   <div
@@ -214,10 +216,10 @@ const ShoppingCart = () => {
                   {numberFormat(item.unitPrice)}
                 </p>
                 <div className="flex items-center pb-8">
-                  <p className="text-sm font-semibold leading-3 text-gray-500  pr-3">
+                  <p className="text-sm font-semibold capitalize leading-3 text-gray-500  pr-3">
                     {item.color}
                   </p>
-                  <p className="text-sm font-semibold leading-3 text-gray-500  border-l border-gray-300 pl-3">
+                  <p className="text-sm font-semibold uppercase leading-3 text-gray-500  border-l border-gray-300 pl-3">
                     {item.size}
                   </p>
                 </div>
@@ -313,6 +315,10 @@ const ShoppingCart = () => {
                   {shippingFee == 0 ? "Free" : numberFormat(shippingFee)}
                 </p>
               </div>
+              <p className="text-sm  font-semibold leading-normal italic text-amber-700 mb-3 ">
+                ( Shipping is free if your order contains at least 5 quantities.
+                )
+              </p>
             </div>
             <div>
               <div className="flex items-center pb-6 justify-between lg:pt-12 py-5 pt-20 border-t border-gray-300">
@@ -334,6 +340,27 @@ const ShoppingCart = () => {
         </div>
       </div>
     </>
+  ) : (
+    <div className="text-center">
+      <i
+        className={`fa fa-shopping-cart mr-7 text-9xl text-amber-500`}
+        aria-hidden="true"
+      ></i>
+      <p className="font-bold text-2xl capitalize mt-7">Your cart is empty</p>
+      <p className="font-bold text-lg text-gray-400 mt-3 break-all">
+        Looks like you haven't added anything to your cart yet
+      </p>
+      <div className="py-6 px-3 mt-32 sm:mt-0">
+        <Link
+          to="/all-items"
+          className="bg-amber-500 active:bg-amber-600 w-1/4 h-10 py-2.5 uppercase text-white font-bold hover:shadow-md shadow text-sm   rounded-md outline-none focus:outline-none sm:mr-2 mb-1"
+          type="button"
+          style={{ transition: "all .15s ease" }}
+        >
+          Shop Now
+        </Link>
+      </div>
+    </div>
   );
 };
 
