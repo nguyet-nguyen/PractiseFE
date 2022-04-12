@@ -512,7 +512,6 @@ const SignUp = () => {
           </form>
         </div>
       </div>
-      <ToastContainer />
     </div>
   );
 };

@@ -177,7 +177,6 @@ const SignIn = () => {
                     </div>
                 </div>
             </section>
-            <ToastContainer />
         </main>
     );
 }
