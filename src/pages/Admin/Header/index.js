@@ -15,19 +15,8 @@ function Header({sidebarOpen, setSidebarOpen}) {
         // }`}>
             <header className={`sticky top-0 border-b z-30 bg-slate-900 border-slate-800 text-white`}>
             <div className="px-4 sm:px-6 lg:px-8">
-                <div className="flex items-center justify-end h-16 -mb-px">
+                <div className="flex items-center justify-end h-10 -mb-px">
 
-                    <button type="button"
-                            onClick={changeTheme}
-                            className="inline-block  py-2.5 text-blue-400 font-medium text-xl
-                            leading-tight mr-4">
-                        {localStorage.getItem("theme") == "true" ?
-                            <i className="fa fa-sun-o" aria-hidden="true"></i>
-                            :
-                            <i className="fa fa-moon-o" aria-hidden="true"></i>
-                        }
-
-                    </button>
                     {/* Header: Left side */}
                     <div className="flex">
 
