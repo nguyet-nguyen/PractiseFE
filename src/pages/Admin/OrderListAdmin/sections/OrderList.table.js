@@ -23,16 +23,16 @@ const OrderListTable = () => {
     handleSubmit,
     formState: { errors },
   } = useForm();
-
+let itempage = 5;
   useEffect(() => {
-    getAllOrderListAdmin(pageItem, 2)
+    getAllOrderListAdmin(pageItem, itempage)
       .then((res) => {
         setOrderlist(res.data.data);
         setSearchList(res.data.data);
-        if (res.data.total % 2 == 0) {
+        if (res.data.total % itempage == 0) {
           setPage(res.data.total / 2);
         } else {
-          setPage(Math.floor(res.data.total / 2) + 1);
+          setPage(Math.floor(res.data.total / itempage) + 1);
         }
       })
       .catch((err) => {
@@ -63,7 +63,7 @@ const OrderListTable = () => {
 
   const changePage = (item) => {
     setPageItem(item);
-    getAllOrderListAdmin(item, 2)
+    getAllOrderListAdmin(item, itempage)
       .then((response) => {
         setOrderlist(response.data.data);
         setSearchList(response.data.data);
@@ -76,7 +76,7 @@ const OrderListTable = () => {
   const changePagePrevious = (item) => {
     if (item >= 1) {
       setPageItem(item);
-      getAllOrderListAdmin(item, 2)
+      getAllOrderListAdmin(item, itempage)
         .then((response) => {
           setOrderlist(response.data.data);
           setSearchList(response.data.data);
@@ -90,7 +90,7 @@ const OrderListTable = () => {
   const changePageNext = (item) => {
     if (item <= page) {
       setPageItem(item);
-      getAllOrderListAdmin(item, 2)
+      getAllOrderListAdmin(item, itempage)
         .then((response) => {
           setOrderlist(response.data.data);
           setSearchList(response.data.data);
@@ -147,7 +147,7 @@ const OrderListTable = () => {
   };
 
   const getAllOrder = () => {
-    getAllOrderListAdmin(pageItem, 2)
+    getAllOrderListAdmin(pageItem, itempage)
       .then((res) => {
         setOrderlist(res.data.data);
       })

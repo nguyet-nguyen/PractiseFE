@@ -337,7 +337,7 @@ const ProductsTable = () => {
 
                 {/*------------------------------product-----------------------------*/}
                 <div
-                    className="modal fade fixed top-0 left-0 hidden w-full max-h-min outline-none overflow-x-hidden overflow-y-auto"
+                    className="modal fade fixed top-0 left-0 hidden w-full h-full outline-none overflow-x-hidden overflow-y-auto"
                     id="exampleModalLg" tabIndex="-1" aria-labelledby="exampleModalLgLabel" aria-modal="true"
                     role="dialog">
                     <div className="modal-dialog modal-lg relative w-auto pointer-events-none">
@@ -352,6 +352,7 @@ const ProductsTable = () => {
                                         className="btn-close box-content w-4 h-4 p-1 text-black border-none rounded-none opacity-50 focus:shadow-none focus:outline-none focus:opacity-100 hover:text-black hover:opacity-75 hover:no-underline"
                                         data-bs-dismiss="modal" aria-label="Close"></button>
                             </div>
+
                             <div className="modal-body relative">
                                 {/*-----------------------------------------------*/}
                                 <div className="min-w-screen flex items-center justify-center">
