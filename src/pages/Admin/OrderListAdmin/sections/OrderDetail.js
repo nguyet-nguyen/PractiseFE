@@ -140,10 +140,10 @@ const OrdDetailAdmin = () => {
                       </div>
                     </div>
                   </div>
-                  <div className="bg-gray-100 p-10">
-                    <div className="flex items-center justify-around w-full md:pt-2 pt-6">
+                  <div className="bg-gray-100 py-2 px-10">
+                    <div className="flex items-center justify-around w-full pt-2">
                       <p className="text-lg capitalize font-black leading-none text-gray-800 ">
-                        Pending
+                        Approved
                         {order.status == 1 && (
                           <span className="bg-indigo-500 rounded-lg text-sm p-1 ml-2">
                             <i
@@ -234,7 +234,7 @@ const OrdDetailAdmin = () => {
                             <p className="text-md uppercase font-black leading-none text-gray-800 ">
                               {item.name}
                             </p>
-                            <p className="text-md uppercase font-black leading-none text-gray-800 ">
+                            <p className="text-md uppercase font-black leading-none text-indigo-800 ">
                               {numberFormat(item.price)}
                             </p>
                           </div>
@@ -242,7 +242,7 @@ const OrdDetailAdmin = () => {
                             {numberFormat(item.unitPrice)} x {item.amount}
                           </p>
                           <div className="flex items-center ">
-                            <p className="text-sm font-semibold leading-3 text-gray-500  pr-3">
+                            <p className="text-sm font-semibold capitalize leading-3 text-gray-500  pr-3">
                               {item.color}
                             </p>
                             <p className="text-sm font-semibold leading-3 text-gray-500  border-l border-gray-300 pl-3">

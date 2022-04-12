@@ -100,7 +100,7 @@ let itempage = 5;
         });
     }
   };
-  const onChangeStatusApproved = (id, status) => {
+  const onChangeStatusDelivery = (id, status) => {
     const data = {
       status: 2,
       reasonCancel: "",
@@ -293,7 +293,7 @@ let itempage = 5;
                               {numberFormat(order.totalPrice)}
                             </td>
                             <td className="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
-                              {order.status == "Pending" ? (
+                              {order.status == "Approved" ? (
                                 <span
                                   className="inline-block px-4 py-2.5 text-amber-600
                                                             font-medium text-xs leading-tight uppercase rounded shadow-md"
@@ -301,7 +301,7 @@ let itempage = 5;
                                   {order.status}
                                 </span>
                               ) : null}
-                              {order.status == "Approved" ? (
+                              {order.status == "Delivery" ? (
                                 <span
                                   className="inline-block px-4 py-2.5 text-blue-600
                                                             font-medium text-xs leading-tight uppercase rounded shadow-md"
@@ -327,12 +327,12 @@ let itempage = 5;
                               ) : null}
                             </td>
                             <td className="text-right text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
-                              {order.status == "Pending" ? (
+                              {order.status == "Approved" ? (
                                 <>
                                   <button
                                     type="button"
                                     onClick={() =>
-                                      onChangeStatusApproved(order.id, 2)
+                                      onChangeStatusDelivery(order.id, 2)
                                     }
                                     className="inline-block mr-2 px-4 py-2.5 bg-blue-600 text-white
                                                             font-medium text-xs leading-tight uppercase rounded shadow-md"
@@ -342,7 +342,7 @@ let itempage = 5;
 
                                 </>
                               ) : null}
-                              {(order.status == "Approved" || order.status == "Pending")? (
+                              {(order.status == "Delivery" || order.status == "Approved")? (
                                 <>
                                   <button
                                     type="button"

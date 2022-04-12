@@ -591,7 +591,7 @@ const Profile = () => {
                               className="fa fa-clock pr-2"
                               aria-hidden="true"
                             ></i>
-                            Pending
+                            Appoved
                           </button>
                           <button className=" active:bg-blue-500 uppercase text-blue-500 border border-blue-500 font-bold hover:shadow-md shadow text-xs px-4 py-2 rounded outline-none focus:outline-none sm:mr-2 mb-1"
                           onClick={() =>
@@ -601,7 +601,7 @@ const Profile = () => {
                               className="fa fa-car pr-2"
                               aria-hidden="true"
                             ></i>
-                            Approved
+                            Delivery
                           </button>
                           <button type="button" className=" active:bg-green-500  uppercase text-green-500 border border-green-500 font-bold hover:shadow-md shadow text-xs px-4 py-2 rounded outline-none focus:outline-none sm:mr-2 mb-1"
                           onClick={() =>
@@ -648,7 +648,7 @@ const Profile = () => {
                                 >
                                   {order.status}
                                 </span> } 
-                                {order.status == "Pending" && <span
+                                {order.status == "Appoved" && <span
                                   className="inline-block px-4 py-2.5 text-amber-600
                                                             font-semibold text-xs leading-tight uppercase "
                                 >
@@ -660,7 +660,7 @@ const Profile = () => {
                                 >
                                   {order.status}
                                 </span> } 
-                                {order.status == "Approved" && <span
+                                {order.status == "Delivery" && <span
                                   className="inline-block px-4 py-2.5 text-blue-600
                                                             font-semibold text-xs leading-tight uppercase "
                                 >
@@ -692,10 +692,10 @@ const Profile = () => {
                                     </p>
 
                                     <div className="flex items-center py-3">
-                                      <p className="text-xs font-semibold leading-3 text-gray-400  pr-3">
+                                      <p className="text-xs font-semibold leading-3 capitalize text-gray-400  pr-3">
                                         {order.firstItem[0].color}
                                       </p>
-                                      <p className="text-xs font-semibold leading-3 text-gray-400  border-l border-gray-300 pl-3">
+                                      <p className="text-xs font-semibold leading-3 uppercase text-gray-400  border-l border-gray-300 pl-3">
                                         Size {order.firstItem[0].size}
                                       </p>
                                     </div>
@@ -719,7 +719,7 @@ const Profile = () => {
                                   {numberFormat(order.totalPrice)}
                                 </span>
                                 <div className="flex flex-col lg:flex-row justify-center">
-                                  {order.status == "Pending" && 
+                                  {order.status == "Appoved" && 
                                   <button
                                     className="active:bg-red-500 uppercase text-red-500 border border-red-500 focus:ring-4 hover:shadow-md shadow font-semibold rounded-md text-sm px-5 py-1.5 text-center lg:mr-2"
                                     data-bs-toggle="modal"
