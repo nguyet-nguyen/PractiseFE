@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import {
@@ -271,6 +271,7 @@ const CheckoutForm = () => {
           </h1>
           <ul className="py-6 border-b space-y-6 px-8">
             {itemsInCart.map((item) => (
+              <Link to={`/all-items/item-detail/${item.idProduct}`}>
               <li key={item.id} className="grid grid-cols-7 gap-2 border-b-1">
                 <div className="col-span-1 self-center">
                   <img
@@ -280,14 +281,14 @@ const CheckoutForm = () => {
                   />
                 </div>
                 <div className="flex flex-col col-span-3 pt-2">
-                  <span className="text-gray-600 text-md capitalize font-semi-bold">
+                  <span className="text-gray-600 uppercase text-md font-semi-bold">
                     {item.name}
                   </span>
                   <div className="flex items-center pt-2">
-                    <p className="text-sm font-semibold leading-3 text-gray-500 pr-3">
+                    <p className="text-sm font-semibold capitalize leading-3 text-gray-500 pr-3">
                       {item.color}
                     </p>
-                    <p className="text-sm font-semibold leading-3 text-gray-500  border-l border-gray-300 pl-3">
+                    <p className="text-sm font-semibold uppercase leading-3 text-gray-500  border-l border-gray-300 pl-3">
                       {item.size}
                     </p>
                   </div>
@@ -303,6 +304,8 @@ const CheckoutForm = () => {
                   </div>
                 </div>
               </li>
+              </Link>
+
             ))}
           </ul>
           <div className="px-8 border-b">
@@ -325,7 +328,6 @@ const CheckoutForm = () => {
           </div>
         </div>
       </div>
-      <ToastContainer />
     </>
   );
 };
