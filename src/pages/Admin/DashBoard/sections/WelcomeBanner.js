@@ -160,7 +160,7 @@ function WelcomeBanner() {
                     <div className="mx-auto w-full col-span-2">
                         <h2 className="text-xl font-bold  mb-0" id="headingOne">
                             <button
-                                className="relative flex items-center w-full py-4 px-5 text-3xl font-bold
+                                className="relative flex items-center w-full py-4 px-5 text-2xl font-bold
                                  6 text-left bg-white border-0 rounded-none transition focus:outline-no uppercase"
                                 type="button"
 
@@ -173,12 +173,12 @@ function WelcomeBanner() {
                     <div className="mx-auto full dataDoughnut">
                         <h2 className="text-xl font-bold mb-0 " id="headingOne">
                             <button
-                                className="relative flex items-center justify-center w-full py-4 px-5 text-3xl font-bold
+                                className="relative flex items-center justify-center w-full py-4 px-5 text-2xl font-bold
                                  text-slate-600 text-left bg-white border-0 rounded-none transition focus:outline-no uppercase "
                                 type="button"
 
                             >
-                                order status report
+                                new order status report
                             </button>
                         </h2>
                         <Doughnut data={dataDoughnut}/>
