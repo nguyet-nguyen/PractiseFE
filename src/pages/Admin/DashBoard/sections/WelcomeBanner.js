@@ -14,16 +14,22 @@ function WelcomeBanner() {
     const [lineChart, setLineChart] = useState([]);
     const [pending, setPending] = useState(1);
     const [approved, setApproved] = useState(1);
+
     useEffect(() => {
-        getReports()
+        const data = {
+            fromDate: "2022-02-09",
+            toDate: "2022-04-10"
+        }
+        getReports(data)
             .then(response => {
                 setReport(response.data);
-                setPending(response.data.order.pending)
-                setApproved(response.data.order.approved)
+                setPending(response.data.order.approve)
+                setApproved(response.data.order.delivery)
             })
             .catch(err => {
                 console.log(err);
             })
+
         getReportsChart()
             .then(response => {
                 setLineChart(response.data);
@@ -32,7 +38,7 @@ function WelcomeBanner() {
                 console.log(err);
             })
     }, []);
-    console.log(lineChart);
+    console.log(report);
     let lineChartLables=[];
     let lineChartData=[];
 
@@ -43,8 +49,6 @@ function WelcomeBanner() {
         })
     }
 
-    console.log(lineChartLables);
-    console.log(lineChartData);
     const dataDoughnut = {
         datasets: [{
             data: [pending, approved],
@@ -75,6 +79,7 @@ function WelcomeBanner() {
     };
 
     return (
+
         report ?
             <div>
                 <div className="accordion" id="accordionExample">

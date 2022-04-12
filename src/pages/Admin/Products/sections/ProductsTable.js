@@ -172,8 +172,6 @@ const ProductsTable = () => {
                             <i className="fa fa-trash" aria-hidden="true"></i>
                         </button>
                     </>
-
-
                 );
             },
         },
