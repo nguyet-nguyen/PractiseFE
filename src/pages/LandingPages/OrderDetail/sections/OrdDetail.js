@@ -93,42 +93,53 @@ const OrdDetail = () => {
             </div>
             <div className="bg-gray-100 p-10">
               <div className="flex items-center justify-around w-full md:pt-2 pt-6">
-                  {order.status == 1 && (
 
+                  {order.status != 3 && (
                       <p className="text-lg capitalize font-black leading-none text-gray-800 ">
                   Pending
-                    <span className="bg-amber-500 rounded-lg text-sm p-1 ml-2">
+                          {order.status == 1 && (
+
+                              <span className="bg-amber-500 rounded-lg text-sm p-1 ml-2">
                       <i
                         className={`fa fa-check text-white text-center`}
                         aria-hidden="true"
                       ></i>
                     </span>
-                </p>
+                          )}
+                      </p>
                   )}
-                  {order.status == 2 && (
+
+                  {order.status != 3 && (
 
                   <p className="text-lg capitalize font-black leading-none text-gray-800 ">
                   Shipping
-                    <span className="bg-amber-500 rounded-lg text-sm p-1 ml-2">
+                      {order.status == 2 && (
+
+                          <span className="bg-amber-500 rounded-lg text-sm p-1 ml-2">
                       <i
                         className={`fa fa-check text-white text-center`}
                         aria-hidden="true"
                       ></i>
                     </span>
-                </p>
+                      )}
+                  </p>
                   )}
 
-                  {order.status == 4 && (
 
-                  <p className="text-lg capitalize font-black leading-none text-gray-800 ">
+                  {order.status != 3 && (
+                      <p className="text-lg capitalize font-black leading-none text-gray-800 ">
                   Completed
-                    <span className="bg-amber-500 rounded-lg text-sm p-1 ml-2">
+                      {order.status == 4 && (
+
+                          <span className="bg-amber-500 rounded-lg text-sm p-1 ml-2">
                       <i
                         className={`fa fa-check text-white text-center`}
                         aria-hidden="true"
                       ></i>
                     </span>
-                </p>
+                      )}
+
+                  </p>
                   )}
 
                   {order.status == 3 && (

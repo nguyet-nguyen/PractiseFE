@@ -149,7 +149,7 @@ const ItemDetail = () => {
                                 ))}
                             </div>
                             <button
-                                className="carousel-control-prev absolute top-0 bottom-0 flex items-center justify-center p-0 text-center border-0 hover:outline-none hover:no-underline focus:outline-none focus:no-underline left-0"
+                                className="carousel-control-prev text-white absolute top-0 bottom-0 flex items-center justify-center p-0 text-center border-0 hover:outline-none hover:no-underline focus:outline-none focus:no-underline left-0"
                                 type="button" data-bs-target="#carouselDarkVariant" data-bs-slide="prev"
                             >
                                 <span
@@ -159,7 +159,7 @@ const ItemDetail = () => {
                                 <span className="visually-hidden">Previous</span>
                             </button>
                             <button
-                                className="carousel-control-next absolute top-0 bottom-0 flex items-center justify-center p-0 text-center border-0 hover:outline-none hover:no-underline focus:outline-none focus:no-underline right-0"
+                                className="carousel-control-next text-white absolute top-0 bottom-0 flex items-center justify-center p-0 text-center border-0 hover:outline-none hover:no-underline focus:outline-none focus:no-underline right-0"
                                 type="button"
                                 data-bs-target="#carouselDarkVariant"
                                 data-bs-slide="next"
@@ -234,8 +234,7 @@ const ItemDetail = () => {
 
 
                             <div className="flex my-6 items-center">
-                                <label className="text-gray-700 text-sm font-semibold">Counter
-                                    Input
+                                <label className="text-gray-700 text-sm font-semibold">Quantity
                                 </label>
                                 <div className="flex ml-5 w-40 h-10  bg-white
                              border-amber-700 mt-1">

@@ -86,6 +86,7 @@ const SignUp = () => {
     formData.append("password", data.password);
     formData.append("address", address);
    if(data.password == data.confirmPassword) {
+     setErrConfirmPass(false);
      SignUpApi(formData)
          .then((response) => {
            toast(<CustomPopupMessage mess={response.data.message} icon="check"/>);
@@ -287,11 +288,10 @@ const SignUp = () => {
                         no more than 20 characters
                       </p>
                   )}
-                  {errConfirmPass==true ?
+                  {errConfirmPass===true &&
                       <p className="mt-3 text-red-500 text-xs italic">
                         Passwords must be same, Please try again !
                       </p>
-                      : null
                   }
                 </div>
               </div>

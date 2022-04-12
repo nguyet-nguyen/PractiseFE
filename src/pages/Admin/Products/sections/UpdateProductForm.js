@@ -101,7 +101,7 @@ const UpdateProductForm = () => {
                                                     </div>
                                                 </div>
                                                 <div className="p-3 bg-red-600 rounded-b-lg break-words text-white uppercase">
-                                                    Product addition fail
+                                                    Product update fail
                                                 </div>
                                             </div>
                                         ) : null}
