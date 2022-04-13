@@ -167,14 +167,16 @@ const OrdDetail = () => {
                 </div>
               )}
             </div>
+
             {order.items &&
               order.items.map((item) => (
+                <Link to={`/all-items/item-detail/${item.idProduct}`}>
                 <div
                   key={item.id}
                   className="md:flex items-strech px-10 py-8 md:py-10 lg:py-8 border-t border-gray-100"
                 >
                   <div className="md:w-4/12 2xl:w-1/12 w-full">
-                    <Link to={`/all-items/item-detail/${item.idProduct}`}>
+                    
                       <img
                         src={item.image[0]}
                         alt="product image"
@@ -185,7 +187,7 @@ const OrdDetail = () => {
                         alt="product image"
                         className="md:hidden w-full h-full object-center object-cover"
                       />
-                    </Link>
+                    
                   </div>
                   <div className="md:pl-3 lg:ml-7 md:w-8/12 2xl:w-11/12 flex flex-col justify-center">
                     <div className="flex items-center justify-between w-full md:pt-0 pt-4">
@@ -209,6 +211,7 @@ const OrdDetail = () => {
                     </div>
                   </div>
                 </div>
+                </Link>
               ))}
             <div className="bg-gray-100 p-4">
               <div className="flex lg:flex-row flex-col" id="cart">
