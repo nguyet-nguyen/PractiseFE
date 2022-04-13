@@ -12,6 +12,9 @@ import routes from "routes";
 import { ToastContainer } from "react-toastify";
 
 import ProductDetail from "pages/LandingPages/ProductDetail";
+import SignUp from "pages/LandingPages/SignUp";
+import SignIn from "layouts/pages/authentication/sign-in";
+
 import ProductsPage from "layouts/pages/admin/products";
 import UsersPage from "layouts/pages/admin/users";
 import DashboardPage from "layouts/pages/admin/dashboard";
@@ -53,6 +56,18 @@ export default function App() {
                     {/* User Page */}
                     {getRoutes(routes)}
                     <Route exact path="/all-items/item-detail/:id" element={<ProductDetail/>}/>
+                    <Route
+                        path="/pages/authentication/sign-in"
+                        element={
+                            <SignIn/>
+                        }
+                    />
+                    <Route
+                        path="/pages/authentication/sign-up"
+                        element={
+                            <SignUp/>
+                        }
+                    />
                     <Route
                         path="/shopping-cart"
                         element={

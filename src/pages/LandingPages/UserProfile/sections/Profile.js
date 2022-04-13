@@ -27,6 +27,7 @@ const Profile = () => {
   const [ward, setWard] = useState({ id: wards[0].id, name: wards[0].name });
   const [idOrderCancel, setIdOrderCancel] = useState();
   const [reasonForCancel, setReasonForCancel] = useState();
+  const [showSpinnerUpdate, setShowSpinnerUpdate] = useState(false);
 
   const {
     register,
@@ -85,6 +86,8 @@ const Profile = () => {
   };
 
   const onSubmit = async (data, e) => {
+    setShowSpinnerUpdate(true);
+
     let address =
       city.name +
       " - " +
@@ -100,11 +103,11 @@ const Profile = () => {
       phone: data.phone,
       address: address,
     };
+    $("#modalUpdateUserInfo").modal("hide");
 
     updateUserInfo(userId, dataUpdate)
       .then((response) => {
         getUserInformation(userId);
-        $("#modalUpdateUserInfo").modal("hide");
         toast(
           <CustomPopupMessage
             mess="Update user information successfully!"
@@ -115,7 +118,7 @@ const Profile = () => {
         );
       })
       .catch((err) => {
-        alert(err.data);
+        console.log(err.data);
       });
 
     e.target.reset();
@@ -136,6 +139,9 @@ const Profile = () => {
         setDistrict(distObj);
         const wardObj = wards.find((x) => x.name === addressArr[2]);
         setWard(wardObj);
+        
+        setShowSpinnerUpdate(false);
+
       })
       .catch((err) => {
         console.warn(err);
@@ -154,6 +160,7 @@ const Profile = () => {
 
   // Update status for order cancel
   const onSubmitCancelOrd = (id) => {
+
     const dataCancel = {
       status: 3,
       reasonCancel: reasonForCancel,
@@ -162,6 +169,7 @@ const Profile = () => {
     cancelOrder(dataCancel, id)
       .then((res) => {
         console.log(res.data);
+        getUsersOrderList();
         $("#modalUserCancelOrd").modal("hide");
         toast(
           <CustomPopupMessage
@@ -172,7 +180,6 @@ const Profile = () => {
           />
         );
         setReasonForCancel("");
-        getUsersOrderList();
       })
       .catch((err) => {
         console.log(err);
@@ -349,11 +356,14 @@ const Profile = () => {
                   {/* <!-- Button trigger modal --> */}
                   <button
                     type="button"
-                    className="mb-2 inline-block px-6 py-2.5 bg-amber-500 hover:bg-amber-600 text-amber-500 font-semibold leading-tight uppercase focus:outline-none focus:ring-0 transition duration-150 ease-in-out"
+                    className="mb-2 inline-block px-6 py-2.5 bg-amber-500 hover:bg-amber-600 text-white rounded-md font-semibold leading-tight uppercase focus:outline-none focus:ring-0 transition duration-150 ease-in-out"
                     data-bs-toggle="modal"
                     data-bs-target="#modalUpdateUserInfo"
                   >
                     Edit Information
+                    {showSpinnerUpdate && <div class="spinner-border animate-spin inline-block w-4 h-4 border-3 ml-2 rounded-full" role="status">
+                      <span class="visually-hidden">Loading...</span>
+                    </div>}
                   </button>
                 </div>
                 {/* <!-- Modal --> */}
@@ -704,12 +714,12 @@ const Profile = () => {
                                 </span> } 
                                   </div>
                                 </div>
-
+                                <Link
+                                      to={`/all-items/item-detail/${order.firstItem[0].idProduct}`}
+                                    >
                                 <div className="md:flex items-strech py-8 md:py-10 lg:py-8 border-t border-gray-200">
                                   <div className="md:w-4/12 2xl:w-2/12 w-full">
-                                    <Link
-                                      to={`/all-items/item-detail/${order.firstItem[0].id}`}
-                                    >
+                                 
                                       <img
                                         src={order.firstItem[0].image[0]}
                                         alt="product image"
@@ -720,9 +730,10 @@ const Profile = () => {
                                         alt="product image"
                                         className="md:hidden w-full h-full object-center object-cover"
                                       />
-                                    </Link>
                                   </div>
+                                
                                   <div className="md:pl-3 lg:ml-7 md:w-8/12 2xl:w-10/12 flex flex-col justify-center">
+                                 
                                     <p className="text-sm uppercase font-black leading-none text-gray-600 ">
                                       {order.firstItem[0].name}
                                     </p>
@@ -747,7 +758,10 @@ const Profile = () => {
                                       </p>
                                     </div>
                                   </div>
+                                
+
                                 </div>
+                                </Link>
                               </div>
 
                               <div className="flex justify-between items-center border-t border-gray-200 py-4 px-1">
@@ -765,6 +779,7 @@ const Profile = () => {
                                       className="fa fa-repeat"
                                       aria-hidden="true"
                                     ></i>
+                              
                                   </button>
                                   {order.status == "Approved" && 
                                   <button

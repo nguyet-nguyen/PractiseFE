@@ -16,7 +16,7 @@ const ProductDetailPopup = (products) => {
                         <div
                             className="modal-header flex flex-shrink-0 items-center justify-between p-4 border-b border-gray-200 rounded-t-md">
                             <h2 className="font-bold text-3xl text-gray-900 uppercase">
-                                Product Detail infomation
+                                Product Detail Information
                             </h2>
                             <button type="button"
                                     className="btn-close box-content w-4 h-4 p-1 text-black border-none rounded-none opacity-50 focus:shadow-none focus:outline-none focus:opacity-100 hover:text-black hover:opacity-75 hover:no-underline"
@@ -125,7 +125,7 @@ const ProductDetailPopup = (products) => {
                                                                    type="text"
                                                                    className={`w-full -ml-10 pl-10 pr-3 py-2 rounded-lg border-2 border-gray-200
                                             outline-none focus:ring-2 focus:ring-amber-500 focus:border-amber-600`}
-                                                                   placeholder="category"
+                                                                   placeholder="Category"
                                                                    value={products.products.category}
                                                                    id="category"
                                                                    name='category'/>
@@ -193,7 +193,7 @@ const ProductDetailPopup = (products) => {
                                                 <div className="flex -mx-3">
                                                     <div className="w-full px-3 mb-5">
                                                         <label htmlFor="" className="text-xs font-semibold px-1">
-                                                            Product's Decription
+                                                            Product's Description
                                                         </label>
                                                         <div className="flex">
                                                             <div

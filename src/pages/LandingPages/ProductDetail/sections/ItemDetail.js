@@ -15,6 +15,9 @@ const ItemDetail = () => {
     const [sizeState, setSizeState] = useState();
     const [sizeAmount, setSizeAmount] = useState(1);
     const [counter, setCounter] = useState(1);
+    const [showSpinner, setShowSpinner] = useState(false);
+
+    const token = localStorage.getItem("token");
 
     useEffect(() => {
         getProductDetail(params.id)
@@ -22,13 +25,15 @@ const ItemDetail = () => {
                 setItemDetail(res.data);
                 setSizeState(res.data.items[0].id);
                 setSizeAmount(res.data.items[0].amount);
-                getAllItemsInCart()
+                if(token){
+                    getAllItemsInCart()
                     .then((res) => {
                         setItemsInCart(res.data);
                     })
                     .catch((err) => {
                         console.log(err);
                     });
+                }
             })
             .catch(err => {
                 console.log(err);
@@ -75,51 +80,70 @@ const ItemDetail = () => {
     }
 
     const onAddToCart = (item) => {
-        const existingItem = itemsInCart.find((i) => {
-            return i.idProductItem == sizeState;
-        });
-        if(existingItem){
-            const totalQtyOrd = existingItem.amount + counter;
-            if (existingItem.totalAmount < totalQtyOrd) {
-                toast(<CustomPopupMessage mess={`The product's quantity for this order has been exceeded`} icon="exclamation-circle"
-                titleColor="red"
-                iconColor="red"/>);
-            }else{
+        if(token){ 
+            setShowSpinner(true);
+            const existingItem = itemsInCart.find((i) => {
+                return i.idProductItem == sizeState;
+            });
+            if(existingItem){
+                const totalQtyOrd = existingItem.amount + counter;
+                if (existingItem.totalAmount < totalQtyOrd) {
+                    toast(<CustomPopupMessage mess={`The product's quantity for this order has been exceeded`} icon="exclamation-circle"
+                    titleColor="red"
+                    iconColor="red"/>);
+
+                    setShowSpinner(false);
+                }else{
+                    const total = itemDetail.price * counter;
+                    const data = {
+                    "productItem": sizeState,
+                    "amount": counter,
+                    "total": total
+                    };
+                addToCart(data)
+                    .then(res => {
+                        toast(<CustomPopupMessage mess={`${itemDetail.name} has been added to your cart.`} icon="check-circle"
+                        titleColor="amber"
+                        iconColor="amber"/>);
+                        setShowSpinner(false);    
+                    })
+                    .catch(err => {
+                        console.log(err);
+                    })
+                }
+            }
+             else {
                 const total = itemDetail.price * counter;
                 const data = {
-                "productItem": sizeState,
-                "amount": counter,
-                "total": total
-            };
-            addToCart(data)
-                .then(res => {
-                    toast(<CustomPopupMessage mess={`${itemDetail.name} has been added to your cart.`} icon="check-circle"
-                    titleColor="amber"
-                    iconColor="amber"/>);
-                })
-                .catch(err => {
-                    console.log(err);
-                })
+                    "productItem": sizeState,
+                    "amount": counter,
+                    "total": total
+                };
+                addToCart(data)
+                    .then(res => {
+                        toast(<CustomPopupMessage mess={`${itemDetail.name} has been added to your cart.`} icon="check-circle"
+                        titleColor="amber"
+                        iconColor="amber"/>);
+                        setShowSpinner(false);    
+                    })
+                    .catch(err => {
+                        console.log(err);
+                    })
             }
+        }else{
+            $("#modalWarningToken").modal("show");
         }
-         else {
-            const total = itemDetail.price * counter;
-            const data = {
-                "productItem": sizeState,
-                "amount": counter,
-                "total": total
-            };
-            addToCart(data)
-                .then(res => {
-                    toast(<CustomPopupMessage mess={`${itemDetail.name} has been added to your cart.`} icon="check-circle"
-                    titleColor="amber"
-                    iconColor="amber"/>);
-                })
-                .catch(err => {
-                    console.log(err);
-                })
-        }
+      
 
+    }
+
+    const goBack = () => {
+        $("#modalWarningToken").modal("hide");
+    }
+    
+    const goSignInPage = () => {
+        $("#modalWarningToken").modal("hide");
+        navigate("/pages/authentication/sign-in");
     }
 
     return (
@@ -282,7 +306,12 @@ const ItemDetail = () => {
                                 hover:bg-amber-600 hover:text-white focus:outline-none focus:ring-0
                                 transition duration-150 ease-in-out disabled:bg-gray-300 disabled:text-white disabled:border-gray-300">
                                     Add to cart
+                                    {showSpinner && <div class="spinner-border animate-spin inline-block w-4 h-4 border-3 ml-2 rounded-full" role="status">
+                                        <span class="visually-hidden">Loading...</span>
+                                    </div>}
                                 </button>
+
+                                
                             </div>
                             <p className="text-base text-gray-500 ">
                                 {itemDetail.description}
@@ -290,6 +319,61 @@ const ItemDetail = () => {
                         </div>
                     </div>
                 </div>
+                   {/* <!-- Modal --> */}
+      <div
+        className="modal fade fixed top-0 left-0 hidden w-full h-full outline-none overflow-x-hidden overflow-y-auto"
+        id="modalWarningToken"
+        tabIndex="-1"
+        aria-labelledby="modalWarningTokenLabel"
+        aria-hidden="true"
+      >
+        <div className="modal-dialog modal-md modal-dialog-centered modal-dialog-scrollable relative w-auto pointer-events-none">
+          <div className="modal-content border-none shadow-lg relative flex flex-col w-full pointer-events-auto bg-white bg-clip-padding rounded-md outline-none text-current">
+            <div className="modal-header flex flex-shrink-0 items-center justify-between p-4 rounded-t-md">
+              <button
+                type="button"
+                className="btn-close box-content w-4 h-4 p-1 text-black border-none rounded-none opacity-50 focus:shadow-none focus:outline-none focus:opacity-100 hover:text-black hover:opacity-75 hover:no-underline"
+                data-bs-dismiss="modal"
+                aria-label="Close"
+              ></button>
+            </div>
+            <div className="modal-body relative text-center">
+              <div className="w-full px-3">
+                <i
+                  className={`fa fa-frown-o text-5xl text-amber-500`}
+                  aria-hidden="true"
+                ></i>
+                <p className="font-bold text-xl uppercase mt-5">
+                  Sorry
+                </p>
+                <p className="text-base mt-2">
+                    As an unlogged user you can not add more products to cart. 
+                </p>
+                <p className="text-base  mt-1">
+                    Please sign in to continue add to cart process.{" "} 
+                </p>
+              </div>
+              
+            </div>
+            <div className="modal-footer flex flex-shrink-0 flex-wrap items-center justify-between p-4 mt-2 rounded-b-md">
+              <button
+                type="button"
+                className="inline-block px-6 py-2.5  border border-amber-500 text-amber-600 font-medium text-xs leading-tight uppercase rounded shadow-md hover:border-amber-600 hover:shadow-lg focus:border-amber-600 focus:shadow-lg focus:outline-none focus:ring-0 active:border-amber-800 active:shadow-lg transition duration-150 ease-in-out"
+                onClick={goBack}
+              >
+                Back
+              </button>
+              <button
+                type="button"
+                className="inline-block px-6 py-2.5 bg-amber-500 text-white font-medium text-xs leading-tight uppercase rounded shadow-md hover:bg-amber-600 hover:shadow-lg focus:bg-amber-600 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-amber-700 active:shadow-lg transition duration-150 ease-in-out ml-1"
+                onClick={goSignInPage}
+              >
+                Sign In
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
             </section>
             : <Loading />
 

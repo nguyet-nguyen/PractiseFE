@@ -8,20 +8,24 @@ const SignIn = () => {
     const navigate = useNavigate();
     const { register, handleSubmit, formState: { errors } } = useForm();
     const [messErr, setMessErr] = useState("")
-
+    const [showSpinner, setShowSpinner] = useState(false);
 
     const onSubmit = async (data, e) => {
+        setShowSpinner(true);
+
         const bodyToken = {
             username: data.email,
             password: data.password,
         };
         SignInApiToken(bodyToken).then(response => {
+            setShowSpinner(false);
             localStorage.setItem("token", response.data.token);
             navigate('/');
         })
             .catch(err => {
                 console.log(err);
                 setMessErr(err.message)
+                setShowSpinner(false);
             }
             )
         // -------------------------------
@@ -157,6 +161,9 @@ const SignIn = () => {
                                                 type="submit"
                                                 style={{ transition: "all .15s ease" }}>
                                                 Sign In
+                                                {showSpinner &&  <div class="spinner-border animate-spin inline-block w-4 h-4 border-3 ml-2 rounded-full" role="status">
+                                                    <span class="visually-hidden">Loading...</span>
+                                                </div>}
                                             </button>
                                         </div>
                                         <div className="flex items-center justify-between mt-4">
