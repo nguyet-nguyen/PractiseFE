@@ -2,11 +2,14 @@ import Loading from "Loading";
 import React, { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import "react-toastify/dist/ReactToastify.css";
-import { getUserOrderDetailByAdmin, exportInvoiceFile } from "../../../../features/Api";
+import {
+  getUserOrderDetailByAdmin,
+  exportInvoiceFile,
+} from "../../../../features/Api";
 import { numberFormat } from "../../../LandingPages/Home/function/FormatMoney";
 import Sidebar from "../../Sidebar";
 import Header from "../../Header";
-import FileSaver from 'file-saver';
+import FileSaver from "file-saver";
 import CustomPopupMessage from "../../../CustomPopupMess";
 import { toast } from "react-toastify";
 
@@ -15,6 +18,8 @@ const OrdDetailAdmin = () => {
   const [order, setOrder] = useState();
   const [subtotal, setSubtotal] = useState();
   const [shippingFee, setShippingFee] = useState(0);
+  const [showSpinner, setShowSpinner] = useState(false);
+
   let params = useParams();
 
   useEffect(() => {
@@ -47,10 +52,12 @@ const OrdDetailAdmin = () => {
   };
 
   const exportFile = (id) => {
+    setShowSpinner(true);
     exportInvoiceFile(id)
       .then((res) => {
         const filename = res.data.split("files/");
         FileSaver.saveAs(res.data, filename[1]);
+        setShowSpinner(false);
         toast(
           <CustomPopupMessage
             mess="This order has been exported successfully!"
@@ -84,7 +91,7 @@ const OrdDetailAdmin = () => {
                         Order Detail
                       </p>
                     </div>
-                    
+
                     <div className="lg:w-1/2 lg:text-right lg:pt-0 pt-4 lg:ml-30 w-full  h-full">
                       <button
                         type="button"
@@ -94,8 +101,16 @@ const OrdDetailAdmin = () => {
                       >
                         <i className="fa fa-print pr-2" aria-hidden="true"></i>
                         Export Order
+                        {showSpinner && (
+                          <div
+                            class="spinner-border animate-spin inline-block w-4 h-4 border-3 ml-2 rounded-full"
+                            role="status"
+                          >
+                            <span class="visually-hidden">Loading...</span>
+                          </div>
+                        )}
                       </button>
-                    </div>  
+                    </div>
                   </div>
                 </div>
 

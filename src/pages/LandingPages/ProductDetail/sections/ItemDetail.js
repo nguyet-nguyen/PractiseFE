@@ -1,7 +1,7 @@
 
 import React, { useEffect, useState } from "react";
 import { getProductDetail, addToCart, getAllItemsInCart } from "../../../../features/Api";
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import { numberFormat } from "../../Home/function/FormatMoney";
 import Loading from "../../../../Loading";
 import { toast } from "react-toastify";
@@ -16,6 +16,8 @@ const ItemDetail = () => {
     const [sizeAmount, setSizeAmount] = useState(1);
     const [counter, setCounter] = useState(1);
     const [showSpinner, setShowSpinner] = useState(false);
+
+    const navigate = useNavigate();
 
     const token = localStorage.getItem("token");
 
