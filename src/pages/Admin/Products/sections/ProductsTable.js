@@ -245,14 +245,20 @@ const ProductsTable = () => {
                     </div>
                 </div>
             </div>
-            <DataTable
-                columns={columns}
-                data={data}
-                customStyles={customStyles}
-                progressPending={pending}
-                progressComponent={<Loading/>}
-                pagination
-            />
+            {pending ?
+                <Loading adminPage={true}/>
+                :
+                <DataTable
+                    columns={columns}
+                    data={data}
+                    customStyles={customStyles}
+                    progressPending={pending}
+                    progressComponent={<Loading/>}
+                    pagination
+                />
+            }
+
+
             {/*------------------------------product-----------------------------*/}
             <div
                 className="modal fade fixed top-0 left-0 hidden w-full h-full outline-none overflow-x-hidden overflow-y-auto"

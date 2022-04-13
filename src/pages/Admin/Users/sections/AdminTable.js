@@ -1,17 +1,16 @@
 import React, {useEffect, useState} from "react";
-import {getAllProductsAdmin, getAllUsers} from "../../../../features/Api";
+import {getAllAdmins} from "../../../../features/Api";
 import {Link} from "react-router-dom";
 import Loading from "../../../../Loading";
-import {numberFormat} from "../../../LandingPages/Home/function/FormatMoney";
 import DataTable from "react-data-table-component";
 
-const UsersTable = () => {
+const AdminTable = () => {
     const [users, setUsers] = useState([]);
     const [searchData, setSearchList] = useState();
     const [pending, setPending] = useState(true);
 
     useEffect(() => {
-        getAllUsers()
+        getAllAdmins()
             .then((res) => {
                 setUsers(res.data.data);
                 setSearchList(res.data.data);
@@ -21,7 +20,7 @@ const UsersTable = () => {
                 console.log(err);
                 setPending(false);
             })
-    }, [getAllUsers]);
+    }, [getAllAdmins]);
 
     const searchProduct = (e) => {
         let searchList = [];
@@ -108,15 +107,15 @@ const UsersTable = () => {
         <>
             <div className="px-4 sm:px-6 lg:px-8 py-8 w-full max-w-9xl mx-auto">
                 <h2 className="font-bold text-4xl text-slate-800 uppercase mb-5">
-                    <i className="fa fa-users" aria-hidden="true"></i> users list</h2>
+                    <i className="fa fa-users" aria-hidden="true"></i> Admins list</h2>
                 <div className="flex space-x-2 justify-between mb-5">
                     <Link to="/admin/sign-up"
                           type="button"
                           data-mdb-ripple="true"
                           data-mdb-ripple-color="light"
-                          className="inline-block px-6 py-2.5 bg-indigo-600 text-white font-medium text-xs
-                                leading-tight uppercase rounded shadow-md hover:bg-indigo-700 hover:shadow-lg focus:bg-indigo-700
-                                focus:shadow-lg focus:outline-none focus:ring-0 active:bg-indigo-800 active:shadow-lg transition
+                          className="inline-block px-6 py-2.5 bg-blue-600 text-white font-medium text-xs
+                                leading-tight uppercase rounded shadow-md hover:bg-blue-700 hover:shadow-lg focus:bg-blue-700
+                                focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg transition
                                 duration-150 ease-in-out">Add Admin
                     </Link>
                     <div className="xl:w-96">
@@ -130,11 +129,7 @@ const UsersTable = () => {
                                 aria-describedby="button-addon2"
                             />
                             <button
-                                className="btn inline-block px-6 py-2.5 bg-indigo-600
-                                text-white font-medium text-xs leading-tight uppercase rounded shadow-md
-                                 hover:bg-indigo-700 hover:shadow-lg focus:bg-indigo-700  focus:shadow-lg
-                                  focus:outline-none focus:ring-0 active:bg-indigo-800 active:shadow-lg
-                                  transition duration-150 ease-in-out flex items-center"
+                                className="btn inline-block px-6 py-2.5 bg-blue-600 text-white font-medium text-xs leading-tight uppercase rounded shadow-md hover:bg-blue-700 hover:shadow-lg focus:bg-blue-700  focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg transition duration-150 ease-in-out flex items-center"
                                 type="button"
                                 id="button-addon2"
                             >
@@ -157,7 +152,8 @@ const UsersTable = () => {
                         </div>
                     </div>
                 </div>
-                {pending ?  <Loading adminPage={true}/>
+                {pending ?
+                    <Loading adminPage={true}/>
                     :
                     <DataTable
                         columns={columns}
@@ -168,6 +164,7 @@ const UsersTable = () => {
                         // progressComponent={<Loading />}
                     />
                 }
+
             </div>
 
         </>
@@ -175,4 +172,4 @@ const UsersTable = () => {
     )
 }
 
-export default UsersTable;
+export default AdminTable;
