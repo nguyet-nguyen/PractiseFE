@@ -142,7 +142,7 @@ export const getUserOrderDetail = (id) => {
 // User cancel order for reason
 export const cancelOrder = (data, id) => {
   try {
-    return apiadminnoFormdata.put(`/user/orders/${id}`, data);
+    return apiadminnoFormdata.put(`/users/orders/${id}`, data);
   } catch (error) {
     console.log(error);
   }
@@ -151,7 +151,7 @@ export const cancelOrder = (data, id) => {
 // Filter order list by ord status id - users ord history
 export const filterOrdByStatus = (id) => {
   try {
-    return apiadmin.get(`/user/orders/filter?status=${id}`);
+    return apiadmin.get(`/users/orders/filter?status=${id}`);
   } catch (error) {
     console.log(error);
   }
@@ -160,7 +160,7 @@ export const filterOrdByStatus = (id) => {
 // Buy items in order again
 export const buyAgain = (id) => {
   try {
-    return apiadmin.get(`/user/orders/${id}/buyAgain`);
+    return apiadmin.get(`/users/orders/${id}/buyAgain`);
   } catch (error) {
     console.log(error);
   }
