@@ -15,6 +15,7 @@ const ShoppingCart = () => {
   const [idItemDel, setIdItemDel] = useState();
   const [qtyTotal, setQtyTotal] = useState(0);
   const [showEmpty, setShowEmpty] = useState(false);
+  const [showSpinner, setShowSpinner] = useState(false);
 
   useEffect(() => {
     getAllItems();
@@ -57,12 +58,15 @@ const ShoppingCart = () => {
 
   // Remove item from shopping cart
   const onRemoveItem = (id) => {
+    setShowSpinner(true);
+
     removeItemFromCart(id)
       .then((res) => {
         const index = itemsInCart.findIndex((item) => item.id === id);
         if (index !== -1) {
           itemsInCart.splice(index, 1);
           updateTotal(itemsInCart);
+          setShowSpinner(false);
         }
       })
       .catch((err) => {
@@ -71,6 +75,7 @@ const ShoppingCart = () => {
   };
 
   const onUpdateCart = (item) => {
+    setShowSpinner(true);
     const total = item.unitPrice * item.amount;
     const data = {
       amount: item.amount,
@@ -81,6 +86,7 @@ const ShoppingCart = () => {
     updateCart(item.id, data)
       .then((res) => {
         getAllItems();
+        setShowSpinner(false);
       })
       .catch((err) => {
         console.log(err);
@@ -336,7 +342,9 @@ const ShoppingCart = () => {
                   {itemsInCart.length > 1 ? "items" : "item"} )
                 </p>
                 <p className="text-xl font-bold leading-normal text-right text-gray-800 ">
-                  {numberFormat(subtotal + shippingFee)}
+                {showSpinner ? <div class="spinner-border animate-spin inline-block w-5 h-5 border-3 rounded-full" role="status">
+                  <span class="visually-hidden">Loading...</span>
+                </div> : `${numberFormat(subtotal + shippingFee)}`}
                 </p>
               </div>
               <Link to="/checkout">

@@ -21,6 +21,7 @@ const SignUp = () => {
   });
   const [ward, setWard] = useState({ id: wards[0].id, name: wards[0].name });
   const [validEmailMess, setValidEmailMess] = useState(false);
+  const [showSpinner, setShowSpinner] = useState(false);
 
   const changeCityId = (id) => {
     let cityName;
@@ -69,6 +70,7 @@ const SignUp = () => {
   };
   const [errConfirmPass,setErrConfirmPass] = useState(false)
   const onSubmit = async (data, e) => {
+    setShowSpinner(true);
     let address =
       city.name +
       " - " +
@@ -88,6 +90,7 @@ const SignUp = () => {
      setErrConfirmPass(false);
      SignUpApi(formData)
          .then((response) => {
+           setShowSpinner(false);
            toast(<CustomPopupMessage mess={response.data.message} icon="check-circle"
            titleColor="amber"
            iconColor="amber"/>);
@@ -494,7 +497,11 @@ const SignUp = () => {
                 <div className="w-full px-3 mb-2">
                   <button className="block w-full max-w-xs mx-auto bg-amber-600 hover:bg-amber-700 focus:bg-amber-700 text-white rounded-lg px-3 py-3 font-semibold">
                     REGISTER NOW
+                    {showSpinner &&  <div class="spinner-border animate-spin inline-block w-4 h-4 border-3 ml-2 rounded-full" role="status">
+                      <span class="visually-hidden">Loading...</span>
+                    </div>}
                   </button>
+                 
                 </div>
               </div>
               <div className="flex items-center justify-between mt-4">

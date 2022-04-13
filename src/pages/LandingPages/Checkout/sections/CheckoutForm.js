@@ -14,6 +14,8 @@ const CheckoutForm = () => {
   const [itemsInCart, setItemsInCart] = useState([]);
   const [subtotal, setSubtotal] = useState(0);
   const [shippingFee, setShippingFee] = useState(0);
+  const [showSpinner, setShowSpinner] = useState(false);
+
   const {
     register,
     setValue,
@@ -75,6 +77,7 @@ const CheckoutForm = () => {
       });
   };
   const onSubmit = async (data, e) => {
+    setShowSpinner(true);
     const dataCheckout = {
       "recipientName": data.recipientName,
       "recipientEmail": data.recipientEmail,
@@ -84,6 +87,7 @@ const CheckoutForm = () => {
     };
     addOrder(dataCheckout)
       .then((response) => {
+        setShowSpinner(false);
         $("#modalCheckoutSuccess").modal("show");
       })
       .catch((err) => {
@@ -269,8 +273,11 @@ const CheckoutForm = () => {
                     )}
                 </fieldset>
               </section>
-              <button className="submit-button mt-4 uppercase px-4 py-3 rounded-full bg-amber-500 hover:bg-amber-600 text-white focus:ring focus:outline-none w-full text-xl font-semibold transition-colors">
+              <button className="submit-button mt-4 uppercase px-4 py-3 rounded-full bg-amber-500 hover:bg-amber-600 text-white focus:outline-none w-full text-xl font-semibold transition-colors">
                 Order
+                {showSpinner && <div class="spinner-border animate-spin inline-block w-5 h-5 border-3 ml-2 rounded-full" role="status">
+                  <span class="visually-hidden">Loading...</span>
+                </div>}
               </button>
             </form>
           </div>
