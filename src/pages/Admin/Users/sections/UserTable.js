@@ -37,7 +37,7 @@ const UsersTable = () => {
             }
         })
         setUsers(searchList);
-        if (searchKey == null || searchKey == "" || searchKey.isEmpty()) {
+        if (searchKey == null || searchKey == "") {
             setUsers(searchData);
         }
     }
