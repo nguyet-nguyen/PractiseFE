@@ -363,7 +363,7 @@ const OrderListTable = () => {
                                                       id="reasonCancel2"
                                                       name="reasonCancel2"
                                                       className={`w-full h-16 pl-5 pr-3 py-2 rounded-lg border-2 border-gray-200
-                                            outline-none focus:ring-2 focus:ring-amber-500 focus:border-amber-600 }`}
+                                            outline-none focus:ring-2 focus:ring-indigo-400 focus:border-indigo-400 }`}
                                                       placeholder="Reason For Order Cancellation"
                                                       {...register(
                                                           "reasonCancel2",
@@ -385,9 +385,10 @@ const OrderListTable = () => {
                                     </button>
                                     <button
                                         type="submit"
-                                        className="inline-block px-6 py-2.5 bg-red-600 text-white font-medium
-                                              text-xs leading-tight uppercase rounded shadow-md hover:bg-amber-600 hover:shadow-lg
-                                              focus:bg-amber-600 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-amber-700
+                                        className="inline-block px-6 border-2 py-2.5 bg-red-600 text-white font-medium
+                                              text-xs leading-tight uppercase rounded shadow-md hover:bg-white
+                                              hover:border-red-600 hover:shadow-lg hover:text-red-600
+                                              focus:bg-amber-600 focus:shadow-lg focus:outline-none focus:ring-0
                                                active:shadow-lg transition duration-150 ease-in-out ml-1"
                                         data-bs-dismiss="modal"
                                     >
