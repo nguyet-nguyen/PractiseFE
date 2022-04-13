@@ -6,7 +6,7 @@ import { getUserInfo } from "../../../../features/Api";
 import ModalUpdateAvatar from "../sections/ModalUpdateAvatar";
 import { cities, districts, wards } from "../../../../address";
 import { updateUserInfo, getAllItemsInCart } from "../../../../features/Api";
-import { ToastContainer, toast } from "react-toastify";
+import { toast } from "react-toastify";
 import CustomPopupMessage from "../../../CustomPopupMess";
 
 const Profile = () => {
@@ -93,7 +93,9 @@ const Profile = () => {
             .then((response) => {
                 getUserInformation(userId);
                 $("#modalUpdateUserInfo").modal("hide");
-                toast(<CustomPopupMessage mess="Update user information successfully!" icon="check"/>);
+                toast(<CustomPopupMessage mess="Update user information successfully!" icon="check-circle"
+                titleColor="indigo"
+                iconColor="indigo"/>);
 
             })
             .catch((err) => {
@@ -170,7 +172,7 @@ const Profile = () => {
                                         <div className="relative">
                                             {/* <!-- Button trigger modal --> */}
                                             <button
-                                                className="icon_change h-6 w-7 pt-1 text-sm bg-amber-400 hover:bg-amber-500 text-white rounded-xl leading-tight text-center absolute m-10 mb-4 mr-20 z-50 cursor-pointer"
+                                                className="icon_change h-6 w-7 pt-1 text-sm bg-indigo-400 hover:bg-indigo-500 text-white rounded-xl leading-tight text-center absolute m-10 mb-4 mr-20 z-50 cursor-pointer"
                                                 data-bs-toggle="modal"
                                                 data-bs-target="#modalUpdateAvatar"
                                             >
@@ -186,39 +188,13 @@ const Profile = () => {
                                         <ModalUpdateAvatar userInfo={userInfo} />
                                     </div>
                                     <div className="w-full lg:w-4/12 px-4 lg:order-3 lg:text-right lg:self-center ">
-                                        <div className="py-6 px-3 mt-32 sm:mt-0">
-                                            <Link
-                                                to="/"
-                                                className="bg-amber-500 active:bg-amber-600 uppercase text-white font-bold hover:shadow-md shadow text-xs px-4 py-2 rounded outline-none focus:outline-none sm:mr-2 mb-1"
-                                                type="button"
-                                                style={{ transition: "all .15s ease" }}
-                                            >
-                                                Continue Shopping
-                                            </Link>
-                                        </div>
+                                  
                                     </div>
                                     <div className="w-full lg:w-4/12 px-4 lg:order-1">
-                                        <div className="flex justify-center py-4 lg:pt-4 pt-8">
-                                            <div className="mr-4 p-3 text-center">
-                                                <Link to="/shopping-cart">
-                        <span className="text-xl font-bold block uppercase tracking-wide text-gray-700 hover:text-amber-600">
-                          {itemsInCart.length}
-                        </span>
-                                                </Link>
-                                                <span className="text-sm text-gray-500">
-                          Items In Cart
-                        </span>
-                                            </div>
-                                            <div className="mr-4 p-3 text-center">
-                        <span className="text-xl font-bold block uppercase tracking-wide text-gray-700">
-                          10
-                        </span>
-                                                <span className="text-sm text-gray-500">Orders</span>
-                                            </div>
-                                        </div>
+                                       
                                     </div>
                                 </div>
-                                <div className="text-center mt-6">
+                                <div className="text-center mt-28">
                                     <h3 className="text-4xl font-semibold leading-normal text-center mb-2 text-gray-800">
                                         {userInfo.name}
                                     </h3>
@@ -239,7 +215,7 @@ const Profile = () => {
                                     {/* <!-- Button trigger modal --> */}
                                     <button
                                         type="button"
-                                        className="mb-2 inline-block px-6 py-2.5 bg-none text-amber-500 font-semibold leading-tight uppercase focus:outline-none focus:ring-0 transition duration-150 ease-in-out"
+                                        className="mb-20 inline-block px-6 py-2.5 bg-indigo-500 hover:bg-indigo-600 text-white rounded-md font-semibold leading-tight uppercase focus:outline-none focus:ring-0 transition duration-150 ease-in-out"
                                         data-bs-toggle="modal"
                                         data-bs-target="#modalUpdateUserInfo"
                                     >
@@ -471,7 +447,7 @@ const Profile = () => {
                                                     </button>
                                                     <button
                                                         type="submit"
-                                                        className="inline-block px-6 py-2.5 bg-amber-500 text-white font-medium text-xs leading-tight uppercase rounded shadow-md hover:bg-amber-600 hover:shadow-lg focus:bg-amber-600 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-amber-700 active:shadow-lg transition duration-150 ease-in-out ml-1"
+                                                        className="inline-block px-6 py-2.5 bg-indigo-500 text-white font-medium text-xs leading-tight uppercase rounded shadow-md hover:bg-indigo-600 hover:shadow-lg focus:bg-indigo-600 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-indigo-700 active:shadow-lg transition duration-150 ease-in-out ml-1"
                                                     >
                                                         Save changes
                                                     </button>
@@ -485,7 +461,6 @@ const Profile = () => {
                     </div>
                 </section>
             </main>
-            <ToastContainer />
         </>
     );
 };

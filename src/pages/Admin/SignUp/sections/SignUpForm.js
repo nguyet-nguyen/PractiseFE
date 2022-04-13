@@ -73,6 +73,9 @@ const SignUpAdminForm = () => {
         if(data.password == data.confirmPassword) {
             CreateUsers(formData).then(response => {
                 navigate('/pages/authentication/sign-in');
+                toast(<CustomPopupMessage mess={response.data.message} icon="check-circle"
+                titleColor="indigo"
+                iconColor="indigo"/>);
                 console.log(response.data);
             })
                 .catch(err => {

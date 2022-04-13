@@ -7,6 +7,8 @@ import { numberFormat } from "../../../LandingPages/Home/function/FormatMoney";
 import Sidebar from "../../Sidebar";
 import Header from "../../Header";
 import FileSaver from 'file-saver';
+import CustomPopupMessage from "../../../CustomPopupMess";
+import { toast } from "react-toastify";
 
 const OrdDetailAdmin = () => {
   const [sidebarOpen, setSidebarOpen] = useState(false);
@@ -49,6 +51,14 @@ const OrdDetailAdmin = () => {
       .then((res) => {
         const filename = res.data.split("files/");
         FileSaver.saveAs(res.data, filename[1]);
+        toast(
+          <CustomPopupMessage
+            mess="This order has been exported successfully!"
+            icon="check-circle"
+            titleColor="indigo"
+            iconColor="indigo"
+          />
+        );
       })
       .catch((err) => {
         console.log(err);
@@ -74,32 +84,18 @@ const OrdDetailAdmin = () => {
                         Order Detail
                       </p>
                     </div>
-                    {order.status == 2 && (
+                    
                     <div className="lg:w-1/2 lg:text-right lg:pt-0 pt-4 lg:ml-30 w-full  h-full">
                       <button
                         type="button"
                         onClick={() => exportFile(order.id)}
-                        className="inline-block mr-2 px-4 py-2.5 lg:mb-0 mb-3 active:bg-indigo-500 text-indigo-500 border border-indigo-500
+                        className="inline-block mr-2 px-4 py-2.5 lg:mb-0 mb-3  text-indigo-500 border border-indigo-500
                                 font-medium text-xs leading-tight uppercase rounded hover:shadow-md shadow"
                       >
                         <i className="fa fa-print pr-2" aria-hidden="true"></i>
-                        Export Invoice
+                        Export Order
                       </button>
-                    </div>
-                    )}
-                     {order.status == 4 && (
-                    <div className="lg:w-1/2 lg:text-right lg:pt-0 pt-4 lg:ml-30 w-full  h-full">
-                      <button
-                        type="button"
-                        onClick={() => exportFile(order.id)}
-                        className="inline-block mr-2 px-4 py-2.5 lg:mb-0 mb-3 active:bg-indigo-500 text-indigo-500 border border-indigo-500
-                                font-medium text-xs leading-tight uppercase rounded hover:shadow-md shadow"
-                      >
-                        <i className="fa fa-print pr-2" aria-hidden="true"></i>
-                        Print PDF
-                      </button>
-                    </div>
-                    )}
+                    </div>  
                   </div>
                 </div>
 
