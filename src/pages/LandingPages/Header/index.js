@@ -8,11 +8,15 @@ const Header = () => {
         <div>
             <DefaultNavbar
                 routes={routes}
-                action={{
+                action={[{
                     route: "/pages/authentication/sign-in",
                     label: "Sign In",
                     color: "default",
-                }}
+                },{
+                    route: "/pages/authentication/sign-up",
+                    label: "Sign Up",
+                    color: "default",
+                },]}
                 transparent
                 light
             />
