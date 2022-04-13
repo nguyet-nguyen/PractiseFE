@@ -25,18 +25,18 @@ const AdminTable = () => {
     const searchProduct = (e) => {
         let searchList = [];
         let searchKey = e.target.value;
+        console.log(e.target.value)
         users.forEach(user => {
             if ((user.name.toString().toLowerCase().indexOf(searchKey) > -1)
                 || (user.email.toString().toLowerCase().indexOf(searchKey) > -1)
                 || (user.phone.toString().toLowerCase().indexOf(searchKey) > -1)
-                || (user.roles.toString().toLowerCase().indexOf(searchKey) > -1)
                 || ((user.address).toString().toLowerCase().indexOf(searchKey) > -1)
             ) {
                 searchList.push(user);
             }
         })
         setUsers(searchList);
-        if (searchKey == null || searchKey == "" || searchKey.isEmpty()) {
+        if (searchKey == null || searchKey == "" ) {
             setUsers(searchData);
         }
     }
@@ -113,9 +113,9 @@ const AdminTable = () => {
                           type="button"
                           data-mdb-ripple="true"
                           data-mdb-ripple-color="light"
-                          className="inline-block px-6 py-2.5 bg-indigo-600 text-white font-medium text-xs
-                                leading-tight uppercase rounded shadow-md hover:bg-indigo-700 hover:shadow-lg focus:bg-indigo-700
-                                focus:shadow-lg focus:outline-none focus:ring-0 active:bg-indigo-800 active:shadow-lg transition
+                          className="inline-block px-6 py-2.5 bg-blue-600 text-white font-medium text-xs
+                                leading-tight uppercase rounded shadow-md hover:bg-blue-700 hover:shadow-lg focus:bg-blue-700
+                                focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg transition
                                 duration-150 ease-in-out">Add Admin
                     </Link>
                     <div className="xl:w-96">
