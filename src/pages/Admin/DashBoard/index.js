@@ -4,6 +4,8 @@ import Sidebar from '../Sidebar';
 import WelcomeBanner from './sections/WelcomeBanner';
 
 function Dashboard() {
+  console.log(React.version);
+
     const [sidebarOpen, setSidebarOpen] = useState(false);
 
     return (
