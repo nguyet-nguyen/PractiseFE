@@ -4,6 +4,9 @@ import React, {useState, useEffect} from "react";
 import {Link, useNavigate} from "react-router-dom";
 import {useForm} from "react-hook-form";
 import {CreateProducts, getAllCategory} from "../../../../features/Api";
+import CustomPopupMessage from "../../../CustomPopupMess";
+import { toast } from "react-toastify";
+
 const AddProductForm = () => {
     const [sidebarOpen, setSidebarOpen] = useState(false);
 
@@ -26,9 +29,16 @@ const AddProductForm = () => {
         ]));
         [...data.images].map(f => formData.append("images[]", f));
         CreateProducts(formData).then(response => {
-            // navigate('/pages/authentication/sign-in');
             console.log(response.data);
             navigate("/admin/products");
+            toast(
+                <CustomPopupMessage
+                    mess="This product has been added successfully!"
+                    icon="check-circle"
+                    titleColor="indigo"
+                    iconColor="indigo"
+                />
+            );
         })
             .catch(err => {
                     console.log(err.data);

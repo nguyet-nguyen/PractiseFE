@@ -1,6 +1,6 @@
 import React from "react";
 import { useForm } from "react-hook-form";
-import { toast, ToastContainer } from "react-toastify";
+import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { updateUserAvatar } from "../../../../features/Api";
 import CustomPopupMessage from "../../../CustomPopupMess";
@@ -15,12 +15,14 @@ const ModalUpdateAvatar = ({ userInfo }) => {
   const onUpdateAvatar = async (data, e) => {
     const formData = new FormData();
     formData.append("image", data.image[0]);
+    $("#modalUpdateAvatar").modal("hide");
 
     updateUserAvatar(userInfo.id, formData)
       .then((response) => {
         console.log(response.data);
-        $("#modalUpdateAvatar").modal("hide");
-        toast(<CustomPopupMessage mess="Update avatar successfully!" icon="check"/>);
+        toast(<CustomPopupMessage mess="Update avatar successfully!" icon="check-circle"
+        titleColor="amber"
+        iconColor="amber"/>);
       })
       .catch((err) => {
         alert(err.data);
@@ -102,7 +104,6 @@ const ModalUpdateAvatar = ({ userInfo }) => {
           </div>
         </div>
       </div>
-      <ToastContainer />
     </>
   );
 };

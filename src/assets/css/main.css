@@ -100,7 +100,7 @@ html {
 }
 
 .Toastify__progress-bar {
-    background: #f1c40f;
+    background: rgb(183, 178, 178);
 }
 
 /* Hide Arrows From Input Number */

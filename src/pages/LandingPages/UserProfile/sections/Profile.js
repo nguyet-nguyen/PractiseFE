@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { Link, useNavigate } from "react-router-dom";
-import { toast, ToastContainer } from "react-toastify";
+import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { cities, districts, wards } from "../../../../address";
 import {
@@ -108,7 +108,9 @@ const Profile = () => {
         toast(
           <CustomPopupMessage
             mess="Update user information successfully!"
-            icon="check"
+            icon="check-circle"
+            titleColor="amber"
+            iconColor="amber"
           />
         );
       })
@@ -164,7 +166,9 @@ const Profile = () => {
         toast(
           <CustomPopupMessage
             mess="Your order has been cancelled successfully!"
-            icon="check"
+            icon="check-circle"
+            titleColor="amber"
+            iconColor="amber"
           />
         );
         setReasonForCancel("");
@@ -205,16 +209,29 @@ const Profile = () => {
   const onBuyItAgain = (id) => {
     buyAgain(id)
       .then((res) => {
+        console.log(res.data);
+        console.log(res.data.error);
+        console.log(res.error);
         navigate("/shopping-cart");
         toast(
           <CustomPopupMessage
             mess={res.data.message}
-            icon="check"
+            icon="check-circle"
+            titleColor="amber"
+            iconColor="amber"
           />
         );
       })
       .catch((err) => {
-        console.log(err);
+        console.log(err.response.data.error);
+        toast(
+          <CustomPopupMessage
+            mess={err.response.data.error}
+            icon="exclamation-circle"
+            titleColor="red"
+            iconColor="red"
+          />
+        );
       });
   };
 
@@ -332,7 +349,7 @@ const Profile = () => {
                   {/* <!-- Button trigger modal --> */}
                   <button
                     type="button"
-                    className="mb-2 inline-block px-6 py-2.5 bg-none text-amber-500 font-semibold leading-tight uppercase focus:outline-none focus:ring-0 transition duration-150 ease-in-out"
+                    className="mb-2 inline-block px-6 py-2.5 bg-amber-500 hover:bg-amber-600 text-amber-500 font-semibold leading-tight uppercase focus:outline-none focus:ring-0 transition duration-150 ease-in-out"
                     data-bs-toggle="modal"
                     data-bs-target="#modalUpdateUserInfo"
                   >
@@ -859,7 +876,6 @@ const Profile = () => {
           </div>
         </section>
       </main>
-      <ToastContainer />
     </>
   );
 };

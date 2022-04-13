@@ -3,8 +3,7 @@ import { useForm } from "react-hook-form";
 import { SignUpApi, checkIfEmailExists } from "../../../features/Api";
 import { Link, useNavigate } from "react-router-dom";
 import { cities, districts, wards } from "../../../address";
-import { toast, ToastContainer } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
+import { toast } from "react-toastify";
 import CustomPopupMessage from "../../CustomPopupMess";
 
 const SignUp = () => {
@@ -89,7 +88,9 @@ const SignUp = () => {
      setErrConfirmPass(false);
      SignUpApi(formData)
          .then((response) => {
-           toast(<CustomPopupMessage mess={response.data.message} icon="check"/>);
+           toast(<CustomPopupMessage mess={response.data.message} icon="check-circle"
+           titleColor="amber"
+           iconColor="amber"/>);
            navigate("/pages/authentication/sign-in");
          })
          .catch((err) => {
