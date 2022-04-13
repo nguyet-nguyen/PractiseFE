@@ -29,6 +29,8 @@ import OrderDetail from "pages/LandingPages/OrderDetail";
 import OrderListAdmin from "./pages/Admin/OrderListAdmin";
 import OrderDetailAdmin from "pages/Admin/OrderListAdmin/sections/OrderDetail";
 import UserProfile from "./pages/LandingPages/UserProfile";
+import AdminTable from "./pages/Admin/Users/sections/AdminTable";
+import Admins from "./pages/Admin/Users/index-admin";
 
 export default function App() {
 
@@ -148,7 +150,15 @@ export default function App() {
                         }
                     />
                     <Route
-                        path="/admin/users"
+                        path="/admin/users-list/admin"
+                        element={
+                            <PrivateRoute>
+                                <Admins/>
+                            </PrivateRoute>
+                        }
+                    />
+                    <Route
+                        path="/admin/users-list/buyer"
                         element={
                             <PrivateRoute>
                                 <UsersPage/>

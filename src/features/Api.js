@@ -166,6 +166,14 @@ export const getAllUsers = () => {
   }
 };
 
+export const getAllAdmins = () => {
+  try {
+    return apiadmin.get(`/admin/accounts`);
+  } catch (error) {
+    console.log(error);
+  }
+};
+
 // create user
 export const CreateUsers = (data) => {
   try {

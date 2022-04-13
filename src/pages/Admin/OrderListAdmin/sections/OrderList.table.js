@@ -313,14 +313,19 @@ const OrderListTable = () => {
                     </div>
                 </div>
                 {/*---------------------------------------------*/}
-                <DataTable
-                    columns={columns}
-                    data={data}
-                    pagination
-                    customStyles={customStyles}
-                    progressPending={pending}
-                    // progressComponent={<Loading />}
-                />
+                {pending ?
+                    <Loading adminPage={true}/>
+                    :
+                    <DataTable
+                        columns={columns}
+                        data={data}
+                        pagination
+                        customStyles={customStyles}
+                        progressPending={pending}
+                        // progressComponent={<Loading />}
+                    />
+                }
+
 
                 {/*---------------------------------------------*/}
                 <div
