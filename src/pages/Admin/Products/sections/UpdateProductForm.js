@@ -4,6 +4,9 @@ import React, {useState, useEffect} from "react";
 import {useNavigate, useParams} from "react-router-dom";
 import {useForm} from "react-hook-form";
 import {CreateProducts, getAllCategory, getProductDetail, UpdateProduct} from "../../../../features/Api";
+import CustomPopupMessage from "../../../CustomPopupMess";
+import { toast } from "react-toastify";
+
 const UpdateProductForm = () => {
     const [sidebarOpen, setSidebarOpen] = useState(false);
     const navigate = useNavigate();
@@ -52,6 +55,14 @@ const UpdateProductForm = () => {
         UpdateProduct(formData,itemDetail.id).then(response => {
             console.log(response.data);
             navigate("/admin/products");
+            toast(
+                <CustomPopupMessage
+                    mess="This product has been updated successfully!"
+                    icon="check-circle"
+                    titleColor="indigo"
+                    iconColor="indigo"
+                />
+            );
         })
             .catch(err => {
                     console.log(err);

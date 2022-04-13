@@ -1,6 +1,6 @@
 import React from "react";
 import { useForm } from "react-hook-form";
-import { toast, ToastContainer } from "react-toastify";
+import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { updateUserAvatar } from "../../../../features/Api";
 import CustomPopupMessage from "../../../CustomPopupMess";
@@ -15,12 +15,14 @@ const ModalUpdateAvatar = ({ userInfo }) => {
     const onUpdateAvatar = async (data, e) => {
         const formData = new FormData();
         formData.append("image", data.image[0]);
+        $("#modalUpdateAvatar").modal("hide");
 
         updateUserAvatar(userInfo.id, formData)
             .then((response) => {
                 console.log(response.data);
-                $("#modalUpdateAvatar").modal("hide");
-                toast(<CustomPopupMessage mess="Update avatar successfully!" icon="check"/>);
+                toast(<CustomPopupMessage mess="Update avatar successfully!" icon="check-circle"
+                titleColor="indigo"
+                iconColor="indigo"/>);
             })
             .catch((err) => {
                 alert(err.data);
@@ -93,7 +95,7 @@ const ModalUpdateAvatar = ({ userInfo }) => {
                                 </button>
                                 <button
                                     type="submit"
-                                    className="inline-block px-6 py-2.5 bg-amber-500 text-white font-medium text-xs leading-tight uppercase rounded shadow-md hover:bg-amber-600 hover:shadow-lg focus:bg-amber-600 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-amber-700 active:shadow-lg transition duration-150 ease-in-out ml-1"
+                                    className="inline-block px-6 py-2.5 bg-indigo-500 text-white font-medium text-xs leading-tight uppercase rounded shadow-md hover:bg-indigo-600 hover:shadow-lg focus:bg-indigo-600 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-indigo-700 active:shadow-lg transition duration-150 ease-in-out ml-1"
                                 >
                                     Save changes
                                 </button>
@@ -102,7 +104,6 @@ const ModalUpdateAvatar = ({ userInfo }) => {
                     </div>
                 </div>
             </div>
-            <ToastContainer />
         </>
     );
 };
