@@ -109,16 +109,7 @@ const UsersTable = () => {
             <div className="px-4 sm:px-6 lg:px-8 py-8 w-full max-w-9xl mx-auto">
                 <h2 className="font-bold text-4xl text-slate-800 uppercase mb-5">
                     <i className="fa fa-users" aria-hidden="true"></i> users list</h2>
-                <div className="flex space-x-2 justify-between mb-5">
-                    <Link to="/admin/sign-up"
-                          type="button"
-                          data-mdb-ripple="true"
-                          data-mdb-ripple-color="light"
-                          className="inline-block px-6 py-2.5 bg-indigo-600 text-white font-medium text-xs
-                                leading-tight uppercase rounded shadow-md hover:bg-indigo-700 hover:shadow-lg focus:bg-indigo-700
-                                focus:shadow-lg focus:outline-none focus:ring-0 active:bg-indigo-800 active:shadow-lg transition
-                                duration-150 ease-in-out">Add Admin
-                    </Link>
+                <div className="flex space-x-2 justify-end mb-5">
                     <div className="xl:w-96">
                         <div className="input-group relative flex flex-wrap items-stretch w-full">
                             <input
