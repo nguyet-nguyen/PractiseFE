@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { cities, districts, wards } from "../../../../address";
 import {
   cancelOrder,
-  filterOrdByStatus, getAllItemsInCart, getUserInfo, getUsersOrdHistory, updateUserInfo
+  filterOrdByStatus, getAllItemsInCart, getUserInfo, getUsersOrdHistory, updateUserInfo, buyAgain
 } from "../../../../features/Api";
 import CustomPopupMessage from "../../../CustomPopupMess";
 import { numberFormat } from "../../Home/function/FormatMoney";
@@ -14,6 +14,7 @@ import ModalUpdateAvatar from "../sections/ModalUpdateAvatar";
 
 const Profile = () => {
   // Profile
+  const navigate = useNavigate();
   const [userInfo, setUserInfo] = useState({});
   const [addressArray, setAddressArray] = useState();
   const [itemsInCart, setItemsInCart] = useState([]);
@@ -199,6 +200,24 @@ const Profile = () => {
         console.warn(err);
       });
   };
+
+  // Buy items again
+  const onBuyItAgain = (id) => {
+    buyAgain(id)
+      .then((res) => {
+        navigate("/shopping-cart");
+        toast(
+          <CustomPopupMessage
+            mess={res.data.message}
+            icon="check"
+          />
+        );
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+
   return (
     <>
       <main className="profile-page">
@@ -591,7 +610,7 @@ const Profile = () => {
                               className="fa fa-clock pr-2"
                               aria-hidden="true"
                             ></i>
-                            Appoved
+                            Approved
                           </button>
                           <button className=" active:bg-blue-500 uppercase text-blue-500 border border-blue-500 font-bold hover:shadow-md shadow text-xs px-4 py-2 rounded outline-none focus:outline-none sm:mr-2 mb-1"
                           onClick={() =>
@@ -648,7 +667,7 @@ const Profile = () => {
                                 >
                                   {order.status}
                                 </span> } 
-                                {order.status == "Appoved" && <span
+                                {order.status == "Approved" && <span
                                   className="inline-block px-4 py-2.5 text-amber-600
                                                             font-semibold text-xs leading-tight uppercase "
                                 >
@@ -719,7 +738,18 @@ const Profile = () => {
                                   {numberFormat(order.totalPrice)}
                                 </span>
                                 <div className="flex flex-col lg:flex-row justify-center">
-                                  {order.status == "Appoved" && 
+                                <button
+                                    className="active:bg-amber-500 capitalize text-amber-500 border border-amber-500 focus:ring-4 hover:shadow-md shadow font-semibold rounded-md text-sm px-5 py-1.5 text-center lg:mr-2"
+                                    onClick={() =>
+                                      onBuyItAgain(order.id)
+                                    }
+                                 >
+                                   <i
+                                      className="fa fa-repeat"
+                                      aria-hidden="true"
+                                    ></i>
+                                  </button>
+                                  {order.status == "Approved" && 
                                   <button
                                     className="active:bg-red-500 uppercase text-red-500 border border-red-500 focus:ring-4 hover:shadow-md shadow font-semibold rounded-md text-sm px-5 py-1.5 text-center lg:mr-2"
                                     data-bs-toggle="modal"

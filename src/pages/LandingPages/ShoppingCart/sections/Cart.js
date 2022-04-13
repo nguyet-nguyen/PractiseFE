@@ -14,6 +14,7 @@ const ShoppingCart = () => {
   const [shippingFee, setShippingFee] = useState(0);
   const [idItemDel, setIdItemDel] = useState();
   const [qtyTotal, setQtyTotal] = useState(0);
+  const [showEmpty, setShowEmpty] = useState(false);
 
   useEffect(() => {
     getAllItems();
@@ -90,6 +91,11 @@ const ShoppingCart = () => {
     getAllItemsInCart()
       .then((res) => {
         setItemsInCart(res.data);
+        if(res.data.length > 0){
+          setShowEmpty(false);
+        }else if(res.data.length == 0){
+          setShowEmpty(true);
+        }
 
         updateShippingFee(res.data);
         updateTotal(res.data);
@@ -344,26 +350,27 @@ const ShoppingCart = () => {
       </div>
     </>
   ) : (
-    <div className="text-center">
-      <i
-        className={`fa fa-shopping-cart mr-7 text-9xl text-amber-500`}
-        aria-hidden="true"
-      ></i>
-      <p className="font-bold text-2xl capitalize mt-7">Your cart is empty</p>
-      <p className="font-bold text-lg text-gray-400 mt-3 break-all">
-        Looks like you haven't added anything to your cart yet
-      </p>
-      <div className="py-6 px-3 mt-32 sm:mt-0">
-        <Link
-          to="/all-items"
-          className="bg-amber-500 active:bg-amber-600 w-1/4 h-10 py-2.5 uppercase text-white font-bold hover:shadow-md shadow text-sm   rounded-md outline-none focus:outline-none sm:mr-2 mb-1"
-          type="button"
-          style={{ transition: "all .15s ease" }}
-        >
-          Shop Now
-        </Link>
-      </div>
+    showEmpty && (<div className="text-center">
+    <i
+      className={`fa fa-shopping-cart mr-7 text-9xl text-amber-500`}
+      aria-hidden="true"
+    ></i>
+    <p className="font-bold text-2xl capitalize mt-7">Your cart is empty</p>
+    <p className="font-bold text-lg text-gray-400 mt-3 break-all">
+      Looks like you haven't added anything to your cart yet
+    </p>
+    <div className="py-6 px-3 mt-32 sm:mt-0">
+      <Link
+        to="/all-items"
+        className="bg-amber-500 active:bg-amber-600 w-1/4 h-10 py-2.5 uppercase text-white font-bold hover:shadow-md shadow text-sm   rounded-md outline-none focus:outline-none sm:mr-2 mb-1"
+        type="button"
+        style={{ transition: "all .15s ease" }}
+      >
+        Shop Now
+      </Link>
     </div>
+  </div>)
+   
   );
 };
 

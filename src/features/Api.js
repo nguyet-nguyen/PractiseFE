@@ -157,6 +157,15 @@ export const filterOrdByStatus = (id) => {
   }
 };
 
+// Buy items in order again
+export const buyAgain = (id) => {
+  try {
+    return apiadmin.get(`/user/orders/${id}/buyAgain`);
+  } catch (error) {
+    console.log(error);
+  }
+};
+
 // ----------------------admin----------------------------------
 export const getAllUsers = () => {
   try {
