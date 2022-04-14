@@ -9,13 +9,14 @@ import {
 } from "../../../../features/Api";
 import CustomPopupMessage from "../../../CustomPopupMess";
 import { numberFormat } from "../../Home/function/FormatMoney";
+import Loading from "../../../../Loading";
 
 const CheckoutForm = () => {
   const [itemsInCart, setItemsInCart] = useState([]);
   const [subtotal, setSubtotal] = useState(0);
   const [shippingFee, setShippingFee] = useState(0);
   const [showSpinner, setShowSpinner] = useState(false);
-
+  const [loading, setLoading] = useState(false);
   const {
     register,
     setValue,
@@ -33,11 +34,13 @@ const CheckoutForm = () => {
   const getAllItems = () => {
     getAllItemsInCart()
       .then((res) => {
+        setLoading(true);
         setItemsInCart(res.data);
         updateShippingFee(res.data);
         updateTotal(res.data);
       })
       .catch((err) => {
+        setLoading(true);
         console.log(err);
       });
   };
@@ -98,7 +101,7 @@ const CheckoutForm = () => {
   const goShopping = () => {
     $("#modalCheckoutSuccess").modal("hide");
     navigate("/all-items");
-    
+
   }
 
   const goListCustomerOrds = () => {
@@ -282,67 +285,74 @@ const CheckoutForm = () => {
             </form>
           </div>
         </div>
-        <div className="lg:w-2/5 lg:ml-10 md:w-8/12 w-full  h-full bg-white">
-          <h1 className="py-6 border-b-2 text-xl uppercase text-gray-600 px-8">
-            Order Summary
-          </h1>
-          <ul className="py-6 border-b space-y-6 px-8">
-            {itemsInCart.map((item) => (
-              <Link to={`/all-items/item-detail/${item.idProduct}`}>
-                <li key={item.id} className="grid grid-cols-7 gap-2 border-b-1">
-                  <div className="col-span-1 self-center">
-                    <img
-                      src={item.images[0]}
-                      alt="Product Image"
-                      className="rounded w-full"
-                    />
-                  </div>
-                  <div className="flex flex-col col-span-3 pt-2">
+        <div className="relative lg:w-2/5 lg:ml-10 md:w-8/12">
+          {loading ?
+              <div className=" w-full  h-full bg-white">
+                <h1 className="py-6 border-b-2 text-xl uppercase text-gray-600 px-8">
+                  Order Summary
+                </h1>
+                <ul className="py-6 border-b space-y-6 px-8">
+                  {itemsInCart.map((item) => (
+                      <Link to={`/all-items/item-detail/${item.idProduct}`}>
+                        <li key={item.id} className="grid grid-cols-7 gap-2 border-b-1">
+                          <div className="col-span-1 self-center">
+                            <img
+                                src={item.images[0]}
+                                alt="Product Image"
+                                className="rounded w-full"
+                            />
+                          </div>
+                          <div className="flex flex-col col-span-3 pt-2">
                     <span className="text-gray-600 uppercase text-md font-semi-bold">
                       {item.name}
                     </span>
-                    <div className="flex items-center pt-2">
-                      <p className="text-sm font-semibold capitalize leading-3 text-gray-500 pr-3">
-                        {item.color}
-                      </p>
-                      <p className="text-sm font-semibold uppercase leading-3 text-gray-500  border-l border-gray-300 pl-3">
-                        {item.size}
-                      </p>
-                    </div>
-                  </div>
-                  <div className="col-span-3 pt-3">
-                    <div className="flex items-center text-sm justify-between">
+                            <div className="flex items-center pt-2">
+                              <p className="text-sm font-semibold capitalize leading-3 text-gray-500 pr-3">
+                                {item.color}
+                              </p>
+                              <p className="text-sm font-semibold uppercase leading-3 text-gray-500  border-l border-gray-300 pl-3">
+                                {item.size}
+                              </p>
+                            </div>
+                          </div>
+                          <div className="col-span-3 pt-3">
+                            <div className="flex items-center text-sm justify-between">
                       <span className="text-gray-500">
                         {item.amount} x {numberFormat(item.unitPrice)}
                       </span>
-                      <span className="text-gray-700 font-semibold inline-block">
+                              <span className="text-gray-700 font-semibold inline-block">
                         {numberFormat(item.price)}
                       </span>
-                    </div>
-                  </div>
-                </li>
-              </Link>
-            ))}
-          </ul>
-          <div className="px-8 border-b">
-            <div className="flex justify-between uppercase py-4 text-gray-600">
-              <span>Subtotal</span>
-              <span className="font-semibold text-gray-700">
+                            </div>
+                          </div>
+                        </li>
+                      </Link>
+                  ))}
+                </ul>
+                <div className="px-8 border-b">
+                  <div className="flex justify-between uppercase py-4 text-gray-600">
+                    <span>Subtotal</span>
+                    <span className="font-semibold text-gray-700">
                 {numberFormat(subtotal)}
               </span>
-            </div>
-            <div className="flex justify-between uppercase py-4 text-gray-600">
-              <span>Shipping</span>
-              <span className="font-semibold text-amber-500">
+                  </div>
+                  <div className="flex justify-between uppercase py-4 text-gray-600">
+                    <span>Shipping</span>
+                    <span className="font-semibold text-amber-500">
                 {shippingFee == 0 ? "Free" : numberFormat(shippingFee)}
               </span>
-            </div>
-          </div>
-          <div className="font-semibold text-xl uppercase px-8 flex justify-between py-8 text-amber-500">
-            <span>Total</span>
-            <span>{numberFormat(subtotal + shippingFee)}</span>
-          </div>
+                  </div>
+                </div>
+                <div className="font-semibold text-xl uppercase px-8 flex justify-between py-8 text-amber-500">
+                  <span>Total</span>
+                  <span>{numberFormat(subtotal + shippingFee)}</span>
+                </div>
+              </div>
+              : <Loading />
+          }
         </div>
+
+
       </div>
       {/* <!-- Modal --> */}
       <div
@@ -375,10 +385,10 @@ const CheckoutForm = () => {
                   Your order has been approved
                 </p>
                 <p className="text-base  mt-1">
-                  We'll send you an email with order details and tracking information.{" "} 
+                  We'll send you an email with order details and tracking information.{" "}
                 </p>
               </div>
-              
+
             </div>
             <div className="modal-footer flex flex-shrink-0 flex-wrap items-center justify-between p-4 mt-2 rounded-b-md">
               <button
