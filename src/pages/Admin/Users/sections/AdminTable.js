@@ -107,7 +107,7 @@ const AdminTable = () => {
         <>
             <div className="px-4 sm:px-6 lg:px-8 py-8 w-full max-w-9xl mx-auto">
                 <h2 className="font-bold text-4xl text-slate-800 uppercase mb-5">
-                    <i className="fa fa-users" aria-hidden="true"></i> Admins list</h2>
+                    <i className="fa fa-users" aria-hidden="true"></i> Admin list</h2>
                 <div className="flex space-x-2 justify-between mb-5">
                     <Link to="/admin/sign-up"
                           type="button"

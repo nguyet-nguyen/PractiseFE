@@ -55,12 +55,13 @@ const OrderListTable = () => {
         }
     };
 
-    const onChangeStatusDelivery = (id) => {
-        const data = {
+    const onChangeStatusDelivery = (id, statusId) => {
+        if(statusId==2){
+          const data = {
             status: 2,
             reasonCancel: "",
-        };
-        UpdateStatusOrderList(data, id)
+          };
+          UpdateStatusOrderList(data, id)
             .then((res) => {
                 console.log(res.data);
                 toast(
@@ -75,6 +76,29 @@ const OrderListTable = () => {
             .catch((err) => {
                 console.log(err);
             });
+        }else if(statusId==4){
+          const data = {
+            status: 4,
+            reasonCancel: "",
+          };
+          UpdateStatusOrderList(data, id)
+            .then((res) => {
+                console.log(res.data);
+                toast(
+                    <CustomPopupMessage
+                        mess="This order has been completed"
+                        icon="check-circle"
+                        titleColor="indigo"
+                        iconColor="indigo"
+                    />
+                );
+            })
+            .catch((err) => {
+                console.log(err);
+            });
+        }
+        
+        
         getAllOrder();
     };
 
@@ -198,6 +222,18 @@ const OrderListTable = () => {
             cell: (order) => {
                 return (
                     <>
+                        {order.status == "Delivery" ? (
+                            <>
+                                <button
+                                    type="button"
+                                    onClick={() => onChangeStatusDelivery(order.id, 4)}
+                                    className="inline-block mr-2 px-4 py-2.5 bg-green-600 text-white
+                                                            font-medium text-xs leading-tight uppercase rounded shadow-md"
+                                >
+                                    Complete
+                                </button>
+                            </>
+                        ) : null}
                         {order.status == "Approved" ? (
                             <>
                                 <button
@@ -266,7 +302,7 @@ const OrderListTable = () => {
         <>
             <div className="px-4 py-8 w-full w-9xl mx-auto">
                 <h2 className="font-bold text-4xl text-slate-800 uppercase mb-5">
-                    <i className="fa fa-shopping-cart" aria-hidden="true"></i> orders list
+                    <i className="fa fa-shopping-cart" aria-hidden="true"></i> order list
                 </h2>
                 <div className="flex space-x-2 justify-end mb-5">
                     <div className="xl:w-96">
@@ -317,95 +353,73 @@ const OrderListTable = () => {
                     />
                 )}
 
-                {/*---------------------------------------------*/}
-                <div
-                    className="modal fade fixed top-0 left-0 hidden w-full h-full outline-none overflow-x-hidden overflow-y-auto"
-                    id="modalCancelOrd"
-                    tabIndex="-1"
-                    aria-labelledby="modalCancelOrdLabel"
-                    aria-hidden="true"
+          {/*---------------------------------------------*/}
+        <div
+          className="modal fade fixed top-0 left-0 hidden w-full h-full outline-none overflow-x-hidden overflow-y-auto"
+          id="modalCancelOrd"
+          tabIndex="-1"
+          aria-labelledby="modalCancelOrdLabel"
+          aria-hidden="true"
+        >
+          <div className="modal-dialog modal-md modal-dialog-centered modal-dialog-scrollable relative w-auto pointer-events-none">
+            <div className="modal-content border-none shadow-lg relative flex flex-col w-full pointer-events-auto bg-white bg-clip-padding rounded-md outline-none text-current">
+              <div className="modal-header flex flex-shrink-0 items-center justify-between p-4 border-b border-gray-200 rounded-t-md">
+                <h5
+                  className="text-xl font-medium leading-normal pl-8 text-gray-800 uppercase"
+                  id="modalCancelOrdLabel"
                 >
-                    <div
-                        className="modal-dialog modal-md modal-dialog-centered modal-dialog-scrollable relative w-auto pointer-events-none">
-                        <div
-                            className="modal-content border-none shadow-lg relative flex flex-col w-full pointer-events-auto bg-white bg-clip-padding rounded-md outline-none text-current">
-                            <div
-                                className="modal-header flex flex-shrink-0 items-center justify-between p-4 border-b border-gray-200 rounded-t-md">
-                                <h5
-                                    className="text-xl font-medium leading-normal pl-8 text-gray-800 uppercase"
-                                    id="modalCancelOrdLabel">
-                                </h5>
-                                <div
-                                    className="modal-dialog modal-md modal-dialog-centered modal-dialog-scrollable relative w-auto pointer-events-none">
-                                    <div
-                                        className="modal-content border-none shadow-lg relative flex flex-col w-full pointer-events-auto bg-white bg-clip-padding rounded-md outline-none text-current">
-                                        <div
-                                            className="modal-header flex flex-shrink-0 items-center justify-between p-4 border-b border-gray-200 rounded-t-md">
-                                            <h5
-                                                className="text-xl font-medium leading-normal pl-8 text-gray-800 uppercase"
-                                                id="modalCancelOrdLabel"
-                                            >
-                                                Order Canceled
-                                            </h5>
-                                            <button
-                                                type="button"
-                                                className="btn-close box-content w-4 h-4 p-1 text-black border-none rounded-none opacity-50 focus:shadow-none focus:outline-none focus:opacity-100 hover:text-black hover:opacity-75 hover:no-underline"
-                                                data-bs-dismiss="modal"
-                                                aria-label="Close"
-                                            ></button>
-                                        </div>
-                                        <form
-                                            className="px-6 pb-4 space-y-6 lg:px-8 sm:pb-6 xl:pb-8"
-                                            onSubmit={handleSubmit(onSubmit)}
-                                        >
-                                            <div className="modal-body relative p-4">
-                                                <div className="flex -mx-3">
-                                                    <div className="w-full px-3">
-                                                        <div className="flex">
-                                                  <textarea
-                                                      id="reasonCancel2"
-                                                      name="reasonCancel2"
-                                                      className={`w-full h-16 pl-5 pr-3 py-2 rounded-lg border-2 border-gray-200
-                                            outline-none focus:ring-2 focus:ring-indigo-400 focus:border-indigo-400 }`}
-                                                      placeholder="Reason For Order Cancellation"
-                                                      {...register(
-                                                          "reasonCancel2",
-                                                          {}
-                                                      )}
-                                                  />
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div
-                                                className="modal-footer flex flex-shrink-0 flex-wrap
-                                                    items-center justify-end p-4 border-t border-gray-200 rounded-b-md">
-                                                <button
-                                                    type="button"
-                                                    className="inline-block px-6 py-2.5 bg-gray-500 text-white font-medium text-xs leading-tight uppercase rounded shadow-md hover:bg-gray-700 hover:shadow-lg focus:bg-gray-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-gray-800 active:shadow-lg transition duration-150 ease-in-out"
-                                                    data-bs-dismiss="modal"
-                                                >
-                                                    Close
-                                                </button>
-                                                <button
-                                                    type="submit"
-                                                    className="inline-block px-6 border-2 py-2.5 bg-red-600 text-white font-medium
-                                              text-xs leading-tight uppercase rounded shadow-md hover:bg-white
-                                              hover:border-red-600 hover:shadow-lg hover:text-red-600
-                                              focus:bg-amber-600 focus:shadow-lg focus:outline-none focus:ring-0
-                                               active:shadow-lg transition duration-150 ease-in-out ml-1"
-                                                    data-bs-dismiss="modal"
-                                                >
-                                                    Cancel Order
-                                                </button>
-                                            </div>
-                                        </form>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+                  Order Canceled
+                </h5>
+                <button
+                  type="button"
+                  className="btn-close box-content w-4 h-4 p-1 text-black border-none rounded-none opacity-50 focus:shadow-none focus:outline-none focus:opacity-100 hover:text-black hover:opacity-75 hover:no-underline"
+                  data-bs-dismiss="modal"
+                  aria-label="Close"
+                ></button>
+              </div>
+              <form
+                className="px-6 pb-4 space-y-6 lg:px-8 sm:pb-6 xl:pb-8"
+                onSubmit={handleSubmit(onSubmit)}
+              >
+                <div className="modal-body relative p-4">
+                  <div className="flex -mx-3">
+                    <div className="w-full px-3">
+                      <div className="flex">
+                        <textarea
+                          id="reasonCancel2"
+                          name="reasonCancel2"
+                          className={`w-full h-16 pl-5 pr-3 py-2 rounded-lg border-2 border-gray-200
+                                            outline-none focus:ring-2 focus:ring-amber-500 focus:border-amber-600 }`}
+                          placeholder="Reason For Order Cancellation"
+                          {...register("reasonCancel2", {})}
+                        />
+                      </div>
                     </div>
+                  </div>
                 </div>
+                <div className="modal-footer flex flex-shrink-0 flex-wrap items-center justify-end p-4 border-t border-gray-200 rounded-b-md">
+                  <button
+                    type="button"
+                    className="inline-block px-6 py-2.5 bg-gray-500 text-white font-medium text-xs leading-tight uppercase rounded shadow-md hover:bg-gray-700 hover:shadow-lg focus:bg-gray-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-gray-800 active:shadow-lg transition duration-150 ease-in-out"
+                    data-bs-dismiss="modal"
+                  >
+                    Close
+                  </button>
+                  <button
+                    type="submit"
+                    className="inline-block px-6 py-2.5 bg-red-600 text-white font-medium
+                                              text-xs leading-tight uppercase rounded shadow-md hover:bg-amber-600 hover:shadow-lg
+                                              focus:bg-amber-600 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-amber-700
+                                               active:shadow-lg transition duration-150 ease-in-out ml-1"
+                    data-bs-dismiss="modal"
+                  >
+                    Cancel Order
+                  </button>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
             </div>
         </>
     );
