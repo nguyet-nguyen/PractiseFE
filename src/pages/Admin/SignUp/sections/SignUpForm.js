@@ -95,7 +95,7 @@ const SignUpAdminForm = () => {
       CreateUsers(formData)
         .then((response) => {
             setShowSpinner(false);
-          navigate("/pages/authentication/sign-in");
+          navigate("/admin/users-list/admin");
           toast(
             <CustomPopupMessage
               mess={response.data.message}
