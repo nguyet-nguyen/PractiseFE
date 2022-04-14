@@ -6,7 +6,7 @@ const CardProduct = ({proList, homePage, hotDeal}) => {
     if (!homePage)
         return proList ? (
             <>
-                {proList.map((product, index) =>
+                {proList && proList.map((product, index) =>
                     <div key={product.id} className={`ProductCard cardProduct-${index} mx-auto w-full h-84 p-2 border bg-white rounded-lg md:w-72 hover:shadow-lg 
                     transition duration-300 ease-in-out`}>
                         <Link to={`/all-items/item-detail/${product.id}`}>
@@ -46,7 +46,7 @@ const CardProduct = ({proList, homePage, hotDeal}) => {
     else
         return proList ? (
             <>
-                {proList.slice(0, 8).map((product, index) =>
+                {proList && proList.slice(0, 8).map((product, index) =>
                     <div key={product.id} className={`ProductCard cardProduct-${index} mx-auto w-full h-84 p-2 border bg-white rounded-lg md:w-72 hover:shadow-lg 
                     transition duration-300 ease-in-out`}>
                         <Link to={`/all-items/item-detail/${product.id}`}>

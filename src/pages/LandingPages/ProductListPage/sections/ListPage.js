@@ -263,7 +263,7 @@ const ListPage = ({sidebarOpen, setSidebarOpen, categoryList}) => {
                                             className="text-amber-700 ml-3 text-lg lg:hidden lg:sidebar-expanded:block 2xl:block uppercase">All Categories</span>
                                     </h3>
                                     <ul className="mt-3">
-                                        {categoryList.map((category) =>
+                                        {categoryList && categoryList.map((category) =>
                                             <li className={`px-3 py-2 rounded-sm mb-0.5 last:mb-0 ${pathname === '/dashboard' && 'bg-slate-900'}`}>
                                                 <div className="form-check">
                                                     <input
