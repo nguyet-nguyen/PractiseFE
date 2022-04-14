@@ -73,7 +73,7 @@ function WelcomeBanner() {
     };
 
     const dataLine = {
-        labels: lineChartLables.reverse(),
+        labels: lineChartLables,
         datasets: [
             {
                 label: "monthly revenue",
