@@ -163,7 +163,7 @@ const CheckoutForm = () => {
                   <div className="flex border-b border-gray-200">
                     <div className="w-1/7 text-center flex items-center justify-center ">
                       <span className="text-right px-2">
-                        Name <span className="text-red-500">*</span>
+                        Name<span className="text-red-500">*</span>
                       </span>
                     </div>
                     <input
@@ -186,7 +186,7 @@ const CheckoutForm = () => {
                   <div className="flex border-b border-gray-200">
                     <div className="w-1/7 text-center flex items-center justify-center ">
                       <span className="text-right px-2">
-                        Phone <span className="text-red-500">*</span>
+                        Phone<span className="text-red-500">*</span>
                       </span>
                     </div>
                     <input
@@ -225,7 +225,7 @@ const CheckoutForm = () => {
                   <div className="flex border-b border-gray-200">
                     <div className="w-1/7 text-center flex items-center justify-center ">
                       <span className="text-right px-2">
-                        Email <span className="text-red-500">*</span>
+                        Email<span className="text-red-500">*</span>
                       </span>
                     </div>
                     <input
@@ -254,14 +254,14 @@ const CheckoutForm = () => {
                     )}
 
                   <div className="flex">
-                    <div className="w-1/7 text-center flex items-center justify-center ">
+                    <div className="w-2/7 text-center flex items-center justify-center ">
                       <span className="text-right px-2">
-                        Address <span className="text-red-500">*</span>
+                        Address<span className="text-red-500">*</span>
                       </span>
                     </div>
                     <input
                       type="text"
-                      className={`w-80 pl-4 py-2 outline-none`}
+                      className={`w-full pl-4 py-2 outline-none`}
                       placeholder="Address"
                       id="addressDelivery"
                       name="addressDelivery"

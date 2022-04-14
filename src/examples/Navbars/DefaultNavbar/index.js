@@ -565,7 +565,7 @@ function DefaultNavbar({
                   <div
                     className="absolute inline-block top-0 right-0
                                     bottom-auto left-auto translate-x-1/3 -translate-y-0
-                                     rotate-0 skew-x-0 skew-y-0 scale-x-100 scale-y-100 py-1.5 px-2
+                                     rotate-0 skew-x-0 skew-y-0 scale-x-100 scale-y-100 py-1.5 px-3
                                       text-xs leading-none text-center whitespace-nowrap align-baseline
                                        font-bold bg-amber-600 text-white rounded-full z-10"
                   >

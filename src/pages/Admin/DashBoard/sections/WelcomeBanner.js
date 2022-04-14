@@ -87,9 +87,9 @@ function WelcomeBanner() {
     const [errorFromDate, setErrorFromDate] = useState(false);
     const [errorToDate, setErrorToDate] = useState(false);
     const [errorDate, setErrorDate] = useState(false);
-
+    const [showSpinner, setShowSpinner] = useState(false);
     const onSubmit = async (data, e) => {
-
+        setShowSpinner(true);
         const today = format(new Date(), 'yyyy-MM-dd')
         if (today < data.fromDate) {
             setErrorFromDate(true);
@@ -108,6 +108,7 @@ function WelcomeBanner() {
         console.log(body);
         getReports(body)
             .then(response => {
+                setShowSpinner(false);
                 setErrorFromDate(false);
                 setErrorToDate(false);
                 setErrorDate(false);
@@ -177,6 +178,14 @@ function WelcomeBanner() {
                                         text-sm leading-tight uppercase rounded shadow-md hover:bg-indigo-700
                                         hover:shadow-lg focus:bg-indigo-700 focus:shadow-lg focus:outline-none focus:ring-0
                                          active:bg-indigo-800 active:shadow-lg transition duration-150 ease-in-out">Filter
+                                          {showSpinner && (
+                            <div
+                              class="spinner-border animate-spin inline-block w-4 h-4 border-3 ml-2 rounded-full"
+                              role="status"
+                            >
+                              <span class="visually-hidden">Loading...</span>
+                            </div>
+                          )}
                                 </button>
 
                             </form>

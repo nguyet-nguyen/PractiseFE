@@ -4,6 +4,7 @@ import CardProduct from "pages/LandingPages/Home/function/CardProduct";
 import {requestFilterCategory} from "features/Api";
 import Loading from "../../../../Loading";
 import {useLocation} from "react-router-dom";
+import { numberFormat } from "pages/LandingPages/Home/function/FormatMoney";
 
 const ListPage = ({sidebarOpen, setSidebarOpen, categoryList}) => {
     const location = useLocation();
@@ -346,13 +347,13 @@ const ListPage = ({sidebarOpen, setSidebarOpen, categoryList}) => {
                                                                 <label
                                                                     className="form-check-label inline-block text-gray-800 capitalize"
                                                                     htmlFor="flexCheckDefault">
-                                                                    Under {price.maxPrice}
+                                                                    Under {numberFormat(price.maxPrice)}
                                                                 </label>
                                                                 :
                                                                 <label
                                                                     className="form-check-label inline-block text-gray-800 capitalize"
                                                                     htmlFor="flexCheckDefault">
-                                                                    Over {price.minPrice}
+                                                                    Over {numberFormat(price.minPrice)}
                                                                 </label>
                                                             }
 
@@ -374,7 +375,7 @@ const ListPage = ({sidebarOpen, setSidebarOpen, categoryList}) => {
                                                             <label
                                                                 className="form-check-label inline-block text-gray-800 capitalize"
                                                                 htmlFor="flexCheckDefault">
-                                                                {price.minPrice} - {price.maxPrice}
+                                                                {numberFormat(price.minPrice)} - {numberFormat(price.maxPrice)}
                                                             </label>
                                                         </div>
 
