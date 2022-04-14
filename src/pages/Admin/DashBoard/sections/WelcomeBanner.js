@@ -222,7 +222,7 @@ function WelcomeBanner() {
                 hover:shadow-lg">
                                         <div className="flex justify-end">
                                             <div className="text-amber-500 text-4xl">
-                                                <i className="fa fa-home" aria-hidden="true"></i>
+                                                <i className="fa fa-users" aria-hidden="true"></i>
                                             </div>
                                         </div>
                                         <div className="block ">
@@ -237,7 +237,7 @@ function WelcomeBanner() {
                 hover:shadow-lg">
                                         <div className="flex justify-end">
                                             <div className="text-blue-600 text-4xl">
-                                                <i className="fa fa-home" aria-hidden="true"></i>
+                                                <i className="fa fa-clipboard" aria-hidden="true"></i>
                                             </div>
                                         </div>
                                         <div className="block ">
