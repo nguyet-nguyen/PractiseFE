@@ -198,8 +198,9 @@ function WelcomeBanner() {
                                         </div>
                                         <div className="block ">
                                             <h5 className="font-bold leading-tight text-2xl mt-0 mb-2 text-slate-800">{numberFormat(report.totalRevenue)}</h5>
-                                            <p className="font-medium leading-tight text-md mt-0 text-slate-400 uppercase">Items
-                                                Sales</p>
+                                            <p className="font-medium leading-tight text-md mt-0 text-slate-400 uppercase">
+                                                Revenues total
+                                            </p>
                                         </div>
                                     </div>
                                     <div className="block p-4 bg-slate-10 rounded-md dark:bg-darker
