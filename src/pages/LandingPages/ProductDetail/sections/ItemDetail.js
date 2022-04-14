@@ -4,7 +4,7 @@ import { getProductDetail, addToCart, getAllItemsInCart } from "../../../../feat
 import { useParams } from "react-router-dom";
 import { numberFormat } from "../../Home/function/FormatMoney";
 import Loading from "../../../../Loading";
-import { ToastContainer, toast } from "react-toastify";
+import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import CustomPopupMessage from "../../../CustomPopupMess";
 
@@ -81,7 +81,9 @@ const ItemDetail = () => {
         if(existingItem){
             const totalQtyOrd = existingItem.amount + counter;
             if (existingItem.totalAmount < totalQtyOrd) {
-                toast(<CustomPopupMessage mess={`The product's quantity for this order has been exceeded`} icon="exclamation-triangle"/>);
+                toast(<CustomPopupMessage mess={`The product's quantity for this order has been exceeded`} icon="exclamation-circle"
+                titleColor="red"
+                iconColor="red"/>);
             }else{
                 const total = itemDetail.price * counter;
                 const data = {
@@ -91,7 +93,9 @@ const ItemDetail = () => {
             };
             addToCart(data)
                 .then(res => {
-                    toast(<CustomPopupMessage mess={`${itemDetail.name} has been added to your cart.`} icon="check"/>);
+                    toast(<CustomPopupMessage mess={`${itemDetail.name} has been added to your cart.`} icon="check-circle"
+                    titleColor="amber"
+                    iconColor="amber"/>);
                 })
                 .catch(err => {
                     console.log(err);
@@ -107,7 +111,9 @@ const ItemDetail = () => {
             };
             addToCart(data)
                 .then(res => {
-                    toast(<CustomPopupMessage mess={`${itemDetail.name} has been added to your cart.`} icon="check"/>);
+                    toast(<CustomPopupMessage mess={`${itemDetail.name} has been added to your cart.`} icon="check-circle"
+                    titleColor="amber"
+                    iconColor="amber"/>);
                 })
                 .catch(err => {
                     console.log(err);
@@ -284,7 +290,6 @@ const ItemDetail = () => {
                         </div>
                     </div>
                 </div>
-                <ToastContainer />
             </section>
             : <Loading />
 
