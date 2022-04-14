@@ -108,7 +108,7 @@ const UsersTable = () => {
         <>
             <div className="px-4 sm:px-6 lg:px-8 py-8 w-full max-w-9xl mx-auto">
                 <h2 className="font-bold text-4xl text-slate-800 uppercase mb-5">
-                    <i className="fa fa-users" aria-hidden="true"></i> users list</h2>
+                    <i className="fa fa-users" aria-hidden="true"></i> user list</h2>
                 <div className="flex space-x-2 justify-end mb-5">
                     <div className="xl:w-96">
                         <div className="input-group relative flex flex-wrap items-stretch w-full">

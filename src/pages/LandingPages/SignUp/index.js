@@ -147,7 +147,7 @@ const SignUp = () => {
                                             ${errors.name &&
                         "border-red-600 focus:ring-red-500 focus:border-red-600 border-1"
                         }`}
-                      placeholder="full name"
+                      placeholder="Full name"
                       id="name"
                       name="name"
                       {...register("name", { required: true })}

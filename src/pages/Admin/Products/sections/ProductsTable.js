@@ -220,6 +220,10 @@ const ProductsTable = () => {
 
     return (
         <>
+         <div className="px-4 py-8 w-full w-9xl mx-auto">
+                <h2 className="font-bold text-4xl text-slate-800 uppercase mb-5">
+                    <i className="fa fa-shopping-cart" aria-hidden="true"></i> Product list
+                </h2>
             <div className="flex space-x-2 justify-between mb-4">
                 <Link to="/admin/products/add-product"
                       type="button"
@@ -263,6 +267,7 @@ const ProductsTable = () => {
                         </button>
                     </div>
                 </div>
+            </div>
             </div>
       {pending ? (
         <Loading adminPage={true} />
