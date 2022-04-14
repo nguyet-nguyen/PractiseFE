@@ -227,7 +227,7 @@ function WelcomeBanner() {
                                         <div className="block ">
                                             <h5 className="font-bold leading-tight text-2xl mt-0 mb-2 text-slate-800">{report.totalUser}</h5>
                                             <p className="font-medium leading-tight text-md mt-0 text-slate-400 uppercase">
-                                                Total user
+                                                Users Total
                                             </p>
                                         </div>
                                     </div>
@@ -242,7 +242,7 @@ function WelcomeBanner() {
                                         <div className="block ">
                                             <h5 className="font-bold leading-tight text-2xl mt-0 mb-2 text-slate-800">{report.totalOrder}</h5>
                                             <p className="font-medium leading-tight text-md mt-0 text-slate-400 uppercase">All
-                                                order</p>
+                                                orders</p>
                                         </div>
                                     </div>
                                 </div>
