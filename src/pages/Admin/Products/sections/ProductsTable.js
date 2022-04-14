@@ -102,15 +102,15 @@ const ProductsTable = () => {
       .catch((err) => {
         console.log(err.data);
       });
-    getAllProductsAdmin()
-      .then((response) => {
-        setProductList(response.data);
-        setPending(false);
-      })
-      .catch((err) => {
-        console.warn(err);
-        setPending(false);
-      });
+    // getAllProductsAdmin()
+    //   .then((response) => {
+    //     setProductList(response.data);
+    //     setPending(false);
+    //   })
+    //   .catch((err) => {
+    //     console.warn(err);
+    //     setPending(false);
+    //   });
   };
   if (itemDetail.items != null) {
     itemDetail.items.forEach((size) => {
