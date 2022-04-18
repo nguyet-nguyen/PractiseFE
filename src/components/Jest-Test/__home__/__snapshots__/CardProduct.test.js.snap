@@ -1,0 +1,63 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Unit Test CardProduct Component render SnapShot case 1 1`] = `null`;
+
+exports[`Unit Test CardProduct Component render SnapShot case 2 1`] = `
+<div
+  class="ProductCard cardProduct-0 mx-auto w-full h-84 p-2 border bg-white rounded-lg md:w-72 hover:shadow-lg 
+                    transition duration-300 ease-in-out"
+>
+  <a
+    href="/all-items/item-detail/1"
+  >
+    <div
+      class="bg-gray-400 h-auto rounded-t-lg relative card-product"
+    >
+      <a
+        class="card-product-img"
+        href="/all-items/item-detail/1"
+      >
+        <img
+          alt=""
+          class="image-card hover:opacity-75"
+          src="h"
+        />
+      </a>
+      <div
+        class="flex justify-center items-center px-2 pb-2 card-icon absolute"
+      >
+        <div
+          class="w-full p-2"
+        >
+          <a
+            class="block w-9 bg-white hover:bg-amber-600
+ border-2 border-amber-600 hover:border-inherit p-1 rounded
+ uppercase font-small icon-seemore"
+            href="/all-items/item-detail/1"
+          >
+            <i
+              aria-hidden="true"
+              class="fa fa-eye text-amber-600 font-bold pl-1 "
+            />
+          </a>
+        </div>
+      </div>
+    </div>
+    <div
+      class="mx-auto text-center py-2 px-2"
+    >
+      <a
+        class="productName md:text-base text-xs text-color font-semibold hover:text-amber-700 uppercase"
+        href="/all-items/item-detail/1"
+      >
+        MOONLIGHT ANKLE BOOT
+      </a>
+      <p
+        class="productPrice font-bold md:text-base text-sm lining-nums text-amber-700"
+      >
+        $500,000.00
+      </p>
+    </div>
+  </a>
+</div>
+`;

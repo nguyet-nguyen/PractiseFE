@@ -11,17 +11,19 @@ import Loading from "../../../../Loading";
 
 const ShoppingCart = () => {
     const [itemsInCart, setItemsInCart] = useState([]);
+    const [itemsInCartDefault, setItemsInCartDefault] = useState([]);
     const [subtotal, setSubtotal] = useState(0);
     const [shippingFee, setShippingFee] = useState(0);
     const [idItemDel, setIdItemDel] = useState();
-    const [qtyTotal, setQtyTotal] = useState(0);
     const [showEmpty, setShowEmpty] = useState(false);
+    const [showMore, setShowMore] = useState(false);
+    const [showLess, setShowLess] = useState(false);
     const [showSpinner, setShowSpinner] = useState(false);
     const [loading, setLoading] = useState(false);
 
     useEffect(() => {
         getAllItems();
-    }, [itemsInCart]);
+    }, []);
 
     const increase = (item) => {
         if (item.amount < item.totalAmount) {
@@ -48,7 +50,6 @@ const ShoppingCart = () => {
             item.amount = 1;
         } else {
             item.amount = quantity;
-            console.log("quantity");
         }
         onUpdateCart(item);
     };
@@ -69,6 +70,10 @@ const ShoppingCart = () => {
                     itemsInCart.splice(index, 1);
                     updateTotal(itemsInCart);
                     setShowSpinner(false);
+                    if(itemsInCart.length <= 3){
+                        setShowMore(false);
+                        setShowLess(false);
+                    }
                 }
             })
             .catch((err) => {
@@ -83,7 +88,6 @@ const ShoppingCart = () => {
             amount: item.amount,
             total: total,
         };
-        console.log(item.id);
 
         updateCart(item.id, data)
             .then((res) => {
@@ -98,7 +102,18 @@ const ShoppingCart = () => {
     const getAllItems = () => {
         getAllItemsInCart()
             .then((res) => {
-                setItemsInCart(res.data);
+                setItemsInCartDefault(res.data);
+                if(res.data.length > 3){
+                    const items = res.data.slice(0, 3);
+                    setItemsInCart(items);
+                    setShowMore(true);
+                    setShowLess(false);
+                }else{
+                    setItemsInCart(res.data);
+                    setShowMore(false);
+                    setShowLess(false);
+                }
+
                 if (res.data.length > 0) {
                     setShowEmpty(false);
                 } else if (res.data.length == 0) {
@@ -114,14 +129,28 @@ const ShoppingCart = () => {
             });
     };
 
+    const viewMore = () => {
+        setItemsInCart(itemsInCartDefault);
+        setShowMore(false);
+        setShowLess(true);
+    };
+
+    const viewLess = (allItems) => {
+        const items = allItems.slice(0, 3);
+        setItemsInCart(items);
+        setShowMore(true);
+        setShowLess(false);
+    };
+
     // Update shipping fee
     const updateShippingFee = (allItems) => {
-        const qty = allItems.reduce(
-            (partialSum, item) => partialSum + item.amount,
+        const sum = allItems.reduce(
+            (partialSum, item) => partialSum + item.price,
             0
         );
-        setQtyTotal(qty);
-        if (qty < 5) {
+        console.log(sum);
+    
+        if (sum < 500) {
             setShippingFee(20);
         } else {
             setShippingFee(0);
@@ -147,7 +176,7 @@ const ShoppingCart = () => {
 
                 {loading?
                     <div className="flex lg:flex-row flex-col" id="cart">
-                        <div className="lg:w-2/3 md:w-8/12 w-full px-4 py-2 bg-white lg:h-screen h-auto">
+                        <div className="lg:w-2/3 md:w-8/12 w-full px-4 py-2 bg-white h-auto">
                             <label className="inline-flex items-center">
                             </label>
                             {itemsInCart.map((item) => (
@@ -296,8 +325,22 @@ const ShoppingCart = () => {
                                     </div>
                                 </div>
                             ))}
+                            {showMore &&  <button
+                                className="leading-3 float-right underline font-bold text-md text-amber-600 cursor-pointer mt-2"
+                                onClick={() => viewMore()}
+                            >
+                                View more
+                                <i class="fa fa-arrow-circle-o-down ml-2" aria-hidden="true"></i>
+                            </button>}
+                            {showLess &&  <button
+                                className="leading-3 float-right underline font-bold text-md text-amber-600 cursor-pointer mt-2"
+                                onClick={() => viewLess(itemsInCartDefault)}
+                            >
+                                View less
+                                <i class="fa fa-arrow-circle-o-down ml-2" aria-hidden="true"></i>
+                            </button>}
                         </div>
-
+                      
                         <div className="lg:w-1/3 lg:ml-20 md:w-8/12 w-full bg-gray-100  h-full">
                             <div
                                 className="flex flex-col h-auto lg:px-8 md:px-7 px-4 lg:py-16 md:py-8 py-6 justify-between overflow-y-auto">
@@ -321,9 +364,9 @@ const ShoppingCart = () => {
                                             {shippingFee == 0 ? "Free" : numberFormat(shippingFee)}
                                         </p>
                                     </div>
-                                    {qtyTotal < 5 && (
+                                    {subtotal < 500 && (
                                         <p className="text-sm  font-semibold leading-normal italic text-amber-700 mb-3 ">
-                                            ( Shipping is free if your order contains at least 5 quantities.
+                                            ( Shipping is free if you order $500.00 or more.
                                             )
                                         </p>)}
 
