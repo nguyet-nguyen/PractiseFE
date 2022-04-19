@@ -3,13 +3,16 @@ import React, {useState, useEffect, useRef} from 'react';
 import CardProduct from "pages/LandingPages/Home/function/CardProduct";
 import {requestFilterCategory} from "features/Api";
 import Loading from "../../../../Loading";
-import {useLocation} from "react-router-dom";
+import {useLocation, useNavigate} from "react-router-dom";
 import { numberFormat } from "pages/LandingPages/Home/function/FormatMoney";
+import {useParams} from "react-router-dom";
+import {Navigate} from 'react-router-dom';
 
 const ListPage = ({sidebarOpen, setSidebarOpen, categoryList}) => {
     const location = useLocation();
     const {pathname} = location;
-
+    let params = useParams();
+    const navigate = useNavigate();
     const trigger = useRef(null);
     const sidebar = useRef(null);
 
@@ -52,6 +55,10 @@ const ListPage = ({sidebarOpen, setSidebarOpen, categoryList}) => {
     const [pageItem, setPageItem] = useState(1);
     useEffect(() => {
         setLoading(true);
+        if (categoryList.find(element => element.id != params.id)){
+           navigate.push("/all-items/1");
+           //  <Navigate to="/all-items/1" />;
+        }
         requestFilterCategory(data, pageItem, 6)
             .then((response) => {
                 setLoading(false)
@@ -68,7 +75,6 @@ const ListPage = ({sidebarOpen, setSidebarOpen, categoryList}) => {
             });
     }, []);
     // -------------pagination--------------
-    console.log(page)
     const changePage = (item) => {
         setPageItem(item)
         requestFilterCategory(data ,item, 6)
@@ -78,7 +84,6 @@ const ListPage = ({sidebarOpen, setSidebarOpen, categoryList}) => {
             .catch((err) => {
                 console.warn(err);
             });
-        console.log(item);
     }
     const changePagePrevious = (item) => {
         if (item >= 1) {
@@ -91,7 +96,6 @@ const ListPage = ({sidebarOpen, setSidebarOpen, categoryList}) => {
                     console.warn(err);
                 });
         }
-        console.log(item);
     }
     const changePageNext = (item) => {
         if (item <= page) {
@@ -104,12 +108,10 @@ const ListPage = ({sidebarOpen, setSidebarOpen, categoryList}) => {
                     console.warn(err);
                 });
         }
-        console.log(item)
     }
-
     // ----------------filter-----------------
     const [sort, setSort] = useState("");
-    const [cate, setCate] = useState(1);
+    const [cate, setCate] = useState(params.id);
     const [priceState, setPriceState] = useState(1);
     const [minPrice, setMinPrice] = useState(0);
     const [maxPrice, setMaxPrice] = useState("");
@@ -121,7 +123,6 @@ const ListPage = ({sidebarOpen, setSidebarOpen, categoryList}) => {
         maxPrice: maxPrice,
         keyword: search,
     }
-    console.log(data);
 
     const getcategoryId = (e) => {
         setCate(e.target.value);
@@ -206,7 +207,6 @@ const ListPage = ({sidebarOpen, setSidebarOpen, categoryList}) => {
         }
     ]
     const searchProduct = (e) => {
-        console.log(e.target.value);
         setSearch(e.target.value);
 
     }
@@ -215,7 +215,6 @@ const ListPage = ({sidebarOpen, setSidebarOpen, categoryList}) => {
     }).catch(err => {
         console.log(err);
     })
-    console.log(productListFilter);
     return (
         <div id="listPage-productList">
             <div className="grid md:grid-cols-4 grid-cols-1 gap-4">
