@@ -48,7 +48,7 @@ function Home() {
     return (
         <>
             <Header/>
-            <section className="container h-auto md:px-5 px-4 py-2 mx-auto md:py-12 md:px-32">
+            <section className="container h-auto md:px-5 px-4 py-2 mx-auto md:py-12 md:px-24">
                 <div className="md:w-12/12 w-full h-auto transition-all rounded-lg mx-auto">
                     <>
                         <Category categoryList={categoryList}/>

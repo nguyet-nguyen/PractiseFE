@@ -9,11 +9,9 @@ function HotDeal() {
         getProductHotDeal()
             .then((response) => {
                 setHotDeal(response.data);
-                setLoading(false)
             })
             .catch((err) => {
                 console.warn(err);
-                setLoading(false)
             });
     }, []);
     return (

@@ -202,3 +202,33 @@ input[type=number] {
     height: 450px !important;
     width: 450px !important;
 }
+/*---------------------------------------*/
+.navbar-area {
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 40;
+    width: 100%;
+    padding-top: 0.5rem;
+    padding-bottom: 0.5rem;
+    transition-duration: 300ms;
+    background-color: transparent;
+}
+@media (max-width: 1024px) {
+    .navbar-area {
+        padding-top: 1.5rem;
+        padding-bottom: 1.5rem;
+    }
+}
+.is-sticky {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 999;
+    box-shadow: 0 2px 24px 0 rgb(0 0 0 / 15%);
+    background-color: #ffffff !important;
+    animation: 100ms ease-in-out 0s normal none 1 running fadeInDown;
+    padding-top: 0px;
+    padding-bottom: 0px;
+}
