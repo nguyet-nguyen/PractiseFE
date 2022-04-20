@@ -4,6 +4,7 @@ import Icon from "@mui/material/Icon";
 // Pages
 import Home from "pages/LandingPages/Home";
 import ProductListPages from "pages/LandingPages/ProductListPage";
+import AboutUs from "pages/LandingPages/AboutUs";
 
 
 const routes = [
@@ -25,6 +26,11 @@ const routes = [
             name: "All Items",
             route: "/all-items",
             component: <ProductListPages/>,
+          },
+          {
+            name: "About Us",
+            route: "/aboutus",
+            component: <AboutUs/>,
           },
           // {
           //   name: "Shopping Cart",

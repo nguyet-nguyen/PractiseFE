@@ -93,7 +93,7 @@ function DefaultFooter({ content }) {
     //     </Grid>
     //   </Container>
     // </MKBox>
-    <footer class="text-center py-8 mt-48 border-t-2 border-t-slate-200 ">
+    <footer className="text-center py-8 mt-48 border-t-2 border-t-slate-200 ">
      
         <Link to="/" className="flex justify-center items-center mb-8 mt-3">
             <img
@@ -102,15 +102,15 @@ function DefaultFooter({ content }) {
                 alt="logo"
             />
         </Link>
-        <p class="mt-4 text-gray-400 italic ">
+        <p className="mt-4 text-gray-400 italic ">
           Victoria Resort, Ninh Kieu District, Can Tho
         </p>
-      <div class="flex justify-center items-center mt-5 mb-2">
-        <span class="mr-4 text-sm font-semibold">Register for free</span>
+      <div className="flex justify-center items-center mt-5 mb-2">
+        <span className="mr-4 text-sm font-semibold">Register for free</span>
         <Link to="/pages/authentication/sign-up">
           <button
             type="button"
-            class="inline-block px-6 py-2 border-2 font-semibold border-amber-500 text-xs leading-tight uppercase rounded-full hover:bg-amber-500 hover:text-white focus:outline-none focus:ring-0 transition duration-150 ease-in-out"
+            className="inline-block px-6 py-2 border-2 font-semibold border-amber-500 text-xs leading-tight uppercase rounded-full hover:bg-amber-500 hover:text-white focus:outline-none focus:ring-0 transition duration-150 ease-in-out"
           >
             Sign up
           </button>
@@ -118,9 +118,9 @@ function DefaultFooter({ content }) {
         
       </div>
 
-      <div class="text-center p-4 font-bold">
+      <div className="text-center p-4 font-bold">
         © 2022 {" "}
-        <a class="font-bold" href="https://tailwind-elements.com/">
+        <a className="font-bold" href="https://tailwind-elements.com/">
           Can Tho's Fresher Unlock 
         </a>
       </div>
