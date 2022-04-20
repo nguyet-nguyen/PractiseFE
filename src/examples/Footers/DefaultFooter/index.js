@@ -93,7 +93,7 @@ function DefaultFooter({ content }) {
     //     </Grid>
     //   </Container>
     // </MKBox>
-    <footer className="text-center py-8 mt-48 border-t-2 border-t-slate-200 ">
+    <footer className="text-center py-8 lg:mt-32 border-t-2 border-t-slate-200 ">
      
         <Link to="/" className="flex justify-center items-center mb-8 mt-3">
             <img
