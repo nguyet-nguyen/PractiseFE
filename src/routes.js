@@ -23,7 +23,7 @@ const routes = [
           },
           {
             name: "All Items",
-            route: "/all-items/:id",
+            route: "/all-items",
             component: <ProductListPages/>,
           },
           // {

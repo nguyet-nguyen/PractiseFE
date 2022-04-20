@@ -14,8 +14,7 @@ import {
 } from '@heroicons/react/outline'
 import {ChevronDownIcon} from '@heroicons/react/solid'
 import logoName from "./../../../../src/assets/images/logos/logo-name.png"
-import {getAllCategory} from "../../../features/Api";
-
+import {getAllCategory, getCountItemsInCart} from "../../../features/Api";
 
 
 function classNames(...classes) {
@@ -51,13 +50,36 @@ function DefaultNavbar() {
     categoryList.forEach(item => {
         solutions.push({
             name: item.name,
-            href: `/all-items/${item.id}`
+            href: `/all-items`
         })
     })
+
+    const [countItemCart, setCountItemCart] = useState(0);
+    useEffect(() => {
+        getCountItemsInCart()
+            .then((response) => {
+                setCountItemCart(response.data.count);
+                console.log(countItemCart);
+            })
+            .catch((err) => {
+                console.log(err);
+            });
+    });
+
+    const token = localStorage.getItem("token");
+    const users = JSON.parse(localStorage.getItem("userInfo"));
+    const SignOut = () => {
+        try {
+            localStorage.clear();
+            navigate("/");
+        } catch {
+            console.log("loi");
+        }
+    };
     return (
         <Popover className="header-section hover:bg-white bg-none transition ease-in-out absolute top-0 right-0 left-0">
             <div className="w-full mx-auto px-4 sm:px-6">
-                <div className="flex justify-between items-center py-6 md:justify-start md:space-x-10">
+                <div className="flex justify-between items-center py-3 md:justify-start md:space-x-10">
                     <div className="flex justify-start lg:w-0 lg:flex-1">
                         <Link to="/" className="flex justify-start items-center">
                             <img
@@ -130,104 +152,186 @@ function DefaultNavbar() {
                                 </>
                             )}
                         </Popover>
+                        <Link to="/" className="text-sm font-semibold text-gray-600 hover:text-gray-900">
+                            About Us
+                        </Link>
                     </Popover.Group>
                     <div className="hidden md:flex items-center justify-end md:flex-1 lg:w-0">
-                        <Link to="/pages/authentication/sign-in" className="font-semibold border-2 border-amber-600 px-3 py-1.5
-                        rounded-md text-amber-700 bg-white hover:bg-amber-600 text-sm hover:text-white">
-                            Sign in
-                        </Link>
-                        <Link to="/pages/authentication/sign-up"
-                              className="ml-4 whitespace-nowrap inline-flex items-center justify-center px-3 py-1.5
-                            border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-amber-600
-                            hover:bg-amber-800"
-                        >
-                            Sign up
-                        </Link>
-                    </div>
-                </div>
-            </div>
-
-            <Transition
-                as={Fragment}
-                enter="duration-200 ease-out"
-                enterFrom="opacity-0 scale-95"
-                enterTo="opacity-100 scale-100"
-                leave="duration-100 ease-in"
-                leaveFrom="opacity-100 scale-100"
-                leaveTo="opacity-0 scale-95"
-            >
-                <Popover.Panel focus
-                               className="absolute z-50 top-0 inset-x-0 p-2 transition transform origin-top-right md:hidden">
-                    <div
-                        className="rounded-lg shadow-lg ring-1 ring-black ring-opacity-5 bg-white divide-y-2 divide-gray-50">
-                        <div className="pt-5 pb-6 px-5">
-                            <div className="flex items-center justify-between">
-                                <div>
-                                    <Link to="/" className="flex justify-start items-center">
-                                        <img
-                                            className="w-16"
-                                            src={logoName}
-                                            alt=""
-                                        />
-                                    </Link>
-                                </div>
-                                <div className="-mr-2">
-                                    <Popover.Button className="bg-white rounded-md p-2 inline-flex items-center
-                                    justify-center text-gray-400 hover:text-gray-500 hover:bg-gray-100 focus:outline-none
-                                    focus:ring-2 focus:ring-inset focus:ring-amber-600 focus:text-amber-600">
-                                        <span className="sr-only">Close menu</span>
-                                        <XIcon className="h-6 w-6" aria-hidden="true"/>
-                                    </Popover.Button>
-                                </div>
-                            </div>
-                            <div className="mt-6">
-                                <nav className="grid gap-y-8">
-                                    {solutions.map((item) => (
-                                        <a
-                                            key={item.name}
-                                            href={item.href}
-                                            className="-m-3 p-3 flex items-center rounded-md hover:bg-gray-50"
+                        {token ?
+                            <>
+                            <div className="flex justify-center">
+                                <Link to="/shopping-cart">
+                                    <div className="inline-flex items-center relative w-fit mr-8">
+                                        <div
+                                            className="absolute inline-block top-0 right-0
+                                    bottom-auto left-auto translate-x-1/3 -translate-y-0
+                                     rotate-0 skew-x-0 skew-y-0 scale-x-100 scale-y-100 py-1.5 px-2
+                                      text-xs leading-none text-center whitespace-nowrap align-baseline
+                                       font-bold bg-white border-2 border-amber-600 text-amber-600 rounded-full z-10"
                                         >
-                                            <span
-                                                className="ml-3 text-sm font-medium text-gray-900">{item.name}</span>
-                                        </a>
-                                    ))}
-                                </nav>
-                            </div>
-                        </div>
-                        <div className="py-6 px-5 space-y-6">
-                            {/*<div className="grid grid-cols-2 gap-y-4 gap-x-8">*/}
-                            {/*    /!*<a href="#" className="text-base font-medium text-gray-900 hover:text-gray-700">*!/*/}
-                            {/*    /!*    Pricing*!/*/}
-                            {/*    /!*</a>*!/*/}
+                                            {countItemCart}
+                                        </div>
+                                        <div
+                                            data-mdb-ripple="true"
+                                            data-mdb-ripple-color="light"
+                                            className="inline-block px-2 py-2.5 text-white
+                                        text-xs leading-tight uppercase rounded
+                                        focus:shadow-lg focus:outline-none focus:ring-0 active:shadow-lg
+                                         transition duration-150 ease-in-out"
+                                        >
+                                            <i
+                                                className={`fa fa-shopping-cart pr-2 text-amber-600 text-2xl`}
+                                                aria-hidden="true"
+                                            ></i>
+                                        </div>
+                                    </div>
+                                </Link>
+                                <div className="dropdown relative">
+                                    <button
+                                        className="active:border-none"
+                                        type="button"
+                                        id="dropdownMenuButton1"
+                                        data-bs-toggle="dropdown"
+                                        aria-expanded="false"
+                                    >
+                                        <img
+                                            src={users.image}
+                                            className="rounded-full border-2 border-amber-600 w-10 shadow-lg"
+                                            alt="Avatar"
+                                        />
+                                    </button>
+                                    <ul
+                                        className=" dropdown-menu min-w-max absolute hidden bg-white text-base
+                                                 z-50 float-left list-none text-left rounded-lg shadow-lg mt-1 hidden
+                                                 m-0 bg-clip-padding border-none"
+                                        aria-labelledby="dropdownMenuButton1">
+                                        <li>
+                                            <Link
+                                                className=" dropdown-item text-sm py-2 px-4 font-normal block w-full whitespace-nowrap
+                                                        bg-transparent border-b-2 border-gray-100 text-gray-700 hover:text-amber-600
+                                                        focus:bg-white focus:text-amber-600"
+                                                to="/user-profile"
+                                            >
+                                                Your profile
+                                            </Link>
+                                        </li>
+                                        <li>
+                                            <button
+                                                type="button"
+                                                onClick={SignOut}
+                                                className=" dropdown-item text-sm py-2 px-4 font-normal
+                                                block w-full whitespace-nowrap
+                                                        bg-transparent text-gray-700 hover:text-amber-600
+                                                        focus:bg-white focus:text-amber-600"
+                                            >
+                                                Sign Out
+                                            </button>
+                                        </li>
 
-                            {/*    /!*<a href="#" className="text-base font-medium text-gray-900 hover:text-gray-700">*!/*/}
-                            {/*    /!*    Docs*!/*/}
-                            {/*    /!*</a>*!/*/}
-                            {/*</div>*/}
-                            <div>
-                                <Link to="/pages/authentication/sign-in"
+                                    </ul>
+                                </div>
+                            </div>
+                            </>
+                                : <>
+                                <Link to="/pages/authentication/sign-in" className="font-semibold border-2 border-amber-600 px-3 py-1.5
+                        rounded-md text-amber-700 bg-white hover:bg-amber-600 text-sm hover:text-white ">
+                                    Sign in
+                                </Link>
+                                <Link to="/pages/authentication/sign-up"
                                       className="ml-4 whitespace-nowrap inline-flex items-center justify-center px-3 py-1.5
                             border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-amber-600
                             hover:bg-amber-800"
                                 >
-                                    Sign in
+                                    Sign up
                                 </Link>
-                                <p className="mt-6 text-center text-sm font-medium text-gray-500">
-                                    Existing customer?{" "}
-                                    <Link to="/pages/authentication/sign-up"
-                                          className="text-amber-600 hover:text-amber-500">
-                                        Sign up
-                                    </Link>
-                                </p>
+                            </>
+                                }
+
                             </div>
-                        </div>
-                    </div>
-                </Popover.Panel>
-            </Transition>
-        </Popover>
+                            </div>
+                            </div>
 
-    );
-}
+                            <Transition
+                            as={Fragment}
+                            enter="duration-200 ease-out"
+                            enterFrom="opacity-0 scale-95"
+                            enterTo="opacity-100 scale-100"
+                            leave="duration-100 ease-in"
+                            leaveFrom="opacity-100 scale-100"
+                            leaveTo="opacity-0 scale-95"
+                            >
+                            <Popover.Panel focus
+                            className="absolute z-50 top-0 inset-x-0 p-2 transition transform origin-top-right md:hidden">
+                            <div
+                            className="rounded-lg shadow-lg ring-1 ring-black ring-opacity-5 bg-white divide-y-2 divide-gray-50">
+                            <div className="pt-5 pb-6 px-5">
+                            <div className="flex items-center justify-between">
+                            <div>
+                            <Link to="/" className="flex justify-start items-center">
+                            <img
+                            className="w-16"
+                            src={logoName}
+                            alt=""
+                            />
+                            </Link>
+                            </div>
+                            <div className="-mr-2">
+                            <Popover.Button className="bg-white rounded-md p-2 inline-flex items-center
+                                    justify-center text-gray-400 hover:text-gray-500 hover:bg-gray-100 focus:outline-none
+                                    focus:ring-2 focus:ring-inset focus:ring-amber-600 focus:text-amber-600">
+                            <span className="sr-only">Close menu</span>
+                            <XIcon className="h-6 w-6" aria-hidden="true"/>
+                            </Popover.Button>
+                            </div>
+                            </div>
+                            <div className="mt-6">
+                            <nav className="grid gap-y-8">
+                        {solutions.map((item) => (
+                            <a
+                            key={item.name}
+                            href={item.href}
+                            className="-m-3 p-3 flex items-center rounded-md hover:bg-gray-50"
+                            >
+                            <span
+                            className="ml-3 text-sm font-medium text-gray-900">{item.name}</span>
+                            </a>
+                            ))}
+                            </nav>
+                            </div>
+                            </div>
+                            <div className="py-6 px-5 space-y-6">
+                        {/*<div className="grid grid-cols-2 gap-y-4 gap-x-8">*/}
+                        {/*    /!*<a href="#" className="text-base font-medium text-gray-900 hover:text-gray-700">*!/*/}
+                        {/*    /!*    Pricing*!/*/}
+                        {/*    /!*</a>*!/*/}
 
-export default DefaultNavbar;
+                        {/*    /!*<a href="#" className="text-base font-medium text-gray-900 hover:text-gray-700">*!/*/}
+                        {/*    /!*    Docs*!/*/}
+                        {/*    /!*</a>*!/*/}
+                        {/*</div>*/}
+                            <div>
+                            <Link to="/pages/authentication/sign-in"
+                            className="ml-4 whitespace-nowrap inline-flex items-center justify-center px-3 py-1.5
+                            border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-amber-600
+                            hover:bg-amber-800"
+                            >
+                            Sign in
+                            </Link>
+                            <p className="mt-6 text-center text-sm font-medium text-gray-500">
+                            Existing customer?{" "}
+                            <Link to="/pages/authentication/sign-up"
+                            className="text-amber-600 hover:text-amber-500">
+                            Sign up
+                            </Link>
+                            </p>
+                            </div>
+                            </div>
+                            </div>
+                            </Popover.Panel>
+                            </Transition>
+                            </Popover>
+
+                            );
+                        }
+
+                        export default DefaultNavbar;
