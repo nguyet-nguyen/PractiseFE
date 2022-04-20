@@ -3,16 +3,13 @@ import React, {useState, useEffect, useRef} from 'react';
 import CardProduct from "pages/LandingPages/Home/function/CardProduct";
 import {requestFilterCategory} from "features/Api";
 import Loading from "../../../../Loading";
-import {useLocation, useNavigate} from "react-router-dom";
+import {useLocation} from "react-router-dom";
 import { numberFormat } from "pages/LandingPages/Home/function/FormatMoney";
-import {useParams} from "react-router-dom";
-import {Navigate} from 'react-router-dom';
 
 const ListPage = ({sidebarOpen, setSidebarOpen, categoryList}) => {
     const location = useLocation();
     const {pathname} = location;
-    let params = useParams();
-    const navigate = useNavigate();
+
     const trigger = useRef(null);
     const sidebar = useRef(null);
 
@@ -53,28 +50,25 @@ const ListPage = ({sidebarOpen, setSidebarOpen, categoryList}) => {
     const [loading, setLoading] = useState(false);
     const [page, setPage] = useState(1);
     const [pageItem, setPageItem] = useState(1);
-    useEffect(() => {
-        setLoading(true);
-        if (categoryList.find(element => element.id != params.id)){
-           navigate.push("/all-items/1");
-           //  <Navigate to="/all-items/1" />;
-        }
-        requestFilterCategory(data, pageItem, 6)
-            .then((response) => {
-                setLoading(false)
-                setProductListFilter(response.data.data);
-                if (response.data.total % 6 == 0) {
-                    setPage(response.data.total / 6);
-                } else {
-                    setPage(Math.floor((response.data.total / 6)) + 1);
-                }
-            })
-            .catch((err) => {
-                setLoading(false)
-                console.warn(err);
-            });
-    }, []);
+    // useEffect(() => {
+    //     setLoading(true);
+    //     requestFilterCategory(data, pageItem, 6)
+    //         .then((response) => {
+    //             setLoading(false);
+    //             setProductListFilter(response.data.data);
+    //             if (response.data.total % 6 == 0) {
+    //                 setPage(response.data.total / 6);
+    //             } else {
+    //                 setPage(Math.floor((response.data.total / 6)) + 1);
+    //             }
+    //         })
+    //         .catch((err) => {
+    //             setLoading(false)
+    //             console.warn(err);
+    //         });
+    // }, []);
     // -------------pagination--------------
+    console.log(page)
     const changePage = (item) => {
         setPageItem(item)
         requestFilterCategory(data ,item, 6)
@@ -84,6 +78,7 @@ const ListPage = ({sidebarOpen, setSidebarOpen, categoryList}) => {
             .catch((err) => {
                 console.warn(err);
             });
+        console.log(item);
     }
     const changePagePrevious = (item) => {
         if (item >= 1) {
@@ -96,6 +91,7 @@ const ListPage = ({sidebarOpen, setSidebarOpen, categoryList}) => {
                     console.warn(err);
                 });
         }
+        console.log(item);
     }
     const changePageNext = (item) => {
         if (item <= page) {
@@ -108,10 +104,12 @@ const ListPage = ({sidebarOpen, setSidebarOpen, categoryList}) => {
                     console.warn(err);
                 });
         }
+        console.log(item)
     }
+
     // ----------------filter-----------------
     const [sort, setSort] = useState("");
-    const [cate, setCate] = useState(params.id);
+    const [cate, setCate] = useState(1);
     const [priceState, setPriceState] = useState(1);
     const [minPrice, setMinPrice] = useState(0);
     const [maxPrice, setMaxPrice] = useState("");
@@ -123,6 +121,7 @@ const ListPage = ({sidebarOpen, setSidebarOpen, categoryList}) => {
         maxPrice: maxPrice,
         keyword: search,
     }
+    console.log(data);
 
     const getcategoryId = (e) => {
         setCate(e.target.value);
@@ -197,23 +196,33 @@ const ListPage = ({sidebarOpen, setSidebarOpen, categoryList}) => {
             id: 3,
             name: "createdAt-DESC",
             description: "Latest items",
-
         },
         {
             id: 4,
             name: "createdAt-ASC",
             description: "Oldest items",
-
         }
     ]
     const searchProduct = (e) => {
+        console.log(e.target.value);
         setSearch(e.target.value);
 
     }
-    requestFilterCategory(data, pageItem, 6).then(res => {
-        setProductListFilter(res.data.data);
-    }).catch(err => {
-        console.log(err);
+    // setLoading(true);
+    useEffect(() => {
+        // setLoading(true);
+        requestFilterCategory(data, pageItem, 6)
+            .then(response => {
+            setLoading(false);
+            setProductListFilter(response.data.data);
+            if (response.data.total % 6 == 0) {
+                setPage(response.data.total / 6);
+            } else {
+                setPage(Math.floor((response.data.total / 6)) + 1);
+            }
+        }).catch(err => {
+            console.log(err);
+        })
     })
     return (
         <div id="listPage-productList">
