@@ -3,13 +3,17 @@ import React, {useState, useEffect, useRef} from 'react';
 import CardProduct from "pages/LandingPages/Home/function/CardProduct";
 import {requestFilterCategory} from "features/Api";
 import Loading from "../../../../Loading";
-import {useLocation} from "react-router-dom";
-import { numberFormat } from "pages/LandingPages/Home/function/FormatMoney";
+import {useLocation, useNavigate} from "react-router-dom";
+import {numberFormat} from "pages/LandingPages/Home/function/FormatMoney";
+import {useParams} from "react-router-dom";
+import {Navigate} from 'react-router-dom';
+import emptyList from "./../../../../../src/assets/images/logos/emptyList.JPG"
 
 const ListPage = ({sidebarOpen, setSidebarOpen, categoryList}) => {
     const location = useLocation();
     const {pathname} = location;
-
+    let params = useParams();
+    const navigate = useNavigate();
     const trigger = useRef(null);
     const sidebar = useRef(null);
 
@@ -50,40 +54,46 @@ const ListPage = ({sidebarOpen, setSidebarOpen, categoryList}) => {
     const [loading, setLoading] = useState(false);
     const [page, setPage] = useState(1);
     const [pageItem, setPageItem] = useState(1);
-    // useEffect(() => {
-    //     setLoading(true);
-    //     requestFilterCategory(data, pageItem, 6)
-    //         .then((response) => {
-    //             setLoading(false);
-    //             setProductListFilter(response.data.data);
-    //             if (response.data.total % 6 == 0) {
-    //                 setPage(response.data.total / 6);
-    //             } else {
-    //                 setPage(Math.floor((response.data.total / 6)) + 1);
-    //             }
-    //         })
-    //         .catch((err) => {
-    //             setLoading(false)
-    //             console.warn(err);
-    //         });
-    // }, []);
+    const [cate, setCate] = useState(params.id);
+    useEffect(() => {
+        setLoading(true);
+        requestFilterCategory(data, pageItem, 6)
+            .then((response) => {
+                if (response.data.data.length <= 0) {
+                    setCate(1);
+                    navigate("/all-items/1");
+                } else if (response.data.data.length > 0) {
+                    setCate(params.id);
+                }
+                setLoading(false)
+                setProductListFilter(response.data.data);
+                if (response.data.total % 6 == 0) {
+                    setPage(response.data.total / 6);
+                } else {
+                    setPage(Math.floor((response.data.total / 6)) + 1);
+                }
+
+            })
+            .catch((err) => {
+                setLoading(false)
+                console.warn(err);
+            });
+    }, []);
     // -------------pagination--------------
-    console.log(page)
     const changePage = (item) => {
         setPageItem(item)
-        requestFilterCategory(data ,item, 6)
+        requestFilterCategory(data, item, 6)
             .then((response) => {
                 setProductListFilter(response.data.data);
             })
             .catch((err) => {
                 console.warn(err);
             });
-        console.log(item);
     }
     const changePagePrevious = (item) => {
         if (item >= 1) {
             setPageItem(item)
-            requestFilterCategory(data ,item, 6)
+            requestFilterCategory(data, item, 6)
                 .then((response) => {
                     setProductListFilter(response.data.data);
                 })
@@ -91,12 +101,11 @@ const ListPage = ({sidebarOpen, setSidebarOpen, categoryList}) => {
                     console.warn(err);
                 });
         }
-        console.log(item);
     }
     const changePageNext = (item) => {
         if (item <= page) {
             setPageItem(item)
-            requestFilterCategory(data ,item, 6)
+            requestFilterCategory(data, item, 6)
                 .then((response) => {
                     setProductListFilter(response.data.data);
                 })
@@ -104,12 +113,10 @@ const ListPage = ({sidebarOpen, setSidebarOpen, categoryList}) => {
                     console.warn(err);
                 });
         }
-        console.log(item)
     }
-
     // ----------------filter-----------------
     const [sort, setSort] = useState("");
-    const [cate, setCate] = useState(1);
+
     const [priceState, setPriceState] = useState(1);
     const [minPrice, setMinPrice] = useState(0);
     const [maxPrice, setMaxPrice] = useState("");
@@ -121,10 +128,9 @@ const ListPage = ({sidebarOpen, setSidebarOpen, categoryList}) => {
         maxPrice: maxPrice,
         keyword: search,
     }
-    console.log(data);
-
     const getcategoryId = (e) => {
         setCate(e.target.value);
+        navigate(`/all-items/${e.target.value}`);
     }
     const getPriceLevel = (e) => {
         setPriceState(e.target.value);
@@ -196,47 +202,41 @@ const ListPage = ({sidebarOpen, setSidebarOpen, categoryList}) => {
             id: 3,
             name: "createdAt-DESC",
             description: "Latest items",
+
         },
         {
             id: 4,
             name: "createdAt-ASC",
             description: "Oldest items",
+
         }
     ]
     const searchProduct = (e) => {
-        console.log(e.target.value);
         setSearch(e.target.value);
 
     }
-    // setLoading(true);
-    useEffect(() => {
-        // setLoading(true);
-        requestFilterCategory(data, pageItem, 6)
-            .then(response => {
-            setLoading(false);
-            setProductListFilter(response.data.data);
-            if (response.data.total % 6 == 0) {
-                setPage(response.data.total / 6);
-            } else {
-                setPage(Math.floor((response.data.total / 6)) + 1);
-            }
-        }).catch(err => {
-            console.log(err);
-        })
+    requestFilterCategory(data, pageItem, 6).then(response => {
+        setProductListFilter(response.data.data);
+        if (response.data.total % 6 == 0) {
+            setPage(response.data.total / 6);
+        } else {
+            setPage(Math.floor((response.data.total / 6)) + 1);
+        }
+    }).catch(err => {
+        console.log(err);
     })
     return (
         <div id="listPage-productList">
-            <div className="grid md:grid-cols-4 grid-cols-1 gap-4">
+            <div className="grid md:grid-cols-4 grid-cols-1">
                 <div className="md:mt-14 mt-0">
                     <div className='-left-4'>
                         <div
-                            className={`md:fixed inset-0 bg-white bg-opacity-30 z-40 lg:hidden lg:z-auto transition-opacity duration-200 ${sidebarOpen ? 'opacity-100' : 'opacity-0 pointer-events-none'}`}
-                            aria-hidden="true"></div>
-                        <div
                             id="sidebar"
                             ref={sidebar}
-                            className={`flex flex-col items-center justify-center absolute bg-white z-40 left-0 top-0 lg:static lg:left-auto lg:top-auto
-                 lg:translate-x-0 transform h-auto overflow-y-scroll lg:overflow-y-auto no-scrollbar w-72 
+                            className={`flex flex-col items-center justify-center absolute bg-white z-40 
+                            left-0 top-0 lg:static lg:left-auto lg:top-auto
+                 lg:translate-x-0 transform h-auto overflow-y-scroll lg:overflow-y-auto no-scrollbar lg:w-72 
+                 md:w-auto
                  lg:w-20 lg:sidebar-expanded:!w-72 2xl:!w-72 shrink-0 transition-all 
                  duration-200 ease-in-out  ${sidebarOpen ? 'translate-x-0' : '-translate-x-64'}`}>
                             {/* Sidebar header */}
@@ -258,7 +258,7 @@ const ListPage = ({sidebarOpen, setSidebarOpen, categoryList}) => {
                             </div>
 
                             {/* Links */}
-                            <div className="border-2 rounded-md border-solid border-zinc-300 p-5">
+                            <div className="border-2 rounded-md border-solid border-zinc-300 xl:p-5 md-p-3">
                                 {/* Pages group */}
 
                                 <div>
@@ -299,7 +299,6 @@ const ListPage = ({sidebarOpen, setSidebarOpen, categoryList}) => {
                                         )}
                                     </ul>
                                 </div>
-
                                 <div>
                                     <h3 className="uppercase text-slate-500 font-bold flex mt-5">
                                         <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 text-amber-700"
@@ -396,6 +395,7 @@ const ListPage = ({sidebarOpen, setSidebarOpen, categoryList}) => {
 
                                     </ul>
                                 </div>
+
                             </div>
                         </div>
                     </div>
@@ -416,10 +416,10 @@ const ListPage = ({sidebarOpen, setSidebarOpen, categoryList}) => {
                             </svg>
                         </button>
                         <div className="flex justify-between items-center">
-                            <h2 className="font-bold text-color leading-tight text-3xl text-center uppercase">All
-                                Items
+                            <h2 className="font-bold text-color leading-tight xl:text-3xl text-xl text-center uppercase">
+                                All Items
                             </h2>
-                            <form className="w-full max-w-sm bg-white">
+                            <form className="w-full max-w-sm bg-white xl:block hidden">
                                 <div className="flex items-center rounded-full border-2 border-amber-600 px-5 py-2">
                                     <input
                                         onBlur={searchProduct}
@@ -445,9 +445,28 @@ const ListPage = ({sidebarOpen, setSidebarOpen, categoryList}) => {
                                 </select>
                             </div>
                         </div>
-                        <div className="grid md:grid-cols-3 grid-cols-2 gap-6 md:mt-6 mt-3">
-                            <CardProduct proList={productListFilter}/>
-                        </div>
+
+
+                        {productListFilter && productListFilter.length > 0 ?
+                            (<div className="grid md:grid-cols-3 grid-cols-2 gap-6 md:mt-6 mt-3">
+                                    <CardProduct proList={productListFilter}/>
+                                </div>
+                            )
+                            : (
+                                <div className="flex justify-center">
+                                    <div className="flex flex-col mt-12">
+                                        <img
+                                            src={emptyList}
+                                            className="max-w-sm h-auto"
+                                            alt=""
+                                        />
+                                        <p className="text-2xl mx-auto text-amber-600 mt-3">Your collection list is empty!</p>
+                                    </div>
+                                </div>
+                                )
+                        }
+
+
                     </div>
                 </div>
             </div>

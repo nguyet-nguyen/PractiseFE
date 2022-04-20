@@ -24,7 +24,7 @@ const routes = [
           },
           {
             name: "All Items",
-            route: "/all-items",
+            route: "/all-items/:id",
             component: <ProductListPages/>,
           },
           {
