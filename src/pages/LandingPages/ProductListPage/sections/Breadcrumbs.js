@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 
 const BreadcrumbsProductList = () => {
     return (
-        <nav className="rounded-md w-full mx-4 md:mb-10 mb-5">
+        <nav className="rounded-md w-full mx-4 md:mb-10 mb-0">
             <ol className="list-reset flex">
                 <li>
                     <Link to="/" className="text-gray-800 hover:text-amber-700">
