@@ -11,7 +11,7 @@ const Category = ({categoryList}) => {
             <div className="flex flex-wrap md:justify-center justify-start">
                 {categoryList && categoryList.map((category, index) =>
                     (index > 0) ?
-                        <div className={`flex md:flex-wrap md:w-1/5 w-1/2 flex-col category category-${index}`}>
+                        <div key={category.id} className={`flex md:flex-wrap md:w-1/5 w-1/2 flex-col category category-${index}`}>
                             <div className="w-full p-2 md:p-4">
                                 <div className="text-center">
                                     <Link to="/all-items">
