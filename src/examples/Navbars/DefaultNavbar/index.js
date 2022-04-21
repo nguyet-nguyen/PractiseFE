@@ -2,14 +2,8 @@ import {Fragment, useEffect, useState} from 'react'
 import {Popover, Transition} from '@headlessui/react'
 import {Link} from "react-router-dom";
 import {
-    BookmarkAltIcon,
-    CalendarIcon,
-    ChartBarIcon,
+
     MenuIcon,
-    PhoneIcon,
-    PlayIcon,
-    ShieldCheckIcon,
-    SupportIcon,
     XIcon,
 } from '@heroicons/react/outline'
 import {ChevronDownIcon} from '@heroicons/react/solid'
@@ -45,17 +39,16 @@ function DefaultNavbar() {
             .catch((err) => {
                 console.log(err.message);
             });
-        if(token) {
+        if (token) {
             getCountItemsInCart()
                 .then((response) => {
                     setCountItemCart(response.data.count);
-                    console.log(countItemCart)
                 })
                 .catch((err) => {
                     console.log(err);
                 });
         }
-    },[getAllCategory])
+    }, [getAllCategory])
     const solutions = []
     categoryList.forEach(item => {
         solutions.push({
@@ -63,21 +56,8 @@ function DefaultNavbar() {
             href: `/all-items/${item.id}`
         })
     })
-
-    // useEffect(() => {
-    //     if(token) {
-    //         getCountItemsInCart()
-    //             .then((response) => {
-    //                 setCountItemCart(response.data.count);
-    //                 console.log(countItemCart)
-    //             })
-    //             .catch((err) => {
-    //                 console.log(err);
-    //             });
-    //     }
-    //
-    // });
-
+    const pathNameUrl=window.location.pathname;
+    const pathName = pathNameUrl.split("/")
     const token = localStorage.getItem("token");
     const users = JSON.parse(localStorage.getItem("userInfo"));
     const SignOut = () => {
@@ -89,10 +69,6 @@ function DefaultNavbar() {
         }
         navigate("/");
     };
-    const [activeLink, setActiveLink] = useState(1);
-    const changeStateHeader = (e) => {
-        setActiveLink(e)
-    }
     return (
         <Popover
             className="header-section z-10 hover:bg-white bg-transparent transition ease-in-out absolute top-0 right-0 left-0">
@@ -116,9 +92,10 @@ function DefaultNavbar() {
                         </Popover.Button>
                     </div>
                     <Popover.Group as="nav" className="hidden md:flex items-center space-x-10">
-                        <Link  to="/" >
-                            <button className={`font-semibold ${activeLink==1? "text-amber-600 text-base hover:text-amber-700"
-                                : "text-gray-600 text-sm hover:text-gray-900"}`} onClick={()=> changeStateHeader(1)}>
+                        <Link to="/">
+                            <button
+                                className={`font-semibold ${pathName[1] == "" ? "text-amber-600 text-base hover:text-amber-700"
+                                    : "text-gray-600 text-sm hover:text-gray-900"}`}>
                                 Home
                             </button>
 
@@ -133,8 +110,9 @@ function DefaultNavbar() {
                                             'focus:ring-offset-2'
                                         )}
                                     >
-                                        <span className={`font-semibold ${activeLink==2? "text-amber-600 text-base hover:text-amber-700"
-                                            : "text-gray-600 text-sm hover:text-gray-900"}`}>Item List</span>
+                                        <span
+                                            className={`font-semibold ${pathName[1] == "all-items" ? "text-amber-600 text-base hover:text-amber-700"
+                                                : "text-gray-600 text-sm hover:text-gray-900"}`}>Item List</span>
                                         <ChevronDownIcon
                                             className={classNames(
                                                 open ? 'text-gray-900' : 'text-gray-600',
@@ -167,7 +145,6 @@ function DefaultNavbar() {
                                                             className="-m-3 p-3 flex items-center rounded-lg">
 
                                                             <button
-                                                                onClick={()=> changeStateHeader(2)}
                                                                 className="ml-3 text-sm font-medium text-gray-900 hover:text-amber-600">{item.name}</button>
                                                         </Link>
                                                     ))}
@@ -179,8 +156,9 @@ function DefaultNavbar() {
                             )}
                         </Popover>
                         <Link to="/aboutus" className="text-sm font-semibold text-gray-600 hover:text-gray-900">
-                            <button className={`font-semibold ${activeLink==3? "text-amber-600 text-base hover:text-amber-700"
-                                : "text-gray-600 text-sm hover:text-gray-900"}`} onClick={()=> changeStateHeader(3)}>
+                            <button
+                                className={`font-semibold ${pathName[1] == "aboutus" ? "text-amber-600 text-base hover:text-amber-700"
+                                    : "text-gray-600 text-sm hover:text-gray-900"}`}>
                                 About Us
                             </button>
 
@@ -237,12 +215,14 @@ function DefaultNavbar() {
                                             aria-labelledby="dropdownMenuButton1">
                                             <li>
                                                 <Link
-                                                    className=" dropdown-item text-sm py-2 px-4 font-normal block w-full whitespace-nowrap
-                                                        bg-transparent border-b-2 border-gray-100 text-gray-700 hover:text-amber-600
-                                                        focus:bg-white focus:text-amber-600"
+                                                    className={`dropdown-item text-sm py-2 px-4 font-normal block w-full whitespace-nowrap
+                                                        bg-transparent border-b-2 border-gray-100
+                                                         ${pathName[1]=="user-profile" ? "text-amber-600" : "text-gray-700"} 
+                                                         hover:text-amber-600
+                                                        focus:bg-white focus:text-amber-600`}
                                                     to="/user-profile"
                                                 >
-                                                    Your profile
+                                                        Your profile
                                                 </Link>
                                             </li>
                                             <li>
@@ -330,11 +310,21 @@ function DefaultNavbar() {
                             </div>
                         </div>
                         <Popover.Group as="nav" className="md:hidden flex justify-center py-5 items-center">
-                            <Link to="/" className="text-sm font-semibold text-gray-600 hover:text-gray-900 mr-5">
-                                Home
+                            <Link to="/">
+                                <button
+                                    className={`font-semibold ${pathName[1] == "" ? "text-amber-600 text-base hover:text-amber-700"
+                                        : "text-gray-600 text-sm hover:text-gray-900"}`}>
+                                    Home
+                                </button>
+
                             </Link>
                             <Link to="/aboutus" className="text-sm font-semibold text-gray-600 hover:text-gray-900">
-                                About Us
+                                <button
+                                    className={`font-semibold ${pathName[1] == "aboutus" ? "text-amber-600 text-base hover:text-amber-700"
+                                        : "text-gray-600 text-sm hover:text-gray-900"}`} >
+                                    About Us
+                                </button>
+
                             </Link>
                         </Popover.Group>
                         <div className="py-6 px-5 space-y-6">
@@ -404,12 +394,17 @@ function DefaultNavbar() {
                                                 aria-labelledby="dropdownMenuButton1">
                                                 <li>
                                                     <Link
-                                                        className=" dropdown-item text-sm py-2 px-4 font-normal block w-full whitespace-nowrap
-                                                        bg-transparent border-b-2 border-gray-100 text-gray-700 hover:text-amber-600
-                                                        focus:bg-white focus:text-amber-600"
+                                                        className={`dropdown-item text-sm py-2 px-4 font-normal block w-full whitespace-nowrap
+                                                        bg-transparent border-b-2 border-gray-100
+                                                         ${pathName[1]=="user-profile" ? "text-amber-600" : "text-gray-700"} 
+                                                         hover:text-amber-600
+                                                        focus:bg-white focus:text-amber-600`}
                                                         to="/user-profile"
                                                     >
-                                                        Your profile
+                                                        <button>
+                                                            Your profile
+                                                        </button>
+
                                                     </Link>
                                                 </li>
                                                 <li>

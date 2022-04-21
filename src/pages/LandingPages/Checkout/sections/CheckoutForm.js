@@ -101,8 +101,8 @@ const CheckoutForm = () => {
         $("#modalCheckoutSuccess").modal("show");
       })
       .catch((err) => {
+        console.log(err.data);
         setShowPaymentFailed(true);
-        alert(err.data);
         setShowSpinner(false);
       });
     }else if(paymentMethod == "paypal"){

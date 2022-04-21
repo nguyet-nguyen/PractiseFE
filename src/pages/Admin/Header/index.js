@@ -15,7 +15,7 @@ function Header({sidebarOpen, setSidebarOpen}) {
         // }`}>
             <header className={`sticky top-0 border-b z-30 bg-slate-900 border-slate-800 text-white`}>
             <div className="px-4 sm:px-6 lg:px-8">
-                <div className="flex items-center justify-end h-10 -mb-px">
+                <div className="flex items-center md:justify-end justify-between h-10 -mb-px">
 
                     {/* Header: Left side */}
                     <div className="flex">

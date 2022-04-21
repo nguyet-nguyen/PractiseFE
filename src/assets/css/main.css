@@ -193,6 +193,9 @@ input[type=number] {
     height: 65px;
     width: 65px;
 }
+.rdt_TableCell {
+    white-space: pre-wrap;
+}
 #actionId {
     display: flex;
     align-items: flex-end;

@@ -174,6 +174,7 @@ const OrderListTable = () => {
         {
             name: "Status",
             sortable: true,
+            width: "max-content",
             selector: (row) => (
                 <>
                     {row.status == "Approved" ? (
@@ -300,11 +301,11 @@ const OrderListTable = () => {
     }
     return (
         <>
-            <div className="px-4 py-8 w-full w-9xl mx-auto">
-                <h2 className="font-bold text-4xl text-slate-800 uppercase mb-5">
+            <div className="w-full w-9xl mx-auto">
+                <h2 className="font-bold md:text-4xl text-2xl text-slate-800 uppercase mb-5">
                     <i className="fa fa-shopping-cart" aria-hidden="true"></i> order list
                 </h2>
-                <div className="flex space-x-2 justify-end mb-5">
+                <div className="flex space-x-2 md:justify-end justify-start mb-5">
                     <div className="xl:w-96">
                         <div className="input-group relative flex flex-wrap items-stretch w-full">
                             <input
