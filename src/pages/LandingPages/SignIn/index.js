@@ -9,7 +9,7 @@ const SignIn = () => {
     const { register, handleSubmit, formState: { errors } } = useForm();
     const [messErr, setMessErr] = useState("")
     const [showSpinner, setShowSpinner] = useState(false);
-
+    const [showMess, setShowMess] = useState(true);
     const onSubmit = async (data, e) => {
         setShowSpinner(true);
 
@@ -39,7 +39,6 @@ const SignIn = () => {
                 console.log(err);
             })
     }
-    const [showMess, setShowMess] = useState(true);
     return (
         <main>
             <section className="absolute w-full h-full">
