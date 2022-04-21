@@ -85,9 +85,9 @@ function ProductList() {
                     <CardProduct proList={productListFilter} homePage={true} />
                 </div>
                 <div className="flex justify-center items-c md:hidden">
-                    <button type="button" className="inline-block px-6 py-2 mt-5 border-2 border-amber-700 text-amber-700 font-medium 
+                    <Link to="/all-items/1" type="button" className="inline-block px-6 py-2 mt-5 border-2 border-amber-700 text-amber-700 font-medium
                     text-xs leading-tight uppercase rounded-full hover:bg-black hover:bg-opacity-5 focus:outline-none focus:ring-0 
-                    transition duration-100 ease-in-out">See More</button>
+                    transition duration-100 ease-in-out">See More</Link>
                 </div>
             </div>
     );
