@@ -51,7 +51,7 @@ function ProductList() {
                     border-b-0 pl-0 hidden" id="tabs-tab"
                         role="tablist">
                         {categoryList && categoryList.map((category, index) =>
-                            <li className="nav-item nav-category mx-2" role="presentation" onClick={getcategoryId}>
+                            <li key={category.id} className="nav-item nav-category mx-2" role="presentation" onClick={getcategoryId}>
                                 <button type="button" className={`nav-link block font-semibold text-sm leading-tight uppercase border-x-0 
                                border-t-0 border-b-2 hover:border-amber-600 focus:border-amber-600
                                border-transparent px-6 py-3 hover:border-transparent hover:text-amber-700 focus:text-amber-700

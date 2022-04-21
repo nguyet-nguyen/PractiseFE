@@ -402,7 +402,7 @@ const ListPage = ({sidebarOpen, setSidebarOpen, categoryList}) => {
                 </div>
                 <div className="col-span-3">
                     <div>
-                        {loading ? <Loading/> : ""}
+
                         <button
                             className="lg:hidden buttonSideNav bg-amber-600 p-2 rounded-r-md
                 text-white"
@@ -446,25 +446,30 @@ const ListPage = ({sidebarOpen, setSidebarOpen, categoryList}) => {
                             </div>
                         </div>
 
-
-                        {productListFilter && productListFilter.length > 0 ?
-                            (<div className="grid md:grid-cols-3 grid-cols-2 gap-6 md:mt-6 mt-3">
-                                    <CardProduct proList={productListFilter}/>
-                                </div>
-                            )
-                            : (
-                                <div className="flex justify-center">
-                                    <div className="flex flex-col mt-12">
-                                        <img
-                                            src={emptyList}
-                                            className="max-w-sm h-auto"
-                                            alt=""
-                                        />
-                                        <p className="text-2xl mx-auto text-amber-600 mt-3">Your collection list is empty!</p>
+                        {loading ? <Loading/> :
+                        <>
+                            {productListFilter && productListFilter.length > 0 ?
+                                (<div className="grid md:grid-cols-3 grid-cols-2 gap-6 md:mt-6 mt-3">
+                                        <CardProduct proList={productListFilter}/>
                                     </div>
-                                </div>
                                 )
+                                : (
+                                    <div className="flex justify-center">
+                                        <div className="flex flex-col mt-12">
+                                            <img
+                                                src={emptyList}
+                                                className="max-w-sm h-auto"
+                                                alt=""
+                                            />
+                                            <p className="text-2xl mx-auto text-amber-600 mt-3">Your collection list is empty!</p>
+                                        </div>
+                                    </div>
+                                )
+                            }
+                        </>
+
                         }
+
 
 
                     </div>
