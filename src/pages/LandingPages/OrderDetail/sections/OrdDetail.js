@@ -93,6 +93,20 @@ const OrdDetail = () => {
               <div className="flex items-center justify-around w-full pt-2">
                 {order.status != 3 && (
                   <p className="text-lg capitalize font-black leading-none text-gray-800 ">
+                    Pending
+                    {order.status == 5 && (
+                      <span className="bg-amber-500 rounded-lg text-sm p-1 ml-2">
+                        <i
+                          className={`fa fa-check text-white text-center`}
+                          aria-hidden="true"
+                        ></i>
+                      </span>
+                    )}
+                  </p>
+                )}
+
+                {order.status != 3 && (
+                  <p className="text-lg capitalize font-black leading-none text-gray-800 ">
                     Approved
                     {order.status == 1 && (
                       <span className="bg-amber-500 rounded-lg text-sm p-1 ml-2">
@@ -144,24 +158,30 @@ const OrdDetail = () => {
                 )}
               </div>
 
+              {order.status == 5 && (
+                <div className="w-full bg-gray-200 h-4 my-7 rounded-md">
+                  <div className="bg-amber-500 text-center text-sm font-medium h-5 text-white rounded-md w-1/4">
+                    Step 1
+                  </div>
+                </div>
+              )}
               {order.status == 1 && (
                 <div className="w-full bg-gray-200 h-4 my-7 rounded-md">
-                  <div className="bg-amber-500 text-center text-sm font-medium h-5 text-white rounded-md w-1/3">
-                    Step 1
+                  <div className="bg-amber-500 text-right pr-40 text-sm font-medium h-5 text-white rounded-md w-2/4">
+                    Step 2
                   </div>
                 </div>
               )}
               {order.status == 2 && (
                 <div className="w-full bg-gray-200 h-4 my-7 rounded-md">
-                  <div className="bg-amber-500 text-right pr-44 text-sm font-medium h-5 text-white rounded-md w-2/3">
-                    Step 2
+                  <div className="bg-amber-500 text-right pr-40 text-sm font-medium h-5 text-white rounded-md w-3/4">
+                    Step 3
                   </div>
                 </div>
               )}
-
               {order.status == 4 && (
                 <div className="w-full bg-gray-200 h-4 my-7 rounded-md">
-                  <div className="bg-amber-500 text-right pr-44 text-sm font-medium h-5 text-white rounded-md w-full">
+                  <div className="bg-amber-500 text-right pr-36 text-sm font-medium h-5 text-white rounded-md w-full">
                     Delivered
                   </div>
                 </div>
