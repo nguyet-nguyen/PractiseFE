@@ -47,14 +47,16 @@ const UsersTable = () => {
         {
             name: 'No',
             sortable: true,
-            width: '100px',
             selector: row => row.no,
+            width: "100px",
         },
         {
             name: 'Avatar',
             selector: row => <div><img src={row.avatar}/></div>,
             disableFilters: true,
-            width: "120px"
+            width: "fix-content",
+
+
         },
         {
             name: 'Name',
@@ -65,18 +67,20 @@ const UsersTable = () => {
         {
             name: 'Email',
             sortable: true,
+            width: "max-content",
             selector: row => row.email,
 
         },
         {
             name: 'Phone',
             sortable: true,
-
             selector: row => row.phone,
         },
         {
             name: 'Address',
             sortable: true,
+            width: "400px",
+            wrap: true,
             selector: row => row.address,
 
         },
@@ -94,8 +98,8 @@ const UsersTable = () => {
     for (let i = 0; i < users.length; i++) {
         const user = {
             no: i + 1,
-            id:  users[i].id,
-            avatar:  users[i].image,
+            id: users[i].id,
+            avatar: users[i].image,
             email: users[i].email,
             name: users[i].name,
             phone: users[i].phone,
@@ -106,10 +110,10 @@ const UsersTable = () => {
     }
     return (
         <>
-            <div className="px-4 sm:px-6 lg:px-8 py-8 w-full max-w-9xl mx-auto">
-                <h2 className="font-bold text-4xl text-slate-800 uppercase mb-5">
+            <div className="w-full max-w-9xl mx-auto">
+                <h2 className="font-bold md:text-4xl text-2xl text-slate-800 uppercase mb-5">
                     <i className="fa fa-users" aria-hidden="true"></i> user list</h2>
-                <div className="flex space-x-2 justify-end mb-5">
+                <div className="flex space-x-2 md:justify-end justify-start mb-5">
                     <div className="xl:w-96">
                         <div className="input-group relative flex flex-wrap items-stretch w-full">
                             <input
@@ -148,7 +152,7 @@ const UsersTable = () => {
                         </div>
                     </div>
                 </div>
-                {pending ?  <Loading adminPage={true}/>
+                {pending ? <Loading adminPage={true}/>
                     :
                     <DataTable
                         columns={columns}

@@ -46,14 +46,14 @@ const AdminTable = () => {
         {
             name: 'No',
             sortable: true,
-            width: '100px',
+            width: "100px",
             selector: row => row.no,
         },
         {
             name: 'Avatar',
             selector: row => <div><img src={row.avatar}/></div>,
+            width: "fix-content",
             disableFilters: true,
-            width: "120px"
         },
         {
             name: 'Name',
@@ -64,6 +64,7 @@ const AdminTable = () => {
         {
             name: 'Email',
             sortable: true,
+            width: "max-content",
             selector: row => row.email,
 
         },
@@ -76,6 +77,8 @@ const AdminTable = () => {
         {
             name: 'Address',
             sortable: true,
+            width: "400px",
+            wrap: true,
             selector: row => row.address,
 
         },
@@ -105,18 +108,18 @@ const AdminTable = () => {
     }
     return (
         <>
-            <div className="px-4 sm:px-6 lg:px-8 py-8 w-full max-w-9xl mx-auto">
-                <h2 className="font-bold text-4xl text-slate-800 uppercase mb-5">
+            <div className="w-full max-w-9xl mx-auto">
+                <h2 className="font-bold md:text-4xl text-2xl text-slate-800 uppercase mb-5">
                     <i className="fa fa-users" aria-hidden="true"></i> Admin list</h2>
-                <div className="flex space-x-2 justify-between mb-5">
+                <div className="flex md:space-x-2 space-x-0 md:flex-row flex-col justify-between mb-5">
                     <Link to="/admin/sign-up"
                           type="button"
                           data-mdb-ripple="true"
                           data-mdb-ripple-color="light"
-                          className="inline-block px-6 py-2.5 bg-indigo-600 text-white font-medium text-xs
+                          className="inline-block md:px-6 md:py-2.5 px-3 py-2 bg-indigo-600 text-white font-medium text-xs
                                 leading-tight uppercase rounded shadow-md hover:bg-indigo-700 hover:shadow-lg focus:bg-indigo-700
                                 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-indigo-800 active:shadow-lg transition
-                                duration-150 ease-in-out">Add Admin
+                                duration-150 ease-in-out w-fit md:mb-0 mb-3">Add Admin
                     </Link>
                     <div className="xl:w-96">
                         <div className="input-group relative flex flex-wrap items-stretch w-full">

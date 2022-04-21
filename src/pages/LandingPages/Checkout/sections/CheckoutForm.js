@@ -94,7 +94,7 @@ const CheckoutForm = () => {
         $("#modalCheckoutSuccess").modal("show");
       })
       .catch((err) => {
-        alert(err.data);
+        console.log(err.data);
       });
   };
 

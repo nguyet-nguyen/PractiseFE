@@ -102,15 +102,6 @@ const ProductsTable = () => {
       .catch((err) => {
         console.log(err.data);
       });
-    // getAllProductsAdmin()
-    //   .then((response) => {
-    //     setProductList(response.data);
-    //     setPending(false);
-    //   })
-    //   .catch((err) => {
-    //     console.warn(err);
-    //     setPending(false);
-    //   });
   };
   if (itemDetail.items != null) {
     itemDetail.items.forEach((size) => {
@@ -149,7 +140,7 @@ const ProductsTable = () => {
       key: "action",
       text: "Action",
       className: "action",
-      width: 100,
+      width: "max-content",
       align: "left",
       sortable: false,
       cell: (record) => {
@@ -220,19 +211,19 @@ const ProductsTable = () => {
 
     return (
         <>
-         <div className="px-4 py-8 w-full w-9xl mx-auto">
-                <h2 className="font-bold text-4xl text-slate-800 uppercase mb-5">
+         <div className="md:px-4 md:py-8 px-0 py-3 w-full mx-auto">
+                <h2 className="font-bold md:text-4xl text-2xl text-slate-800 uppercase mb-5">
                 <i class="fa fa-product-hunt" aria-hidden="true"></i> Product list
                 </h2>
-            <div className="flex space-x-2 justify-between mb-4">
+            <div className="flex justify-between  md:space-x-2 space-x-0 md:flex-row flex-col mb-4">
                 <Link to="/admin/products/add-product"
                       type="button"
                       data-mdb-ripple="true"
                       data-mdb-ripple-color="light"
-                      className="inline-block px-6 py-2.5 bg-indigo-600 text-white font-medium text-xs
+                      className="inline-block md:px-6 md:py-2.5 px-3 py-2 bg-indigo-600 text-white font-medium text-xs
                                 leading-tight uppercase rounded shadow-md hover:bg-indigo-700 hover:shadow-lg focus:bg-indigo-700
                                 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-indio-800 active:shadow-lg transition
-                                duration-150 ease-in-out">Add Product
+                                duration-150 ease-in-out w-fit md:mb-0 mb-3">Add Product
                 </Link>
                 <div className="xl:w-96">
                     <div className="input-group relative flex flex-wrap items-stretch w-full">
@@ -245,7 +236,10 @@ const ProductsTable = () => {
                             aria-describedby="button-addon2"
                         />
                         <button
-                            className="btn inline-block px-6 py-2.5 bg-indigo-600 text-white font-medium text-xs leading-tight uppercase rounded shadow-md hover:bg-indigo-700 hover:shadow-lg focus:bg-indigo-700  focus:shadow-lg focus:outline-none focus:ring-0 active:bg-indigo-800 active:shadow-lg transition duration-150 ease-in-out flex items-center"
+                            className="btn inline-block md:px-6 md:py-2.5 px-3 py-1.5 bg-indigo-600 text-white font-medium
+                            text-xs leading-tight uppercase rounded shadow-md hover:bg-indigo-700 hover:shadow-lg
+                            focus:bg-indigo-700  focus:shadow-lg focus:outline-none focus:ring-0 active:bg-indigo-800
+                            active:shadow-lg transition duration-150 ease-in-out flex items-center"
                             type="button"
                             id="button-addon2"
                         >
