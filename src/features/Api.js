@@ -121,6 +121,15 @@ export const addOrder = (data) => {
   }
 };
 
+// Checkout by PayPal
+export const addOrderPayPal = (data) => {
+  try {
+    return apiadminnoFormdata.post(`/users/orders/payments`, data);
+  } catch (error) {
+    console.log(error);
+  }
+};
+
 // Users order history
 export const getUsersOrdHistory = () => {
   try {

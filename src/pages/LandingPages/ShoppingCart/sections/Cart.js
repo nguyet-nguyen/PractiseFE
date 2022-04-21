@@ -413,7 +413,7 @@ const ShoppingCart = () => {
             </p>
             <div className="py-6 px-3 mt-32 sm:mt-0">
                 <Link
-                    to="/all-items"
+                    to="/all-items/1"
                     className="bg-amber-500 active:bg-amber-600 w-1/4 h-10 py-2.5 uppercase text-white font-bold hover:shadow-md shadow text-sm   rounded-md outline-none focus:outline-none sm:mr-2 mb-1"
                     type="button"
                     style={{transition: "all .15s ease"}}
