@@ -29,7 +29,7 @@ const isSticky = (e) => {
 };
 
 function DefaultNavbar() {
-
+    const [countItemCart, setCountItemCart] = useState(0);
     const [categoryList, setCategoryList] = useState([]);
     useEffect(() => {
         window.addEventListener('scroll', isSticky);
@@ -45,7 +45,17 @@ function DefaultNavbar() {
             .catch((err) => {
                 console.log(err.message);
             });
-    })
+        if(token) {
+            getCountItemsInCart()
+                .then((response) => {
+                    setCountItemCart(response.data.count);
+                    console.log(countItemCart)
+                })
+                .catch((err) => {
+                    console.log(err);
+                });
+        }
+    },[getAllCategory])
     const solutions = []
     categoryList.forEach(item => {
         solutions.push({
@@ -54,27 +64,30 @@ function DefaultNavbar() {
         })
     })
 
-    const [countItemCart, setCountItemCart] = useState(0);
-    useEffect(() => {
-        getCountItemsInCart()
-            .then((response) => {
-                setCountItemCart(response.data.count);
-                console.log(countItemCart);
-            })
-            .catch((err) => {
-                console.log(err);
-            });
-    });
+    // useEffect(() => {
+    //     if(token) {
+    //         getCountItemsInCart()
+    //             .then((response) => {
+    //                 setCountItemCart(response.data.count);
+    //                 console.log(countItemCart)
+    //             })
+    //             .catch((err) => {
+    //                 console.log(err);
+    //             });
+    //     }
+    //
+    // });
 
     const token = localStorage.getItem("token");
     const users = JSON.parse(localStorage.getItem("userInfo"));
     const SignOut = () => {
         try {
             localStorage.clear();
-            navigate("/");
+            window.location.reload();
         } catch {
             console.log("loi");
         }
+        navigate("/");
     };
     const [activeLink, setActiveLink] = useState(1);
     const changeStateHeader = (e) => {
