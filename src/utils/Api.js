@@ -1,7 +1,7 @@
 import axios from 'axios';
-console.log(process.env.REACT_APP_DOMAIN);
 // config hosting-api here
-export const baseURL = 'http://127.0.0.1/api';
+export const baseURL = process.env.REACT_APP_DOMAIN + '/api';
+console.log(baseURL);
 export const api = axios.create({
     baseURL,
     headers: {
