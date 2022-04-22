@@ -177,7 +177,7 @@ input[type=number] {
 }
 @media (max-width: 991px) {
     .rdt_Table {
-        width: full;
+        width: 1200px!important;
     }
 }
 .image-detail {

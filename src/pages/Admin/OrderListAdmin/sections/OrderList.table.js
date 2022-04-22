@@ -293,7 +293,7 @@ const OrderListTable = () => {
                         <Link to={`/admin/orders-list/order-detail/${order.id}`}>
                             <button
                                 type="button"
-                                className="inline-block lg:ml-2 ml-0 px-4 py-2.5 bg-purple-600 text-white
+                                className="inline-block ml-2 px-4 py-2.5 bg-purple-600 text-white
                                                                 font-medium text-xs leading-tight uppercase rounded shadow-md"
                             >
                                 Detail
