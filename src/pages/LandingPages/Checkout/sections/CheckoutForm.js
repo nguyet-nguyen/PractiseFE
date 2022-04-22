@@ -90,8 +90,8 @@ const CheckoutForm = () => {
       recipientEmail: data.recipientEmail,
       recipientPhone: data.recipientPhone,
       addressDelivery: data.addressDelivery,
-      // shippingCost: shippingFee,
-      shippingCost: 0,
+      shippingCost: shippingFee,
+      // shippingCost: 0,
       paymentMethod: paymentMethod,
     };
     if(paymentMethod == "cod"){

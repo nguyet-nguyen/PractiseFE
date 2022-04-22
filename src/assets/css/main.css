@@ -175,7 +175,11 @@ input[type=number] {
         transform: rotate(360deg)
     }
 }
-
+@media (max-width: 991px) {
+    .rdt_Table {
+        width: full;
+    }
+}
 .image-detail {
     height: 600px;
 }
