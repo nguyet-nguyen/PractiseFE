@@ -147,34 +147,40 @@ const OrderListTable = () => {
         {
             name: "No",
             sortable: true,
-            width: "100px",
+            width:"100px",
             selector: (row) => row.no,
         },
         {
             name: "Date At",
+            wrap: true,
             sortable: true,
             selector: (row) => row.orderDate,
         },
         {
             name: "Email",
+            wrap: true,
+            grow: 2,
             sortable: true,
             selector: (row) => row.recipientEmail,
         },
-        {
-            name: "Phone",
-            sortable: true,
-            selector: (row) => row.recipientPhone,
-        },
+        // {
+        //     name: "Phone",
+        //     sortable: true,
+        //     selector: (row) => row.recipientPhone,
+        // },
         {
             name: "Amount",
             sortable: true,
-            width: "150px",
             selector: (row) => row.amount,
+        },
+        {
+            name: "Payment",
+            sortable: true,
+            selector: (row) => row.paymentMethod,
         },
         {
             name: "Status",
             sortable: true,
-            width: "max-content",
             selector: (row) => (
                 <>
                     {row.status == "Approved" ? (
@@ -214,11 +220,12 @@ const OrderListTable = () => {
         },
         {
             key: "action",
+            name: "Actions",
             id: "actionId",
             text: "Action",
             className: "action",
             align: "left",
-            width: "300px",
+            grow: 3,
             sortable: false,
             cell: (order) => {
                 return (
@@ -295,6 +302,7 @@ const OrderListTable = () => {
             recipientEmail: orderlist[i].recipientEmail,
             recipientPhone: orderlist[i].recipientPhone,
             status: orderlist[i].status,
+            paymentMethod: orderlist[i].paymentMethod,
             amount: orderlist[i].amount,
         };
         data.push(order);

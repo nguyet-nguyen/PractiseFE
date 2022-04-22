@@ -36,7 +36,7 @@ const AdminTable = () => {
             }
         })
         setUsers(searchList);
-        if (searchKey == null || searchKey == "" ) {
+        if (searchKey == null || searchKey == "") {
             setUsers(searchData);
         }
     }
@@ -52,32 +52,32 @@ const AdminTable = () => {
         {
             name: 'Avatar',
             selector: row => <div><img src={row.avatar}/></div>,
-            width: "fix-content",
             disableFilters: true,
         },
         {
             name: 'Name',
             sortable: true,
+            wrap: true,
+            grow: 2,
             selector: row => row.name,
-
         },
         {
             name: 'Email',
             sortable: true,
-            width: "max-content",
+            wrap: true,
+            grow: 2,
             selector: row => row.email,
 
         },
         {
             name: 'Phone',
             sortable: true,
-
             selector: row => row.phone,
         },
         {
             name: 'Address',
             sortable: true,
-            width: "400px",
+            grow: 3,
             wrap: true,
             selector: row => row.address,
 
@@ -96,8 +96,8 @@ const AdminTable = () => {
     for (let i = 0; i < users.length; i++) {
         const user = {
             no: i + 1,
-            id:  users[i].id,
-            avatar:  users[i].image,
+            id: users[i].id,
+            avatar: users[i].image,
             email: users[i].email,
             name: users[i].name,
             phone: users[i].phone,

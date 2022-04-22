@@ -49,7 +49,7 @@ const ShoppingCart = () => {
           placeItems: "center",
         }}
       ></MKBox>
-      <section className="container h-auto mx-auto px-4 py-2 md:py-12 md:px-32">
+      <section className="container h-auto mx-auto px-2 py-2 md:py-12 md:px-32">
         <div className="md:w-12/12 w-full h-auto transition-all rounded-lg mx-auto">
           <BreadcrumbsCheckout />
           <CheckoutForm />

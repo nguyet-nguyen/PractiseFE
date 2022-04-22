@@ -47,27 +47,26 @@ const UsersTable = () => {
         {
             name: 'No',
             sortable: true,
-            selector: row => row.no,
             width: "100px",
+            selector: row => row.no,
         },
         {
             name: 'Avatar',
             selector: row => <div><img src={row.avatar}/></div>,
             disableFilters: true,
-            width: "fix-content",
-
-
         },
         {
             name: 'Name',
             sortable: true,
+            grow: 2,
             selector: row => row.name,
 
         },
         {
             name: 'Email',
             sortable: true,
-            width: "max-content",
+            grow: 2,
+            wrap: true,
             selector: row => row.email,
 
         },
@@ -79,7 +78,7 @@ const UsersTable = () => {
         {
             name: 'Address',
             sortable: true,
-            width: "400px",
+            grow: 3,
             wrap: true,
             selector: row => row.address,
 
