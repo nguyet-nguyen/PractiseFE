@@ -176,16 +176,37 @@ const OrderListTable = () => {
         {
             name: "Payment",
             sortable: true,
-            selector: (row) => row.paymentMethod,
+            selector: (row) => {
+                return (
+                    <>
+                        <span
+                            className="inline-block w-full  text-gray-600
+                                            font-semibold text-sm leading-tight uppercase "
+                        >
+                            {row.paymentMethod == "paypal" &&  row.status=="Pending" || row.paymentMethod == "cod"
+                            && row.status !="Completed" || row.status=="Canceled" ? "UNPAID" : "PAID"}
+
+                        </span>
+                    </>
+                );
+            },
         },
         {
             name: "Status",
             sortable: true,
             selector: (row) => (
                 <>
-                    {row.status == "Approved" ? (
+                    {row.status == "Pending" ? (
                         <span
                             className="inline-block px-4 py-2.5 text-amber-600
+                                                            font-medium text-xs leading-tight uppercase rounded shadow-md"
+                        >
+                        {row.status}
+                    </span>
+                    ) : null}
+                    {row.status == "Approved" ? (
+                        <span
+                            className="inline-block px-4 py-2.5 text-green-700
                                                             font-medium text-xs leading-tight uppercase rounded shadow-md"
                         >
               {row.status}
