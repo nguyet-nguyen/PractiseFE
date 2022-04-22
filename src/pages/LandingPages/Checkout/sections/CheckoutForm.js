@@ -165,7 +165,7 @@ const CheckoutForm = () => {
       ) : (
         <>
           <div className="flex lg:flex-row flex-col">
-            <div className="lg:w-3/5 md:w-8/12 w-full lg:h-screen h-auto bg-indigo-50 px-12">
+            <div className="lg:w-3/5 md:w-8/12 w-full lg:h-screen h-auto bg-indigo-50 md:px-12 px-2">
               <div className="mt-8 p-4 relative flex flex-col sm:flex-row sm:items-center bg-white shadow rounded-md">
                 <div className="flex flex-row items-center border-b sm:border-b-0 w-full sm:w-auto pb-4 sm:pb-0">
                   <div className="text-yellow-500">
@@ -198,7 +198,7 @@ const CheckoutForm = () => {
                     </h2>
                     <fieldset className="mb-3 bg-white shadow-lg rounded text-gray-600">
                       <div className="flex border-b border-gray-200">
-                        <div className="w-1/7 text-center flex items-center justify-center ">
+                        <div className="md:w-1/7 text-center flex items-center justify-center ">
                           <span className="text-right px-2">
                             Name<span className="text-red-500">*</span>
                           </span>
@@ -267,7 +267,7 @@ const CheckoutForm = () => {
                         </div>
                         <input
                           type="text"
-                          className={`w-80 pl-4 py-2 outline-none`}
+                          className={`md:w-80 w-full whitespace-pre-wrap pl-4 py-2 outline-none`}
                           placeholder="Email"
                           id="recipientEmail"
                           name="recipientEmail"
@@ -291,12 +291,12 @@ const CheckoutForm = () => {
                         )}
 
                       <div className="flex">
-                        <div className="w-2/7 text-center flex items-center justify-center ">
+                        <div className="w-2/7 text-center flex items-start mt-2 justify-center ">
                           <span className="text-right px-2">
                             Address<span className="text-red-500">*</span>
                           </span>
                         </div>
-                        <input
+                        <textarea
                           type="text"
                           className={`w-full pl-4 py-2 outline-none`}
                           placeholder="Address"
@@ -350,7 +350,7 @@ const CheckoutForm = () => {
                     </div>
                   </section>
 
-                  <button className="submit-button mt-4 uppercase px-4 py-3 rounded-full bg-amber-500 hover:bg-amber-600 text-white focus:outline-none w-full text-xl font-semibold transition-colors">
+                  <button className="submit-button mt-4 mb-4 md:mb-0 uppercase px-4 py-3 rounded-full bg-amber-500 hover:bg-amber-600 text-white focus:outline-none w-full text-xl font-semibold transition-colors">
                     Order
                     {showSpinner && (
                       <div

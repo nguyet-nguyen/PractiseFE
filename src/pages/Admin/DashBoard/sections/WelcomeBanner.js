@@ -139,7 +139,7 @@ function WelcomeBanner() {
                             </h2>
                             <form className="flex md:flex-row flex-col justify-end md:w-1/2 w-full py-3 px-4 md:px-10"
                                   onSubmit={handleSubmit(onSubmit)}>
-                                <div className="datepicker relative form-floating md:mr-0 mr-2 md:mb-0 mb-3">
+                                <div className="datepicker relative form-floating md:mr-2 mr-0 md:mb-0 mb-3">
                                     <input type="date"
                                            id="fromDate"
                                            name="fromDate"
@@ -159,7 +159,7 @@ function WelcomeBanner() {
                                     {errorDate &&
                                         <p className="text-red-500 text-xs mt-3 italic">From date invalid</p>}
                                 </div>
-                                <div className="datepicker relative form-floating md:mr-0 mr-2 md:mb-0 mb-3">
+                                <div className="datepicker relative form-floating md:mr-2 mr-0 md:mb-0 mb-3">
                                     <input type="date"
                                            id="toDate"
                                            name="toDate"
