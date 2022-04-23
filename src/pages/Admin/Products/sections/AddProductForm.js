@@ -46,8 +46,8 @@ const AddProductForm = () => {
           <CustomPopupMessage
             mess="This product has been added successfully!"
             icon="check-circle"
-            titleColor="indigo"
-            iconColor="indigo"
+            titleColor="amber"
+            iconColor="amber"
           />
         );
       })
@@ -76,9 +76,9 @@ const AddProductForm = () => {
         {/*  Site header */}
         <Header sidebarOpen={sidebarOpen} setSidebarOpen={setSidebarOpen} />
         <main>
-          <div className="min-w-screen min-h-screen flex items-center justify-center px-5 py-5">
+          <div className="min-w-screen flex items-center justify-center px-5 py-6">
             <div
-              className="bg-gray-100 text-gray-500 rounded-3xl shadow-xl w-full overflow-hidden"
+              className="bg-slate-100 text-gray-500 rounded-sm shadow-xl w-full overflow-hidden"
               style={{ maxWidth: "800px" }}
             >
               <div className="md:flex w-full">
@@ -87,7 +87,7 @@ const AddProductForm = () => {
                   onSubmit={handleSubmit(onSubmit)}
                 >
                   <div className="text-center mb-7">
-                    <h1 className="font-bold text-3xl text-gray-900">
+                    <h1 className="font-bold text-3xl uppercase text-gray-900">
                       Add Product
                     </h1>
                     <p>Enter product information to add new product</p>
@@ -132,6 +132,8 @@ const AddProductForm = () => {
                           className="text-xs font-semibold px-1"
                         >
                           Product's Name
+                          <span className="text-red-500 ml-1">*</span>
+
                         </label>
                         <div className="flex">
                           <div className="w-10 z-10 pl-1 text-center pointer-events-none flex items-center justify-center">
@@ -143,7 +145,7 @@ const AddProductForm = () => {
                           <input
                             type="text"
                             className={`w-full -ml-10 pl-10 pr-3 py-2 rounded-lg border-2 border-gray-200
-                                            outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-600
+                                            outline-none focus:ring-2 focus:ring-amber-500 focus:border-amber-600
                                             ${
                                               errors.name &&
                                               "border-red-600 focus:ring-red-500 focus:border-red-600 border-1"
@@ -166,6 +168,7 @@ const AddProductForm = () => {
                           className="text-xs font-semibold px-1"
                         >
                           Color
+                          <span className="text-red-500 ml-1">*</span>
                         </label>
                         <div className="flex">
                           <div className="w-10 z-10 pl-1 text-center pointer-events-none flex items-center justify-center">
@@ -177,7 +180,7 @@ const AddProductForm = () => {
                           <input
                             type="text"
                             className={`w-full -ml-10 pl-10 pr-3 py-2 rounded-lg border-2 border-gray-200
-                                            outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-600
+                                            outline-none focus:ring-2 focus:ring-amber-500 focus:border-amber-600
                                             ${
                                               errors.color &&
                                               "border-red-600 focus:ring-red-500 focus:border-red-600 border-1"
@@ -202,6 +205,7 @@ const AddProductForm = () => {
                           className="text-xs font-semibold px-1"
                         >
                           Price
+                          <span className="text-red-500 ml-1">*</span>
                         </label>
                         <div className="flex">
                           <div className="w-10 z-10 pl-1 text-center pointer-events-none flex items-center justify-center">
@@ -211,7 +215,7 @@ const AddProductForm = () => {
                             type="number"
                             min="0"
                             className={`w-full -ml-10 pl-10 pr-3 py-2 rounded-lg border-2 border-gray-200
-                                            outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-600
+                                            outline-none focus:ring-2 focus:ring-amber-500 focus:border-amber-600
                                             ${
                                               errors.price &&
                                               "border-red-600 focus:ring-red-500 focus:border-red-600 border-1"
@@ -236,6 +240,7 @@ const AddProductForm = () => {
                           className="text-xs font-semibold px-1"
                         >
                           Material
+                          <span className="text-red-500 ml-1">*</span>
                         </label>
                         <div className="flex">
                           <div className="w-10 z-10 pl-1 text-center pointer-events-none flex items-center justify-center">
@@ -247,7 +252,7 @@ const AddProductForm = () => {
                           <input
                             type="text"
                             className={`w-full -ml-10 pl-10 pr-3 py-2 rounded-lg border-2 border-gray-200
-                                            outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-600
+                                            outline-none focus:ring-2 focus:ring-amber-500 focus:border-amber-600
                                             ${
                                               errors.material &&
                                               "border-red-600 focus:ring-red-500 focus:border-red-600 border-1"
@@ -271,11 +276,12 @@ const AddProductForm = () => {
                           className="text-xs font-semibold px-1"
                         >
                           Category
+                          <span className="text-red-500 ml-1">*</span>
                         </label>
                         <div className="flex justify-end">
                           <select
                             className={`w-full -ml-10 pl-10 pr-3 py-2 rounded-lg border-2 border-gray-200
-                                            outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-600
+                                            outline-none focus:ring-2 focus:ring-amber-500 focus:border-amber-600
                                             ${
                                               errors.categoryList &&
                                               "border-red-600 focus:ring-red-500 focus:border-red-600 border-1"
@@ -289,7 +295,7 @@ const AddProductForm = () => {
                               i === 0 ? (
                                 ""
                               ) : (
-                                <option value={category.id}>
+                                <option value={category.id} key={category.id}>
                                   {category.name}
                                 </option>
                               )
@@ -305,6 +311,7 @@ const AddProductForm = () => {
                           className="text-xs font-semibold px-1"
                         >
                           Amount of S size
+                          <span className="text-red-500 ml-1">*</span>
                         </label>
                         <div className="flex">
                           <div className="w-10 z-10 pl-1 text-center pointer-events-none flex items-center justify-center">
@@ -316,7 +323,7 @@ const AddProductForm = () => {
                           <input
                             type="number"
                             className={`w-full -ml-10 pl-10 pr-3 py-2 rounded-lg border-2 border-gray-200
-                                            outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-600
+                                            outline-none focus:ring-2 focus:ring-amber-500 focus:border-amber-600
                                             ${
                                               errors.SizeS &&
                                               "border-red-600 focus:ring-red-500 focus:border-red-600 border-1"
@@ -344,6 +351,7 @@ const AddProductForm = () => {
                           className="text-xs font-semibold px-1"
                         >
                           Amount of M size
+                          <span className="text-red-500 ml-1">*</span>
                         </label>
                         <div className="flex">
                           <div className="w-10 z-10 pl-1 text-center pointer-events-none flex items-center justify-center">
@@ -355,7 +363,7 @@ const AddProductForm = () => {
                           <input
                             type="number"
                             className={`w-full -ml-10 pl-10 pr-3 py-2 rounded-lg border-2 border-gray-200
-                                            outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-600
+                                            outline-none focus:ring-2 focus:ring-amber-500 focus:border-amber-600
                                             ${
                                               errors.SizeM &&
                                               "border-red-600 focus:ring-red-500 focus:border-red-600 border-1"
@@ -383,6 +391,7 @@ const AddProductForm = () => {
                           className="text-xs font-semibold px-1"
                         >
                           Amount of L size
+                          <span className="text-red-500 ml-1">*</span>
                         </label>
                         <div className="flex">
                           <div className="w-10 z-10 pl-1 text-center pointer-events-none flex items-center justify-center">
@@ -394,7 +403,7 @@ const AddProductForm = () => {
                           <input
                             type="number"
                             className={`w-full -ml-10 pl-10 pr-3 py-2 rounded-lg border-2 border-gray-200
-                                            outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-600
+                                            outline-none focus:ring-2 focus:ring-amber-500 focus:border-amber-600
                                             ${
                                               errors.SizeL &&
                                               "border-red-600 focus:ring-red-500 focus:border-red-600 border-1"
@@ -436,7 +445,7 @@ const AddProductForm = () => {
                             id="description"
                             name="description"
                             className={`w-full h-20 -ml-10 pl-10 pr-3 py-2 rounded-lg border-2 border-gray-200
-                                            outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-600
+                                            outline-none focus:ring-2 focus:ring-amber-500 focus:border-amber-600
                                             ${
                                               errors.description &&
                                               "border-red-600 focus:ring-red-500 focus:border-red-600 border-1"
@@ -477,17 +486,17 @@ const AddProductForm = () => {
                     <div className="flex -mx-3">
                       <div className="w-full px-3 mb-2">
                         <button
-                          className="block w-full max-w-xs mx-auto bg-indigo-600
-                                                     hover:bg-indigo-700 focus:bg-indigo-700 text-white
+                          className="block w-full max-w-xs mx-auto bg-amber-600
+                                                     hover:bg-amber-700 focus:bg-amber-700 text-white
                                                      rounded-lg px-3 py-3 font-semibold uppercase"
                         >
                           Add product
                           {showSpinner && (
                             <div
-                              class="spinner-border animate-spin inline-block w-4 h-4 border-3 ml-2 rounded-full"
+                              className="spinner-border animate-spin inline-block w-4 h-4 border-3 ml-2 rounded-full"
                               role="status"
                             >
-                              <span class="visually-hidden">Loading...</span>
+                              <span className="visually-hidden">Loading...</span>
                             </div>
                           )}
                         </button>
