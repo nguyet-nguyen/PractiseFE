@@ -57,8 +57,8 @@ function UserMenu() {
       >
         <img className="w-8 h-8 rounded-full" src={users.image} width="32" height="32" alt="User" />
         <div className="flex items-center truncate">
-          <span className="truncate ml-2 text-sm font-medium">{users.name}</span>
-          <svg className="w-3 h-3 shrink-0 ml-1 fill-current text-slate-400" viewBox="0 0 12 12">
+          <span className="truncate ml-2 text-sm font-semibold text-amber-500">{users.name}</span>
+          <svg className="w-3 h-3 shrink-0 ml-1 fill-current text-amber-500" viewBox="0 0 12 12">
             <path d="M5.9 11.4L.5 6l1.4-1.4 4 4 4-4L11.3 6z" />
           </svg>
         </div>
@@ -86,7 +86,7 @@ function UserMenu() {
           <ul>
             <li>
               <Link
-                className="font-medium text-sm text-indigo-500 hover:text-indigo-600 flex items-center py-1 px-3"
+                className="font-medium text-sm text-amber-500 hover:text-amber-600 flex items-center py-1 px-3"
                 to="/admin/profile"
                 onClick={() => setDropdownOpen(!dropdownOpen)}
               >
@@ -95,7 +95,7 @@ function UserMenu() {
             </li>
             <li>
               <Link
-                className="font-medium text-sm text-indigo-500 hover:text-indigo-600 flex items-center py-1 px-3"
+                className="font-medium text-sm text-amber-500 hover:text-amber-600 flex items-center py-1 px-3"
                 to="/admin/sign-in"
                 onClick={SignOutAdmin}
               >

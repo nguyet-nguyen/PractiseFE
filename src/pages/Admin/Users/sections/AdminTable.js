@@ -116,9 +116,9 @@ const AdminTable = () => {
                           type="button"
                           data-mdb-ripple="true"
                           data-mdb-ripple-color="light"
-                          className="inline-block md:px-6 md:py-2.5 px-3 py-2 bg-indigo-600 text-white font-medium text-xs
-                                leading-tight uppercase rounded shadow-md hover:bg-indigo-700 hover:shadow-lg focus:bg-indigo-700
-                                focus:shadow-lg focus:outline-none focus:ring-0 active:bg-indigo-800 active:shadow-lg transition
+                          className="inline-block md:px-6 md:py-2.5 px-3 py-2 bg-amber-500 text-white font-medium text-xs
+                                leading-tight uppercase rounded shadow-md hover:bg-amber-600 hover:shadow-lg focus:bg-amber-600
+                                focus:shadow-lg focus:outline-none focus:ring-0 active:bg-amber-600 active:shadow-lg transition
                                 duration-150 ease-in-out w-fit md:mb-0 mb-3">Add Admin
                     </Link>
                     <div className="xl:w-96">
@@ -126,13 +126,13 @@ const AdminTable = () => {
                             <input
                                 onChange={searchProduct}
                                 type="search"
-                                className="form-control relative flex-auto min-w-0 block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-indigo-600 focus:outline-none"
+                                className="form-control relative flex-auto min-w-0 block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-amber-600 focus:outline-none"
                                 placeholder="Search"
                                 aria-label="Search"
                                 aria-describedby="button-addon2"
                             />
                             <button
-                                className="btn inline-block px-6 py-2.5 bg-indigo-600 text-white font-medium text-xs leading-tight uppercase rounded shadow-md hover:bg-indigo-700 hover:shadow-lg focus:bg-indigo-700  focus:shadow-lg focus:outline-none focus:ring-0 active:bg-indigo-800 active:shadow-lg transition duration-150 ease-in-out flex items-center"
+                                className="btn px-6 py-2.5 bg-amber-500 text-white font-medium text-xs leading-tight uppercase rounded shadow-md hover:bg-amber-600 hover:shadow-lg focus:bg-amber-600  focus:shadow-lg focus:outline-none focus:ring-0 active:bg-amber-600 active:shadow-lg transition duration-150 ease-in-out flex items-center"
                                 type="button"
                                 id="button-addon2"
                             >

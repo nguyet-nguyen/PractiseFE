@@ -13,7 +13,7 @@ function Header({sidebarOpen, setSidebarOpen}) {
         // ${localStorage.getItem("theme") == "true" ? "bg-slate-900 border-slate-800 text-white"
         // : "bg-white border-slate-200"
         // }`}>
-            <header className={`sticky top-0 border-b z-30 bg-slate-900 border-slate-800 text-white`}>
+            <header className={`sticky top-0 border-b z-30 bg-slate-200 border-slate-200 text-white`}>
             <div className="px-4 sm:px-6 lg:px-8">
                 <div className="flex items-center md:justify-end justify-between h-10 -mb-px">
 
@@ -22,7 +22,7 @@ function Header({sidebarOpen, setSidebarOpen}) {
 
                         {/* Hamburger button */}
                         <button
-                            className="text-slate-500 hover:text-slate-600 lg:hidden"
+                            className="text-amber-600 hover:text-amber-800 lg:hidden"
                             aria-controls="sidebar"
                             aria-expanded={sidebarOpen}
                             onClick={() => setSidebarOpen(!sidebarOpen)}

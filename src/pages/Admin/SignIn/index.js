@@ -49,7 +49,7 @@ function SignInAdmin() {
       <main>
         <section className="absolute w-full h-full">
           <div
-            className="absolute top-0 w-full h-full bg-slate-800"
+            className="absolute top-0 w-full h-full "
             style={{
               backgroundImage:
                 "url(" + require("assets/images/register_bg.png") + ")",
@@ -60,7 +60,7 @@ function SignInAdmin() {
           <div className="container mx-auto px-4 h-full">
             <div className="flex content-center items-center justify-center h-full">
               <div className="w-full lg:w-4/12 px-4">
-                <div className="relative flex flex-col min-w-0 break-words w-full mb-6 shadow-lg rounded-lg bg-gray-300 border-0">
+                <div className="relative flex flex-col min-w-0 break-words w-full mb-6 shadow-lg rounded-lg bg-slate-100 border-0">
                   <div className="rounded-t mb-0 px-6 py-6">
                     <div className="text-center my-3">
                       <h6 className="text-slate-700 uppercase text-xl md:text-2xl font-bold">
@@ -188,7 +188,7 @@ function SignInAdmin() {
 
                       <div className="text-center mt-6">
                         <button
-                          className="bg-indigo-500 text-white active:bg-indigo-700 text-sm font-bold uppercase px-6 py-3
+                          className="bg-amber-500 text-white hover:bg-amber-600 active:bg-amber-700 text-sm font-bold uppercase px-6 py-3
                            rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 w-full"
                           type="submit"
                           style={{ transition: "all .15s ease" }}
@@ -196,10 +196,10 @@ function SignInAdmin() {
                           Sign In
                           {showSpinner && (
                             <div
-                              class="spinner-border animate-spin inline-block w-4 h-4 border-3 ml-2 rounded-full"
+                              className="spinner-border animate-spin inline-block w-4 h-4 border-3 ml-2 rounded-full"
                               role="status"
                             >
-                              <span class="visually-hidden">Loading...</span>
+                              <span className="visually-hidden">Loading...</span>
                             </div>
                           )}
                         </button>
