@@ -120,8 +120,8 @@ const SignUpAdminForm = () => {
             <nav className="rounded-md w-full mx-6 md:my-5 my-2">
                 <ol className="list-reset flex">
                     <li>
-                        <Link to="/" className="text-gray-800 hover:text-amber-700">
-                            Homepage
+                        <Link to="/admin/users-list/admin" className="text-gray-800 hover:text-amber-700">
+                            Admins
                         </Link>
                     </li>
                     <li className="flex items-center"><span className="text-gray-500 mx-2">
@@ -131,9 +131,9 @@ const SignUpAdminForm = () => {
                     </svg>
                 </span></li>
                     <li>
-                    <span className="text-amber-700">
-                        Profile
-                    </span>
+                    <Link to="/admin/sign-up" className="text-amber-700 hover:text-amber-800">
+                        Add Admin
+                    </Link>
                     </li>
                 </ol>
             </nav>

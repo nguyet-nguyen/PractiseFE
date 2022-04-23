@@ -139,7 +139,7 @@ const AddProductForm = () => {
                     <nav className="rounded-md w-full mx-6 md:my-5 my-2">
                         <ol className="list-reset flex">
                             <li>
-                                <Link to="/admin/products" className="text-gray-800 hover:text-amber-700">
+                                <Link to="/admin/products" className="text-amber-800 hover:text-amber-700">
                                     Product List
                                 </Link>
                             </li>
@@ -167,7 +167,7 @@ const AddProductForm = () => {
                                     onSubmit={handleSubmit(onSubmit)}
                                 >
                                     <div className="text-center mb-7">
-                                        <h1 className="font-bold text-3xl uppercase text-gray-900">
+                                        <h1 className="font-bold text-3xl uppercase text-amber-600">
                                             Add Product
                                         </h1>
                                         <p>Enter product information to add new product</p>

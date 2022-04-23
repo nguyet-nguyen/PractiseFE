@@ -190,8 +190,8 @@ const ProductsTable = () => {
     const customStyles = {
         headCells: {
             style: {
-                color: "white",
-                background: "rgb(30 41 59)",
+                color: "#B45309",
+                background: "#E2E8F0",
                 font: "bold",
             },
         },
@@ -212,7 +212,7 @@ const ProductsTable = () => {
     return (
         <>
             <div className="w-full w-9xl mx-auto">
-                <h2 className="font-bold md:text-4xl text-2xl text-slate-800 uppercase mb-5">
+                <h2 className="font-bold md:text-4xl text-2xl text-amber-600 uppercase mb-5">
                     <i className="fa fa-product-hunt" aria-hidden="true"></i> Product list
                 </h2>
                 <div className="flex justify-between  md:space-x-2 space-x-0 md:flex-row flex-col mb-4">
@@ -290,7 +290,7 @@ const ProductsTable = () => {
                         className="modal-content border-none shadow-lg relative flex flex-col w-full pointer-events-auto bg-white bg-clip-padding rounded-sm outline-none text-current">
                         <div
                             className="modal-header flex flex-shrink-0 items-center justify-between p-4 border-b border-gray-200 rounded-t-md">
-                            <h2 className="font-bold text-3xl text-gray-900 uppercase">
+                            <h2 className="font-bold text-3xl text-amber-600 uppercase">
                                 Product Detail infomation
                             </h2>
                             <button
@@ -579,7 +579,7 @@ const ProductsTable = () => {
                         <div
                             className="modal-header flex flex-shrink-0 items-center justify-between p-4 border-b border-gray-200 rounded-t-md">
                             <h5
-                                className="text-xl font-medium leading-normal text-gray-800"
+                                className="text-xl font-bold leading-normal text-amber-600 uppercase"
                                 id="exampleModalScrollableLabel"
                             >
                                 DELETE
