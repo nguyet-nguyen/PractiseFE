@@ -1,20 +1,22 @@
 import Sidebar from "../../Sidebar";
 import Header from "../../Header";
 import React, {useState, useEffect} from "react";
-import {useNavigate, useParams} from "react-router-dom";
+import {Link, useNavigate, useParams} from "react-router-dom";
 import {useForm} from "react-hook-form";
-import {CreateProducts, getAllCategory, getProductDetail, UpdateProduct} from "../../../../features/Api";
+import {getAllCategory, getProductDetail, UpdateProduct} from "../../../../features/Api";
 import CustomPopupMessage from "../../../CustomPopupMess";
-import { toast } from "react-toastify";
+import {toast} from "react-toastify";
 import Loading from "../../../../Loading";
 
 const UpdateProductForm = () => {
     const [sidebarOpen, setSidebarOpen] = useState(false);
     const navigate = useNavigate();
-    const {  register,
+    const {
+        register,
         setValue,
         handleSubmit,
-        formState: { errors },} = useForm();
+        formState: {errors},
+    } = useForm();
     const [messErr, setMessErr] = useState("");
     let params = useParams();
     const [itemDetail, setItemDetail] = useState([]);
@@ -38,14 +40,12 @@ const UpdateProductForm = () => {
             .catch((err) => {
                 console.log(err.message);
             });
-    },[]);
-    console.log()
+    }, []);
     setValue("name", itemDetail.name);
     setValue("color", itemDetail.color);
     setValue("description", itemDetail.description);
     setValue("price", itemDetail.price);
     setValue("material", itemDetail.material);
-    setValue("category", itemDetail.category);
     const onSubmit = async (data, e) => {
         const formData = new FormData();
         formData.append("category", data.category);
@@ -55,8 +55,7 @@ const UpdateProductForm = () => {
         formData.append("price", data.price);
         formData.append("material", data.material);
         [...data.images].map(f => formData.append("images[]", f));
-        console.log(formData);
-        UpdateProduct(formData,itemDetail.id).then(response => {
+        UpdateProduct(formData, itemDetail.id).then(response => {
             console.log(response.data);
             navigate("/admin/products");
             toast(
@@ -73,9 +72,68 @@ const UpdateProductForm = () => {
                     setMessErr(err.message);
                 }
             )
-
     };
     const [showMess, setShowMess] = useState(true);
+    const colorProduct = [
+        {
+            id: 1,
+            name: "Black",
+        },
+        {
+            id: 2,
+            name: "Blue",
+        },
+        {
+            id: 3,
+            name: "Green",
+        },
+        {
+            id: 4,
+            name: "Yellow",
+        },
+        {
+            id: 5,
+            name: "Red",
+        },
+        {
+            id: 6,
+            name: "Gray",
+        },
+        {
+            id: 7,
+            name: "Brown",
+        },
+    ]
+    const materialProduct = [
+        {
+            id: 1,
+            name: "Wool",
+        },
+        {
+            id: 2,
+            name: "Silk",
+        },
+        {
+            id: 3,
+            name: "Leather",
+        },
+        {
+            id: 4,
+            name: "Polyester",
+        },
+        {
+            id: 5,
+            name: "Polyamide",
+        },
+        {
+            id: 6,
+            name: "Cotton",
+        },
+        {
+            id: 7,
+            name: "Satin",
+        },
+    ]
     return (
         <div className="flex h-screen overflow-hidden">
             {/* Sidebar */}
@@ -86,14 +144,36 @@ const UpdateProductForm = () => {
                 <Header sidebarOpen={sidebarOpen} setSidebarOpen={setSidebarOpen}/>
                 {loading ?
                     <main>
-                        <div className="min-w-screen flex items-center justify-center px-5 py-20">
+                        <nav className="rounded-md w-full mx-6 md:my-5 my-2">
+                            <ol className="list-reset flex">
+                                <li>
+                                    <Link to="/admin/products" className="text-gray-800 hover:text-amber-700">
+                                        Product List
+                                    </Link>
+                                </li>
+                                <li className="flex items-center"><span className="text-gray-500 mx-2">
+                    <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                        <path fillRule="evenodd" d="M10.293 15.707a1 1 0 010-1.414L14.586 10l-4.293-4.293a1 1 0 111.414-1.414l5 5a1 1 0 010 1.414l-5 5a1 1 0 01-1.414 0z" clipRule="evenodd" />
+                        <path fillRule="evenodd" d="M4.293 15.707a1 1 0 010-1.414L8.586 10 4.293 5.707a1 1 0 011.414-1.414l5 5a1 1 0 010 1.414l-5 5a1 1 0 01-1.414 0z" clipRule="evenodd" />
+                    </svg>
+                </span></li>
+                                <li>
+                    <span className="text-amber-700">
+                        Update Product
+                    </span>
+                                </li>
+                            </ol>
+                        </nav>
+                        <div className="min-w-screen flex items-center justify-center px-5 pt-3 pb-6">
                             <div
                                 className="bg-gray-100 text-gray-500 rounded-sm shadow-xl w-full overflow-hidden"
                                 style={{maxWidth: "800px"}}>
                                 <div className="md:flex w-full">
-                                    <form className="w-full md:w-full py-8 px-5 md:px-10" onSubmit={handleSubmit(onSubmit)}>
+                                    <form className="w-full md:w-full py-8 px-5 md:px-10"
+                                          onSubmit={handleSubmit(onSubmit)}>
                                         <div className="text-center mb-7">
-                                            <h1 className="font-bold text-3xl text-gray-900 uppercase">Update Product</h1>
+                                            <h1 className="font-bold text-3xl text-gray-900 uppercase">Update
+                                                Product</h1>
                                             <p>Enter product information</p>
 
                                             {(!showMess || messErr != "") ? (
@@ -113,10 +193,12 @@ const UpdateProductForm = () => {
                                                                     className="btn-close btn-close-white box-content w-4 h-4 ml-2 text-white border-none
                                                             rounded-none opacity-50 focus:shadow-none focus:outline-none focus:opacity-100
                                                             hover:text-white hover:opacity-75 hover:no-underline"
-                                                                    data-mdb-dismiss="toast" aria-label="Close"></button>
+                                                                    data-mdb-dismiss="toast"
+                                                                    aria-label="Close"></button>
                                                         </div>
                                                     </div>
-                                                    <div className="p-3 bg-red-600 rounded-b-lg break-words text-white uppercase">
+                                                    <div
+                                                        className="p-3 bg-red-600 rounded-b-lg break-words text-white uppercase">
                                                         Product update fail
                                                     </div>
                                                 </div>
@@ -145,31 +227,30 @@ const UpdateProductForm = () => {
                                                             {...register("name", {required: true})}/>
                                                     </div>
                                                     {errors.name && errors.name.type === "required" &&
-                                                        <p className="text-red-500 mt-3 text-xs italic">value required</p>}
+                                                        <p className="text-red-500 mt-3 text-xs italic">value
+                                                            required</p>}
                                                 </div>
                                                 <div className="w-1/3 px-3 mb-5">
                                                     <label htmlFor="" className="text-xs font-semibold px-1">
                                                         Color
                                                         <span className="text-red-500 ml-1">*</span>
                                                     </label>
-                                                    <div className="flex">
-                                                        <div
-                                                            className="w-10 z-10 pl-1 text-center pointer-events-none flex items-center justify-center">
-                                                            <i className="fa fa-paint-brush" aria-hidden="true"></i>
-                                                        </div>
-                                                        <input
-                                                            type="text"
-                                                            className={`w-full -ml-10 pl-10 pr-3 py-2 rounded-lg border-2 border-gray-200
+                                                    <div className="flex justify-end">
+                                                        <select className={`w-full -ml-10 pl-10 pr-3 py-2 rounded-lg border-2 border-gray-200
                                             outline-none focus:ring-2 focus:ring-amber-500 focus:border-amber-600
-                                            ${errors.color && "border-red-600 focus:ring-red-500 focus:border-red-600 border-1"}`}
-                                                            placeholder="color"
-                                                            id="color"
-                                                            name="color"
-                                                            {...register("color", {required: true})}
-                                                        />
+                                            ${errors.categoryList && "border-red-600 focus:ring-red-500 focus:border-red-600 border-1"}`}
+                                                                id="color" name="color"
+                                                                {...register("color",)}
+                                                                type="text">
+                                                            {colorProduct.map((cate) => (
+                                                                itemDetail.color == cate.name ?
+                                                                    <option value={cate.name}
+                                                                            selected>{cate.name}</option>
+                                                                    : <option value={cate.name}>{cate.name}</option>
+
+                                                            ))}
+                                                        </select>
                                                     </div>
-                                                    {errors.color && errors.color.type === "required" &&
-                                                        <p className="mt-3 text-red-500 text-xs italic">value required</p>}
                                                 </div>
                                             </div>
                                             <div className="flex -mx-3">
@@ -197,7 +278,8 @@ const UpdateProductForm = () => {
                                                         />
                                                     </div>
                                                     {errors.money && errors.money.type === 'required' &&
-                                                        <p className="text-red-500 mt-3 text-xs italic">Value required</p>}
+                                                        <p className="text-red-500 mt-3 text-xs italic">Value
+                                                            required</p>}
 
                                                 </div>
                                                 <div className="w-1/3 px-3 mb-5">
@@ -205,25 +287,25 @@ const UpdateProductForm = () => {
                                                         Material
                                                         <span className="text-red-500 ml-1">*</span>
                                                     </label>
-                                                    <div className="flex">
-                                                        <div
-                                                            className="w-10 z-10 pl-1 text-center pointer-events-none flex items-center justify-center">
-                                                            <i className="fa fa-info-circle" aria-hidden="true"></i>
-                                                        </div>
-                                                        <input
-                                                            type="text"
-                                                            className={`w-full -ml-10 pl-10 pr-3 py-2 rounded-lg border-2 border-gray-200
+                                                    <div className="flex justify-end">
+                                                        <select className={`w-full -ml-10 pl-10 pr-3 py-2 rounded-lg border-2 border-gray-200
                                             outline-none focus:ring-2 focus:ring-amber-500 focus:border-amber-600
-                                            ${errors.material && "border-red-600 focus:ring-red-500 focus:border-red-600 border-1"}`}
-                                                            placeholder="material"
-                                                            id="material"
-                                                            name='material'
-                                                            {...register("material", {required: true})}
+                                            ${errors.categoryList && "border-red-600 focus:ring-red-500 focus:border-red-600 border-1"}`}
+                                                                id="material" name="material"
+                                                                {...register("material",)}
+                                                                type="text">
+                                                            {materialProduct.map((cate) => (
+                                                                itemDetail.material == cate.name ?
+                                                                    <option value={cate.name}
+                                                                            selected>{cate.name}</option>
+                                                                    : <option value={cate.name}>{cate.name}</option>
 
-                                                        />
+                                                            ))}
+                                                        </select>
                                                     </div>
                                                     {errors.material && errors.material.type === "required" &&
-                                                        <p className="text-red-500 text-xs mt-3 italic">Value required</p>}
+                                                        <p className="text-red-500 text-xs mt-3 italic">Value
+                                                            required</p>}
                                                 </div>
                                                 <div className="w-1/3 px-3 mb-5">
                                                     <label htmlFor="" className="text-xs font-semibold px-1">
@@ -239,7 +321,11 @@ const UpdateProductForm = () => {
                                                                 type="text">
                                                             {categoryList.map((cate, i) => (
                                                                 i === 0 ? "" :
-                                                                    <option value={cate.id}>{cate.name}</option>
+                                                                    itemDetail.category == cate.name ?
+                                                                        <option value={cate.id}
+                                                                                selected>{cate.name}</option>
+                                                                        : <option value={cate.id}>{cate.name}</option>
+
                                                             ))}
                                                         </select>
                                                     </div>
@@ -271,12 +357,14 @@ const UpdateProductForm = () => {
                                                     <div className="flex items-center justify-center w-full">
                                                         <label
                                                             className="flex flex-col w-full h-20 border-4 border-blue-200 border-dashed hover:bg-gray-100 hover:border-gray-300">
-                                                            <div className="flex flex-col items-center justify-center pt-2">
+                                                            <div
+                                                                className="flex flex-col items-center justify-center pt-2">
                                                                 <p className="pt-1 text-sm tracking-wider text-gray-400 group-hover:text-gray-600">
                                                                     Attach a file</p>
                                                             </div>
                                                             <input id="images" name="images" multiple="multiple"
-                                                                   accept=".jpg, .png" type="file" {...register('images')}
+                                                                   accept=".jpg, .png"
+                                                                   type="file" {...register('images')}
                                                                    className="ml-8 text-sm"/>
                                                         </label>
                                                     </div>
@@ -298,10 +386,8 @@ const UpdateProductForm = () => {
                                 </div>
                             </div>
                         </div>
-
-
                     </main>
-                    : <Loading adminPage={true} />
+                    : <Loading adminPage={true}/>
                 }
 
             </div>
