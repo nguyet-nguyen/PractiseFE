@@ -70,7 +70,10 @@ const ShoppingCart = () => {
                     itemsInCart.splice(index, 1);
                     updateTotal(itemsInCart);
                     setShowSpinner(false);
-                    if(itemsInCart.length <= 3){
+                    if(itemsInCart.length == 0){
+                        setShowEmpty(true);
+                    }
+                    else if(itemsInCart.length <= 3){
                         setShowMore(false);
                         setShowLess(false);
                     }
