@@ -160,8 +160,8 @@ const SignIn = () => {
                                                 type="submit"
                                                 style={{ transition: "all .15s ease" }}>
                                                 Sign In
-                                                {showSpinner &&  <div class="spinner-border animate-spin inline-block w-4 h-4 border-3 ml-2 rounded-full" role="status">
-                                                    <span class="visually-hidden">Loading...</span>
+                                                {showSpinner &&  <div className="spinner-border animate-spin inline-block w-4 h-4 border-3 ml-2 rounded-full" role="status">
+                                                    <span className="visually-hidden">Loading...</span>
                                                 </div>}
                                             </button>
                                         </div>

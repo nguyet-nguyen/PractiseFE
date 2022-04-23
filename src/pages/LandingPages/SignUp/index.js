@@ -5,6 +5,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { cities, districts, wards } from "../../../address";
 import { toast } from "react-toastify";
 import CustomPopupMessage from "../../CustomPopupMess";
+import imgSignUp from "../../../assets/images/accounts/sign-up.png"
 
 const SignUp = () => {
   const navigate = useNavigate();
@@ -115,7 +116,7 @@ const SignUp = () => {
           <div className="hidden md:block w-1/3 ">
             <img
               className="w-full h-full"
-              src="https://images.unsplash.com/photo-1603400521630-9f2de124b33b?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=387&q=80"
+              src={imgSignUp}
               alt=""
             />
           </div>
@@ -497,14 +498,14 @@ const SignUp = () => {
                 <div className="w-full px-3 mb-2">
                   <button className="block w-full max-w-xs mx-auto bg-amber-600 hover:bg-amber-700 focus:bg-amber-700 text-white rounded-lg px-3 py-3 font-semibold">
                     REGISTER NOW
-                    {showSpinner &&  <div class="spinner-border animate-spin inline-block w-4 h-4 border-3 ml-2 rounded-full" role="status">
-                      <span class="visually-hidden">Loading...</span>
+                    {showSpinner &&  <div className="spinner-border animate-spin inline-block w-4 h-4 border-3 ml-2 rounded-full" role="status">
+                      <span className="visually-hidden">Loading...</span>
                     </div>}
                   </button>
                  
                 </div>
               </div>
-              <div className="flex items-center justify-between mt-4">
+              <div className="flex items-center justify-between mt-2">
                 <span className="w-1/6 border-b dark:border-slate-800 md:w-1/5"></span>
                 Already have an account ?
                 <Link
