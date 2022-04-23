@@ -193,6 +193,12 @@ input[type=number] {
     display: flex;
     justify-content: center;
 }
+.rdt_TableRow:hover {
+    background-color: #f2eceb;
+}
+.sc-dmRaPn.gelpCx {
+    overflow-y: auto;
+}
 .rdt_TableCell img {
     height: 65px;
     width: 65px;

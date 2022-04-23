@@ -152,14 +152,13 @@ const OrderListTable = () => {
         },
         {
             name: "Date At",
-            wrap: true,
+            grow: 2,
             sortable: true,
             selector: (row) => row.orderDate,
         },
         {
             name: "Email",
-            wrap: true,
-            grow: 2,
+            grow: 3,
             sortable: true,
             selector: (row) => row.recipientEmail,
         },
@@ -246,59 +245,93 @@ const OrderListTable = () => {
             text: "Action",
             className: "action",
             align: "left",
-            grow: 3,
+            grow: 2,
             sortable: false,
+            allowOverflow: true,
             cell: (order) => {
                 return (
                     <>
-                        {order.status == "Delivery" ? (
-                            <>
-                                <button
-                                    type="button"
-                                    onClick={() => onChangeStatusDelivery(order.id, 4)}
-                                    className="inline-block mr-2 px-4 py-2.5 bg-green-600 text-white
-                                                            font-medium text-xs leading-tight uppercase rounded shadow-md"
-                                >
-                                    Complete
-                                </button>
-                            </>
-                        ) : null}
-                        {order.status == "Approved" ? (
-                            <>
-                                <button
-                                    type="button"
-                                    onClick={() => onChangeStatusDelivery(order.id, 2)}
-                                    className="inline-block mr-2 px-4 py-2.5 bg-blue-600 text-white
-                                                            font-medium text-xs leading-tight uppercase rounded shadow-md"
-                                >
-                                    Delivery
-                                </button>
-                            </>
-                        ) : null}
-                        {order.status == "Delivery" || order.status == "Approved" ? (
-                            <>
-                                <button
-                                    type="button"
-                                    className="inline-block px-4 py-2.5 bg-red-600 text-white
-                                                            font-medium text-xs leading-tight uppercase rounded shadow-md"
-                                    data-bs-toggle="modal"
-                                    data-bs-target="#modalCancelOrd"
-                                    onClick={() => setIdYouWantToCancel(order.id)}
-                                >
-                                    Cancel
-                                </button>
-                                {/* <!-- Modal --> */}
-                            </>
-                        ) : null}
-                        <Link to={`/admin/orders-list/order-detail/${order.id}`}>
-                            <button
-                                type="button"
-                                className="inline-block ml-2 px-4 py-2.5 bg-purple-600 text-white
-                                                                font-medium text-xs leading-tight uppercase rounded shadow-md"
-                            >
-                                Detail
-                            </button>
-                        </Link>
+                        <div className="flex justify-center">
+                            <div>
+                                <div className="dropdown relative">
+                                    <button
+                                        className="dropdown-toggle px-6 py-2.5 text-amber-700 font-medium
+                                        text-base leading-tight uppercase rounded transition duration-150 ease-in-out
+                                        flex items-center whitespace-nowrap"
+                                        type="button"
+                                        id="dropdownMenuButton1"
+                                        data-bs-toggle="dropdown"
+                                        aria-expanded="false"
+                                    >
+                                        <i className="fa fa-ellipsis-v" aria-hidden="true"></i>
+
+                                    </button>
+                                    <ul
+                                        className="dropdown-menu min-w-max absolute hidden bg-white text-base z-50 float-right
+                                         p-4 list-none text-left shadow-lg mt-1 hidden m-0 bg-clip-padding rounded-md border-2 border-amber-600"
+                                        aria-labelledby="dropdownMenuButton1">
+
+                                        <li>
+                                            <Link to={`/admin/orders-list/order-detail/${order.id}`}>
+                                                <button
+                                                    type="button"
+                                                    className="dropdown-item inline-block w-full px-3 py-2 bg-purple-600 text-white
+                                                                font-medium text-xs leading-tight uppercase rounded shadow-md mb-2"
+                                                >
+                                                    Detail
+                                                </button>
+                                            </Link>
+                                        </li>
+                                        <li>
+                                            {order.status == "Delivery" ? (
+                                                <>
+                                                    <button
+                                                        type="button"
+                                                        onClick={() => onChangeStatusDelivery(order.id, 4)}
+                                                        className="dropdown-item inline-block w-full mr-2 px-3 py-2 bg-green-600 text-white
+                                                            font-medium text-xs leading-tight uppercase rounded shadow-md mb-2"
+                                                    >
+                                                        Complete
+                                                    </button>
+                                                </>
+                                            ) : null}
+                                        </li>
+                                        <li>
+                                            {order.status == "Approved" ? (
+                                                <>
+                                                    <button
+                                                        type="button"
+                                                        onClick={() => onChangeStatusDelivery(order.id, 2)}
+                                                        className="dropdown-item inline-block w-full mr-2 px-3 py-2 bg-blue-600 text-white
+                                                            font-medium text-xs leading-tight uppercase rounded shadow-md mb-2"
+                                                    >
+                                                        Delivery
+                                                    </button>
+                                                </>
+                                            ) : null}
+
+                                        </li>
+                                        <li>
+                                            {order.status == "Delivery" || order.status == "Approved" ? (
+                                                <>
+                                                    <button
+                                                        type="button"
+                                                        className="inline-block px-3 py-2 bg-red-600 text-white
+                                                            font-medium text-xs leading-tight w-full uppercase rounded shadow-md"
+                                                        data-bs-toggle="modal"
+                                                        data-bs-target="#modalCancelOrd"
+                                                        onClick={() => setIdYouWantToCancel(order.id)}
+                                                    >
+                                                        Cancel
+                                                    </button>
+                                                    {/* <!-- Modal --> */}
+                                                </>
+                                            ) : null}
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
                     </>
                 );
             },
@@ -310,6 +343,7 @@ const OrderListTable = () => {
                 color: "white",
                 background: "rgb(30 41 59)",
                 font: "bold",
+                height: "auto"
             },
         },
     };
