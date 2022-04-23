@@ -172,7 +172,7 @@ const UpdateProductForm = () => {
                                     <form className="w-full md:w-full py-8 px-5 md:px-10"
                                           onSubmit={handleSubmit(onSubmit)}>
                                         <div className="text-center mb-7">
-                                            <h1 className="font-bold text-3xl text-gray-900 uppercase">Update
+                                            <h1 className="font-bold text-3xl text-amber-600 uppercase">Update
                                                 Product</h1>
                                             <p>Enter product information</p>
 
