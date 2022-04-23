@@ -87,8 +87,8 @@ const UsersTable = () => {
     const customStyles = {
         headCells: {
             style: {
-                color: "white",
-                background: "rgb(30 41 59)",
+                color: "#B45309",
+                background: "#E2E8F0",
                 font: "bold"
             },
         },
@@ -110,7 +110,7 @@ const UsersTable = () => {
     return (
         <>
             <div className="w-full max-w-9xl mx-auto">
-                <h2 className="font-bold md:text-4xl text-2xl text-slate-800 uppercase mb-5">
+                <h2 className="font-bold md:text-4xl text-2xl text-amber-600 uppercase mb-5">
                     <i className="fa fa-users" aria-hidden="true"></i> user list</h2>
                 <div className="flex space-x-2 md:justify-end justify-start mb-5">
                     <div className="xl:w-96">

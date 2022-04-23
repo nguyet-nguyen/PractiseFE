@@ -62,8 +62,8 @@ const OrdDetailAdmin = () => {
           <CustomPopupMessage
             mess="This order has been exported successfully!"
             icon="check-circle"
-            titleColor="indigo"
-            iconColor="indigo"
+            titleColor="amber"
+            iconColor="amber"
           />
         );
       })
@@ -87,7 +87,7 @@ const OrdDetailAdmin = () => {
                 <div className="px-4 md:px-3">
                   <div className="flex lg:flex-row flex-col" id="cart">
                     <div className="lg:w-1/2 w-full py-2 bg-white h-auto">
-                      <p className="lg:text-3xl text-2xl font-black leading-10 text-[#63584c]">
+                      <p className="lg:text-3xl text-2xl font-black leading-10 text-amber-600">
                         Order Detail
                       </p>
                     </div>
@@ -96,7 +96,7 @@ const OrdDetailAdmin = () => {
                       <button
                         type="button"
                         onClick={() => exportFile(order.id)}
-                        className="inline-block mr-2 px-4 py-2.5 lg:mb-0 mb-3  text-indigo-500 border border-indigo-500
+                        className="inline-block mr-2 px-4 py-2.5 lg:mb-0 mb-3  text-amber-500 border border-amber-500
                                 font-medium text-xs leading-tight uppercase rounded hover:shadow-md shadow"
                       >
                         <i className="fa fa-print pr-2" aria-hidden="true"></i>
@@ -156,7 +156,7 @@ const OrdDetailAdmin = () => {
                       <p className="text-lg capitalize font-black leading-none text-gray-800 ">
                         Approved
                         {order.status == 1 && (
-                          <span className="bg-indigo-500 rounded-lg text-sm p-1 ml-2">
+                          <span className="bg-amber-500 rounded-lg text-sm p-1 ml-2">
                             <i
                               className={`fa fa-check text-white text-center`}
                               aria-hidden="true"
@@ -167,7 +167,7 @@ const OrdDetailAdmin = () => {
                       <p className="text-lg capitalize font-black leading-none text-gray-800 ">
                         Shipping
                         {order.status == 2 && (
-                          <span className="bg-indigo-500 rounded-lg text-sm p-1 ml-2">
+                          <span className="bg-amber-500 rounded-lg text-sm p-1 ml-2">
                             <i
                               className={`fa fa-check text-white text-center`}
                               aria-hidden="true"
@@ -178,7 +178,7 @@ const OrdDetailAdmin = () => {
                       <p className="text-lg capitalize font-black leading-none text-gray-800 ">
                         Completed
                         {order.status == 4 && (
-                          <span className="bg-indigo-500 rounded-lg text-sm p-1 ml-2">
+                          <span className="bg-amber-500 rounded-lg text-sm p-1 ml-2">
                             <i
                               className={`fa fa-check text-white text-center`}
                               aria-hidden="true"
@@ -199,14 +199,14 @@ const OrdDetailAdmin = () => {
 
                     {order.status == 1 && (
                       <div className="w-full bg-gray-200 h-4 my-7 rounded-md">
-                        <div className="bg-indigo-500 text-center text-sm font-medium h-5 text-white rounded-md w-1/3">
+                        <div className="bg-amber-500 text-center text-sm font-medium h-5 text-white rounded-md w-1/3">
                           Step 1
                         </div>
                       </div>
                     )}
                     {order.status == 2 && (
                       <div className="w-full bg-gray-200 h-4 my-7 rounded-md">
-                        <div className="bg-indigo-500 text-right pr-44 text-sm font-medium h-5 text-white rounded-md w-2/3">
+                        <div className="bg-amber-500 text-right pr-44 text-sm font-medium h-5 text-white rounded-md w-2/3">
                           Step 2
                         </div>
                       </div>
@@ -214,7 +214,7 @@ const OrdDetailAdmin = () => {
 
                     {order.status == 4 && (
                       <div className="w-full bg-gray-200 h-4 my-7 rounded-md">
-                        <div className="bg-indigo-500 text-right pr-44 text-sm font-medium h-5 text-white rounded-md w-full">
+                        <div className="bg-amber-500 text-right pr-44 text-sm font-medium h-5 text-white rounded-md w-full">
                           Delivered
                         </div>
                       </div>
@@ -245,7 +245,7 @@ const OrdDetailAdmin = () => {
                             <p className="text-md uppercase font-black leading-none text-gray-800 ">
                               {item.name}
                             </p>
-                            <p className="text-md uppercase font-black leading-none text-indigo-800 ">
+                            <p className="text-md uppercase font-black leading-none text-amber-800 ">
                               {numberFormat(item.price)}
                             </p>
                           </div>
@@ -295,7 +295,7 @@ const OrdDetailAdmin = () => {
                                 Total ( {order.items.length}
                                 {order.items.length > 1 ? " items" : " item"} )
                               </p>
-                              <p className="text-xl font-bold leading-normal text-right text-indigo-600 ">
+                              <p className="text-xl font-bold leading-normal text-right text-amber-600 ">
                                 {numberFormat(subtotal + shippingFee)}
                               </p>
                             </div>

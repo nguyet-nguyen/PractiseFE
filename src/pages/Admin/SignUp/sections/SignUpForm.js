@@ -134,7 +134,7 @@ const SignUpAdminForm = () => {
             onSubmit={handleSubmit(onSubmit)}
           >
             <div className="text-center mb-4">
-              <h1 className="font-semibold text-2xl text-gray-900">
+              <h1 className="font-semibold text-2xl text-amber-600">
                 Create New Admin
               </h1>
               <p className="text-sm">

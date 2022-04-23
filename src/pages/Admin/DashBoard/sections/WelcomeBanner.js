@@ -131,7 +131,7 @@ function WelcomeBanner() {
                             <h2 className="text-xl font-bold mb-0 flex items-center" id="headingOne">
                                 <button
                                     className="relative flex items-center w-full py-4 px-5 text-2xl font-bold
-                                 text-slate-600 text-left bg-white border-0 rounded-none transition focus:outline-no uppercase"
+                                 text-amber-600 text-left bg-white border-0 rounded-none transition focus:outline-no cursor-default uppercase"
                                     type="button"
                                 >
                                     General report
@@ -269,7 +269,7 @@ function WelcomeBanner() {
                     <div className="mx-auto w-full md:col-span-2 col-span-1">
                         <h2 className="text-xl font-bold  mb-0" id="headingOne">
                             <button
-                                className="relative flex items-center w-full py-4 px-5 text-2xl font-bold
+                                className="relative flex items-center w-full py-4 px-5 text-2xl font-bold text-amber-600 cursor-default
                                  6 text-left bg-white border-0 rounded-none transition focus:outline-no uppercase"
                                 type="button"
 
@@ -283,7 +283,7 @@ function WelcomeBanner() {
                         <h2 className="text-xl font-bold mb-0 " id="headingOne">
                             <button
                                 className="relative flex items-center justify-center w-full py-4 px-5 text-2xl font-bold
-                                 text-slate-600 text-left bg-white border-0 rounded-none transition focus:outline-no uppercase "
+                                 text-amber-600 cursor-default text-left bg-white border-0 rounded-none transition focus:outline-no uppercase "
                                 type="button"
 
                             >

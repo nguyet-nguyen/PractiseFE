@@ -68,8 +68,8 @@ const OrderListTable = () => {
                     <CustomPopupMessage
                         mess="This order are shipping"
                         icon="check-circle"
-                        titleColor="indigo"
-                        iconColor="indigo"
+                        titleColor="amber"
+                        iconColor="amber"
                     />
                 );
             })
@@ -88,8 +88,8 @@ const OrderListTable = () => {
                     <CustomPopupMessage
                         mess="This order has been completed"
                         icon="check-circle"
-                        titleColor="indigo"
-                        iconColor="indigo"
+                        titleColor="amber"
+                        iconColor="amber"
                     />
                 );
             })
@@ -120,8 +120,8 @@ const OrderListTable = () => {
                     <CustomPopupMessage
                         mess="This order has been cancelled successfully!"
                         icon="check-circle"
-                        titleColor="indigo"
-                        iconColor="indigo"
+                        titleColor="amber"
+                        iconColor="amber"
                     />
                 );
             })
@@ -340,8 +340,8 @@ const OrderListTable = () => {
     const customStyles = {
         headCells: {
             style: {
-                color: "white",
-                background: "rgb(30 41 59)",
+                color: "#B45309",
+                background: "#E2E8F0",
                 font: "bold",
                 height: "auto"
             },
@@ -365,7 +365,7 @@ const OrderListTable = () => {
     return (
         <>
             <div className="w-full w-9xl mx-auto">
-                <h2 className="font-bold md:text-4xl text-2xl text-slate-800 uppercase mb-5">
+                <h2 className="font-bold md:text-4xl text-2xl text-amber-600 uppercase mb-5">
                     <i className="fa fa-shopping-cart" aria-hidden="true"></i> order list
                 </h2>
                 <div className="flex space-x-2 md:justify-end justify-start mb-5">
@@ -374,13 +374,13 @@ const OrderListTable = () => {
                             <input
                                 onChange={searchProduct}
                                 type="search"
-                                className="form-control relative flex-auto min-w-0 block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
+                                className="form-control relative flex-auto min-w-0 block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-amber-600 focus:outline-none"
                                 placeholder="Search"
                                 aria-label="Search"
                                 aria-describedby="button-addon2"
                             />
                             <button
-                                className="btn inline-block px-6 py-2.5 bg-blue-600 text-white font-medium text-xs leading-tight uppercase rounded shadow-md hover:bg-blue-700 hover:shadow-lg focus:bg-blue-700  focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg transition duration-150 ease-in-out flex items-center"
+                                className="btn px-6 py-2.5 bg-amber-600 text-white font-medium text-xs leading-tight uppercase rounded shadow-md hover:bg-amber-700 hover:shadow-lg focus:bg-amber-700  focus:shadow-lg focus:outline-none focus:ring-0 active:bg-amber-800 active:shadow-lg transition duration-150 ease-in-out flex items-center"
                                 type="button"
                                 id="button-addon2"
                             >
@@ -429,7 +429,7 @@ const OrderListTable = () => {
             <div className="modal-content border-none shadow-lg relative flex flex-col w-full pointer-events-auto bg-white bg-clip-padding rounded-md outline-none text-current">
               <div className="modal-header flex flex-shrink-0 items-center justify-between p-4 border-b border-gray-200 rounded-t-md">
                 <h5
-                  className="text-xl font-medium leading-normal pl-8 text-gray-800 uppercase"
+                  className="text-xl font-medium leading-normal pl-8 text-amber-600 uppercase"
                   id="modalCancelOrdLabel"
                 >
                   Order Canceled
