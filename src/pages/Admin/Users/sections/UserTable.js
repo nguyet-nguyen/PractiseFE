@@ -124,10 +124,10 @@ const UsersTable = () => {
                                 aria-describedby="button-addon2"
                             />
                             <button
-                                className="btn inline-block px-6 py-2.5 bg-indigo-600
+                                className="btn px-6 py-2.5 bg-amber-500
                                 text-white font-medium text-xs leading-tight uppercase rounded shadow-md
-                                 hover:bg-indigo-700 hover:shadow-lg focus:bg-indigo-700  focus:shadow-lg
-                                  focus:outline-none focus:ring-0 active:bg-indigo-800 active:shadow-lg
+                                 hover:bg-amber-600 hover:shadow-lg focus:bg-amber-600  focus:shadow-lg
+                                  focus:outline-none focus:ring-0 active:bg-amber-600 active:shadow-lg
                                   transition duration-150 ease-in-out flex items-center"
                                 type="button"
                                 id="button-addon2"

@@ -89,8 +89,8 @@ const Profile = () => {
           <CustomPopupMessage
             mess="Update user information successfully!"
             icon="check-circle"
-            titleColor="indigo"
-            iconColor="indigo"
+            titleColor="amber"
+            iconColor="amber"
           />
         );
       })
@@ -104,6 +104,7 @@ const Profile = () => {
   const getUserInformation = (userId) => {
     getUserInfo(userId)
       .then((response) => {
+        console.log(response.data);
         setUserInfo(response.data);
         const addressArr = response.data.address.split(" - ");
         setAddressArray(addressArr);
@@ -128,50 +129,18 @@ const Profile = () => {
   return (
     
         userInfo ? 
-      <main className="profile-page">
-        <section className="relative block" style={{ height: "500px" }}>
-          <div
-            className="absolute top-0 w-full h-full bg-center bg-cover"
-            style={{
-              backgroundImage:
-                "url(" + require("assets/images/admin-profile/bg-1.jpg") + ")",
-            }}
-          >
-            <span
-              id="blackOverlay"
-              className="w-full h-full absolute opacity-20 bg-black"
-            ></span>
-          </div>
-          <div
-            className="top-auto bottom-0 left-0 right-0 w-full absolute pointer-events-none overflow-hidden"
-            style={{ height: "70px" }}
-          >
-            <svg
-              className="absolute bottom-0 overflow-hidden"
-              xmlns="http://www.w3.org/2000/svg"
-              preserveAspectRatio="none"
-              version="1.1"
-              viewBox="0 0 2560 100"
-              x="0"
-              y="0"
-            >
-              <polygon
-                className="text-gray-300 fill-current"
-                points="2560 0 2560 100 0 100"
-              ></polygon>
-            </svg>
-          </div>
-        </section>
-        <section className="relative py-16 bg-gray-300">
-          <div className="container mx-auto px-4">
-            <div className="relative flex flex-col min-w-0 break-words bg-white w-full mb-6 shadow-xl rounded-lg -mt-64">
+      <main className="profile-page ">
+     
+        <section className="relative pt-12 ">
+          <div className="container mx-auto lg:px-80">
+            <div className="relative flex flex-col min-w-0 break-words bg-slate-100 items-center justify-center mb-6 shadow-xl rounded-sm mt-28">
               <div className="px-6">
                 <div className="flex flex-wrap justify-center">
                   <div className="w-full lg:w-3/12 px-4 lg:order-2 flex justify-center">
                     <div className="relative">
                       {/* <!-- Button trigger modal --> */}
                       <button
-                        className="icon_change h-6 w-7 pt-1 text-sm bg-indigo-400 hover:bg-indigo-500 text-white rounded-xl leading-tight text-center absolute m-10 mb-4 mr-20 z-50 cursor-pointer"
+                        className="icon_change h-6 w-7 pt-1 text-sm bg-amber-400 hover:bg-amber-500 text-white rounded-xl leading-tight text-center absolute m-10 mb-4 mr-20 z-50 cursor-pointer"
                         data-bs-toggle="modal"
                         data-bs-target="#modalUpdateAvatar"
                       >
@@ -210,17 +179,17 @@ const Profile = () => {
                   {/* <!-- Button trigger modal --> */}
                   <button
                     type="button"
-                    className="mb-20 inline-block px-6 py-2.5 bg-indigo-500 hover:bg-indigo-600 text-white rounded-md font-semibold leading-tight uppercase focus:outline-none focus:ring-0 transition duration-150 ease-in-out"
+                    className="mb-20 inline-block px-6 py-2.5 bg-amber-500 hover:bg-amber-600 text-white rounded-md font-semibold leading-tight uppercase focus:outline-none focus:ring-0 transition duration-150 ease-in-out"
                     data-bs-toggle="modal"
                     data-bs-target="#modalUpdateUserInfo"
                   >
                     Edit Information
                     {showSpinnerUpdate && (
                       <div
-                        class="spinner-border animate-spin inline-block w-4 h-4 border-3 ml-2 rounded-full"
+                        className="spinner-border animate-spin inline-block w-4 h-4 border-3 ml-2 rounded-full"
                         role="status"
                       >
-                        <span class="visually-hidden">Loading...</span>
+                        <span className="visually-hidden">Loading...</span>
                       </div>
                     )}
                   </button>
@@ -234,7 +203,7 @@ const Profile = () => {
                   aria-hidden="true"
                 >
                   <div className="modal-dialog modal-lg modal-dialog-centered modal-dialog-scrollable relative w-auto pointer-events-none">
-                    <div className="modal-content border-none shadow-lg relative flex flex-col w-full pointer-events-auto bg-white bg-clip-padding rounded-md outline-none text-current">
+                    <div className="modal-content border-none shadow-lg relative flex flex-col w-full pointer-events-auto bg-white bg-clip-padding rounded-sm outline-none text-current">
                       <div className="modal-header flex flex-shrink-0 items-center justify-between p-4 border-b border-gray-200 rounded-t-md">
                         <h5
                           className="text-xl font-medium leading-normal pl-8 text-gray-800 uppercase"
@@ -331,6 +300,7 @@ const Profile = () => {
                                 >
                                   {cities.map((cities) => (
                                     <option
+                                      key={cities.id}
                                       value={cities.id}
                                       selected={city.id === cities.id}
                                     >
@@ -365,6 +335,7 @@ const Profile = () => {
                                   {districts.map((dist) =>
                                     dist.idCity == city.id ? (
                                       <option
+                                        key={dist.id}
                                         value={dist.id}
                                         selected={district.id == dist.id}
                                       >
@@ -398,6 +369,7 @@ const Profile = () => {
                                   {wards.map((w) =>
                                     w.idDistrict == district.id ? (
                                       <option
+                                        key={w.id}
                                         value={w.id}
                                         selected={ward.id == w.id}
                                       >
@@ -458,7 +430,7 @@ const Profile = () => {
                           </button>
                           <button
                             type="submit"
-                            className="inline-block px-6 py-2.5 bg-indigo-500 text-white font-medium text-xs leading-tight uppercase rounded shadow-md hover:bg-indigo-600 hover:shadow-lg focus:bg-indigo-600 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-indigo-700 active:shadow-lg transition duration-150 ease-in-out ml-1"
+                            className="inline-block px-6 py-2.5 bg-amber-500 text-white font-medium text-xs leading-tight uppercase rounded shadow-md hover:bg-amber-600 hover:shadow-lg focus:bg-amber-600 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-amber-700 active:shadow-lg transition duration-150 ease-in-out ml-1"
                           >
                             Save changes
                           </button>

@@ -4,11 +4,11 @@ import { useForm } from "react-hook-form";
 import {
   checkIfEmailExists,
   CreateUsers,
-  SignUpApi,
 } from "../../../../features/Api";
 import { Link, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import CustomPopupMessage from "../../../CustomPopupMess";
+import imgAddNewAdmin from "../../../../assets/images/accounts/add-new-admin.png"
 
 const SignUpAdminForm = () => {
   const navigate = useNavigate();
@@ -100,8 +100,8 @@ const SignUpAdminForm = () => {
             <CustomPopupMessage
               mess={response.data.message}
               icon="check-circle"
-              titleColor="indigo"
-              iconColor="indigo"
+              titleColor="amber"
+              iconColor="amber"
             />
           );
           console.log(response.data);
@@ -116,16 +116,16 @@ const SignUpAdminForm = () => {
   };
 
   return (
-    <div className="min-w-screen min-h-screen flex items-center justify-center px-5 py-5">
+    <div className="min-w-screen flex items-center justify-center px-5 pt-8">
       <div
-        className="bg-gray-100 text-gray-500 rounded-3xl shadow-xl w-full overflow-hidden"
+        className="bg-gray-100 text-gray-500 rounded-sm shadow-xl w-full overflow-hidden"
         style={{ maxWidth: "1000px" }}
       >
         <div className="md:flex w-full">
           <div className="hidden md:block w-1/3 ">
             <img
               className="w-full h-full"
-              src="https://images.unsplash.com/photo-1603400521630-9f2de124b33b?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=387&q=80"
+              src={imgAddNewAdmin}
               alt=""
             />
           </div>
@@ -491,8 +491,8 @@ const SignUpAdminForm = () => {
               <div className="flex -mx-3">
                 <div className="w-full px-3 mb-2">
                   <button
-                    className="block w-full uppercase max-w-xs mx-auto bg-indigo-500 border-2 border-indigo-500 text-white
-                                        hover:bg-indigo-600 focus:bg-indigo-600 focus:text-white hover:text-white rounded-lg px-3 py-3 font-semibold"
+                    className="block w-full uppercase max-w-xs mx-auto bg-amber-500 border-2 border-amber-500 text-white
+                                        hover:bg-amber-600 focus:bg-amber-600 focus:text-white hover:text-white rounded-lg px-3 py-3 font-semibold"
                   >
                     Add New Admin
                     {showSpinner && (

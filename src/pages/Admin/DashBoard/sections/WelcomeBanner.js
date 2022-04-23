@@ -176,10 +176,10 @@ function WelcomeBanner() {
                                             current date</p>}
                                 </div>
                                 <button type="submit"
-                                        className="inline-block md:px-8 md:py-5 px-4 py-3 bg-indigo-500 text-white font-medium h-fit md:mb-0 mb-3
-                                        text-sm leading-tight uppercase rounded shadow-md hover:bg-indigo-700
-                                        hover:shadow-lg focus:bg-indigo-700 focus:shadow-lg focus:outline-none focus:ring-0
-                                         active:bg-indigo-800 active:shadow-lg transition duration-150 ease-in-out">Filter
+                                        className="inline-block md:px-8 md:py-5 px-4 py-3 bg-amber-500 text-white font-medium h-fit md:mb-0 mb-3
+                                        text-sm leading-tight uppercase rounded shadow-md hover:bg-amber-600
+                                        hover:shadow-lg focus:bg-amber-600 focus:shadow-lg focus:outline-none focus:ring-0
+                                         active:bg-amber-600 active:shadow-lg transition duration-150 ease-in-out">Filter
                                           {showSpinner && (
                             <div
                               class="spinner-border animate-spin inline-block w-4 h-4 border-3 ml-2 rounded-full"

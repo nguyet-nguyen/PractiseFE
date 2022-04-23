@@ -21,8 +21,8 @@ const ModalUpdateAvatar = ({ userInfo }) => {
             .then((response) => {
                 console.log(response.data);
                 toast(<CustomPopupMessage mess="Update avatar successfully!" icon="check-circle"
-                titleColor="indigo"
-                iconColor="indigo"/>);
+                titleColor="amber"
+                iconColor="amber"/>);
             })
             .catch((err) => {
                 alert(err.data);
@@ -95,7 +95,7 @@ const ModalUpdateAvatar = ({ userInfo }) => {
                                 </button>
                                 <button
                                     type="submit"
-                                    className="inline-block px-6 py-2.5 bg-indigo-500 text-white font-medium text-xs leading-tight uppercase rounded shadow-md hover:bg-indigo-600 hover:shadow-lg focus:bg-indigo-600 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-indigo-700 active:shadow-lg transition duration-150 ease-in-out ml-1"
+                                    className="inline-block px-6 py-2.5 bg-amber-500 text-white font-medium text-xs leading-tight uppercase rounded shadow-md hover:bg-amber-600 hover:shadow-lg focus:bg-amber-600 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-amber-700 active:shadow-lg transition duration-150 ease-in-out ml-1"
                                 >
                                     Save changes
                                 </button>

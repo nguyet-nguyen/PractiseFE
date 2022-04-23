@@ -63,8 +63,8 @@ const UpdateProductForm = () => {
                 <CustomPopupMessage
                     mess="This product has been updated successfully!"
                     icon="check-circle"
-                    titleColor="indigo"
-                    iconColor="indigo"
+                    titleColor="amber"
+                    iconColor="amber"
                 />
             );
         })
@@ -86,9 +86,9 @@ const UpdateProductForm = () => {
                 <Header sidebarOpen={sidebarOpen} setSidebarOpen={setSidebarOpen}/>
                 {loading ?
                     <main>
-                        <div className="min-w-screen min-h-screen flex items-center justify-center px-5 py-5">
+                        <div className="min-w-screen flex items-center justify-center px-5 py-20">
                             <div
-                                className="bg-gray-100 text-gray-500 rounded-3xl shadow-xl w-full overflow-hidden"
+                                className="bg-gray-100 text-gray-500 rounded-sm shadow-xl w-full overflow-hidden"
                                 style={{maxWidth: "800px"}}>
                                 <div className="md:flex w-full">
                                     <form className="w-full md:w-full py-8 px-5 md:px-10" onSubmit={handleSubmit(onSubmit)}>
@@ -127,6 +127,7 @@ const UpdateProductForm = () => {
                                                 <div className="w-2/3 px-3 mb-5">
                                                     <label htmlFor="" className="text-xs font-semibold px-1">
                                                         Product's Name
+                                                        <span className="text-red-500 ml-1">*</span>
                                                     </label>
                                                     <div className="flex">
                                                         <div
@@ -149,6 +150,7 @@ const UpdateProductForm = () => {
                                                 <div className="w-1/3 px-3 mb-5">
                                                     <label htmlFor="" className="text-xs font-semibold px-1">
                                                         Color
+                                                        <span className="text-red-500 ml-1">*</span>
                                                     </label>
                                                     <div className="flex">
                                                         <div
@@ -174,6 +176,7 @@ const UpdateProductForm = () => {
                                                 <div className="w-1/3 px-3 mb-5">
                                                     <label htmlFor="" className="text-xs font-semibold px-1">
                                                         Price
+                                                        <span className="text-red-500 ml-1">*</span>
                                                     </label>
                                                     <div className="flex">
                                                         <div
@@ -200,6 +203,7 @@ const UpdateProductForm = () => {
                                                 <div className="w-1/3 px-3 mb-5">
                                                     <label htmlFor="" className="text-xs font-semibold px-1">
                                                         Material
+                                                        <span className="text-red-500 ml-1">*</span>
                                                     </label>
                                                     <div className="flex">
                                                         <div
@@ -224,6 +228,7 @@ const UpdateProductForm = () => {
                                                 <div className="w-1/3 px-3 mb-5">
                                                     <label htmlFor="" className="text-xs font-semibold px-1">
                                                         Category
+                                                        <span className="text-red-500 ml-1">*</span>
                                                     </label>
                                                     <div className="flex justify-end">
                                                         <select className={`w-full -ml-10 pl-10 pr-3 py-2 rounded-lg border-2 border-gray-200
@@ -284,7 +289,7 @@ const UpdateProductForm = () => {
                                                         className="block w-full max-w-xs mx-auto bg-amber-600
                                                      hover:bg-amber-700 focus:bg-amber-700 text-white
                                                      rounded-lg px-3 py-3 font-semibold uppercase">
-                                                        Update products
+                                                        Update product
                                                     </button>
                                                 </div>
                                             </div>
