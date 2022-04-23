@@ -52,8 +52,8 @@ const ProductsTable = () => {
             <CustomPopupMessage
                 mess="This order has been removed successfully!"
                 icon="check-circle"
-                titleColor="indigo"
-                iconColor="indigo"
+                titleColor="amber"
+                iconColor="amber"
             />
         );
     };
@@ -211,17 +211,17 @@ const ProductsTable = () => {
 
     return (
         <>
-            <div className="md:px-4 md:py-8 px-0 py-3 w-full mx-auto">
+            <div className="w-full w-9xl mx-auto">
                 <h2 className="font-bold md:text-4xl text-2xl text-slate-800 uppercase mb-5">
-                    <i class="fa fa-product-hunt" aria-hidden="true"></i> Product list
+                    <i className="fa fa-product-hunt" aria-hidden="true"></i> Product list
                 </h2>
                 <div className="flex justify-between  md:space-x-2 space-x-0 md:flex-row flex-col mb-4">
                     <Link to="/admin/products/add-product"
                           type="button"
                           data-mdb-ripple="true"
                           data-mdb-ripple-color="light"
-                          className="inline-block md:px-6 md:py-2.5 px-3 py-2 bg-indigo-600 text-white font-medium text-xs
-                                leading-tight uppercase rounded shadow-md hover:bg-indigo-700 hover:shadow-lg focus:bg-indigo-700
+                          className="inline-block md:px-6 md:py-2.5 px-3 py-2 bg-amber-500 text-white font-medium text-xs
+                                leading-tight uppercase rounded shadow-md hover:bg-amber-600 hover:shadow-lg focus:bg-amber-600
                                 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-indio-800 active:shadow-lg transition
                                 duration-150 ease-in-out w-fit md:mb-0 mb-3">Add Product
                     </Link>
@@ -230,15 +230,15 @@ const ProductsTable = () => {
                             <input
                                 onChange={searchProduct}
                                 type="search"
-                                className="form-control relative flex-auto min-w-0 block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-indigo-600 focus:outline-none"
+                                className="form-control relative flex-auto min-w-0 block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-amber-600 focus:outline-none"
                                 placeholder="Search"
                                 aria-label="Search"
                                 aria-describedby="button-addon2"
                             />
                             <button
-                                className="btn inline-block md:px-6 md:py-2.5 px-3 py-1.5 bg-indigo-600 text-white font-medium
-                            text-xs leading-tight uppercase rounded shadow-md hover:bg-indigo-700 hover:shadow-lg
-                            focus:bg-indigo-700  focus:shadow-lg focus:outline-none focus:ring-0 active:bg-indigo-800
+                                className="btn md:px-6 md:py-2.5 px-3 py-1.5 bg-amber-500 text-white font-medium
+                            text-xs leading-tight uppercase rounded shadow-md hover:bg-amber-600 hover:shadow-lg
+                            focus:bg-amber-600  focus:shadow-lg focus:outline-none focus:ring-0 active:bg-amber-600
                             active:shadow-lg transition duration-150 ease-in-out flex items-center"
                                 type="button"
                                 id="button-addon2"
@@ -287,7 +287,7 @@ const ProductsTable = () => {
             >
                 <div className="modal-dialog modal-lg relative w-auto pointer-events-none">
                     <div
-                        className="modal-content border-none shadow-lg relative flex flex-col w-full pointer-events-auto bg-white bg-clip-padding rounded-md outline-none text-current">
+                        className="modal-content border-none shadow-lg relative flex flex-col w-full pointer-events-auto bg-white bg-clip-padding rounded-sm outline-none text-current">
                         <div
                             className="modal-header flex flex-shrink-0 items-center justify-between p-4 border-b border-gray-200 rounded-t-md">
                             <h2 className="font-bold text-3xl text-gray-900 uppercase">
@@ -454,7 +454,7 @@ const ProductsTable = () => {
                                                 <div className="flex -mx-3">
                                                     {itemDetail.items &&
                                                         itemDetail.items.map((size) => (
-                                                            <div className="w-1/3 px-3 mb-5">
+                                                            <div key={size.id} className="w-1/3 px-3 mb-5">
                                                                 <label
                                                                     htmlFor=""
                                                                     className="text-xs font-semibold px-1"
@@ -544,9 +544,9 @@ const ProductsTable = () => {
                                                 </button>
                                                 <button
                                                     type="submit"
-                                                    className=" px-6 py-2.5 bg-white border-2 border-indigo-600 text-indigo-600 font-medium
-                                                text-xs leading-tight uppercase rounded shadow-md hover:bg-indigo-600 hover:shadow-lg
-                                                hover:text-white  focus:bg-indigo-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-indigo-800
+                                                    className=" px-6 py-2.5 bg-white border-2 border-amber-600 text-amber-600 font-medium
+                                                text-xs leading-tight uppercase rounded shadow-md hover:bg-amber-600 hover:shadow-lg
+                                                hover:text-white  focus:bg-amber-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-amber-800
                                                  active:shadow-lg transition duration-150 ease-in-out ml-1
                                                  disabled:opacity-70"
                                                     data-bs-dismiss="modal"
