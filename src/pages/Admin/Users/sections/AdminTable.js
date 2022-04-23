@@ -86,8 +86,8 @@ const AdminTable = () => {
     const customStyles = {
         headCells: {
             style: {
-                color: "white",
-                background: "rgb(30 41 59)",
+                color: "#B45309",
+                background: "#E2E8F0",
                 font: "bold"
             },
         },
@@ -109,7 +109,7 @@ const AdminTable = () => {
     return (
         <>
             <div className="w-full max-w-9xl mx-auto">
-                <h2 className="font-bold md:text-4xl text-2xl text-slate-800 uppercase mb-5">
+                <h2 className="font-bold md:text-4xl text-2xl text-amber-600 uppercase mb-5">
                     <i className="fa fa-users" aria-hidden="true"></i> Admin list</h2>
                 <div className="flex md:space-x-2 space-x-0 md:flex-row flex-col justify-between mb-5">
                     <Link to="/admin/sign-up"

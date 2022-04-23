@@ -22,6 +22,7 @@ const ItemDetail = () => {
     const token = localStorage.getItem("token");
 
     useEffect(() => {
+        window.scrollTo(0, 0);
         getProductDetail(params.id)
             .then(res => {
                 setItemDetail(res.data);
