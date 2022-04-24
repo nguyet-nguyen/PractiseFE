@@ -30,7 +30,7 @@ const BreadcrumbsItemDetail = () => {
                                         </svg>
                                     </span></li>
                                     <li>
-                                        <Link to="/all-items" className="font-medium text-white hover:text-amber-100">
+                                        <Link to="/all-items/1" className="font-medium text-white hover:text-amber-100">
                                             All Items
                                         </Link>
                                     </li>

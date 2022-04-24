@@ -96,6 +96,10 @@ const AddProductForm = () => {
             id: 7,
             name: "Brown",
         },
+        {
+            id: 8,
+            name: "White",
+        },
     ]
     const materialProduct = [
         {

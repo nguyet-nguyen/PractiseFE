@@ -14,7 +14,7 @@ const Category = ({categoryList}) => {
                         <div key={category.id} className={`flex md:flex-wrap md:w-1/5 w-1/2 flex-col category category-${index}`}>
                             <div className="w-full p-2 md:p-4">
                                 <div className="text-center">
-                                    <Link to="/all-items">
+                                    <Link to="/all-items/1">
                                         <div className="category-image mx-auto relative md:w-56 md:h-56 w-32 h-32 md:mb-4 mb-2">
                                             <img
                                                 src={category.image}
