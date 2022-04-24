@@ -16,7 +16,6 @@ const OrdDetail = () => {
     getUserOrderDetail(params.id)
       .then((res) => {
         setOrder(res.data);
-        console.log(res.data);
         const sum = res.data.items.reduce(
           (partialSum, item) => partialSum + item.price,
           0
@@ -92,10 +91,10 @@ const OrdDetail = () => {
             <div className="bg-gray-100 py-2 px-10">
               <div className="flex items-center justify-around w-full pt-2">
                 {order.status != 3 && (
-                  <p className="text-lg capitalize font-black leading-none text-gray-800 ">
+                  <p className="lg:text-lg text-xs capitalize font-black leading-none text-gray-800 ">
                     Pending
                     {order.status == 5 && (
-                      <span className="bg-amber-500 rounded-lg text-sm p-1 ml-2">
+                      <span className="bg-amber-500 rounded-lg text-xs lg:p-1 lg:ml-2 ml-1">
                         <i
                           className={`fa fa-check text-white text-center`}
                           aria-hidden="true"
@@ -106,10 +105,10 @@ const OrdDetail = () => {
                 )}
 
                 {order.status != 3 && (
-                  <p className="text-lg capitalize font-black leading-none text-gray-800 ">
+                  <p className="lg:text-lg text-xs capitalize font-black leading-none text-gray-800 ">
                     Approved
                     {order.status == 1 && (
-                      <span className="bg-amber-500 rounded-lg text-sm p-1 ml-2">
+                      <span className="bg-amber-500 rounded-lg text-xs lg:p-1 lg:ml-2 ml-1">
                         <i
                           className={`fa fa-check text-white text-center`}
                           aria-hidden="true"
@@ -120,10 +119,10 @@ const OrdDetail = () => {
                 )}
 
                 {order.status != 3 && (
-                  <p className="text-lg capitalize font-black leading-none text-gray-800 ">
+                  <p className="lg:text-lg text-xs capitalize font-black leading-none text-gray-800 ">
                     Shipping
                     {order.status == 2 && (
-                      <span className="bg-amber-500 rounded-lg text-sm p-1 ml-2">
+                      <span className="bg-amber-500 rounded-lg text-xs lg:p-1 lg:ml-2 ml-1">
                         <i
                           className={`fa fa-check text-white text-center`}
                           aria-hidden="true"
@@ -134,10 +133,10 @@ const OrdDetail = () => {
                 )}
 
                 {order.status != 3 && (
-                  <p className="text-lg capitalize font-black leading-none text-gray-800 ">
+                  <p className="lg:text-lg text-xs capitalize font-black leading-none text-gray-800 ">
                     Completed
                     {order.status == 4 && (
-                      <span className="bg-amber-500 rounded-lg text-sm p-1 ml-2">
+                      <span className="bg-amber-500 rounded-lg text-xs lg:p-1 lg:ml-2 ml-1">
                         <i
                           className={`fa fa-check text-white text-center`}
                           aria-hidden="true"
@@ -160,28 +159,28 @@ const OrdDetail = () => {
 
               {order.status == 5 && (
                 <div className="w-full bg-gray-200 h-4 my-7 rounded-md">
-                  <div className="bg-amber-500 text-center text-sm font-medium h-5 text-white rounded-md w-1/4">
+                  <div className="bg-amber-500 text-center lg:text-sm text-xs font-medium h-5 text-white rounded-md w-1/4">
                     Step 1
                   </div>
                 </div>
               )}
               {order.status == 1 && (
                 <div className="w-full bg-gray-200 h-4 my-7 rounded-md">
-                  <div className="bg-amber-500 text-right pr-40 text-sm font-medium h-5 text-white rounded-md w-2/4">
+                  <div className="bg-amber-500 text-right lg:pr-36 pr-7 lg:text-sm text-xs font-medium h-5 text-white rounded-md w-2/4">
                     Step 2
                   </div>
                 </div>
               )}
               {order.status == 2 && (
                 <div className="w-full bg-gray-200 h-4 my-7 rounded-md">
-                  <div className="bg-amber-500 text-right pr-40 text-sm font-medium h-5 text-white rounded-md w-3/4">
+                  <div className="bg-amber-500 text-right lg:pr-32 pr-5 lg:text-sm text-xs font-medium h-5 text-white rounded-md w-3/4">
                     Step 3
                   </div>
                 </div>
               )}
               {order.status == 4 && (
                 <div className="w-full bg-gray-200 h-4 my-7 rounded-md">
-                  <div className="bg-amber-500 text-right pr-36 text-sm font-medium h-5 text-white rounded-md w-full">
+                  <div className="bg-amber-500 text-right lg:pr-32 pr-3 lg:text-sm text-xs font-medium h-5 text-white rounded-md w-full">
                     Delivered
                   </div>
                 </div>
@@ -190,9 +189,8 @@ const OrdDetail = () => {
 
             {order.items &&
               order.items.map((item) => (
-                <Link to={`/all-items/item-detail/${item.idProduct}`}>
+                <Link  key={item.id} to={`/all-items/item-detail/${item.idProduct}`}>
                 <div
-                  key={item.id}
                   className="md:flex items-strech px-10 py-8 md:py-10 lg:py-8 border-t border-gray-100"
                 >
                   <div className="md:w-4/12 2xl:w-1/12 w-full">
