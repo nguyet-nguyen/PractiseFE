@@ -151,7 +151,6 @@ const ShoppingCart = () => {
             (partialSum, item) => partialSum + item.price,
             0
         );
-        console.log(sum);
     
         if (sum < 500) {
             setShippingFee(20);
@@ -205,7 +204,7 @@ const ShoppingCart = () => {
                                         <div className="flex items-center justify-between w-full md:pt-0 pt-4">
                                             <Link to={`/all-items/item-detail/${item.idProduct}`}>
                                                 <p className="text-lg uppercase font-black leading-none text-gray-800 ">
-                                                    {item.name}
+                                                    {item.name} 
                                                 </p>
                                             </Link>
 
@@ -333,14 +332,14 @@ const ShoppingCart = () => {
                                 onClick={() => viewMore()}
                             >
                                 View more
-                                <i class="fa fa-arrow-circle-o-down ml-2" aria-hidden="true"></i>
+                                <i className="fa fa-arrow-circle-o-down ml-2" aria-hidden="true"></i>
                             </button>}
                             {showLess &&  <button
                                 className="leading-3 float-right underline font-bold text-md text-amber-600 cursor-pointer mt-2"
                                 onClick={() => viewLess(itemsInCartDefault)}
                             >
                                 View less
-                                <i class="fa fa-arrow-circle-o-down ml-2" aria-hidden="true"></i>
+                                <i className="fa fa-arrow-circle-o-down ml-2" aria-hidden="true"></i>
                             </button>}
                         </div>
                       

@@ -49,7 +49,6 @@ const CardProduct = ({proList, homePage, hotDeal}) => {
                 {proList && proList.slice(0, 8).map((product, index) =>
                     <div key={product.id} className={`ProductCard cardProduct-${index} mx-auto w-full h-84 p-2 border bg-white rounded-lg md:w-72 hover:shadow-lg 
                     transition duration-300 ease-in-out`}>
-                        <Link to={`/all-items/item-detail/${product.id}`}>
                             <div className="bg-gray-400 h-auto rounded-t-lg relative card-product">
                                 <Link to={`/all-items/item-detail/${product.id}`} className="card-product-img">
                                     <img className="image-card hover:opacity-75"
@@ -73,7 +72,7 @@ const CardProduct = ({proList, homePage, hotDeal}) => {
 
                                     <span
                                         className="px-2 z-50 p-1 rounded-full border border-white absolute top-1 right-1 bg-amber-600
-                                            text-white font-semibold text-sm flex align-center flex items-center opacity-90
+                                            text-white font-semibold text-sm align-center flex items-center opacity-90
                                             w-max cursor-pointer active:bg-gray-300 transition duration-300 ease">
                                         {product.totalQuantity} sold
                                           </span>
@@ -90,7 +89,6 @@ const CardProduct = ({proList, homePage, hotDeal}) => {
                                     {numberFormat(product.price)}
                                 </p>
                             </div>
-                        </Link>
                     </div>
                 )}
             </>

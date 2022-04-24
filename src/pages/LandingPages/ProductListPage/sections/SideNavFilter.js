@@ -110,7 +110,7 @@ const SideNavFilter = ({ sidebarOpen, setSidebarOpen }) => {
                         </h3>
                         <ul className="mt-3">
                             {categoryList.map((category) =>
-                            <li className={`px-3 py-2 rounded-sm mb-0.5 last:mb-0 ${pathname === '/dashboard' && 'bg-slate-900'}`}>
+                            <li key={category.id} className={`px-3 py-2 rounded-sm mb-0.5 last:mb-0 ${pathname === '/dashboard' && 'bg-slate-900'}`}>
                                 <div className="form-check">
                                     <input
                                         className="form-check-input appearance-none h-4 w-4 border border-gray-300 

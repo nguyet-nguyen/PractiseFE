@@ -63,11 +63,11 @@ function ProductList() {
                     <div className="flex justify-center md:hidden">
                         <div className="xl:w-96">
                             <select onChange={getcategoryId} className="form-select appearance-none block w-full px-5 py-1.5 text-base font-medium 
-                            text-amber-600 bg-white bg-clip-padding bg-no-repeat border border-2 capitalize
-                            border-solid border-amber-600 rounded transition ease-in-out mx-2 focus:text-white
+                            text-amber-600 bg-white bg-clip-padding bg-no-repeat border-2 capitalize
+                            border-solid border-amber-600 rounded transition ease-in-out mx-2
                             focus:bg-white focus:text-amber-600 focus:border-amber-600 focus:outline-none focus:shadow-inner" aria-label="Default select example">
                                 {categoryList && categoryList.map((category) =>
-                                <option id={category.id} value={category.name} className="p-2 m-2 capitalize">{category.name}</option>
+                                <option key={category.id} id={category.id} value={category.name} className="p-2 m-2 capitalize">{category.name}</option>
                             )}
                             </select>
                         </div>

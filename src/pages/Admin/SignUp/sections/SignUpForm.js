@@ -404,7 +404,7 @@ const SignUpAdminForm = () => {
                                                 onClick={(e) => changeCityId(e.target.value)}
                                             >
                                                 {cities.map((cities) => (
-                                                    <option value={cities.id}>{cities.name}</option>
+                                                    <option key={cities.id} value={cities.id}>{cities.name}</option>
                                                 ))}
                                             </select>
                                         </div>
@@ -429,7 +429,7 @@ const SignUpAdminForm = () => {
                                             >
                                                 {districts.map((district) =>
                                                     district.idCity == city.id ? (
-                                                        <option value={district.id}>{district.name}</option>
+                                                        <option key={district.id} value={district.id}>{district.name}</option>
                                                     ) : null
                                                 )}
                                             </select>
@@ -455,7 +455,7 @@ const SignUpAdminForm = () => {
                                             >
                                                 {wards.map((ward) =>
                                                     ward.idDistrict == district.id ? (
-                                                        <option value={ward.id}>{ward.name}</option>
+                                                        <option key={ward.id} value={ward.id}>{ward.name}</option>
                                                     ) : null
                                                 )}
                                             </select>
