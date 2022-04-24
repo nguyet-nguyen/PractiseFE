@@ -96,17 +96,17 @@ const OrdDetailAdmin = () => {
                       <button
                         type="button"
                         onClick={() => exportFile(order.id)}
-                        className="inline-block mr-2 px-4 py-2.5 lg:mb-0 mb-3  text-amber-500 border border-amber-500
-                                font-medium text-xs leading-tight uppercase rounded hover:shadow-md shadow"
+                        className="inline-block mr-2 px-4 py-2.5 lg:mb-0 mb-3 bg-amber-500 hover:bg-amber-600 text-white 
+                                font-medium text-xs leading-tight uppercase rounded-sm hover:shadow-md shadow"
                       >
                         <i className="fa fa-print pr-2" aria-hidden="true"></i>
                         Export Order
                         {showSpinner && (
                           <div
-                            class="spinner-border animate-spin inline-block w-4 h-4 border-3 ml-2 rounded-full"
+                            className="spinner-border animate-spin inline-block w-2 h-2 border-3 ml-2 rounded-full"
                             role="status"
                           >
-                            <span class="visually-hidden">Loading...</span>
+                            <span className="visually-hidden">Loading...</span>
                           </div>
                         )}
                       </button>
@@ -153,39 +153,62 @@ const OrdDetailAdmin = () => {
                   </div>
                   <div className="bg-gray-100 py-2 px-10">
                     <div className="flex items-center justify-around w-full pt-2">
-                      <p className="text-lg capitalize font-black leading-none text-gray-800 ">
-                        Approved
-                        {order.status == 1 && (
-                          <span className="bg-amber-500 rounded-lg text-sm p-1 ml-2">
-                            <i
-                              className={`fa fa-check text-white text-center`}
-                              aria-hidden="true"
-                            ></i>
-                          </span>
-                        )}
-                      </p>
-                      <p className="text-lg capitalize font-black leading-none text-gray-800 ">
-                        Shipping
-                        {order.status == 2 && (
-                          <span className="bg-amber-500 rounded-lg text-sm p-1 ml-2">
-                            <i
-                              className={`fa fa-check text-white text-center`}
-                              aria-hidden="true"
-                            ></i>
-                          </span>
-                        )}
-                      </p>
-                      <p className="text-lg capitalize font-black leading-none text-gray-800 ">
-                        Completed
-                        {order.status == 4 && (
-                          <span className="bg-amber-500 rounded-lg text-sm p-1 ml-2">
-                            <i
-                              className={`fa fa-check text-white text-center`}
-                              aria-hidden="true"
-                            ></i>
-                          </span>
-                        )}
-                      </p>
+                      {order.status != 3 && (
+                        <p className="lg:text-lg text-xs capitalize font-black leading-none text-gray-800 ">
+                          Pending
+                          {order.status == 5 && (
+                            <span className="bg-amber-500 rounded-lg text-xs lg:p-1 lg:ml-2 ml-1">
+                              <i
+                                className={`fa fa-check text-white text-center`}
+                                aria-hidden="true"
+                              ></i>
+                            </span>
+                          )}
+                        </p>
+                      )}
+
+                      {order.status != 3 && (
+                        <p className="lg:text-lg text-xs capitalize font-black leading-none text-gray-800 ">
+                          Approved
+                          {order.status == 1 && (
+                            <span className="bg-amber-500 rounded-lg text-xs lg:p-1 lg:ml-2 ml-1">
+                              <i
+                                className={`fa fa-check text-white text-center`}
+                                aria-hidden="true"
+                              ></i>
+                            </span>
+                          )}
+                        </p>
+                      )}
+
+                      {order.status != 3 && (
+                        <p className="lg:text-lg text-xs capitalize font-black leading-none text-gray-800 ">
+                          Shipping
+                          {order.status == 2 && (
+                            <span className="bg-amber-500 rounded-lg text-xs lg:p-1 lg:ml-2 ml-1">
+                              <i
+                                className={`fa fa-check text-white text-center`}
+                                aria-hidden="true"
+                              ></i>
+                            </span>
+                          )}
+                        </p>
+                      )}
+
+                      {order.status != 3 && (
+                        <p className="lg:text-lg text-xs capitalize font-black leading-none text-gray-800 ">
+                          Completed
+                          {order.status == 4 && (
+                            <span className="bg-amber-500 rounded-lg text-xs lg:p-1 lg:ml-2 ml-1">
+                              <i
+                                className={`fa fa-check text-white text-center`}
+                                aria-hidden="true"
+                              ></i>
+                            </span>
+                          )}
+                        </p>
+                      )}
+
                       {order.status == 3 && (
                         <p className="text-lg uppercase font-black leading-none text-gray-800 ">
                           Order Canceled
@@ -197,24 +220,30 @@ const OrdDetailAdmin = () => {
                       )}
                     </div>
 
+                    {order.status == 5 && (
+                      <div className="w-full bg-gray-200 h-4 my-7 rounded-md">
+                        <div className="bg-amber-500 text-center lg:text-sm text-xs font-medium h-5 text-white rounded-md w-1/4">
+                          Step 1
+                        </div>
+                      </div>
+                    )}
                     {order.status == 1 && (
                       <div className="w-full bg-gray-200 h-4 my-7 rounded-md">
-                        <div className="bg-amber-500 text-center text-sm font-medium h-5 text-white rounded-md w-1/3">
-                          Step 1
+                        <div className="bg-amber-500 text-right lg:pr-36 pr-7 lg:text-sm text-xs font-medium h-5 text-white rounded-md w-2/4">
+                          Step 2
                         </div>
                       </div>
                     )}
                     {order.status == 2 && (
                       <div className="w-full bg-gray-200 h-4 my-7 rounded-md">
-                        <div className="bg-amber-500 text-right pr-44 text-sm font-medium h-5 text-white rounded-md w-2/3">
-                          Step 2
+                        <div className="bg-amber-500 text-right lg:pr-32 pr-5 lg:text-sm text-xs font-medium h-5 text-white rounded-md w-3/4">
+                          Step 3
                         </div>
                       </div>
                     )}
-
                     {order.status == 4 && (
                       <div className="w-full bg-gray-200 h-4 my-7 rounded-md">
-                        <div className="bg-amber-500 text-right pr-44 text-sm font-medium h-5 text-white rounded-md w-full">
+                        <div className="bg-amber-500 text-right lg:pr-32 pr-3 lg:text-sm text-xs font-medium h-5 text-white rounded-md w-full">
                           Delivered
                         </div>
                       </div>

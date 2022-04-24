@@ -318,32 +318,32 @@ const CheckoutForm = () => {
                     </h2>
                     {/* Paypal */}
                     <div className="mt-4 p-5 relative flex flex-col sm:flex-row sm:items-center bg-white shadow rounded-md">
-                      <label class="relative inline-flex mb-6 lg:mb-2 mr-16 items-center">
+                      <label className="relative inline-flex mb-6 lg:mb-2 mr-16 items-center">
                         <input
                           onChange={(e) => selectPayment(e)}
                           checked={paymentMethod == "cod"}
                           value="cod"
-                          class="form-check-input appearance-none rounded-full h-4 w-4 border border-gray-300 bg-white checked:bg-amber-600 checked:border-amber-600 focus:outline-none transition duration-200 align-top bg-no-repeat bg-center bg-contain float-left mr-1 cursor-pointer"
+                          className="form-check-input appearance-none rounded-full h-4 w-4 border border-gray-300 bg-white checked:bg-amber-600 checked:border-amber-600 focus:outline-none transition duration-200 align-top bg-no-repeat bg-center bg-contain float-left mr-1 cursor-pointer"
                           type="radio"
                           name="flexRadioDefault"
                           id="flexRadioDefault1"
                         />
-                        <span class="ml-2 text-sm text-gray-600 leading-3">
+                        <span className="ml-2 text-sm text-gray-600 leading-3">
                           COD
                         </span>
                       </label>
 
-                      <label class="relative inline-flex mb-2 items-center">
+                      <label className="relative inline-flex mb-2 items-center">
                         <input
                           onChange={(e) => selectPayment(e)}
                           value="paypal"
-                          class="form-check-input appearance-none rounded-full h-4 w-4 border border-gray-300 bg-white checked:bg-amber-600 checked:border-amber-600 focus:outline-none transition duration-200 align-top bg-no-repeat bg-center bg-contain float-left mr-1 cursor-pointer"
+                          className="form-check-input appearance-none rounded-full h-4 w-4 border border-gray-300 bg-white checked:bg-amber-600 checked:border-amber-600 focus:outline-none transition duration-200 align-top bg-no-repeat bg-center bg-contain float-left mr-1 cursor-pointer"
                           type="radio"
                           name="flexRadioDefault"
                           id="flexRadioDefault1"
                         />
 
-                        <span class="ml-2 text-sm text-gray-600 leading-3">
+                        <span className="ml-2 text-sm text-gray-600 leading-3">
                           PayPal
                         </span>
                       </label>
@@ -354,10 +354,10 @@ const CheckoutForm = () => {
                     Order
                     {showSpinner && (
                       <div
-                        class="spinner-border animate-spin inline-block w-5 h-5 border-3 ml-2 rounded-full"
+                        className="spinner-border animate-spin inline-block w-5 h-5 border-3 ml-2 rounded-full"
                         role="status"
                       >
-                        <span class="visually-hidden">Loading...</span>
+                        <span className="visually-hidden">Loading...</span>
                       </div>
                     )}
                   </button>
@@ -372,9 +372,8 @@ const CheckoutForm = () => {
                   </h1>
                   <ul className="py-6 border-b space-y-6 px-8">
                     {itemsInCart.map((item) => (
-                      <Link to={`/all-items/item-detail/${item.idProduct}`}>
+                      <Link key={item.id} to={`/all-items/item-detail/${item.idProduct}`}>
                         <li
-                          key={item.id}
                           className="grid grid-cols-7 gap-2 border-b-1"
                         >
                           <div className="col-span-1 self-center">
