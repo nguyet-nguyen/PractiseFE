@@ -34,6 +34,7 @@ import OrderDetailAdmin from "pages/Admin/OrderListAdmin/sections/OrderDetail";
 import UserProfile from "./pages/LandingPages/UserProfile";
 import AdminTable from "./pages/Admin/Users/sections/AdminTable";
 import Admins from "./pages/Admin/Users/index-admin";
+import NotFound from "pages/NotFound";
 
 export default function App() {
 
@@ -186,6 +187,7 @@ export default function App() {
                             <SignInAdmin/>
                         }
                     />
+                    <Route path="*" element={<NotFound/>} />
 
                 </Routes>
                 <ToastContainer />
