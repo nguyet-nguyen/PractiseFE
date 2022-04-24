@@ -65,6 +65,7 @@ function SignInAdmin() {
                     <div className="text-center my-3">
                       <h6 className="text-slate-700 uppercase text-xl md:text-2xl font-bold">
                         Sign in for Admin
+
                       </h6>
                       {!showMess || messErr != "" ? (
                         <div
@@ -188,7 +189,7 @@ function SignInAdmin() {
 
                       <div className="text-center mt-6">
                         <button
-                          className="bg-amber-500 text-white hover:bg-amber-600 active:bg-amber-700 text-sm font-bold uppercase px-6 py-3
+                          className="bg-amber-600 text-white hover:bg-amber-600 active:bg-amber-800 text-sm font-bold uppercase px-6 py-3
                            rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 w-full"
                           type="submit"
                           style={{ transition: "all .15s ease" }}

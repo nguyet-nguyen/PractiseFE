@@ -101,7 +101,7 @@ function Sidebar({
                   <div className="flex items-center">
                     <svg className="shrink-0 h-6 w-6" viewBox="0 0 24 24">
                       <path className={`fill-current text-amber-700 ${pathname === '/admin/dashboard' && '!text-amber-600'}`} d="M12 0C5.383 0 0 5.383 0 12s5.383 12 12 12 12-5.383 12-12S18.617 0 12 0z" />
-                      <path className={`fill-current text-white ${pathname === '/admin/dashboard' && 'text-amber-600'}`} d="M12 3c-4.963 0-9 4.037-9 9s4.037 9 9 9 9-4.037 9-9-4.037-9-9-9z" />
+                      <path className={`fill-current text-white`} d="M12 3c-4.963 0-9 4.037-9 9s4.037 9 9 9 9-4.037 9-9-4.037-9-9-9z" />
                       <path className={`fill-current text-amber-700 ${pathname === '/admin/dashboard' && 'text-amber-500'}`} d="M12 15c-1.654 0-3-1.346-3-3 0-.462.113-.894.3-1.285L6 6l4.714 3.301A2.973 2.973 0 0112 9c1.654 0 3 1.346 3 3s-1.346 3-3 3z" />
                     </svg>
                     <span className="text-sm font-semibold ml-3 lg:opacity-0 lg:sidebar-expanded:opacity-100 2xl:opacity-100 duration-200">Dashboard</span>
@@ -166,10 +166,9 @@ function Sidebar({
                 <NavLink end to="/admin/orders-list" className={`block  truncate transition duration-150 ${pathname.includes('/admin/orders-list') && 'hover:text-white text-white'}`}>
                   <div className="flex items-center">
                     <svg className="shrink-0 h-6 w-6" viewBox="0 0 24 24">
-                      <path className={`fill-current text-white ${pathname.includes('/admin/orders-list') && 'text-amber-700'}`} d="M8 1v2H3v19h18V3h-5V1h7v23H1V1z" />
-                      <path className={`fill-current text-amber-600 ${pathname.includes('/admin/orders-list') && 'text-white'}`} d="M1 1h22v23H1z"/>
-                      <path className={`fill-current text-white ${pathname.includes('/admin/orders-list') && 'text-amber-700'}`} d="M15 10.586L16.414 12 11 17.414 7.586 14 9 12.586l2 2zM5 0h14v4H5z"/>
-
+                      <path className={`fill-current  ${pathname.includes('/admin/orders-list') ? 'text-amber-700' : 'text-white'}`} d="M8 1v2H3v19h18V3h-5V1h7v23H1V1z" />
+                      <path className={`fill-current  ${pathname.includes('/admin/orders-list') ? 'text-white' : 'text-amber-600'}`} d="M1 1h22v23H1z"/>
+                      <path className={`fill-current  ${pathname.includes('/admin/orders-list') ? 'text-amber-700' : 'text-white'}`} d="M15 10.586L16.414 12 11 17.414 7.586 14 9 12.586l2 2zM5 0h14v4H5z"/>
                     </svg>
                     <span className="text-sm font-semibold ml-3 lg:opacity-0 lg:sidebar-expanded:opacity-100 2xl:opacity-100 duration-200">Orders</span>
                   </div>
