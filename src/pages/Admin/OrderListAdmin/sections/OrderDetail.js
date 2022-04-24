@@ -103,7 +103,7 @@ const OrdDetailAdmin = () => {
                         Export Order
                         {showSpinner && (
                           <div
-                            className="spinner-border animate-spin inline-block w-2 h-2 border-3 ml-2 rounded-full"
+                            className="spinner-border animate-spin inline-block w-3 h-3 border-3 ml-2 rounded-full"
                             role="status"
                           >
                             <span className="visually-hidden">Loading...</span>
