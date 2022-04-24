@@ -315,6 +315,7 @@ const ProductsTable = () => {
                                                     {itemDetail.images
                                                         ? itemDetail.images.map((image, index) => (
                                                             <img
+                                                                key={index}
                                                                 src={image}
                                                                 className="p-1 h-60 w-full bg-white border rounded"
                                                                 alt="..."

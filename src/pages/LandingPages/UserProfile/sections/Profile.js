@@ -493,6 +493,7 @@ const Profile = () => {
                                     >
                                       {cities.map((cities) => (
                                         <option
+                                          key={cities.id}
                                           value={cities.id}
                                           selected={city.id === cities.id}
                                         >
@@ -527,6 +528,7 @@ const Profile = () => {
                                       {districts.map((dist) =>
                                         dist.idCity == city.id ? (
                                           <option
+                                            key={dist.id}
                                             value={dist.id}
                                             selected={district.id == dist.id}
                                           >
@@ -562,6 +564,7 @@ const Profile = () => {
                                       {wards.map((w) =>
                                         w.idDistrict == district.id ? (
                                           <option
+                                            key={w.id}
                                             value={w.id}
                                             selected={ward.id == w.id}
                                           >
@@ -715,7 +718,7 @@ const Profile = () => {
                                   key={order.id}
                                   className="p-4 border-2 shadow overflow-hidden rounded-lg h-auto mr-1"
                                 >
-                                  <div className="h-60 mb-2  lg:h-48">
+                                  <div className="h-96 mb-2  lg:h-48">
                                     <div className="md:flex items-strech py-1">
                                       <div className="pl-1 md:w-8/12 2xl:w-3/4 flex flex-col justify-center">
                                         <p className="text-base uppercase font-black leading-none text-gray-800 ">
@@ -726,10 +729,7 @@ const Profile = () => {
                                         </p>
                                       </div>
                                       <div className="md:w-4/12 2xl:w-1/4 w-full">
-                                         
-                                       
                                           <div className="-mt-2">
-                                              
                                           {order.status == "Completed" && (
                                         <span
                                             className="inline-block w-full text-green-500
@@ -778,18 +778,13 @@ const Profile = () => {
                                           && order.status !="Completed" || order.status=="Canceled" ? "UNPAID" : "PAID"}
 
                                         </span>
-
-                                          </div>
-                                         
-                                          
-                                      
-                                       
+                                        </div>
                                       </div>
                                     </div>
                                     <Link
                                       to={`/all-items/item-detail/${order.firstItem[0].idProduct}`}
                                     >
-                                      <div className="md:flex items-strech py-8 md:py-10 lg:py-8 border-t border-gray-200">
+                                      <div className="lg:flex-row md:flex-col sm:flex-col flex flex-col py-8 md:py-10 lg:py-8 border-t border-gray-200">
                                         <div className="md:w-4/12 2xl:w-2/12 w-full">
                                           <img
                                             src={order.firstItem[0].image[0]}
@@ -803,7 +798,7 @@ const Profile = () => {
                                           />
                                         </div>
 
-                                        <div className="md:pl-3 lg:ml-7 md:w-8/12 2xl:w-10/12 flex flex-col justify-center">
+                                        <div className="md:pl-3 lg:ml-7 md:w-8/12 lg:mt-0 mt-2 2xl:w-10/12 flex flex-col justify-center">
                                           <p className="text-sm uppercase font-black leading-none text-gray-600 ">
                                             {order.firstItem[0].name}
                                           </p>

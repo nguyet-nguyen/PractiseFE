@@ -248,9 +248,9 @@ const UpdateProductForm = () => {
                                                                 type="text">
                                                             {colorProduct.map((cate) => (
                                                                 itemDetail.color == cate.name ?
-                                                                    <option value={cate.name}
+                                                                    <option key={cate.name} value={cate.name}
                                                                             selected>{cate.name}</option>
-                                                                    : <option value={cate.name}>{cate.name}</option>
+                                                                    : <option key={cate.name} value={cate.name}>{cate.name}</option>
 
                                                             ))}
                                                         </select>
@@ -300,9 +300,9 @@ const UpdateProductForm = () => {
                                                                 type="text">
                                                             {materialProduct.map((cate) => (
                                                                 itemDetail.material == cate.name ?
-                                                                    <option value={cate.name}
+                                                                    <option key={cate.name} value={cate.name}
                                                                             selected>{cate.name}</option>
-                                                                    : <option value={cate.name}>{cate.name}</option>
+                                                                    : <option key={cate.name} value={cate.name}>{cate.name}</option>
 
                                                             ))}
                                                         </select>
@@ -326,9 +326,11 @@ const UpdateProductForm = () => {
                                                             {categoryList.map((cate, i) => (
                                                                 i === 0 ? "" :
                                                                     itemDetail.category == cate.name ?
-                                                                        <option value={cate.id}
+                                                                        <option
+                                                                                key={cate.id}
+                                                                                value={cate.id}
                                                                                 selected>{cate.name}</option>
-                                                                        : <option value={cate.id}>{cate.name}</option>
+                                                                        : <option key={cate.id} value={cate.id}>{cate.name}</option>
 
                                                             ))}
                                                         </select>

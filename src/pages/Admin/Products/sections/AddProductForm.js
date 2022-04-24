@@ -262,7 +262,7 @@ const AddProductForm = () => {
                                                             {...register("color",)}
                                                             type="text">
                                                         {colorProduct.map((cate) => (
-                                                            <option value={cate.name}>{cate.name}</option>
+                                                            <option key={cate.name} value={cate.name}>{cate.name}</option>
                                                         ))}
                                                     </select>
                                                 </div>
@@ -318,7 +318,7 @@ const AddProductForm = () => {
                                                             {...register("material",)}
                                                             type="text">
                                                         {materialProduct.map((cate) => (
-                                                            <option value={cate.name}>{cate.name}</option>
+                                                            <option key={cate.name} value={cate.name}>{cate.name}</option>
                                                         ))}
                                                     </select>
                                                 </div>

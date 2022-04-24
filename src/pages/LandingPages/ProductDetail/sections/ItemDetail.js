@@ -162,7 +162,7 @@ const ItemDetail = () => {
                             <div
                                 className="carousel-indicators absolute right-0 bottom-0 left-0 flex justify-center p-0 mb-4">
                                 {itemDetail && itemDetail.images.map((image, index) =>
-                                    <button data-bs-target="#carouselDarkVariant" data-bs-slide-to={index}
+                                    <button key={index} data-bs-target="#carouselDarkVariant" data-bs-slide-to={index}
                                         className="active"
                                         aria-current="true" aria-label="Slide 1"
                                     />
@@ -171,6 +171,7 @@ const ItemDetail = () => {
                             <div className="carousel-inner relative w-full h-full overflow-hidden rounded-lg">
                                 {itemDetail && itemDetail.images.map((image, index) => (
                                     <div
+                                    key={index}
                                         className={`image-detail carousel-item relative  float-left w-full h-full ${index == 0 ? "active" : ""} `}>
                                         <img
                                             src={image}
@@ -233,7 +234,7 @@ const ItemDetail = () => {
                                         <select onChange={e => changeSize(e.target.value)} className="rounded border appearance-none border-amber-600 py-2 focus:outline-none
                                     focus:ring-2 focus:ring-amber-500 focus:border-amber-600 text-base pl-3 pr-10">
                                             {itemDetail && itemDetail.items.map((size) => (
-                                                <option id={size.id} value={size.id}>{size.size}</option>
+                                                <option key={size.id} id={size.id} value={size.id}>{size.size}</option>
                                             ))}
                                         </select>
                                         <span
@@ -256,7 +257,7 @@ const ItemDetail = () => {
                                     {sizeAmount==0 && <span className="mr-2 text-base rotate-12 font-semibold text-red-500 border-2 border-red-500 p-2 uppercase">Sold out</span>}
                                     {sizeAmount != 0 && <span className="mr-2 text-base text-gray-500">Amount items:</span>}
                                     {itemDetail && sizeAmount !=0 && itemDetail.items.map((size) => (
-                                        <span className="text-base text-bold text-amber-700">
+                                        <span key={size.id} className="text-base text-bold text-amber-700">
                                             {size.id == sizeState && size.amount}
                                         </span>
 
@@ -309,8 +310,8 @@ const ItemDetail = () => {
                                 hover:bg-amber-600 hover:text-white focus:outline-none focus:ring-0
                                 transition duration-150 ease-in-out disabled:bg-gray-300 disabled:text-white disabled:border-gray-300">
                                     Add to cart
-                                    {showSpinner && <div class="spinner-border animate-spin inline-block w-4 h-4 border-3 ml-2 rounded-full" role="status">
-                                        <span class="visually-hidden">Loading...</span>
+                                    {showSpinner && <div className="spinner-border animate-spin inline-block w-4 h-4 border-3 ml-2 rounded-full" role="status">
+                                        <span className="visually-hidden">Loading...</span>
                                     </div>}
                                 </button>
 
