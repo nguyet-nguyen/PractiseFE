@@ -27,7 +27,7 @@ function HotDeal() {
                     </svg>
                     <span className="text-color uppercase">Best Seller</span>
                 </span>
-                <Link to="/all-items"
+                <Link to="/all-items/1"
                       className="md:flex items-center transition duration-300 ease-in-out hover:text-amber-600 hidden">
                     See All Product
                     <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 ml-2" viewBox="0 0 20 20"

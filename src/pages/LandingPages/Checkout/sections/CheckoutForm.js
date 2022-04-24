@@ -123,7 +123,7 @@ const CheckoutForm = () => {
 
   const goShopping = () => {
     $("#modalCheckoutSuccess").modal("hide");
-    navigate("/all-items");
+    navigate("/all-items/1");
   };
 
   const goListCustomerOrds = () => {
