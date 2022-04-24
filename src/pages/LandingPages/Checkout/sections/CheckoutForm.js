@@ -10,6 +10,8 @@ import {
 } from "../../../../features/Api";
 import { numberFormat } from "../../Home/function/FormatMoney";
 import Loading from "../../../../Loading";
+import payPalImg from "../../../../assets/images/payment-method/paypal.png"
+import codImg from "../../../../assets/images/payment-method/cash-on-delivery.png"
 
 const CheckoutForm = () => {
   const [itemsInCart, setItemsInCart] = useState([]);
@@ -328,12 +330,15 @@ const CheckoutForm = () => {
                           name="flexRadioDefault"
                           id="flexRadioDefault1"
                         />
-                        <span className="ml-2 text-sm text-gray-600 leading-3">
-                          COD
-                        </span>
+
+                        <img
+                            className="ml-2 w-16 h-16"
+                            src={codImg}
+                            alt=""
+                        />
                       </label>
 
-                      <label className="relative inline-flex mb-2 items-center">
+                      <label className="relative inline-flex mb-2 lg:ml-6 items-center">
                         <input
                           onChange={(e) => selectPayment(e)}
                           value="paypal"
@@ -343,9 +348,11 @@ const CheckoutForm = () => {
                           id="flexRadioDefault1"
                         />
 
-                        <span className="ml-2 text-sm text-gray-600 leading-3">
-                          PayPal
-                        </span>
+                        <img
+                            className="ml-2 w-16 h-14"
+                            src={payPalImg}
+                            alt=""
+                        />
                       </label>
                     </div>
                   </section>

@@ -112,6 +112,7 @@ const ItemDetail = () => {
                     })
                     .catch(err => {
                         console.log(err);
+                        setShowSpinner(false);    
                     })
                 }
             }
@@ -131,6 +132,7 @@ const ItemDetail = () => {
                     })
                     .catch(err => {
                         console.log(err);
+                        setShowSpinner(false);    
                     })
             }
         }else{
