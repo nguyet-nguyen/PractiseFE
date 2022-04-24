@@ -2,17 +2,20 @@ import Loading from "Loading";
 import React, { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import "react-toastify/dist/ReactToastify.css";
-import { getUserOrderDetail } from "../../../../features/Api";
+import { getUserOrderDetail, addOrderPayPal } from "../../../../features/Api";
 import { numberFormat } from "../../Home/function/FormatMoney";
 
 const OrdDetail = () => {
   const [order, setOrder] = useState();
 
   const [subtotal, setSubtotal] = useState();
-  const [shippingFee, setShippingFee] = useState(0);
+  const [showSpinner, setShowSpinner] = useState(false);
+  const [showPaymentFailed, setShowPaymentFailed] = useState(false);
+
   let params = useParams();
 
   useEffect(() => {
+    window.scrollTo(0, 0);
     getUserOrderDetail(params.id)
       .then((res) => {
         setOrder(res.data);
@@ -21,34 +24,96 @@ const OrdDetail = () => {
           0
         );
         setSubtotal(sum);
-        updateShippingFee(res.data.items);
       })
       .catch((err) => {
         console.log(err);
       });
   }, []);
 
-  // Update shipping fee
-  const updateShippingFee = (allItems) => {
-    const qtyTotal = allItems.reduce(
-      (partialSum, item) => partialSum + item.amount,
-      0
-    );
-    if (qtyTotal < 5) {
-      setShippingFee(20);
-    } else {
-      setShippingFee(0);
+  const continueToPay = async (order) => {
+    setShowSpinner(true);
+    const dataPayment = {
+      recipientName: order.recipientName,
+      recipientEmail: order.recipientEmail,
+      recipientPhone: order.recipientPhone,
+      addressDelivery: order.addressDelivery,
+      shippingCost: order.shippingCost,
+      paymentMethod: "paypal",
+    };
+    if(order.status == 5){
+      addOrderPayPal(dataPayment)
+      .then((response) => {
+        setShowSpinner(false);
+        window.open(response.data.url,"_self");
+      })
+      .catch((err) => {
+        alert(err.data);
+        setShowPaymentFailed(true);
+        setShowSpinner(false);
+      });
     }
+  };
+
+  const onShowOrdDetail = () => {
+    setShowPaymentFailed(false);
   };
 
   return (
     <>
+    {showPaymentFailed ? (
+        <div className="w-full px-3 text-center">
+          <i
+            className={`fa fa-frown-o text-9xl text-amber-500`}
+            aria-hidden="true"
+          ></i>
+          <p className="font-bold text-xl uppercase mt-5">Sorry</p>
+          <p className=" text-lg text-gray-500 mt-3 break-all">
+            Looks like your payment failed
+          </p>
+          <p className="text-lg text-gray-500  mt-1">Please payment again </p>
+          <div className="py-6 px-3 mt-32 sm:mt-0">
+            <button
+              onClick={() => {onShowOrdDetail()}}
+              className="bg-amber-500 active:bg-amber-600 w-1/4 h-10 py-2.5 uppercase text-white font-bold hover:shadow-md shadow text-sm   rounded-md outline-none focus:outline-none sm:mr-2 mb-1"
+              type="button"
+              style={{ transition: "all .15s ease" }}
+            >
+              Return to Order Detail
+            </button>
+          </div>
+        </div>
+      ) : (<>
       {order ? (
         <>
           <div className="px-4 md:px-3">
-            <p className="lg:text-4xl text-3xl font-black leading-10 text-[#63584c] py-3">
-              Order Detail
-            </p>
+          
+            <div className="flex lg:flex-row flex-col py-4" id="cart">
+                <div className="lg:w-1/2 w-full bg-white h-auto">
+                  <p className="lg:text-4xl text-3xl font-black leading-10 text-[#63584c]">
+                    Order Detail
+                  </p>
+                </div>
+                { order.status == 5 && <div className="lg:w-1/2 lg:text-right lg:pt-0 pt-4 lg:ml-30 w-full h-full">
+                  <button
+                    type="button"
+                    onClick={() => continueToPay(order)}
+                    className="inline-block px-4 -mr-4 py-2.5 lg:mb-0 mb-3 bg-amber-500 hover:bg-amber-600 text-white 
+                            font-medium text-xs leading-tight uppercase rounded-md hover:shadow-md shadow"
+                  >
+                    <i className="fa fa-paypal pr-2" aria-hidden="true"></i>
+                    Continue to payment
+                    {showSpinner && (
+                      <div
+                        className="spinner-border animate-spin inline-block w-3 h-3 border-3 ml-2 rounded-full"
+                        role="status"
+                      >
+                        <span className="visually-hidden">Loading...</span>
+                      </div>
+                    )}
+                  </button>
+                </div> }
+                
+              </div>
           </div>
 
           <div className="w-full mx-2 bg-white lg:h-auto border-2 border-gray-200 rounded-lg ">
@@ -251,9 +316,9 @@ const OrdDetail = () => {
                           Shipping
                         </p>
                         <p className="text-base  font-bold leading-none text-gray-700">
-                          {shippingFee == 0
+                          {order.shippingCost == 0
                             ? "Free"
-                            : numberFormat(shippingFee)}
+                            : numberFormat(order.shippingCost)}
                         </p>
                       </div>
                     </div>
@@ -264,7 +329,7 @@ const OrdDetail = () => {
                           {order.items.length > 1 ? " items" : " item"} )
                         </p>
                         <p className="text-xl font-bold leading-normal text-right text-amber-600 ">
-                          {numberFormat(subtotal + shippingFee)}
+                          {numberFormat(order.totalPrice)}
                         </p>
                       </div>
                     </div>
@@ -277,6 +342,8 @@ const OrdDetail = () => {
       ) : (
         <Loading />
       )}
+      </>)}
+      
     </>
   );
 };
