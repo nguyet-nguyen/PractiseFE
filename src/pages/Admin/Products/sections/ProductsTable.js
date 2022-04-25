@@ -1,7 +1,3 @@
-import $ from "jquery";
-import dt from "datatables.net";
-
-$.DataTable = dt;
 import React, {Fragment, useEffect, useState} from "react";
 import {
     DeleteProduct,
