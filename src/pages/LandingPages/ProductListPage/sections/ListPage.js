@@ -413,11 +413,11 @@ const ListPage = ({sidebarOpen, setSidebarOpen, categoryList}) => {
                                     </h3>
                                     <ul className="mt-3">
                                         {categoryList && categoryList.map((category) =>
-                                            <li className={`px-3 py-2 rounded-sm mb-0.5 last:mb-0 ${pathname === '/dashboard' && 'bg-slate-900'}`}>
+                                            <li key={category.id} className={`px-3 py-2 rounded-sm mb-0.5 last:mb-0 ${pathname === '/dashboard' && 'bg-slate-900'}`}>
                                                 <div className="form-check">
                                                     <input
                                                         checked={cate == category.id}
-                                                        onClick={getcategoryId}
+                                                        onChange={(e) => getcategoryId(e)}
                                                         className="form-check-input appearance-none rounded-full h-4 w-4
                                                 border border-gray-300 bg-white checked:bg-amber-600
                                                 checked:border-amber-600 focus:outline-none
@@ -451,13 +451,13 @@ const ListPage = ({sidebarOpen, setSidebarOpen, categoryList}) => {
                                     </h3>
                                     <ul className="mt-3">
                                         {priceLevel.map((price, index) =>
-                                            <li className={`px-3 py-2 rounded-sm mb-0.5 last:mb-0 ${pathname === '/dashboard' && 'bg-slate-900'}`}>
+                                            <li key={price.id} className={`px-3 py-2 rounded-sm mb-0.5 last:mb-0 ${pathname === '/dashboard' && 'bg-slate-900'}`}>
                                                 {index == 0
                                                     ?
                                                     <div className="form-check">
                                                         <input
                                                             checked={priceState == price.id}
-                                                            onClick={getPriceLevel}
+                                                            onChange={(e) => getPriceLevel(e)}
                                                             className="form-check-input appearance-none rounded-full h-4 w-4
                                                 border border-gray-300 bg-white checked:bg-amber-600
                                                 checked:border-amber-600 focus:outline-none
@@ -479,7 +479,7 @@ const ListPage = ({sidebarOpen, setSidebarOpen, categoryList}) => {
                                                         <div className="form-check">
                                                             <input
                                                                 checked={priceState == price.id}
-                                                                onClick={getPriceLevel}
+                                                                onChange={(e) => getPriceLevel(e)}
                                                                 className="form-check-input appearance-none rounded-full h-4 w-4
                                                 border border-gray-300 bg-white checked:bg-amber-600
                                                 checked:border-amber-600 focus:outline-none
@@ -508,7 +508,7 @@ const ListPage = ({sidebarOpen, setSidebarOpen, categoryList}) => {
                                                         :
                                                         <div className="form-check">
                                                             <input
-                                                                onClick={getPriceLevel}
+                                                                onChange={(e) => getPriceLevel(e)}
                                                                 className="form-check-input appearance-none rounded-full h-4 w-4
                                                 border border-gray-300 bg-white checked:bg-amber-600
                                                 checked:border-amber-600 focus:outline-none
@@ -574,7 +574,7 @@ const ListPage = ({sidebarOpen, setSidebarOpen, categoryList}) => {
                         focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none capitalize"
                                         aria-label="Default select example">
                                     {sortLevel.map((sort) =>
-                                        <option id={sort.name} value={sort.name}
+                                        <option key={sort.name} id={sort.name} value={sort.name}
                                                 className="p-2 m-2 capitalize">{sort.description}</option>
                                     )}
                                 </select>
