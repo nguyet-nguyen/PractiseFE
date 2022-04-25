@@ -113,6 +113,8 @@ const ProductsTable = () => {
         },
         {
             name: "Name",
+            grow:2,
+            wrap: true,
             sortable: true,
             selector: (row) => row.name,
         },
@@ -136,7 +138,7 @@ const ProductsTable = () => {
             name: "Actions",
             text: "Action",
             className: "action",
-            grow: 3,
+            grow: 2,
             align: "left",
             sortable: false,
             cell: (record) => {
@@ -197,7 +199,7 @@ const ProductsTable = () => {
         const product = {
             no: i + 1,
             id: productList[i].id,
-            name: productList[i].name,
+            name: (productList[i].name.toLowerCase().charAt(0).toUpperCase() + productList[i].name.toLowerCase().slice(1)),
             price: numberFormat(productList[i].price),
             color: productList[i].color,
             category: productList[i].category,
