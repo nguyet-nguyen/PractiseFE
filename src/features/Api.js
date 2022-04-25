@@ -133,7 +133,7 @@ export const addOrderPayPal = (data) => {
 // Continue to payment by PayPal
 export const continueToPayment = (data, id) => {
   try {
-    return apiadminnoFormdata.post(`/users/orders/payments/${id}`, data);
+    return apiadminnoFormdata.put(`/users/orders/payments/${id}`, data);
   } catch (error) {
     console.log(error);
   }
