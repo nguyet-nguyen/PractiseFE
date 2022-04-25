@@ -65,7 +65,7 @@ const ListPage = ({sidebarOpen, setSidebarOpen, categoryList}) => {
                 } else if (response.data.data.length > 0) {
                     setCate(params.id);
                 }
-                setLoading(false)
+                setLoading(false);
                 setProductListFilter(response.data.data);
                 if (response.data.total % 6 == 0) {
                     setPage(response.data.total / 6);
@@ -131,31 +131,167 @@ const ListPage = ({sidebarOpen, setSidebarOpen, categoryList}) => {
     const getcategoryId = (e) => {
         setCate(e.target.value);
         navigate(`/all-items/${e.target.value}`);
+        const data = {
+            sort: sort,
+            category: e.target.value,
+            minPrice: minPrice,
+            maxPrice: maxPrice,
+            keyword: search,
+        }
+        requestFilterCategory(data, pageItem, 6).then(response => {
+            setProductListFilter(response.data.data);
+            if (response.data.total % 6 == 0) {
+                setPage(response.data.total / 6);
+            } else {
+                setPage(Math.floor((response.data.total / 6)) + 1);
+            }
+        }).catch(err => {
+            console.log(err);
+        })
     }
     const getPriceLevel = (e) => {
         setPriceState(e.target.value);
         if (e.target.value == 1) {
             setMinPrice("");
             setMaxPrice("");
+            const data = {
+                sort: sort,
+                category: cate,
+                minPrice: "",
+                maxPrice: "",
+                keyword: search,
+            }
+            requestFilterCategory(data, pageItem, 6).then(response => {
+                setProductListFilter(response.data.data);
+                if (response.data.total % 6 == 0) {
+                    setPage(response.data.total / 6);
+                } else {
+                    setPage(Math.floor((response.data.total / 6)) + 1);
+                }
+            }).catch(err => {
+                console.log(err);
+            })
         } else if (e.target.value == 2) {
             setMinPrice(0);
-            setMaxPrice(500);
+            setMaxPrice(10);
+            const data = {
+                sort: sort,
+                category: cate,
+                minPrice: 0,
+                maxPrice: 10,
+                keyword: search,
+            }
+            requestFilterCategory(data, pageItem, 6).then(response => {
+                setProductListFilter(response.data.data);
+                if (response.data.total % 6 == 0) {
+                    setPage(response.data.total / 6);
+                } else {
+                    setPage(Math.floor((response.data.total / 6)) + 1);
+                }
+            }).catch(err => {
+                console.log(err);
+            })
         } else if (e.target.value == 3) {
-            setMinPrice(500);
-            setMaxPrice(1000);
+            setMinPrice(10);
+            setMaxPrice(20);
+            const data = {
+                sort: sort,
+                category: cate,
+                minPrice: 10,
+                maxPrice: 20,
+                keyword: search,
+            }
+            requestFilterCategory(data, pageItem, 6).then(response => {
+                setProductListFilter(response.data.data);
+                if (response.data.total % 6 == 0) {
+                    setPage(response.data.total / 6);
+                } else {
+                    setPage(Math.floor((response.data.total / 6)) + 1);
+                }
+            }).catch(err => {
+                console.log(err);
+            })
         } else if (e.target.value == 4) {
-            setMinPrice(1000);
-            setMaxPrice(3000);
+            setMinPrice(20);
+            setMaxPrice(30);
+            const data = {
+                sort: sort,
+                category: cate,
+                minPrice: 20,
+                maxPrice: 30,
+                keyword: search,
+            }
+            requestFilterCategory(data, pageItem, 6).then(response => {
+                setProductListFilter(response.data.data);
+                if (response.data.total % 6 == 0) {
+                    setPage(response.data.total / 6);
+                } else {
+                    setPage(Math.floor((response.data.total / 6)) + 1);
+                }
+            }).catch(err => {
+                console.log(err);
+            })
         } else if (e.target.value == 5) {
-            setMinPrice(3000);
-            setMaxPrice(5000);
+            setMinPrice(30);
+            setMaxPrice(40);
+            const data = {
+                sort: sort,
+                category: cate,
+                minPrice: 30,
+                maxPrice: 40,
+                keyword: search,
+            }
+            requestFilterCategory(data, pageItem, 6).then(response => {
+                setProductListFilter(response.data.data);
+                if (response.data.total % 6 == 0) {
+                    setPage(response.data.total / 6);
+                } else {
+                    setPage(Math.floor((response.data.total / 6)) + 1);
+                }
+            }).catch(err => {
+                console.log(err);
+            })
         } else if (e.target.value == 6) {
-            setMinPrice(5000);
+            setMinPrice(40);
             setMaxPrice("");
+            const data = {
+                sort: sort,
+                category: cate,
+                minPrice: 30,
+                maxPrice: "",
+                keyword: search,
+            }
+            requestFilterCategory(data, pageItem, 6).then(response => {
+                setProductListFilter(response.data.data);
+                if (response.data.total % 6 == 0) {
+                    setPage(response.data.total / 6);
+                } else {
+                    setPage(Math.floor((response.data.total / 6)) + 1);
+                }
+            }).catch(err => {
+                console.log(err);
+            })
         }
     }
     const getSortLevel = (e) => {
-        setSort(e.target.value)
+        setSort(e.target.value);
+        const data = {
+            sort: e.target.value,
+            category: cate,
+            minPrice: minPrice,
+            maxPrice: maxPrice,
+            keyword: search,
+        }
+        requestFilterCategory(data, pageItem, 6).then(response => {
+            setProductListFilter(response.data.data);
+            if (response.data.total % 6 == 0) {
+                setPage(response.data.total / 6);
+            } else {
+                setPage(Math.floor((response.data.total / 6)) + 1);
+            }
+        }).catch(err => {
+            console.log(err);
+        })
     }
     const priceLevel = [
         {
@@ -164,67 +300,71 @@ const ListPage = ({sidebarOpen, setSidebarOpen, categoryList}) => {
         {
             id: 2,
             minPrice: 0,
-            maxPrice: 500,
+            maxPrice: 10,
         },
         {
             id: 3,
-            minPrice: 500,
-            maxPrice: 1000,
+            minPrice: 10,
+            maxPrice: 20,
         },
         {
             id: 4,
-            minPrice: 1000,
-            maxPrice: 3000,
+            minPrice: 20,
+            maxPrice: 30,
         },
         {
             id: 5,
-            minPrice: 3000,
-            maxPrice: 5000,
+            minPrice: 30,
+            maxPrice: 40,
         },
         {
             id: 6,
-            minPrice: 5000,
+            minPrice: 40,
         },
     ];
     const sortLevel = [
         {
             id: 1,
+            name: "createdAt-DESC",
+            description: "Latest items",
+        },
+        {
+            id: 2,
+            name: "createdAt-ASC",
+            description: "Oldest items",
+        },
+        {
+            id: 3,
             name: "price-DESC",
             description: "High - Low Price"
         },
         {
-            id: 2,
+            id: 4,
             name: "price-ASC",
             description: "Low - High Price",
-
-        },
-        {
-            id: 3,
-            name: "createdAt-DESC",
-            description: "Latest items",
-
-        },
-        {
-            id: 4,
-            name: "createdAt-ASC",
-            description: "Oldest items",
-
         }
     ]
     const searchProduct = (e) => {
         setSearch(e.target.value);
-
-    }
-    requestFilterCategory(data, pageItem, 6).then(response => {
-        setProductListFilter(response.data.data);
-        if (response.data.total % 6 == 0) {
-            setPage(response.data.total / 6);
-        } else {
-            setPage(Math.floor((response.data.total / 6)) + 1);
+        const data = {
+            sort: sort,
+            category: cate,
+            minPrice: minPrice,
+            maxPrice: maxPrice,
+            keyword: e.target.value,
         }
-    }).catch(err => {
-        console.log(err);
-    })
+        requestFilterCategory(data, pageItem, 6).then(response => {
+            setProductListFilter(response.data.data);
+            if (response.data.total % 6 == 0) {
+                setPage(response.data.total / 6);
+            } else {
+                setPage(Math.floor((response.data.total / 6)) + 1);
+            }
+        }).catch(err => {
+            console.log(err);
+        })
+    }
+
     return (
         <div id="listPage-productList">
             <div className="grid md:grid-cols-4 grid-cols-1">
@@ -385,14 +525,9 @@ const ListPage = ({sidebarOpen, setSidebarOpen, categoryList}) => {
                                                                 {numberFormat(price.minPrice)} - {numberFormat(price.maxPrice)}
                                                             </label>
                                                         </div>
-
-
                                                 }
-
-
                                             </li>
                                         )}
-
                                     </ul>
                                 </div>
 
@@ -467,11 +602,7 @@ const ListPage = ({sidebarOpen, setSidebarOpen, categoryList}) => {
                                 )
                             }
                         </>
-
                         }
-
-
-
                     </div>
                 </div>
             </div>
