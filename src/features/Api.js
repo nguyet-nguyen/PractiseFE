@@ -130,6 +130,15 @@ export const addOrderPayPal = (data) => {
   }
 };
 
+// Continue to payment by PayPal
+export const continueToPayment = (data, id) => {
+  try {
+    return apiadminnoFormdata.post(`/users/orders/payments/${id}`, data);
+  } catch (error) {
+    console.log(error);
+  }
+};
+
 // Users order history
 export const getUsersOrdHistory = () => {
   try {
