@@ -225,9 +225,6 @@ const Profile = () => {
   const onBuyItAgain = (id) => {
     buyAgain(id)
       .then((res) => {
-        console.log(res.data);
-        console.log(res.data.error);
-        console.log(res.error);
         navigate("/shopping-cart");
         toast(
           <CustomPopupMessage
@@ -657,7 +654,7 @@ const Profile = () => {
                               <button
                               className=" active:bg-gray-300 active:text-white uppercase text-amber-500 border border-gray-500 font-bold hover:shadow-md
                               shadow text-xs px-4 py-2 rounded outline-none focus:outline-none sm:mr-2 mb-1"
-                                onClick={() => onFilterStatus(0)}
+                                onClick={() => onFilterStatus(5)}
                               >
                                 <i
                                   className="fa fa-clock pr-2"
