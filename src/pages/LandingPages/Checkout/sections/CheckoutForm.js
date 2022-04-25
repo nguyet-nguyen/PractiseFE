@@ -111,7 +111,6 @@ const CheckoutForm = () => {
       addOrderPayPal(dataCheckout)
       .then((response) => {
         setShowSpinner(false);
-        console.log(response.data.url);
         window.open(response.data.url,"_self");
 
       })
@@ -153,10 +152,10 @@ const CheckoutForm = () => {
             Looks like your payment failed
           </p>
           <p className="text-lg text-gray-500  mt-1">Please payment again </p>
-          <div className="py-6 px-3 mt-32 sm:mt-0">
+          <div className="py-6 px-3 lg:mt-2 mt-0">
             <button
               onClick={() => {onShowCheckout()}}
-              className="bg-amber-500 active:bg-amber-600 w-1/4 h-10 py-2.5 uppercase text-white font-bold hover:shadow-md shadow text-sm   rounded-md outline-none focus:outline-none sm:mr-2 mb-1"
+              className="bg-amber-500 active:bg-amber-600 lg:w-1/4 w-full h-10 py-2.5 uppercase text-white font-bold hover:shadow-md shadow text-sm rounded-md outline-none focus:outline-none mb-1"
               type="button"
               style={{ transition: "all .15s ease" }}
             >
