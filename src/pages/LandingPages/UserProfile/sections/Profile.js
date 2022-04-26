@@ -247,10 +247,13 @@ const Profile = () => {
         );
       });
   };
-
+  useEffect(() => {
+    const section = document.querySelector( '#profile-page' );
+    section.scrollIntoView( { behavior: 'smooth', block: 'start' } );
+  },[])
   return (
     <>
-      <main className="profile-page">
+      <main className="profile-page" id="profile-page">
         <section className="relative block" style={{ height: "500px" }}>
           <div
             className="absolute top-0 w-full h-full bg-center bg-cover"
@@ -434,7 +437,7 @@ const Profile = () => {
                                               errors.phone &&
                                               "border-red-600 focus:ring-red-500 focus:border-red-600 border-1"
                                             }`}
-                                      placeholder="0933549878"
+                                      placeholder="0xxxxxxxxx"
                                       id="phone"
                                       name="phone"
                                       {...register("phone", {

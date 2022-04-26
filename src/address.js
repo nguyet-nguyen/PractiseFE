@@ -46,12 +46,12 @@ export const districts = [
     {
         id: 6,
         idCity: 2,
-        name: '1 District'
+        name: 'District 1 '
     },
     {
         id: 7,
         idCity: 2,
-        name: '7 District'
+        name: 'District 7 '
     },
     {
         id: 8,

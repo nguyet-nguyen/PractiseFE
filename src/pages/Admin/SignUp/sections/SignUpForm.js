@@ -212,7 +212,7 @@ const SignUpAdminForm = () => {
                                                     errors.phone &&
                                                     "border-red-600 focus:ring-red-500 focus:border-red-600 border-1"
                                                 }`}
-                                                placeholder="0933549878"
+                                                placeholder="0xxxxxxxxx"
                                                 id="phone"
                                                 name="phone"
                                                 {...register("phone", {

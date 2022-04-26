@@ -167,14 +167,19 @@ const ShoppingCart = () => {
         );
         setSubtotal(sum);
     };
-
-    return itemsInCart.length > 0 ? (
-        <div className="relative">
-            <div className="px-4 md:px-3">
-                <p className="lg:text-4xl text-3xl font-black leading-10 text-[#63584c] py-3">
-                    Shopping Cart
-                </p>
-            </div>
+    useEffect(() => {
+        const section = document.querySelector( '#cartPage' );
+        section.scrollIntoView( { behavior: 'smooth', block: 'start' } );
+    },[])
+    return (
+        <div id="cartPage">
+            {itemsInCart.length > 0 ? (
+            <div className="relative">
+                <div className="px-4 md:px-3">
+                    <p className="lg:text-4xl text-3xl font-black leading-10 text-[#63584c] py-3">
+                        Shopping Cart
+                    </p>
+                </div>
 
                 {loading?
                     <div className="flex lg:flex-row flex-col" id="cart">
@@ -204,7 +209,7 @@ const ShoppingCart = () => {
                                         <div className="flex items-center justify-between w-full md:pt-0 pt-4">
                                             <Link to={`/all-items/item-detail/${item.idProduct}`}>
                                                 <p className="text-lg uppercase font-black leading-none text-gray-800 ">
-                                                    {item.name} 
+                                                    {item.name}
                                                 </p>
                                             </Link>
 
@@ -342,7 +347,7 @@ const ShoppingCart = () => {
                                 <i className="fa fa-arrow-circle-o-down ml-2" aria-hidden="true"></i>
                             </button>}
                         </div>
-                      
+
                         <div className="lg:w-1/3 lg:ml-20 md:w-8/12 w-full bg-gray-100  h-full">
                             <div
                                 className="flex flex-col h-auto lg:px-8 md:px-7 px-4 lg:py-16 md:py-8 py-6 justify-between overflow-y-auto">
@@ -402,9 +407,9 @@ const ShoppingCart = () => {
                     :
                     <Loading/>
                 }
-        </div>
-    ) : (
-        showEmpty && (<div className="text-center">
+            </div>
+            ) : (
+            showEmpty && (<div className="text-center">
             <i
                 className={`fa fa-shopping-cart mr-7 text-9xl text-amber-500`}
                 aria-hidden="true"
@@ -425,7 +430,10 @@ const ShoppingCart = () => {
             </div>
         </div>)
 
-    );
+            )
+            }
+        </div>
+    )
 };
 
 export default ShoppingCart;

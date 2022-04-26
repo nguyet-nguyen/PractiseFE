@@ -14,8 +14,13 @@ import footerRoutes from "footer.routes";
 import bannerHome from "assets/images/logos/banner-home.PNG";
 import BreadcrumbsItemDetail from "./sections/BreadcrumbsItemDetail";
 import HotDeal from "../Home/sections/HotDeal";
+import {useEffect} from "react";
 
 const ProductDetail = () => {
+    useEffect(() => {
+        const section = document.querySelector( '#productDetailPage' );
+        section.scrollIntoView( { behavior: 'smooth', block: 'start' } );
+    },[])
   return (
     <>
       <DefaultNavbar
@@ -36,15 +41,16 @@ const ProductDetail = () => {
         light
       />
 
-      <BreadcrumbsItemDetail />
-      <section className="container h-auto mx-auto px-4 py-2 mx-auto md:py-12 md:px-32 productListPage">
-        <div className="md:w-12/12 w-full h-auto transition-all rounded-lg mx-auto">
-          <ItemDetail />
-          <div className="my-16">
-            <HotDeal />
-          </div>
-        </div>
-      </section>
+            <BreadcrumbsItemDetail />
+            <section id="productDetailPage" className="container h-auto mx-auto px-4 py-2 mx-auto md:py-12 md:px-32">
+                <div className="md:w-12/12 w-full h-auto transition-all rounded-lg mx-auto">
+                    <ItemDetail />
+                    <div className="my-16">
+                        <HotDeal />
+                    </div>
+                </div>
+            </section>
+       
       <MKBox pt={6} px={1} mt={6}>
         <DefaultFooter content={footerRoutes} />
       </MKBox>

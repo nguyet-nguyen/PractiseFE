@@ -150,7 +150,6 @@ const ItemDetail = () => {
         $("#modalWarningToken").modal("hide");
         navigate("/pages/authentication/sign-in");
     }
-
     return (
         itemDetail ?
             <section id="ProductDetail" className="text-gray-600 body-font overflow-hidden ItemDetail rounded-lg">
@@ -209,9 +208,6 @@ const ItemDetail = () => {
 
                         {/* ------------------------------------------------------------- */}
                         <div className="w-full md:pl-10 md:py-5 mt-4 md:mt-0">
-                            <p className="text-sm text-gray-500 uppercase mb-5">
-                                Material: {itemDetail.material}
-                            </p>
                             <h2 className="text-gray-900 text-3xl font-bold uppercase mb-5">
                                 {itemDetail.name}
                             </h2>
@@ -227,6 +223,10 @@ const ItemDetail = () => {
                             <div className="flex">
                                 <span className="mr-2 capitalize text-base text-gray-500">Category: </span>
                                 <span className="text-base text-amber-700">{itemDetail.category}</span>
+                            </div>
+                            <div className="flex">
+                                <span className="mr-2 capitalize text-base text-gray-500">Material: </span>
+                                <span className="text-base text-amber-700">{itemDetail.material}</span>
                             </div>
                             <div className="flex justify-between my-6 items-center">
 

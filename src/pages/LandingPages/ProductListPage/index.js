@@ -32,7 +32,10 @@ function ProductListPages() {
             });
 
     }, []);
-
+    useEffect(() => {
+        const section = document.querySelector( '#ProductListPage' );
+        section.scrollIntoView( { behavior: 'smooth', block: 'start' } );
+    },[])
     return (
         <>
             <DefaultNavbar
@@ -64,7 +67,7 @@ function ProductListPages() {
                     placeItems: "center",
                 }}>
             </MKBox>
-            <section className="container h-auto mx-auto px-4 py-2 mx-auto md:py-12 md:px-32 productListPage">
+            <section className="container h-auto mx-auto px-4 py-2 mx-auto md:py-12 md:px-32 productListPage" id="ProductListPage">
                 <div className="md:w-12/12 w-full h-auto transition-all rounded-lg mx-auto">
                     <BreadcrumbsProductList />
                     <ListPage categoryList={categoryList} sidebarOpen={sidebarOpen} setSidebarOpen={setSidebarOpen}/>
