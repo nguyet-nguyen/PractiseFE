@@ -248,7 +248,7 @@ const UpdateProductForm = () => {
                                                             className="w-10 z-10 pl-1 text-center pointer-events-none flex items-center justify-center">
                                                             <i className="fa fa-paint-brush" aria-hidden="true"></i>
                                                         </div>
-                                                        <select className={`w-full -ml-10 pl-10 pr-3 py-2 rounded-lg border-2 border-gray-200
+                                                        <select className={`w-full -ml-10 pl-10 pr-3 py-2 rounded-lg border-2 border-gray-200 bg-white
                                             outline-none focus:ring-2 focus:ring-amber-500 focus:border-amber-600
                                             ${errors.categoryList && "border-red-600 focus:ring-red-500 focus:border-red-600 border-1"}`}
                                                                 id="color" name="color"
@@ -305,7 +305,7 @@ const UpdateProductForm = () => {
                                                             className="w-10 z-10 pl-1 text-center pointer-events-none flex items-center justify-center">
                                                             <i className="fa fa-tag" aria-hidden="true"></i>
                                                         </div>
-                                                        <select className={`w-full -ml-10 pl-10 pr-3 py-2 rounded-lg border-2 border-gray-200
+                                                        <select className={`w-full -ml-10 pl-10 pr-3 py-2 rounded-lg border-2 border-gray-200 bg-white
                                             outline-none focus:ring-2 focus:ring-amber-500 focus:border-amber-600
                                             ${errors.categoryList && "border-red-600 focus:ring-red-500 focus:border-red-600 border-1"}`}
                                                                 id="material" name="material"
@@ -335,7 +335,7 @@ const UpdateProductForm = () => {
                                                             className="w-10 z-10 pl-1 text-center pointer-events-none flex items-center justify-center">
                                                             <i className="fa fa-info-circle" aria-hidden="true"></i>
                                                         </div>
-                                                        <select className={`w-full -ml-10 pl-10 pr-3 py-2 rounded-lg border-2 border-gray-200
+                                                        <select className={`w-full -ml-10 pl-10 pr-3 py-2 rounded-lg border-2 border-gray-200 bg-white
                                             outline-none focus:ring-2 focus:ring-amber-500 focus:border-amber-600
                                             ${errors.categoryList && "border-red-600 focus:ring-red-500 focus:border-red-600 border-1"}`}
                                                                 id="category" name="category"
