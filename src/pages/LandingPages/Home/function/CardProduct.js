@@ -7,9 +7,9 @@ const CardProduct = ({proList, homePage, hotDeal}) => {
         return proList ? (
             <>
                 {proList && proList.map((product, index) =>
-                    <div key={product.id} className={`ProductCard cardProduct-${index} mx-auto w-full h-84 p-2 border bg-white rounded-lg md:w-72 hover:shadow-lg 
+                    <div key={product.id} className={`ProductCard cardProduct-${index} mx-auto w-full h-84 p-2 border bg-white rounded-lg hover:shadow-lg 
                     transition duration-300 ease-in-out`}>
-                            <div className="bg-gray-400 h-auto rounded-t-lg relative card-product">
+                            <div className="h-auto rounded-t-lg relative card-product">
                                 <Link to={`/all-items/item-detail/${product.id}`} className="card-product-img">
                                     <img className="image-card hover:opacity-75"
                                          src={product.image[0]}
@@ -45,14 +45,13 @@ const CardProduct = ({proList, homePage, hotDeal}) => {
         return proList ? (
             <>
                 {proList && proList.slice(0, 8).map((product, index) =>
-                    <div key={product.id} className={`ProductCard cardProduct-${index} mx-auto w-full h-84 p-2 border bg-white rounded-lg md:w-72 hover:shadow-lg 
+                    <div key={product.id} className={`ProductCard cardProduct-${index} mx-auto w-full h-84 p-2 border bg-white rounded-lg hover:shadow-lg 
                     transition duration-300 ease-in-out`}>
-                            <div className="bg-gray-400 h-auto rounded-t-lg relative card-product">
+                            <div className="h-auto rounded-t-lg relative card-product">
                                 <Link to={`/all-items/item-detail/${product.id}`} className="card-product-img">
                                     <img className="image-card hover:opacity-75"
                                          src={product.image[0]}
                                          alt=""
-
                                     />
                                 </Link>
                                 <div className="flex justify-center items-center px-2 pb-2 card-icon absolute">

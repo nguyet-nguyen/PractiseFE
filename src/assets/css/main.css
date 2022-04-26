@@ -245,3 +245,8 @@ input[type=number] {
     padding-top: 0px;
     padding-bottom: 0px;
 }
+@media only screen and (max-width: 686px) {
+    .MuiBox-root.css-154fleq {
+        min-height: 35vh;
+        }
+    }
