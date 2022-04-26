@@ -40,10 +40,10 @@ const OrderListTable = () => {
             if (
                 order.recipientEmail.toString().toLowerCase().indexOf(searchKey) > -1 ||
                 order.recipientPhone.toString().toLowerCase().indexOf(searchKey) > -1 ||
-                order.addressDelivery.toString().toLowerCase().indexOf(searchKey) >
-                -1 ||
+                order.addressDelivery.toString().toLowerCase().indexOf(searchKey) > -1 ||
                 order.status.toString().toLowerCase().indexOf(searchKey) > -1 ||
                 order.amount.toString().toLowerCase().indexOf(searchKey) > -1 ||
+                order.paymentMethod.toString().toLowerCase().indexOf(searchKey) > -1 ||
                 order.totalPrice.toString().toLowerCase().indexOf(searchKey) > -1
             ) {
                 searchList.push(order);
@@ -157,7 +157,7 @@ const OrderListTable = () => {
         },
         {
             name: "Email",
-            grow: 3,
+            grow: 2,
             sortable: true,
             selector: (row) => row.recipientEmail,
         },
@@ -174,6 +174,11 @@ const OrderListTable = () => {
         },
         {
             name: "Payment",
+            sortable: true,
+            selector: (row) => row.paymentMethod,
+        },
+        {
+            name: "Is Paid",
             sortable: true,
             selector: (row) => {
                 return (
@@ -356,7 +361,7 @@ const OrderListTable = () => {
             recipientEmail: orderlist[i].recipientEmail,
             recipientPhone: orderlist[i].recipientPhone,
             status: orderlist[i].status,
-            paymentMethod: orderlist[i].paymentMethod,
+            paymentMethod: orderlist[i].paymentMethod.toUpperCase(),
             amount: orderlist[i].amount,
         };
         data.push(order);
