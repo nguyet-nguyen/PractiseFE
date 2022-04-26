@@ -234,7 +234,7 @@ const ItemDetail = () => {
                                     <span className="mr-3">Size</span>
                                     <div className="relative">
                                         <select onChange={e => changeSize(e.target.value)} className="rounded border appearance-none border-amber-600 py-2 focus:outline-none
-                                    focus:ring-2 focus:ring-amber-500 focus:border-amber-600 text-base pl-3 pr-10">
+                                    focus:ring-2 focus:ring-amber-500 focus:border-amber-600 text-base pl-3 pr-10 bg-white">
                                             {itemDetail && itemDetail.items.map((size) => (
                                                 <option key={size.id} id={size.id} value={size.id}>{size.size}</option>
                                             ))}

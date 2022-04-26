@@ -398,7 +398,7 @@ const SignUpAdminForm = () => {
                                                 ></i>
                                             </div>
                                             <select
-                                                className={`w-full -ml-10 pl-8 pr-3 py-2 rounded-lg border-2 border-gray-200
+                                                className={`w-full -ml-10 pl-8 pr-3 py-2 rounded-lg border-2 border-gray-200 bg-white
                                             outline-none focus:ring-2 focus:ring-amber-500 focus:border-amber-600
                                             ${
                                                     errors.city &&
@@ -428,7 +428,7 @@ const SignUpAdminForm = () => {
                                                 ></i>
                                             </div>
                                             <select
-                                                className={`w-full -ml-10 pl-8 pr-3 py-2 rounded-lg border-2 border-gray-200
+                                                className={`w-full -ml-10 pl-8 pr-3 py-2 rounded-lg border-2 border-gray-200 bg-white
                                             outline-none focus:ring-2 focus:ring-amber-500 focus:border-amber-600
                                             ${
                                                     errors.district &&
@@ -460,7 +460,7 @@ const SignUpAdminForm = () => {
                                                 ></i>
                                             </div>
                                             <select
-                                                className={`w-full -ml-10 pl-8 pr-3 py-2 rounded-lg border-2 border-gray-200
+                                                className={`w-full -ml-10 pl-8 pr-3 py-2 rounded-lg border-2 border-gray-200 bg-white
                                             outline-none focus:ring-2 focus:ring-amber-500 focus:border-amber-600
                                             ${
                                                     errors.wards &&
