@@ -390,9 +390,15 @@ const SignUpAdminForm = () => {
                                             Province/City
                                             <span className="text-red-500 ml-1">*</span>
                                         </label>
-                                        <div className="flex justify-end">
+                                        <div className="flex">
+                                            <div className="w-10 z-10 pl-1 text-center pointer-events-none flex items-center justify-center">
+                                                <i
+                                                    className="fa fa-map-marker"
+                                                    aria-hidden="true"
+                                                ></i>
+                                            </div>
                                             <select
-                                                className={`w-full -ml-10 pl-10 pr-3 py-2 rounded-lg border-2 border-gray-200
+                                                className={`w-full -ml-10 pl-8 pr-3 py-2 rounded-lg border-2 border-gray-200
                                             outline-none focus:ring-2 focus:ring-amber-500 focus:border-amber-600
                                             ${
                                                     errors.city &&
@@ -414,9 +420,15 @@ const SignUpAdminForm = () => {
                                             District
                                             <span className="text-red-500 ml-1">*</span>
                                         </label>
-                                        <div className="flex justify-end">
+                                        <div className="flex">
+                                            <div className="w-10 z-10 pl-1 text-center pointer-events-none flex items-center justify-center">
+                                                <i
+                                                    className="fa fa-map-marker"
+                                                    aria-hidden="true"
+                                                ></i>
+                                            </div>
                                             <select
-                                                className={`w-full -ml-10 pl-10 pr-3 py-2 rounded-lg border-2 border-gray-200
+                                                className={`w-full -ml-10 pl-8 pr-3 py-2 rounded-lg border-2 border-gray-200
                                             outline-none focus:ring-2 focus:ring-amber-500 focus:border-amber-600
                                             ${
                                                     errors.district &&
@@ -440,9 +452,15 @@ const SignUpAdminForm = () => {
                                             Ward/Commune
                                             <span className="text-red-500 ml-1">*</span>
                                         </label>
-                                        <div className="flex justify-end">
+                                        <div className="flex">
+                                            <div className="w-10 z-10 pl-1 text-center pointer-events-none flex items-center justify-center">
+                                                <i
+                                                    className="fa fa-map-marker"
+                                                    aria-hidden="true"
+                                                ></i>
+                                            </div>
                                             <select
-                                                className={`w-full -ml-10 pl-10 pr-3 py-2 rounded-lg border-2 border-gray-200
+                                                className={`w-full -ml-10 pl-8 pr-3 py-2 rounded-lg border-2 border-gray-200
                                             outline-none focus:ring-2 focus:ring-amber-500 focus:border-amber-600
                                             ${
                                                     errors.wards &&

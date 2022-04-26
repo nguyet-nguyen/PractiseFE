@@ -5,12 +5,13 @@ import "react-toastify/dist/ReactToastify.css";
 import { updateUserAvatar } from "../../../../features/Api";
 import CustomPopupMessage from "../../../CustomPopupMess";
 
-const ModalUpdateAvatar = ({ userInfo }) => {
+const ModalUpdateAvatar = ({ userInfo, getUserInformation }) => {
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm();
+  
 
   const onUpdateAvatar = async (data, e) => {
     const formData = new FormData();
@@ -19,10 +20,12 @@ const ModalUpdateAvatar = ({ userInfo }) => {
 
     updateUserAvatar(userInfo.id, formData)
       .then((response) => {
-        console.log(response.data);
         toast(<CustomPopupMessage mess="Update avatar successfully!" icon="check-circle"
         titleColor="amber"
         iconColor="amber"/>);
+
+        const idUser = JSON.parse(localStorage.getItem("userInfo") || "{}").id;
+        getUserInformation(idUser);
       })
       .catch((err) => {
         alert(err.data);

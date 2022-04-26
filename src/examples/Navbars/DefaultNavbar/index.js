@@ -204,7 +204,7 @@ function DefaultNavbar() {
                                         >
                                             <img
                                                 src={users.image}
-                                                className="rounded-full border-2 border-amber-600 w-10 shadow-lg"
+                                                className="rounded-full border-2 border-amber-600 w-10 h-10 shadow-lg"
                                                 alt="Avatar"
                                             />
                                         </button>

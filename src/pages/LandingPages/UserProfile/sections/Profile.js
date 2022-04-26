@@ -296,11 +296,11 @@ const Profile = () => {
                         <div className="relative">
                           {/* <!-- Button trigger modal --> */}
                           <button
-                            className="icon_change h-6 w-7 pt-1 text-sm bg-amber-400 hover:bg-amber-500 text-white rounded-xl leading-tight text-center absolute m-10 mb-4 mr-20 z-50 cursor-pointer"
+                            className="icon_change h-7 w-7 text-sm bg-amber-400 hover:bg-amber-500 text-white rounded-xl leading-tight text-center absolute m-10 mb-4 mr-20 z-50 cursor-pointer"
                             data-bs-toggle="modal"
                             data-bs-target="#modalUpdateAvatar"
                           >
-                            <i className="fa fa-plus" aria-hidden="true"></i>
+                            <i className="fa fa-pencil text-xs" aria-hidden="true"></i>
                           </button>
                           <img
                             alt="user avatar"
@@ -309,7 +309,7 @@ const Profile = () => {
                             style={{ maxWidth: "150px", height: "150px" }}
                           />
                         </div>
-                        <ModalUpdateAvatar userInfo={userInfo} />
+                        <ModalUpdateAvatar userInfo={userInfo} getUserInformation={getUserInformation}/>
                       </div>
                       <div className="w-full lg:w-4/12 px-4 lg:order-3 lg:text-right lg:self-center ">
                         <div className="py-6 px-3 mt-32 sm:mt-0">
@@ -350,11 +350,11 @@ const Profile = () => {
                       <h3 className="text-4xl font-semibold leading-normal text-center mb-2 text-gray-800">
                         {userInfo.name}
                       </h3>
-                      <div className="text-sm leading-normal mt-0 mb-2 text-gray-500 font-bold uppercase">
+                      <div className="text-md leading-normal mt-0 mb-2 text-gray-500 font-bold lowercase">
                         <i className="fas fa-envelope mr-2 text-lg text-gray-500"></i>
                         {userInfo.email}
                       </div>
-                      <div className="mb-2 text-gray-700 mt-10">
+                      <div className="mb-2 text-gray-700 mt-4">
                         <i className="fas fa-phone mr-2 text-lg text-gray-500"></i>
                         {userInfo.phone}
                       </div>
@@ -473,9 +473,15 @@ const Profile = () => {
                                   >
                                     Province/City
                                   </label>
-                                  <div className="flex justify-end">
+                                  <div className="flex">
+                                    <div className="w-10 z-10 pl-1 text-center pointer-events-none flex items-center justify-center">
+                                      <i
+                                        className="fa fa-map-marker"
+                                        aria-hidden="true"
+                                      ></i>
+                                    </div>
                                     <select
-                                      className={`w-full -ml-10 pl-5 pr-3 py-2 rounded-lg border-2 border-gray-200
+                                      className={`w-full -ml-10 pl-10 pr-3 py-2 rounded-lg border-2 border-gray-200
                                             outline-none focus:ring-2 focus:ring-amber-500 focus:border-amber-600
                                             ${
                                               errors.city &&
@@ -507,9 +513,15 @@ const Profile = () => {
                                   >
                                     District
                                   </label>
-                                  <div className="flex justify-end">
+                                  <div className="flex">
+                                    <div className="w-10 z-10 pl-1 text-center pointer-events-none flex items-center justify-center">
+                                      <i
+                                        className="fa fa-map-marker"
+                                        aria-hidden="true"
+                                      ></i>
+                                    </div>
                                     <select
-                                      className={`w-full -ml-10 pl-5 pr-3 py-2 rounded-lg border-2 border-gray-200
+                                      className={`w-full -ml-10 pl-10 pr-3 py-2 rounded-lg border-2 border-gray-200
                                             outline-none focus:ring-2 focus:ring-amber-500 focus:border-amber-600
                                             ${
                                               errors.district &&
@@ -535,6 +547,7 @@ const Profile = () => {
                                       )}
                                     </select>
                                   </div>
+                                
                                 </div>
                                 <div className="w-1/3 px-3 mb-5">
                                   <label
@@ -543,9 +556,16 @@ const Profile = () => {
                                   >
                                     Ward/Commune
                                   </label>
-                                  <div className="flex justify-end">
+                                 
+                                  <div className="flex">
+                                    <div className="w-10 z-10 pl-1 text-center pointer-events-none flex items-center justify-center">
+                                      <i
+                                        className="fa fa-map-marker"
+                                        aria-hidden="true"
+                                      ></i>
+                                    </div>
                                     <select
-                                      className={`w-full -ml-10 pl-5 pr-3 py-2 rounded-lg border-2 border-gray-200
+                                      className={`w-full -ml-10 pl-10 pr-3 py-2 rounded-lg border-2 border-gray-200
                                             outline-none focus:ring-2 focus:ring-amber-500 focus:border-amber-600
                                             ${
                                               errors.wards &&
@@ -571,6 +591,7 @@ const Profile = () => {
                                       )}
                                     </select>
                                   </div>
+                                
                                 </div>
                               </div>
                               <div className="flex -mx-3">
