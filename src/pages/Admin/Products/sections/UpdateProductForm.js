@@ -157,8 +157,12 @@ const UpdateProductForm = () => {
                                 </li>
                                 <li className="flex items-center"><span className="text-gray-500 mx-2">
                     <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
-                        <path fillRule="evenodd" d="M10.293 15.707a1 1 0 010-1.414L14.586 10l-4.293-4.293a1 1 0 111.414-1.414l5 5a1 1 0 010 1.414l-5 5a1 1 0 01-1.414 0z" clipRule="evenodd" />
-                        <path fillRule="evenodd" d="M4.293 15.707a1 1 0 010-1.414L8.586 10 4.293 5.707a1 1 0 011.414-1.414l5 5a1 1 0 010 1.414l-5 5a1 1 0 01-1.414 0z" clipRule="evenodd" />
+                        <path fillRule="evenodd"
+                              d="M10.293 15.707a1 1 0 010-1.414L14.586 10l-4.293-4.293a1 1 0 111.414-1.414l5 5a1 1 0 010 1.414l-5 5a1 1 0 01-1.414 0z"
+                              clipRule="evenodd"/>
+                        <path fillRule="evenodd"
+                              d="M4.293 15.707a1 1 0 010-1.414L8.586 10 4.293 5.707a1 1 0 011.414-1.414l5 5a1 1 0 010 1.414l-5 5a1 1 0 01-1.414 0z"
+                              clipRule="evenodd"/>
                     </svg>
                 </span></li>
                                 <li>
@@ -240,6 +244,10 @@ const UpdateProductForm = () => {
                                                         <span className="text-red-500 ml-1">*</span>
                                                     </label>
                                                     <div className="flex justify-end">
+                                                        <div
+                                                            className="w-10 z-10 pl-1 text-center pointer-events-none flex items-center justify-center">
+                                                            <i className="fa fa-paint-brush" aria-hidden="true"></i>
+                                                        </div>
                                                         <select className={`w-full -ml-10 pl-10 pr-3 py-2 rounded-lg border-2 border-gray-200
                                             outline-none focus:ring-2 focus:ring-amber-500 focus:border-amber-600
                                             ${errors.categoryList && "border-red-600 focus:ring-red-500 focus:border-red-600 border-1"}`}
@@ -250,7 +258,8 @@ const UpdateProductForm = () => {
                                                                 itemDetail.color == cate.name ?
                                                                     <option key={cate.name} value={cate.name}
                                                                             selected>{cate.name}</option>
-                                                                    : <option key={cate.name} value={cate.name}>{cate.name}</option>
+                                                                    : <option key={cate.name}
+                                                                              value={cate.name}>{cate.name}</option>
 
                                                             ))}
                                                         </select>
@@ -292,6 +301,10 @@ const UpdateProductForm = () => {
                                                         <span className="text-red-500 ml-1">*</span>
                                                     </label>
                                                     <div className="flex justify-end">
+                                                        <div
+                                                            className="w-10 z-10 pl-1 text-center pointer-events-none flex items-center justify-center">
+                                                            <i className="fa fa-tag" aria-hidden="true"></i>
+                                                        </div>
                                                         <select className={`w-full -ml-10 pl-10 pr-3 py-2 rounded-lg border-2 border-gray-200
                                             outline-none focus:ring-2 focus:ring-amber-500 focus:border-amber-600
                                             ${errors.categoryList && "border-red-600 focus:ring-red-500 focus:border-red-600 border-1"}`}
@@ -302,7 +315,8 @@ const UpdateProductForm = () => {
                                                                 itemDetail.material == cate.name ?
                                                                     <option key={cate.name} value={cate.name}
                                                                             selected>{cate.name}</option>
-                                                                    : <option key={cate.name} value={cate.name}>{cate.name}</option>
+                                                                    : <option key={cate.name}
+                                                                              value={cate.name}>{cate.name}</option>
 
                                                             ))}
                                                         </select>
@@ -317,6 +331,10 @@ const UpdateProductForm = () => {
                                                         <span className="text-red-500 ml-1">*</span>
                                                     </label>
                                                     <div className="flex justify-end">
+                                                        <div
+                                                            className="w-10 z-10 pl-1 text-center pointer-events-none flex items-center justify-center">
+                                                            <i className="fa fa-info-circle" aria-hidden="true"></i>
+                                                        </div>
                                                         <select className={`w-full -ml-10 pl-10 pr-3 py-2 rounded-lg border-2 border-gray-200
                                             outline-none focus:ring-2 focus:ring-amber-500 focus:border-amber-600
                                             ${errors.categoryList && "border-red-600 focus:ring-red-500 focus:border-red-600 border-1"}`}
@@ -327,10 +345,11 @@ const UpdateProductForm = () => {
                                                                 i === 0 ? "" :
                                                                     itemDetail.category == cate.name ?
                                                                         <option
-                                                                                key={cate.id}
-                                                                                value={cate.id}
-                                                                                selected>{cate.name}</option>
-                                                                        : <option key={cate.id} value={cate.id}>{cate.name}</option>
+                                                                            key={cate.id}
+                                                                            value={cate.id}
+                                                                            selected>{cate.name}</option>
+                                                                        : <option key={cate.id}
+                                                                                  value={cate.id}>{cate.name}</option>
 
                                                             ))}
                                                         </select>
