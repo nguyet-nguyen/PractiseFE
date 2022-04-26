@@ -373,7 +373,7 @@ const ShoppingCart = () => {
                                     </div>
                                     {subtotal < 500 && (
                                         <p className="text-sm  font-semibold leading-normal italic text-amber-700 mb-3 ">
-                                            ( Shipping is free if you order $500.00 or more.
+                                            ( Shipping is free if you order $500 or more.
                                             )
                                         </p>)}
 
