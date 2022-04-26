@@ -361,6 +361,7 @@ const UpdateProductForm = () => {
                                                 <div className="w-1/2 px-3 mb-5">
                                                     <label htmlFor="" className="text-xs font-semibold px-1">
                                                         Product's Decription
+                                                        <span className="text-red-500 ml-1">*</span>
                                                     </label>
                                                     <div className="flex">
                                                         <div
@@ -374,10 +375,12 @@ const UpdateProductForm = () => {
                                                                   placeholder="Product's Decription"
                                                                   {...register("description")}/>
                                                     </div>
+                                                    
                                                 </div>
                                                 <div className="w-1/2 px-3 mb-5">
                                                     <label htmlFor="" className="text-xs font-semibold px-1">
-                                                        Avatar
+                                                        Product images
+                                                        <span className="text-red-500 ml-1">*</span>
                                                     </label>
                                                     <div className="flex items-center justify-center w-full">
                                                         <label
