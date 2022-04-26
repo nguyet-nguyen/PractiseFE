@@ -18,11 +18,18 @@ function WelcomeBanner() {
         handleSubmit,
         formState: {errors},
     } = useForm();
-    const [report, setReport] = useState([]);
+    const [report, setReport] = useState(
+        {
+            totalOrder: 0,
+            totalProduct: 0,
+            totalRevenue: 0,
+            totalUser: 0
+        }
+    );
     const [lineChart, setLineChart] = useState([]);
     const [pending, setPending] = useState(1);
     const [approved, setApproved] = useState(1);
-
+    console.log(report);
     useEffect(() => {
         const data = {
             fromDate: null,
@@ -180,14 +187,14 @@ function WelcomeBanner() {
                                         text-sm leading-tight uppercase rounded shadow-md hover:bg-amber-600
                                         hover:shadow-lg focus:bg-amber-600 focus:shadow-lg focus:outline-none focus:ring-0
                                          active:bg-amber-600 active:shadow-lg transition duration-150 ease-in-out">Filter
-                                          {showSpinner && (
-                            <div
-                              class="spinner-border animate-spin inline-block w-4 h-4 border-3 ml-2 rounded-full"
-                              role="status"
-                            >
-                              <span class="visually-hidden">Loading...</span>
-                            </div>
-                          )}
+                                    {showSpinner && (
+                                        <div
+                                            class="spinner-border animate-spin inline-block w-4 h-4 border-3 ml-2 rounded-full"
+                                            role="status"
+                                        >
+                                            <span class="visually-hidden">Loading...</span>
+                                        </div>
+                                    )}
                                 </button>
 
                             </form>
