@@ -45,6 +45,7 @@ const AdminTable = () => {
     const columns = [
         {
             name: 'No',
+            grow: 0.5,
             sortable: true,
             width: "100px",
             selector: row => row.no,

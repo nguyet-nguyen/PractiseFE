@@ -63,7 +63,6 @@ const OrderListTable = () => {
           };
           UpdateStatusOrderList(data, id)
             .then((res) => {
-                console.log(res.data);
                 toast(
                     <CustomPopupMessage
                         mess="This order are shipping"
@@ -83,7 +82,6 @@ const OrderListTable = () => {
           };
           UpdateStatusOrderList(data, id)
             .then((res) => {
-                console.log(res.data);
                 toast(
                     <CustomPopupMessage
                         mess="This order has been completed"
@@ -97,8 +95,6 @@ const OrderListTable = () => {
                 console.log(err);
             });
         }
-        
-        
         getAllOrder();
     };
 
@@ -148,6 +144,8 @@ const OrderListTable = () => {
             name: "No",
             sortable: true,
             width:"100px",
+            grow: 0.5,
+
             selector: (row) => row.no,
         },
         {
@@ -162,11 +160,12 @@ const OrderListTable = () => {
             sortable: true,
             selector: (row) => row.recipientEmail,
         },
-        // {
-        //     name: "Phone",
-        //     sortable: true,
-        //     selector: (row) => row.recipientPhone,
-        // },
+        {
+            name: "Phone",
+            sortable: true,
+            grow: 2,
+            selector: (row) => row.recipientPhone,
+        },
         {
             name: "Amount",
             sortable: true,
@@ -245,7 +244,6 @@ const OrderListTable = () => {
             text: "Action",
             className: "action",
             align: "left",
-            grow: 2,
             sortable: false,
             allowOverflow: true,
             cell: (order) => {

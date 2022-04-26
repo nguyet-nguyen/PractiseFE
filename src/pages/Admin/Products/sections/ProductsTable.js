@@ -109,12 +109,12 @@ const ProductsTable = () => {
         {
             name: "No",
             sortable: true,
+            grow: 0.5,
             selector: (row) => row.no,
         },
         {
             name: "Name",
-            grow:2,
-            wrap: true,
+            grow: 3,
             sortable: true,
             selector: (row) => row.name,
         },
