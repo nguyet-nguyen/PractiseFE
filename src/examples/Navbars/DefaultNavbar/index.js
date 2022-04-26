@@ -113,7 +113,7 @@ function DefaultNavbar() {
                                     >
                                         <span
                                             className={`font-semibold ${pathName[1] == "all-items" ? "text-amber-600 text-base hover:text-amber-700"
-                                                : "text-gray-600 text-sm hover:text-gray-900"}`}>Item List</span>
+                                                : "text-gray-600 text-sm hover:text-gray-900"}`}>Product List</span>
                                         <ChevronDownIcon
                                             className={classNames(
                                                 open ? 'text-gray-900' : 'text-gray-600',
