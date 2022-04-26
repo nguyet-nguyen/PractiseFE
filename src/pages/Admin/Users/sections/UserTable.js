@@ -41,12 +41,11 @@ const UsersTable = () => {
             setUsers(searchData);
         }
     }
-
-
     const columns = [
         {
             name: 'No',
             sortable: true,
+            grow: 0.5,
             width: "100px",
             selector: row => row.no,
         },
@@ -58,7 +57,6 @@ const UsersTable = () => {
         {
             name: 'Name',
             sortable: true,
-            grow: 2,
             selector: row => row.name,
 
         },
@@ -66,7 +64,6 @@ const UsersTable = () => {
             name: 'Email',
             sortable: true,
             grow: 2,
-            wrap: true,
             selector: row => row.email,
 
         },
@@ -78,7 +75,7 @@ const UsersTable = () => {
         {
             name: 'Address',
             sortable: true,
-            grow: 3,
+            grow: 4,
             wrap: true,
             selector: row => row.address,
 

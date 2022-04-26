@@ -177,6 +177,18 @@ input[type=number] {
     display: flex;
     justify-content: center;
 }
+/*.sc-kDDrLX {*/
+/*    opacity: 1 !important;*/
+/*}*/
+.rdt_TableCol_Sortable .sc-kDDrLX {
+    display: none !important;
+}
+.rdt_TableCol_Sortable:hover .sc-kDDrLX {
+    display: block !important;
+}
+.rdt_TableCol_Sortable:focus .sc-kDDrLX {
+    display: block;
+}
 .rdt_TableCol {
     display: flex;
     justify-content: center;
