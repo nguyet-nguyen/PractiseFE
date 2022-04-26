@@ -42,16 +42,17 @@ const CardProduct = ({proList, homePage, hotDeal}) => {
                                      src={product.image[0]}
                                      alt=""
                                 />
-                            </div>
-                            {hotDeal == true ?
-                                <span
-                                    className="px-2 z-50 p-1 rounded-full border border-white absolute top-1 right-1 bg-amber-600
+                                {hotDeal == true ?
+                                    <span
+                                        className="px-2 z-50 p-1 rounded-md border absolute top-2 right-2 bg-amber-600
                                             text-white font-semibold text-sm align-center flex items-center opacity-90
                                             w-max cursor-pointer active:bg-gray-300 transition duration-300 ease">
                                         {product.totalQuantity} sold
                                           </span>
-                                : null
-                            }
+                                    : null
+                                }
+                            </div>
+
                         </Link>
                         <div className="mx-auto text-center py-2 px-2">
                             <Link to={`/all-items/item-detail/${product.id}`}
