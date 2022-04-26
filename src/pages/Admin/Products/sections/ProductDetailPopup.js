@@ -105,7 +105,7 @@ const ProductDetailPopup = (products) => {
                                                         <div className="flex">
                                                             <div
                                                                 className="w-10 z-10 pl-1 text-center pointer-events-none flex items-center justify-center">
-                                                                <i className="fa fa-info-circle" aria-hidden="true"></i>
+                                                                <i className="fa fa-tag" aria-hidden="true"></i>
                                                             </div>
                                                             <input disabled
                                                                    type="text"
@@ -121,6 +121,10 @@ const ProductDetailPopup = (products) => {
                                                             Category
                                                         </label>
                                                         <div className="flex justify-end">
+                                                            <div
+                                                                className="w-10 z-10 pl-1 text-center pointer-events-none flex items-center justify-center">
+                                                                <i className="fa fa-info-circle" aria-hidden="true"></i>
+                                                            </div>
                                                             <input disabled
                                                                    type="text"
                                                                    className={`w-full -ml-10 pl-10 pr-3 py-2 rounded-lg border-2 border-gray-200
