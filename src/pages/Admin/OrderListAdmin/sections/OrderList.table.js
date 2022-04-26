@@ -202,7 +202,7 @@ const OrderListTable = () => {
                 <>
                     {row.status == "Pending" ? (
                         <span
-                            className="inline-block px-4 py-2.5 text-amber-600
+                            className="inline-block px-1 py-2.5 text-amber-600
                                                             font-medium text-xs leading-tight uppercase rounded shadow-md"
                         >
                         {row.status}
@@ -366,6 +366,9 @@ const OrderListTable = () => {
         };
         data.push(order);
     }
+    const paginationComponentOptions = {
+        rowsPerPageText: 'Items per page',
+    };
     return (
         <>
             <div className="w-full w-9xl mx-auto">
@@ -417,6 +420,7 @@ const OrderListTable = () => {
                         pagination
                         customStyles={customStyles}
                         progressPending={pending}
+                        paginationComponentOptions={paginationComponentOptions}
                         // progressComponent={<Loading />}
                     />
                 )}

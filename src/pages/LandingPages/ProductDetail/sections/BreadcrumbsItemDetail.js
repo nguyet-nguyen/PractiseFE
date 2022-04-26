@@ -45,7 +45,7 @@ const BreadcrumbsItemDetail = () => {
                     </svg>
                 </span></li>
                         <li>
-                            <Link to="/user-profile" className="text-gray-800 hover:text-amber-700">
+                            <Link to="/all-items/1" className="text-gray-800 hover:text-amber-700">
                                 All Items
                             </Link>
                         </li>

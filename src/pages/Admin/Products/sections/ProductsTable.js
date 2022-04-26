@@ -206,7 +206,9 @@ const ProductsTable = () => {
         };
         data.push(product);
     }
-
+    const paginationComponentOptions = {
+        rowsPerPageText: 'Items per page',
+    };
     return (
         <>
             <div className="w-full w-9xl mx-auto">
@@ -270,6 +272,7 @@ const ProductsTable = () => {
                     customStyles={customStyles}
                     progressPending={pending}
                     progressComponent={<Loading/>}
+                    paginationComponentOptions={paginationComponentOptions}
                     pagination
                 />
             )}

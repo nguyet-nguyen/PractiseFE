@@ -6,7 +6,7 @@ const Category = ({categoryList}) => {
 
     return (
         <div id="categoryHome">
-            <h3 className="text-color uppercase text-center font-semibold md:text-3xl text-xl">Product's Categories</h3>
+            <h3 className="text-color uppercase text-center font-semibold md:text-3xl text-xl">Product Categories</h3>
             <p className="text-color text-center mb-4 text-base product-desc">All products are warranted for 12 months</p>
             <div className="flex flex-wrap md:justify-center justify-start">
                 {categoryList && categoryList.map((category, index) =>

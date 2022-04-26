@@ -107,6 +107,9 @@ const AdminTable = () => {
         }
         data.push(user);
     }
+    const paginationComponentOptions = {
+        rowsPerPageText: 'Items per page',
+    };
     return (
         <>
             <div className="w-full max-w-9xl mx-auto">
@@ -165,6 +168,7 @@ const AdminTable = () => {
                         pagination
                         customStyles={customStyles}
                         progressPending={pending}
+                        paginationComponentOptions={paginationComponentOptions}
                         // progressComponent={<Loading />}
                     />
                 }
