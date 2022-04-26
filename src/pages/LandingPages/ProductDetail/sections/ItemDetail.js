@@ -257,7 +257,7 @@ const ItemDetail = () => {
                                 </div>
                                 <div className="flex">
                                     {sizeAmount==0 && <span className="mr-2 text-base rotate-12 font-semibold text-red-500 border-2 border-red-500 p-2 uppercase">Sold out</span>}
-                                    {sizeAmount != 0 && <span className="mr-2 text-base text-gray-500">Amount items:</span>}
+                                    {sizeAmount != 0 && <span className="mr-2 text-base text-gray-500">In stock:</span>}
                                     {itemDetail && sizeAmount !=0 && itemDetail.items.map((size) => (
                                         <span key={size.id} className="text-base text-bold text-amber-700">
                                             {size.id == sizeState && size.amount}
