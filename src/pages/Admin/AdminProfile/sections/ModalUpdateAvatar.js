@@ -4,7 +4,6 @@ import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { updateUserAvatar } from "../../../../features/Api";
 import CustomPopupMessage from "../../../CustomPopupMess";
-import $ from "jquery";
 
 const ModalUpdateAvatar = ({ userInfo, getUserInformation }) => {
     const {
