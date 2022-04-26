@@ -363,7 +363,7 @@ const SignUp = () => {
                       ></i>
                     </div>
                     <select
-                      className={`w-full -ml-10 pl-8 pr-3 py-2 rounded-lg border-2 border-gray-200
+                      className={`w-full -ml-10 pl-8 pr-3 py-2 rounded-lg border-2 border-gray-200 bg-white
                                             outline-none focus:ring-2 focus:ring-amber-500 focus:border-amber-600
                                             ${errors.city &&
                         "border-red-600 focus:ring-red-500 focus:border-red-600 border-1"
@@ -394,7 +394,7 @@ const SignUp = () => {
                       ></i>
                     </div>
                     <select
-                      className={`w-full -ml-10 pl-8 pr-3 py-2 rounded-lg border-2 border-gray-200
+                      className={`w-full -ml-10 pl-8 pr-3 py-2 rounded-lg border-2 border-gray-200 bg-white
                                             outline-none focus:ring-2 focus:ring-amber-500 focus:border-amber-600
                                             ${errors.district &&
                         "border-red-600 focus:ring-red-500 focus:border-red-600 border-1"
@@ -427,7 +427,7 @@ const SignUp = () => {
                       ></i>
                     </div>
                     <select
-                      className={`w-full -ml-10 pl-8 pr-3 py-2 rounded-lg border-2 border-gray-200
+                      className={`w-full -ml-10 pl-8 pr-3 py-2 rounded-lg border-2 border-gray-200 bg-white
                                             outline-none focus:ring-2 focus:ring-amber-500 focus:border-amber-600
                                             ${errors.wards &&
                         "border-red-600 focus:ring-red-500 focus:border-red-600 border-1"
