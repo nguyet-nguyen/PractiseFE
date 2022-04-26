@@ -1,4 +1,4 @@
-import {api, apiadmin, apiadminnoFormdata} from "../utils/Api";
+import {api, apiadmin, apiadminnoFormdata, callApiAdmin} from "../utils/Api";
 
 // ---------------users------------------------?
 export const getAllProducts = () => {
@@ -77,9 +77,17 @@ export const addToCart = (data) => {
   }
 };
 // Get count item in shopping cart
-export const getCountItemsInCart = () => {
+// export const getCountItemsInCart = () => {
+//   try {
+//     return apiadmin.get(`/users/carts/count`);
+//   } catch (error) {
+//     console.log(error);
+//   }
+// };
+
+export const getCountItemsInCart = (token) => {
   try {
-    return apiadmin.get(`/users/carts/count`);
+    return callApiAdmin(token).get(`/users/carts/count`);
   } catch (error) {
     console.log(error);
   }

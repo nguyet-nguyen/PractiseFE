@@ -471,8 +471,10 @@ function DefaultNavbar1({
         </Popper>
     );
     const [countItemCart, setCountItemCart] = useState(0);
+    const token = localStorage.getItem("token");
+
     useEffect(() => {
-        getCountItemsInCart()
+        getCountItemsInCart(token)
             .then((response) => {
                 setCountItemCart(response.data.count);
                 console.log(countItemCart);
@@ -482,7 +484,6 @@ function DefaultNavbar1({
             });
     });
 
-    const token = localStorage.getItem("token");
     const users = JSON.parse(localStorage.getItem("userInfo"));
     const navigate = useNavigate();
     const SignOut = () => {

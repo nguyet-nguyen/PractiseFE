@@ -2,7 +2,6 @@ import {Fragment, useEffect, useState} from 'react'
 import {Popover, Transition} from '@headlessui/react'
 import {Link} from "react-router-dom";
 import {
-
     MenuIcon,
     XIcon,
 } from '@heroicons/react/outline'
@@ -25,6 +24,8 @@ const isSticky = (e) => {
 function DefaultNavbar() {
     const [countItemCart, setCountItemCart] = useState(0);
     const [categoryList, setCategoryList] = useState([]);
+    const token = localStorage.getItem("token");
+
     useEffect(() => {
         window.addEventListener('scroll', isSticky);
         return () => {
@@ -40,7 +41,7 @@ function DefaultNavbar() {
                 console.log(err.message);
             });
         if (token) {
-            getCountItemsInCart()
+            getCountItemsInCart(token)
                 .then((response) => {
                     setCountItemCart(response.data.count);
                 })
@@ -48,7 +49,8 @@ function DefaultNavbar() {
                     console.log(err);
                 });
         }
-    }, [getAllCategory])
+    }, [getAllCategory]);
+
     const solutions = []
     categoryList.forEach(item => {
         solutions.push({
@@ -58,7 +60,6 @@ function DefaultNavbar() {
     })
     const pathNameUrl=window.location.pathname;
     const pathName = pathNameUrl.split("/")
-    const token = localStorage.getItem("token");
     const users = JSON.parse(localStorage.getItem("userInfo"));
     const SignOut = () => {
         try {

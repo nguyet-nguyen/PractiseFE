@@ -24,3 +24,13 @@ export const apiadminnoFormdata = axios.create({
         'Content-Type': 'application/json',
     },
 });
+
+export const callApiAdmin = (token) => { 
+        return axios.create({
+        baseURL,
+        headers: {
+            'Authorization': `Bearer ${token}`,
+            "Content-Type": "multipart/form-data"
+        },
+    })
+};

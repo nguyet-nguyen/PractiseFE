@@ -42,7 +42,7 @@ const ProductDetail = () => {
       />
 
             <BreadcrumbsItemDetail />
-            <section id="productDetailPage" className="container h-auto mx-auto px-4 py-2 mx-auto md:py-12 md:px-32">
+            <section id="productDetailPage" className="container h-auto mx-auto px-4 py-2 md:py-12 md:px-32">
                 <div className="md:w-12/12 w-full h-auto transition-all rounded-lg mx-auto">
                     <ItemDetail />
                     <div className="my-16">
