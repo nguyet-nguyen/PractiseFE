@@ -71,6 +71,7 @@ const OrderListTable = () => {
                         iconColor="amber"
                     />
                 );
+                getAllOrder();
             })
             .catch((err) => {
                 console.log(err);
@@ -90,12 +91,12 @@ const OrderListTable = () => {
                         iconColor="amber"
                     />
                 );
+                getAllOrder();
             })
             .catch((err) => {
                 console.log(err);
             });
         }
-        getAllOrder();
     };
 
     // Set order id you want to cancel
@@ -120,11 +121,11 @@ const OrderListTable = () => {
                         iconColor="amber"
                     />
                 );
+                getAllOrder();
             })
             .catch((err) => {
                 console.log(err);
             });
-        getAllOrder();
     };
 
     const getAllOrder = () => {
