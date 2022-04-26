@@ -7,6 +7,7 @@ import Loading from "../../../../Loading";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import CustomPopupMessage from "../../../CustomPopupMess";
+import $ from "jquery";
 
 const ItemDetail = () => {
     let params = useParams();
