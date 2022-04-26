@@ -510,6 +510,7 @@ const AddProductForm = () => {
                                                     className="text-xs font-semibold px-1"
                                                 >
                                                     Product's Decription
+                                                    <span className="text-red-500 ml-1">*</span>
                                                 </label>
                                                 <div className="flex">
                                                     <div
@@ -529,16 +530,24 @@ const AddProductForm = () => {
                                                             "border-red-600 focus:ring-red-500 focus:border-red-600 border-1"
                                                         }`}
                                                         placeholder="Product's Decription"
-                                                        {...register("description")}
+                                                        {...register("description", {
+                                                            required: true,
+                                                        })}
                                                     />
                                                 </div>
+                                                {errors.description && errors.description.type === "required" && (
+                                                    <p className="text-red-500 text-xs mt-3 italic">
+                                                        Value required
+                                                    </p>
+                                                )}
                                             </div>
                                             <div className="w-1/2 px-3 mb-5">
                                                 <label
                                                     htmlFor=""
                                                     className="text-xs font-semibold px-1"
                                                 >
-                                                    Avatar
+                                                    Product images
+                                                    <span className="text-red-500 ml-1">*</span>
                                                 </label>
                                                 <div className="flex items-center justify-center w-full">
                                                     <label
@@ -554,11 +563,18 @@ const AddProductForm = () => {
                                                             multiple="multiple"
                                                             accept=".jpg, .png"
                                                             type="file"
-                                                            {...register("images")}
+                                                            {...register("images", {
+                                                                required: true,
+                                                            })}
                                                             className="ml-8 text-sm"
                                                         />
                                                     </label>
                                                 </div>
+                                                {errors.images && errors.images.type === "required" && (
+                                                    <p className="text-red-500 text-xs mt-3 italic">
+                                                        Value required
+                                                    </p>
+                                                )}
                                             </div>
                                         </div>
 
