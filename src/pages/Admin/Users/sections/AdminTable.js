@@ -59,26 +59,26 @@ const AdminTable = () => {
             name: 'Name',
             sortable: true,
             wrap: true,
-            grow: 2,
             selector: row => row.name,
         },
         {
             name: 'Email',
             sortable: true,
             wrap: true,
-            grow: 2,
+            grow: 3,
             selector: row => row.email,
 
         },
         {
             name: 'Phone',
             sortable: true,
+            grow: 2,
             selector: row => row.phone,
         },
         {
             name: 'Address',
             sortable: true,
-            grow: 3,
+            grow: 4,
             wrap: true,
             selector: row => row.address,
 
