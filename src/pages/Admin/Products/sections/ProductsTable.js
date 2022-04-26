@@ -413,10 +413,7 @@ const ProductsTable = () => {
                                                         <div className="flex">
                                                             <div
                                                                 className="w-10 z-10 pl-1 text-center pointer-events-none flex items-center justify-center">
-                                                                <i
-                                                                    className="fa fa-info-circle"
-                                                                    aria-hidden="true"
-                                                                ></i>
+                                                                <i className="fa fa-tag" aria-hidden="true"></i>
                                                             </div>
                                                             <input
                                                                 disabled
@@ -437,6 +434,10 @@ const ProductsTable = () => {
                                                             Category
                                                         </label>
                                                         <div className="flex justify-end">
+                                                            <div
+                                                                className="w-10 z-10 pl-1 text-center pointer-events-none flex items-center justify-center">
+                                                                <i className="fa fa-info-circle" aria-hidden="true"></i>
+                                                            </div>
                                                             <input
                                                                 disabled
                                                                 type="text"
@@ -464,7 +465,7 @@ const ProductsTable = () => {
                                                                     <div
                                                                         className="w-10 z-10 pl-1 text-center pointer-events-none flex items-center justify-center">
                                                                         <i
-                                                                            className="fa fa-money"
+                                                                            className="fa fa-database"
                                                                             aria-hidden="true"
                                                                         ></i>
                                                                     </div>
