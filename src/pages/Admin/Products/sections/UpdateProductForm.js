@@ -50,28 +50,29 @@ const UpdateProductForm = () => {
         const formData = new FormData();
         formData.append("category", data.category);
         formData.append("name", data.name);
-        formData.append("color", data.color);
+        // formData.append("color", data.color);
         formData.append("description", data.description);
         formData.append("price", data.price);
-        formData.append("material", data.material);
+        // formData.append("material", data.material);
         [...data.images].map(f => formData.append("images[]", f));
-        UpdateProduct(formData, itemDetail.id).then(response => {
-            console.log(response.data);
-            navigate("/admin/products");
-            toast(
-                <CustomPopupMessage
-                    mess="This product has been updated successfully!"
-                    icon="check-circle"
-                    titleColor="amber"
-                    iconColor="amber"
-                />
-            );
-        })
-            .catch(err => {
-                    console.log(err);
-                    setMessErr(err.message);
-                }
-            )
+        console.log(data.category + data.material + data.color + data.description);
+        // UpdateProduct(formData, itemDetail.id).then(response => {
+        //     console.log(response.data);
+        //     navigate("/admin/products");
+        //     toast(
+        //         <CustomPopupMessage
+        //             mess="This product has been updated successfully!"
+        //             icon="check-circle"
+        //             titleColor="amber"
+        //             iconColor="amber"
+        //         />
+        //     );
+        // })
+        //     .catch(err => {
+        //             console.log(err);
+        //             setMessErr(err.message);
+        //         }
+        //     )
     };
     const [showMess, setShowMess] = useState(true);
     const colorProduct = [
@@ -375,6 +376,9 @@ const UpdateProductForm = () => {
                                                                   placeholder="Product's Decription"
                                                                   {...register("description")}/>
                                                     </div>
+                                                    {errors.description && errors.description.type === "required" &&
+                                                        <p className="text-red-500 text-xs mt-3 italic">Value
+                                                            required</p>}
                                                     
                                                 </div>
                                                 <div className="w-1/2 px-3 mb-5">

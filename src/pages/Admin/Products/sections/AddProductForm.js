@@ -23,6 +23,15 @@ const AddProductForm = () => {
         setShowSpinner(true);
 
         const formData = new FormData();
+        if(data.material==null || data.material=="") {
+            data.material=1;
+        }
+        if(data.color==null || data.color=="") {
+            data.color=1;
+        }
+        if(data.category==null || data.category=="") {
+            data.category=1;
+        }
         formData.append("category", data.category);
         formData.append("name", data.name);
         formData.append("color", data.color);
@@ -55,6 +64,7 @@ const AddProductForm = () => {
                 console.log(err.data);
                 setMessErr(err.message);
             });
+        console.log(data.color + data.material + data.category);
     };
     const [categoryList, setCategoryList] = useState([]);
     useEffect(() => {
@@ -143,7 +153,7 @@ const AddProductForm = () => {
                     <nav className="rounded-md w-full mx-6 md:my-5 my-2">
                         <ol className="list-reset flex">
                             <li>
-                                <Link to="/admin/products" className="text-amber-800 hover:text-amber-700">
+                                <Link to="/admin/products" className="text-gray-800 hover:text-amber-700">
                                     Product List
                                 </Link>
                             </li>
@@ -308,7 +318,7 @@ const AddProductForm = () => {
                                                         })}
                                                     />
                                                 </div>
-                                                {errors.money && errors.money.type === "required" && (
+                                                {errors.price && errors.price.type === "required" && (
                                                     <p className="text-red-500 mt-3 text-xs italic">
                                                         Value required
                                                     </p>

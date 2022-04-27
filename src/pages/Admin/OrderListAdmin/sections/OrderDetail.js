@@ -81,7 +81,33 @@ const OrdDetailAdmin = () => {
         {/*  Site header */}
         <Header sidebarOpen={sidebarOpen} setSidebarOpen={setSidebarOpen} />
         <main>
-          <div className="px-4 sm:px-6 lg:px-8 py-8 w-full max-w-9xl mx-auto">
+            <nav className="rounded-md w-full px-7 sm:px-9 lg:px-12 md:mt-5 mt-2">
+                <ol className="list-reset flex">
+                    <li>
+                        <Link to="/admin/products" className="text-gray-800 hover:text-amber-700">
+                            Order List
+                        </Link>
+                    </li>
+                    <li className="flex items-center"><span className="text-gray-500 mx-2">
+                    <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                        <path fillRule="evenodd"
+                              d="M10.293 15.707a1 1 0 010-1.414L14.586 10l-4.293-4.293a1 1 0 111.414-1.414l5 5a1 1 0 010 1.414l-5 5a1 1 0 01-1.414 0z"
+                              clipRule="evenodd"/>
+                        <path fillRule="evenodd"
+                              d="M4.293 15.707a1 1 0 010-1.414L8.586 10 4.293 5.707a1 1 0 011.414-1.414l5 5a1 1 0 010 1.414l-5 5a1 1 0 01-1.414 0z"
+                              clipRule="evenodd"/>
+                    </svg>
+                </span></li>
+                    <li>
+                    <span className="text-amber-700">
+                        Order Detail
+                    </span>
+                    </li>
+                </ol>
+            </nav>
+
+
+          <div className="px-4 sm:px-6 lg:px-8 py-3 w-full max-w-9xl mx-auto">
             {order ? (
               <>
                 <div className="px-4 md:px-3">
