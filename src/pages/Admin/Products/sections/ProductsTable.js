@@ -55,7 +55,7 @@ const ProductsTable = () => {
     };
     const searchProduct = (e) => {
         let searchList = [];
-        let searchKey = e.target.value;
+        let searchKey = e.target.value.toLowerCase();
         setPending(false);
         productList.forEach((product) => {
             if (
