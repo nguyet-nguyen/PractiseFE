@@ -169,6 +169,7 @@ const OrderListTable = () => {
         },
         {
             name: "Amount",
+            grow: 0.5,
             sortable: true,
             selector: (row) => row.amount,
         },
