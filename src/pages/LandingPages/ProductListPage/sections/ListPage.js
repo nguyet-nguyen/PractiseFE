@@ -257,7 +257,7 @@ const ListPage = ({sidebarOpen, setSidebarOpen, categoryList}) => {
             const data = {
                 sort: sort,
                 category: cate,
-                minPrice: 30,
+                minPrice: 40,
                 maxPrice: "",
                 keyword: search,
             }
